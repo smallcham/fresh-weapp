@@ -1,0 +1,18 @@
+<view class="body">
+  <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb="https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg" >
+    <view slot="footer">
+      <van-stepper value="{{ 1 }}" bind:change="onChange" />
+    </view>
+    <view slot="tags">
+      <van-tag plain>爆款直降</van-tag>
+      <van-tag plain>会员优选</van-tag>
+    </view>
+  </van-card>
+
+  <van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="onClickButton" tip="{{ true }}" >
+    <van-tag type="primary">全选</van-tag>
+      <view slot="tip">
+        您的收货地址不支持同城送, <text bindtap="onClickLink" class='text-info'>修改地址</text>
+      </view>
+  </van-submit-bar>
+</view>

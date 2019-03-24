@@ -1,0 +1,219 @@
+<van-search value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
+<van-tabs color="{{ color.success }}" active="{{ active }}" bind:change="onChange">
+  <van-tab title="热卖"></van-tab>
+  <van-tab title="上新"></van-tab>
+  <van-tab title="水果"></van-tab>
+  <van-tab title="蔬菜"></van-tab>
+  <van-tab title="轻食"></van-tab>
+  <van-tab title="粮油"></van-tab>
+</van-tabs>
+
+<view class='body'>
+  <swiper autoplay circular>
+    <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix'></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img11.yiguoimg.com/d/items/2019/190211/9288737241343563_1125x652.jpg?w=1125&h=652' mode='widthFix'>></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix'>></image></swiper-item>
+  </swiper>
+
+  <view class='card'>
+    <van-row gutter="20">
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img10.yiguoimg.com/d/items/2019/190220/9570212329662036_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>乳品酒饮</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img11.yiguoimg.com/d/items/2019/190220/9570212329694804_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>乳品酒饮</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img14.yiguoimg.com/d/items/2019/190220/9570212329727572_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>速食粮油</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img09.yiguoimg.com/d/items/2019/190220/9570212329760340_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>会员专区</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img14.yiguoimg.com/d/items/2019/190220/9570212329793108_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>好物拼团</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img11.yiguoimg.com/d/items/2019/190220/9570212329825876_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>邀请有理</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img12.yiguoimg.com/d/items/2019/190220/9570212329858644_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>订单提现</text></view>
+        </block>
+    </van-col>
+    <van-col span="6">
+        <block>
+          <view class='text-center'><image src='https://img12.yiguoimg.com/d/items/2019/190220/9570212329891412_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>每日签到</text></view>
+        </block>
+    </van-col>
+  </van-row>
+  </view>
+
+  <van-cell title="热销爆款" value="查看更多" is-link/>
+  <scroll-view scroll-x style='white-space: nowrap; display: flex'>
+        <view class='card'>
+          <block>
+            <view class='text-center' ><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
+            <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
+            <view><text class='price'>¥ 9.9</text><van-icon style='color:#19be6b ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 11.9</text></view>
+            </block>
+        </view>
+        <view class="card">
+          <block>
+            <view class='text-center'>
+              <image src='http://p02.sfimg.cn/2018/4000315385/middle_4000315385_1_1/160x160.jpg' style='width:200rpx;height:200rpx;'></image>
+              <van-icon style='float: right' class='text-warning' name="hot-sale-o" />
+            </view>
+            <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
+            <view><text class='price'>¥ 5.9</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 11.9</text></view>
+            </block>
+        </view>
+        <view class='card'>
+          <block>
+            <view class='text-center'><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
+            <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
+            <view><text class='price'>¥ 9.1</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 11.9</text></view>
+            </block>
+        </view>
+        <view class='card'>
+          <block>
+          <view class='text-center'> <image src='http://p02.sfimg.cn/2018/4600298705/middle_4600298705_9_00/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
+            <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
+            <view><text class='price'>¥ 15.9</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+            </block>
+        </view>
+  </scroll-view>
+
+  <van-cell title="特色专区" value="查看更多" is-link/>
+  <van-row>
+    <van-col span="12">
+    <view class='card'>
+        <block>
+          <view><text class='gs-name'>【满99减20专场】</text></view>
+          <view class='text-center'><text class='text-small text-muted'>面膜39元抢</text></view>
+          <view class='text-center'><image src='http://p02.sfimg.cn/2017/5600279917/middle_5600279917_0_1/160x160.jpg' style='width:345rpx;height:320rpx;'></image></view>
+        </block>    
+    </view>
+    </van-col>
+    <van-col span="12">
+    <view class='card'>
+        <block>
+          <view><text class='gs-name'>会员特价</text></view>
+          <view class='text-center'><text class='text-small text-muted'>精选好货1.9元起</text></view>
+          <view class='text-center'><image src='http://004.sfimg.cn/web/b41742e7/b41742e771f53b9f81ebee581062eabc.jpg' style='width:345rpx;height:320rpx;'></image></view>
+        </block>    
+    </view>
+    </van-col>
+  </van-row>
+  <van-cell title="为你推荐"/>
+      <van-row>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img09.yiguoimg.com/d/items/2018/180928/9288731953046844_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-warning' name="hot-sale-o" />
+            </view>
+            <view><text class='gs-name'>紫燕麻辣花生150g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>鲜香嫩辣 让舌头难以自拔</text></view>
+            <view><text class='price'>¥ 19.9</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img09.yiguoimg.com/d/items/2018/180925/9288731742348601_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-info' name="new-arrival-o" />
+              </view>
+            <view><text class='gs-name'>雅玛萨鱼卷125g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>文火烤制 鲜香Q弹</text></view>
+            <view><text class='price'>¥ 18.8</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img11.yiguoimg.com/d/items/2018/180913/9288731130373421_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-info' name="new-arrival-o" />
+              </view>
+            <view><text class='gs-name'>雅玛萨鱼卷125g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>文火烤制 鲜香Q弹</text></view>
+            <view><text class='price'>¥ 18.8</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img14.yiguoimg.com/d/items/2018/181016/9288732653266256_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-info' name="new-arrival-o" />
+              </view>
+            <view><text class='gs-name'>雅玛萨鱼卷125g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>文火烤制 鲜香Q弹</text></view>
+            <view><text class='price'>¥ 18.8</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img11.yiguoimg.com/d/items/2018/181212/9288735395653004_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-info' name="new-arrival-o" />
+              </view>
+            <view><text class='gs-name'>雅玛萨鱼卷125g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>文火烤制 鲜香Q弹</text></view>
+            <view><text class='price'>¥ 18.8</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+      <van-col span="12">
+      <view class='card'>
+          <block>
+            <view class='text-center'>
+              <image src='https://img06.yiguoimg.com/e/web/170427/094225/170427094225405_1233016_300.jpg' style='width:345rpx;height:320rpx;'></image>
+              <van-icon style='float: right' class='text-info' name="new-arrival-o" />
+              </view>
+            <view><text class='gs-name'>雅玛萨鱼卷125g</text></view>
+            <view class='text-center'><text class='text-small text-muted'>文火烤制 鲜香Q弹</text></view>
+            <view><text class='price'>¥ 18.8</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view><text class='text-del'>¥ 21.9</text></view>
+          </block>    
+      </view>
+      </van-col>
+    </van-row>
+
+</view>
