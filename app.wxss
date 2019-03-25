@@ -15,6 +15,11 @@ color: transparent;
   box-sizing: border-box;
 }  */
 
+.center {
+  display: flex;
+  align-items: center;
+}
+
 .body {
   margin-bottom: 120rpx;
 }
@@ -54,6 +59,13 @@ color: transparent;
   color: #19be6b;
   font-size: 30rpx;
   font-weight: bold;
+}
+
+.line {
+ background: rgba(0, 0, 0, 0.030);
+ width: 100%;
+ height: 1rpx;
+ margin: 10rpx;
 }
 
 mb-1 {
@@ -140,6 +152,28 @@ mt-5 {
 }
 
 .card {
+  padding: 0.20rem;
+  margin: 0.20rem;
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  display: inline-block;border:1rpx solid rgba(0, 0, 0, 0.030); border-radius: 0.25em;
+}
+
+.card-fluid {
+  width: 100%;
+  padding: 0.20rem;
+  margin: 0rem;
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  display: inline-block;border:1rpx solid rgba(0, 0, 0, 0.030); border-radius: 0.25em;
+}
+
+.card-fluid-warp {
+  width: 100%;
   padding: 0.20rem;
   margin: 0.20rem;
   position: relative;

@@ -1,18 +1,84 @@
-<view class="body">
-  <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb="https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg" >
-    <view slot="footer">
-      <van-stepper value="{{ 1 }}" bind:change="onChange" />
-    </view>
-    <view slot="tags">
-      <van-tag plain>爆款直降</van-tag>
-      <van-tag plain>会员优选</van-tag>
-    </view>
-  </van-card>
+<van-nav-bar>
+  <view slot="title"><text><van-icon name="location" /> 亦庄 <van-icon name="arrow-down"/></text></view>
+</van-nav-bar>
 
-  <van-submit-bar price="{{ 3050 }}" button-text="提交订单" bind:submit="onClickButton" tip="{{ true }}" >
-    <van-tag type="primary">全选</van-tag>
-      <view slot="tip">
-        您的收货地址不支持同城送, <text bindtap="onClickLink" class='text-info'>修改地址</text>
-      </view>
-  </van-submit-bar>
+<view class="body" style='margin-bottom:210rpx;'>
+    <view class='card-fluid'>
+      <van-row>
+        <van-col span="2">
+          <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
+        </van-col>
+        <van-col span="22">
+          <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb='https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg'>
+              <view slot="footer">
+                <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
+              </view>
+              <view slot="tags">
+                <van-tag plain>爆款直降</van-tag>
+                <van-tag plain>会员优选</van-tag>
+              </view>
+            </van-card>
+        </van-col>
+      </van-row>
+    </view>
+    
+
+    <view class='card-fluid'>
+      <van-row>
+        <van-col span="2">
+          <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
+        </van-col>
+        <van-col span="22">
+          <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb='https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg'>
+              <view slot="footer">
+                <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
+              </view>
+              <view slot="tags">
+                <van-tag plain>爆款直降</van-tag>
+                <van-tag plain>会员优选</van-tag>
+              </view>
+            </van-card>
+        </van-col>
+      </van-row>
+    </view>
+
+     <view class='card-fluid'>
+      <van-row>
+        <van-col span="2">
+          <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
+        </van-col>
+        <van-col span="22">
+          <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb='https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg'>
+              <view slot="footer">
+                <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
+              </view>
+              <view slot="tags">
+                <van-tag plain>爆款直降</van-tag>
+                <van-tag plain>会员优选</van-tag>
+              </view>
+            </van-card>
+        </van-col>
+      </van-row>
+    </view>
+
+        <van-panel>
+          <van-cell>
+          <view slot="title">
+            <van-tag color="#ff9900">💎 优享会员</van-tag>
+          </view>
+          <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning'>¥ 8 / 月 勾选开通</text></van-checkbox>
+        </van-cell>
+        </van-panel>
+
+      <van-cell title="商品总价"  icon="gold-coin-o" value="¥ 219.5"/>
+      <van-cell title="优惠券"  icon="discount" value="无可用优惠券"  is-link/>
+      <van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
+      <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+
+    <van-submit-bar price="{{ 3050 }}" button-text="提交订单" button-type="danger"  bind:submit="onClickButton" tip="{{ true }}" >
+      <van-radio style='padding-left: 20rpx;' checked-color="{{ color.success }}">全选</van-radio>
+        <view slot="tip">
+          您的收货地址不支持同城送, <text bindtap="onClickLink" class='text-info'>修改地址</text>
+        </view>
+    </van-submit-bar>
 </view>

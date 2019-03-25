@@ -62,7 +62,6 @@ Page({
 
   },
   onChange: function (event) {
-    console.log(event.detail);
     if (event.detail === 0) {
       wx.switchTab({
         url: '/pages/index/index',

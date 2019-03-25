@@ -1,4 +1,6 @@
 // pages/cart/index.js
+const app = getApp()
+
 Page({
 
   /**
@@ -12,7 +14,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    this.setData({
+      color: app.globalData.color
+    })
   },
 
   /**
