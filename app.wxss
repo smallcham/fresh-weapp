@@ -43,9 +43,64 @@ color: transparent;
 }
 
 .gs-name {
-  color: #495060;
+  color: #2C3E50;
   text-align: center;
   text-align-last: center;
+  font-size:25rpx;
+  height:50rpx;
+  line-height:35rpx;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.h1 {
+  color: #2C3E50;
+  font-size:68rpx;
+  height:50rpx;
+  line-height:35rpx;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.h2 {
+  color: #2C3E50;
+  font-size:58rpx;
+  height:50rpx;
+  line-height:35rpx;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.h3 {
+  color: #2C3E50;
+  font-size:48rpx;
+  height:50rpx;
+  line-height:35rpx;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.h4 {
+  color: #2C3E50;
+  font-size:38rpx;
+  height:50rpx;
+  line-height:35rpx;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.h5 {
+  color: #2C3E50;
   font-size:28rpx;
   height:50rpx;
   line-height:35rpx;
@@ -56,7 +111,7 @@ color: transparent;
 }
 
 .price {
-  color: #19be6b;
+  color: #18BC9C;
   font-size: 30rpx;
   font-weight: bold;
 }
@@ -123,32 +178,40 @@ mt-5 {
   font-size: 25rpx;
 }
 
+.text-mini {
+  font-size: 20rpx;
+}
+
+.text-tiny {
+  font-size: 15rpx;
+}
+
 .text-title {
   color: #1c2438;
 }
 
 .text-muted {
-  color: #80848f;
+  color: #95a5a6;
 }
 
 .text-info {
-  color: #2d8cf0;
+  color: #3498DB;
 }
 
 .text-primary {
-  color: #2d8cf0;
+  color: #2C3E50;
 }
 
 .text-danger {
-  color: #ed3f14;
+  color: #E74C3C;
 }
 
 .text-warning {
-  color: #ff9900;
+  color: #F39C12;
 }
 
 .text-success {
-  color: #19be6b;
+  color: #18BC9C;
 }
 
 .card {

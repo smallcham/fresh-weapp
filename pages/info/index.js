@@ -1,13 +1,12 @@
-// custom-tab-bar/index.js
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 const app = getApp()
-
+// pages/info/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    active: 0,
     color: app.globalData.color
   },
 
@@ -15,6 +14,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.setData({
+      color: app.globalData.color
+    })
   },
 
   /**
@@ -65,16 +67,18 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onChange: function (event) {
-    if (event.detail === 0) {
-      wx.switchTab({
-        url: '/pages/index/index',
-      })
-    }
-    else if (event.detail === 3) {
-      wx.switchTab({
-        url: '/pages/cart/index',
-      })
-    }
+
+  onAddCart: function(e) {
+    Notify({
+      text: '¥ 29.2 元，还差49.2免配送费',
+      duration: 3000,
+      selector: '#custom-notify',
+      backgroundColor: this.data.color.warning
+    });
   },
+  onToCart: function(e) {
+    wx.switchTab({
+      url: '/pages/cart/index',
+    })
+  }
 })

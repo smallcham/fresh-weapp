@@ -6,13 +6,14 @@
     "custom-tab-bar/index",
     "pages/list/index",
     "pages/vip/index",
-    "pages/mine/index"
+    "pages/mine/index",
+    "pages/info/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#18BC9C",
     "navigationBarTitleText": "缤果鲜生",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "custom": true,

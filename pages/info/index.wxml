@@ -1,0 +1,70 @@
+<view class='body' style='margin-bottom: 150rpx'>
+  <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)">
+    <swiper-item class="text-center"><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/e/items/2017/170620/9288709342667476_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img13.yiguoimg.com/e/items/2017/170620/9288709342733012_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+  </swiper>
+
+
+  <van-panel title="泰国龙眼500g * 1盒" desc="珍珠级龙眼 吃出3D肉感" status="缺货">
+    <view style='padding: 25rpx'>
+      <view><text class='price'>¥ 9.9</text></view>
+      <view><text class='text-del'>¥ 11.9</text><text class='text-small text-muted' style='float:right'>好评率93.9% | 已售 205538 份</text></view>
+      <view class='line'></view>
+      <view><text class='text-muted text-small'>‧ 泰国</text><text class='text-small text-muted'>‧ 次日达</text><text class='text-small text-muted'>‧ 实付满69包邮</text></view>
+    </view>
+  </van-panel>
+
+  <view>
+    <view class='card' style='border: 0rpx'>
+      <view class='text-center'>
+        <van-icon style='font-size: 40rpx' color='{{ color.danger }}' name="like"></van-icon>
+        <view class='text-primary text-mini'><text>缤果安心检测</text></view>
+      </view>
+    </view>
+    <view class='card' style='border: 0rpx'>
+      <view class='text-center'>
+        <van-icon style='font-size: 40rpx' color='{{ color.success }}' name="youzan-shield"></van-icon>
+        <view class='text-primary text-mini'><text>100%品控监测</text></view>
+      </view>
+    </view>
+    <view class='card' style='border: 0rpx'>
+      <view class='text-center'>
+        <van-icon style='font-size: 40rpx' color='{{ color.info }}' name="manager"></van-icon>
+        <view class='text-primary text-mini'><text>经营证件</text></view>
+      </view>
+    </view>
+  </view>
+
+  <van-panel title="商品详情">
+    <view class='card-fluid-warp text-muted text-small' style='border: 0rpx;'>
+      <view><text>重量：500g * 盒</text></view>
+      <view><text>包装：盒装</text></view>
+      <view><text>保质期：到货可立即使用</text></view>
+      <view><text>储藏方法：冷藏</text></view>
+      <view class='line'></view>
+      <view class="text-center">
+        <image lazy-load="true" src='https://img10.yiguoimg.com/d/images/2018/180906/513691889004061990_880x651.jpg'></image>
+        <image lazy-load="true" src='https://img10.yiguoimg.com/d/images/2018/180906/513691889004127526_880x651.jpg'></image>
+        <image lazy-load="true" src='https://img13.yiguoimg.com/d/images/2018/180906/513691889004193062_880x652.jpg'></image>
+      </view>
+    </view>
+  </van-panel>
+
+  </view>
+
+
+<van-goods-action>
+<van-notify id="custom-notify" />
+  <van-goods-action-icon
+    icon="cart-o"
+    text="购物车"
+    bind:click="onToCart"
+    info="2"
+  />
+  <van-goods-action-button
+    text="加入购物车"
+    type="success"
+    bind:click="onAddCart"
+  />
+</van-goods-action>

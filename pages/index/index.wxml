@@ -1,4 +1,4 @@
-<van-search value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
+<van-search shape="round" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
 <van-tabs color="{{ color.success }}" active="{{ active }}" bind:change="onChange">
   <van-tab title="热卖"></van-tab>
   <van-tab title="上新"></van-tab>
@@ -8,13 +8,14 @@
   <van-tab title="粮油"></van-tab>
 </van-tabs>
 
-<view class='body'>
-  <swiper autoplay circular>
-    <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix'></image></swiper-item>
-    <swiper-item class="text-center"><image src='https://img11.yiguoimg.com/d/items/2019/190211/9288737241343563_1125x652.jpg?w=1125&h=652' mode='widthFix'>></image></swiper-item>
-    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix'>></image></swiper-item>
+<van-notify id="custom-notify" />
+<swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)">
+    <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737612998261_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
   </swiper>
 
+<view class='body'>
   <view class='card'>
     <van-row gutter="20">
     <van-col span="6">
@@ -72,10 +73,10 @@
   <scroll-view scroll-x style='white-space: nowrap; display: flex'>
         <view class='card'>
           <block>
-            <view class='text-center' ><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
-            <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
-            <view><text class='price'>¥ 9.9</text><van-icon style='color:#19be6b ;float: right;' name="shopping-cart" /></view>
-            <view><text class='text-del'>¥ 11.9</text></view>
+            <view class='text-center' bindtap='showInfo'><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
+            <view bindtap='showInfo'><text class='gs-name'>泰国龙眼500g*1盒</text></view>
+            <view><text class='price' bindtap='showInfo'>¥ 9.9</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view bindtap='showInfo'><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
         <view class="card">

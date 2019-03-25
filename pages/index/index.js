@@ -1,3 +1,4 @@
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 //index.js
 //获取应用实例
 const app = getApp()
@@ -59,6 +60,11 @@ Page({
       })
     }
   },
+  showInfo: function(e) {
+    wx.navigateTo({
+      url: '/pages/info/index',
+    })
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -66,5 +72,13 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
     })
+  },
+  addCart: function(e) {
+    Notify({
+      text: '已加入购物车',
+      duration: 1000,
+      selector: '#custom-notify',
+      backgroundColor: this.data.color.success
+    });
   }
 })
