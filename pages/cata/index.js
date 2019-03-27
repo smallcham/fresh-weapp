@@ -1,18 +1,36 @@
 // pages/list/index.js
+const app = getApp()
+
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
+    TabCur: 0,
+    VerticalNavTop: 0,
+    goodsCata: app.globalData.goodsCata
+  },
+  tabSelect(e) {
+    this.setData({
+      TabCur: e.currentTarget.dataset.id,
+      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+    })
+  },
+  VerticalMain(e) {
+    console.log(e.detail);
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    this.setData({
+      color: app.globalData.color
+    })
   },
 
   /**
@@ -26,7 +44,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.getTabBar().setData({
+      active: 1
+    })
   },
 
   /**

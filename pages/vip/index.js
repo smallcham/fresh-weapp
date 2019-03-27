@@ -1,3 +1,4 @@
+const app = getApp()
 // pages/vip/index.js
 Page({
 
@@ -12,7 +13,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -26,7 +27,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.getTabBar().setData({
+      active: 2
+    })
   },
 
   /**

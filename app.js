@@ -32,20 +32,50 @@ App({
         }
       }
     })
+
+  //初始化购物车动画
+    const animation = wx.createAnimation({
+      duration: 60,
+      timingFunction: 'linear',
+    })
+    this.animation = animation
+  },
+  cartAnimation: function(target) {
+    this.animation.rotate(15).step()
+    this.animation.rotate(-15).step()
+    this.animation.rotate(0).step()
+    const tabbar = target.getTabBar();
+    tabbar.setData({
+      animationData: this.animation.export(),
+      cartCount: tabbar.data.cartCount + 1
+    })
   },
   globalData: {
     userInfo: null,
+    goodsCata: [
+      { text: "热卖", id: 0 },
+      { text: "上新", id: 1 },
+      { text: "水果", id: 2 },
+      { text: "蔬菜", id: 3 },
+      { text: "轻食", id: 4 },
+      { text: "肉蛋", id: 5 },
+      { text: "海鲜", id: 6 },
+      { text: "河鲜", id: 7 },
+      { text: "粮油", id: 8 },
+      { text: "特产", id: 9 },
+      { text: "酒饮", id: 10 }
+    ],
     color: {
-      primary: "#2d8cf0",
+      primary: "#2C3E50",
       lightprimary: "#5cadff",
       darkprimary: "#2b85e4",
-      info: "#2d8cf0",
+      info: "#3498DB",
       success: "#18BC9C",
-      warning: "#ff9900",
-      danger: "#ed3f14",
+      warning: "#F39C12",
+      danger: "#E74C3C",
       title: "#1c2438",
       content: "#495060",
-      muted: "#80848f",
+      muted: "#95a5a6",
       disabled: "#bbbec4",
       background: "#f8f8f9",
       divide: "#e9eaec",

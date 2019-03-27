@@ -8,7 +8,9 @@ Page({
    */
   data: {
     active: 0,
-    color: app.globalData.color
+    color: app.globalData.color,
+    cartCount: 0,
+    animationData: {}
   },
 
   /**
@@ -65,10 +67,23 @@ Page({
   onShareAppMessage: function () {
 
   },
+  action: function() {
+
+  },
   onChange: function (event) {
     if (event.detail === 0) {
       wx.switchTab({
         url: '/pages/index/index',
+      })
+    }
+    else if (event.detail === 1) {
+      wx.switchTab({
+        url: '/pages/cata/index',
+      })
+    }
+    else if (event.detail === 2) {
+      wx.switchTab({
+        url: '/pages/vip/index',
       })
     }
     else if (event.detail === 3) {
@@ -76,5 +91,15 @@ Page({
         url: '/pages/cart/index',
       })
     }
+    else if (event.detail === 4) {
+      wx.switchTab({
+        url: '/pages/mine/index',
+      })
+    } else {
+
+    }
+    this.setData({
+      active: event.detail
+    })
   },
 })

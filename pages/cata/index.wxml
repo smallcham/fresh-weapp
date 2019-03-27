@@ -1,0 +1,84 @@
+<van-search background="{{ color.success }}" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
+<!-- <van-row>
+  <van-col span="4">
+    <scroll-view scroll-y="true" style="height: 1000rpx" class="text-small">
+      <view style="background: white; width: 180rpx; height: 50rpx;padding-top:15rpx;padding-left:40rpx;" ><text>热卖</text></view>
+      <view style="background: white; width: 180rpx; height: 70rpx;padding-top:15rpx;padding-left:40rpx;"><text>热卖</text></view>
+      <view style="background: white; width: 180rpx; height: 70rpx;padding-top:15rpx;padding-left:40rpx;" ><text>热卖</text></view>
+  </scroll-view>
+  </van-col>
+  <van-col span="20">
+    <van-tabs color="{{ color.success }}" active="{{ active }}" bind:change="onChange">
+      <van-tab title="热卖"></van-tab>
+      <van-tab title="上新"></van-tab>
+      <van-tab title="水果"></van-tab>
+      <van-tab title="蔬菜"></van-tab>
+      <van-tab title="轻食"></van-tab>
+      <van-tab title="粮油"></van-tab>
+    </van-tabs>
+  </van-col>
+</van-row> -->
+<!-- 
+<view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+      <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'></text> 返回
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>Tab索引</view>
+  </view>
+</view> -->
+<view class="VerticalBox">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:1000rpx">
+    <view class="cu-item {{item.id==TabCur?'text-success cur':''}}" wx:for="{{ goodsCata }}" wx:key bindtap='tabSelect' data-id="{{ item.id }}">
+      {{ item.text }}
+    </view>
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain">
+    <view class="padding-xs">
+      <!-- <view class='cu-bar solid-bottom bg-white'>
+        <view class='action text-muted text-tiny'>
+          <text></text> 热销爆款</view>
+      </view> -->
+      
+      <view class="cu-list menu menu-avatar">
+
+        <view class="cu-item grayscale">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img09.yiguoimg.com/d/items/2019/190124/9288737015506488_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>加拿大速冻北极甜虾</view>
+            <view class='text-muted text-mini'>喵星酱：喵喵喵！</view>
+          </view>
+          <view class='action'>
+            <view class='text-muted text-tiny'>22:20</view>
+            <view class="cu-tag round bg-red sm">5</view>
+          </view>
+        </view>
+
+        <view class="cu-item grayscale">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img14.yiguoimg.com/d/items/2017/170904/9288712321082148_500.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>中洋河豚河豚鱼</view>
+            <view class='text-muted text-mini'>喵星酱：喵喵喵！</view>
+          </view>
+          <view class='action'>
+            <view class='text-muted text-tiny'>22:20</view>
+            <view class="cu-tag round bg-red sm">5</view>
+          </view>
+        </view>
+
+        <view class="cu-item grayscale">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>喵星酱：喵喵喵！</view>
+          </view>
+          <view class='action'>
+            <view class='text-muted text-tiny'>22:20</view>
+            <view class="cu-tag round bg-red sm">5</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </scroll-view>
+</view>

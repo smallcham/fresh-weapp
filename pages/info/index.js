@@ -7,7 +7,7 @@ Page({
    * Page initial data
    */
   data: {
-    color: app.globalData.color
+    cartCount: 0
   },
 
   /**
@@ -30,7 +30,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    
   },
 
   /**

@@ -17,6 +17,7 @@
     "van-switch-cell": "/miniprogram_npm/vant-weapp/switch-cell/index",
     "van-checkbox": "/miniprogram_npm/vant-weapp/checkbox/index",
     "van-checkbox-group": "/miniprogram_npm/vant-weapp/checkbox-group/index",
-    "van-nav-bar": "/miniprogram_npm/vant-weapp/nav-bar/index"
+    "van-nav-bar": "/miniprogram_npm/vant-weapp/nav-bar/index",
+    "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index"
   }
 }

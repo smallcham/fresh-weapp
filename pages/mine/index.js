@@ -1,18 +1,22 @@
 // pages/mine/index.js
+const app = getApp()
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+      
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      color: app.globalData.color
+    })
   },
 
   /**
@@ -26,7 +30,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    this.getTabBar().setData({
+      active: 4
+    })
   },
 
   /**

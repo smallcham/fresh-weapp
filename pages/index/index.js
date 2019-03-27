@@ -8,7 +8,9 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    animationData: {},
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    goodsCata: app.globalData.goodsCata
   },
   //事件处理函数
   bindViewTap: function() {
@@ -73,7 +75,13 @@ Page({
       hasUserInfo: true,
     })
   },
+  onShow: function(e) {
+    this.getTabBar().setData({
+      active: 0
+    })
+  },
   addCart: function(e) {
+    app.cartAnimation(this)
     Notify({
       text: '已加入购物车',
       duration: 1000,

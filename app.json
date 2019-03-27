@@ -3,11 +3,11 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/cart/index",
-    "custom-tab-bar/index",
-    "pages/list/index",
+    "pages/cata/index",
     "pages/vip/index",
     "pages/mine/index",
-    "pages/info/index"
+    "pages/info/index",
+    "custom-tab-bar/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,7 +23,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/list/index",
+        "pagePath": "pages/cata/index",
         "text": "分类"
       },
       {

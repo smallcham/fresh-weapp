@@ -1,9 +1,11 @@
-<van-nav-bar fixed>
+<van-dialog id="van-dialog" />
+
+<van-nav-bar fixed border="false">
   <view slot="title" class='text-muted text-small'><van-icon name="location" /> <text> 亦庄 </text> <van-icon name="arrow-down"/></view>
 </van-nav-bar>
 
-<view class="body" style='margin-top:100rpx;margin-bottom:350rpx;'>
-    <view class='card-fluid'>
+<view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
+    <view class='card-fluid' style='border-bottom: 0rpx'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -11,11 +13,11 @@
         <van-col span="22">
           <van-card num="2" tag="" price="10.00" desc="" title="库尔勒香梨" thumb='https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg'>
               <view slot="footer">
-                <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
+                <van-stepper min="0" value="{{ 1 }}" bind:change="onChangeNum" />
               </view>
               <view slot="tags">
-                <van-tag plain>爆款直降</van-tag>
-                <van-tag plain>会员优选</van-tag>
+                <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
+                <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
               </view>
             </van-card>
         </van-col>
@@ -23,7 +25,7 @@
     </view>
     
 
-    <view class='card-fluid'>
+    <view class='card-fluid' style='border-bottom: 0rpx'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -34,15 +36,15 @@
                 <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
               </view>
               <view slot="tags">
-                <van-tag plain>爆款直降</van-tag>
-                <van-tag plain>会员优选</van-tag>
+                <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
+                <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
               </view>
             </van-card>
         </van-col>
       </van-row>
     </view>
 
-     <view class='card-fluid'>
+     <view class='card-fluid' style='border-bottom: 0rpx'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -53,8 +55,8 @@
                 <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
               </view>
               <view slot="tags">
-                <van-tag plain>爆款直降</van-tag>
-                <van-tag plain>会员优选</van-tag>
+                <van-tag plain  style='padding-right: 10rpx;'>爆款直降</van-tag>
+                <van-tag plain  style='padding-right: 10rpx;'>会员优选</van-tag>
               </view>
             </van-card>
         </van-col>
@@ -64,9 +66,9 @@
         <van-panel>
           <van-cell>
           <view slot="title">
-            <van-tag color="#ff9900">💎 优享会员</van-tag>
+            <van-tag color="#ff9900">优享会员</van-tag>
           </view>
-          <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8 / 月 勾选开通</text></van-checkbox>
+          <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
         </van-cell>
         </van-panel>
 

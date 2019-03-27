@@ -1,2 +1,50 @@
-<!--pages/mine/index.wxml-->
-<text>pages/mine/index.wxml</text>
+<view style="background-color: {{ color.success }}">
+  <van-row>
+      <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image></van-col>
+      <van-col span="19">
+        <view style="padding-top: 4%;">
+          <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
+          <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
+        </view>
+      </van-col>
+    </van-row>
+    <view class='card' style='width:95%; background-color: {{ color.default }}'>
+      <view style='margin-left: 5%;'>
+        <block>
+          <view class='text-warning'>
+              <text class='text-small'> 已为您节省 0.00 元</text>
+              <van-tag style="float:right" round color="{{ color.warning }}">立即续费 <van-icon name="play" /></van-tag>
+          </view>
+          <view class='line'></view>
+          <view>
+            <van-row class="text-primary" style="padding: 2rpx">
+              <van-col span="6">
+                <view class='text-small'><van-icon name="diamond" /><text> 专享价</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="bill" /><text> 任务红包</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="logistics" /><text> 1小时达</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="gift" /><text> 会员日</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="friends" /><text> 共享会员</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="diamond" /><text> 超级积分</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="service" /><text> 专属客服</text></view>
+              </van-col>
+              <van-col span="6">
+                <view class='text-small'><van-icon name="more-o" /><text> 敬请期待</text></view>
+              </van-col>
+          </van-row>
+        </view>
+        </block>
+      </view>
+    </view>
+  </view>

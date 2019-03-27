@@ -26,7 +26,7 @@
     <slot wx:else name="title" />
   </view>
 
-  <view class="van-cell__value value-class">
+  <view class="van-cell__value value-class" style='font-size: 25rpx'>
     <block wx:if="{{ value || value === 0 }}">{{ value }}</block>
     <slot wx:else />
   </view>

@@ -1,20 +1,22 @@
-// pages/cart/index.js
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
 const app = getApp()
 
+// pages/cart/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    active: 3
-  },
+
+    },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
     this.setData({
+      userInfo: app.globalData.userInfo,
       color: app.globalData.color
     })
   },
@@ -30,7 +32,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    this.setData({ active: 3 })
+    this.getTabBar().setData({
+      active: 3
+    })
   },
 
   /**
@@ -66,5 +70,17 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChangeNum: function(e) {
+    if (parseInt(e.detail) <= 0) {
+      Dialog.confirm({
+        title: '提示',
+        message: '您确定要删除该商品吗'
+      }).then(() => {
+        // on confirm
+      }).catch(() => {
+
+      });
+    }
   }
 })
