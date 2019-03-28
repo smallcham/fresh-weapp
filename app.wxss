@@ -182,6 +182,14 @@ mt-5 {
   font-size: 35rpx;
 }
 
+.text-super {
+  font-size: 40rpx;
+}
+
+.text-max {
+  font-size: 50rpx;
+}
+
 .text-md {
   font-size: 30rpx;
 }
@@ -191,7 +199,7 @@ mt-5 {
 }
 
 .text-mini {
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 .text-tiny {

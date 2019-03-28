@@ -40,7 +40,7 @@ App({
     })
     this.animation = animation
   },
-  cartAnimation: function(target) {
+  cartAnimation: function(target, isSetData=true) {
     this.animation.rotate(15).step()
     this.animation.rotate(-15).step()
     this.animation.rotate(0).step()
@@ -63,7 +63,11 @@ App({
       { text: "河鲜", id: 7 },
       { text: "粮油", id: 8 },
       { text: "特产", id: 9 },
-      { text: "酒饮", id: 10 }
+      { text: "酒饮", id: 10 },
+      { text: "测试1", id: 11 },
+      { text: "测试2", id: 12 },
+      { text: "测试3", id: 13 },
+      { text: "测试4", id: 14 }
     ],
     color: {
       primary: "#2C3E50",

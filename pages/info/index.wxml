@@ -57,6 +57,7 @@
 <van-goods-action>
 <van-notify id="custom-notify" />
   <van-goods-action-icon
+    animation="{{ animationData }}"
     icon="shopping-cart"
     text="购物车"
     bind:click="onToCart"

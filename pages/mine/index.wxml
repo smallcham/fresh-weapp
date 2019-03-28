@@ -1,50 +1,177 @@
-<view style="background-color: {{ color.success }}">
-  <van-row>
-      <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image></van-col>
-      <van-col span="19">
-        <view style="padding-top: 4%;">
-          <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
-          <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
-        </view>
-      </van-col>
-    </van-row>
-    <view class='card' style='width:95%; background-color: {{ color.default }}'>
-      <view style='margin-left: 5%;'>
-        <block>
-          <view class='text-warning'>
-              <text class='text-small'> 已为您节省 0.00 元</text>
-              <van-tag style="float:right" round color="{{ color.warning }}">立即续费 <van-icon name="play" /></van-tag>
+<view class='body'>
+  <view style="background-color: {{ color.success }};border-radius: 100% 100% 100% 100% / 0% 0% 10% 10%;">
+    <van-row>
+        <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image></van-col>
+        <van-col span="19">
+          <view style="padding-top: 4%;">
+            <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
+            <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
           </view>
-          <view class='line'></view>
-          <view>
-            <van-row class="text-primary" style="padding: 2rpx">
-              <van-col span="6">
-                <view class='text-small'><van-icon name="diamond" /><text> 专享价</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="bill" /><text> 任务红包</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="logistics" /><text> 1小时达</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="gift" /><text> 会员日</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="friends" /><text> 共享会员</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="diamond" /><text> 超级积分</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="service" /><text> 专属客服</text></view>
-              </van-col>
-              <van-col span="6">
-                <view class='text-small'><van-icon name="more-o" /><text> 敬请期待</text></view>
-              </van-col>
-          </van-row>
+        </van-col>
+      </van-row>
+      <view class='card' style='margin-left:2.5%;margin-bottom:-1rpx;width:92%; background-color: {{ color.default }};border-radius: 100% 100% 100% 100% / 0% 0% 14% 14%;"'>
+        <view style='margin-left: 5%;'>
+          <block>
+            <view class='text-warning'>
+                <text class='text-small'> 已为您节省 0.00 元</text>
+                <van-tag style="float:right" round color="{{ color.warning }}">立即续费 <van-icon name="play" /></van-tag>
+            </view>
+            <view class='line'></view>
+            <view>
+              <van-row class="text-muted text-mini" style="padding: 2rpx">
+                <van-col span="6">
+                  <view><van-icon name="diamond" /><text> 专享价</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="bill" /><text> 任务红包</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="logistics" /><text> 1小时达</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="gift" /><text> 会员日</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="friends" /><text> 共享会员</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="diamond" /><text> 超级积分</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="service" /><text> 专属客服</text></view>
+                </van-col>
+                <van-col span="6">
+                  <view><van-icon name="more-o" /><text> 敬请期待</text></view>
+                </van-col>
+            </van-row>
+          </view>
+          </block>
         </view>
-        </block>
       </view>
     </view>
+
+  <view class='card-fulid text-center' style='width:90%;margin-left:2.5%;'>
+    <van-row>
+      <van-col span="6">
+        <view class='card' style='width:100%;border-top:0;'>
+            <view><text class='text-primary'>¥ 0</text></view>
+            <view><text class='text-mini text-muted'>余额</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card' style='width:100%;border-top:0;'>
+            <view><text class='text-primary'>2</text></view>
+            <view><text class='text-mini text-muted'>红包</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card' style='width:100%;border-top:0;'>
+            <view><text class='text-primary'>0</text></view>
+            <view><text class='text-mini text-muted'>商品券</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card' style='width:100%;border-top:0;'>
+            <view><text class='text-primary'>0</text></view>
+            <view><text class='text-mini text-muted'>积分兑换</text></view>
+          </view>
+      </van-col>
+    </van-row>
   </view>
+
+  <view class='card-fulid text-center order-bar'>
+  <van-nav-bar border="false">
+    <view slot="left">
+      <text class='text-small text-primary'>我的订单</text>
+    </view>
+    <view slot="right">
+      <text class='text-mini text-muted'>全部订单</text>
+      <van-icon name="arrow" class='text-mini' color='{{ color.muted }}'/>
+    </view>
+  </van-nav-bar>
+    <van-row>
+      <van-col span="6">
+        <view class='card bar-item'>
+            <view><van-icon class='text-super' color='{{ color.warning }}' name="pending-payment" /></view>
+            <view><text class='text-mini text-muted'>待付款</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card bar-item'>
+            <view><van-icon class='text-super' color='{{ color.info }}' name="send-gift" /></view>
+            <view><text class='text-mini text-muted'>待发货</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card bar-item'>
+            <view><van-icon class='text-super' color='{{ color.success }}' name="logistics" /></view>
+            <view><text class='text-mini text-muted'>配送中</text></view>
+          </view>
+      </van-col>
+      <van-col span="6">
+        <view class='card bar-item'>
+            <view><van-icon class='text-super' color='{{ color.muted }}' name="comment" /></view>
+            <view><text class='text-mini text-muted'>已完成</text></view>
+          </view>
+      </van-col>
+    </van-row>
+  </view>
+
+  <swiper autoplay circular style='height:200rpx'>
+      <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+      <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737612998261_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+      <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    </swiper>
+
+    <view class='card-fulid text-center order-bar'>
+  <van-nav-bar border="false">
+    <view slot="left">
+      <text class='text-small text-primary'>我的服务</text>
+    </view>
+  </van-nav-bar>
+    <van-row>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.warning }}' name="point-gift" /></view>
+            <view><text class='text-mini text-muted'>储值送会员</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.danger }}' name="balance-list" /></view>
+            <view><text class='text-mini text-muted'>邀请的红包</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.danger }}' name="friends" /></view>
+            <view><text class='text-mini text-muted'>我的拼团</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.warning }}' name="star" /></view>
+            <view><text class='text-mini text-muted'>积分商城</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.info }}' name="location" /></view>
+            <view><text class='text-mini text-muted'>收货地址</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.info }}' name="service" /></view>
+            <view><text class='text-mini text-muted'>客服和帮助</text></view>
+          </view>
+      </van-col>
+      <van-col span="8">
+        <view class='card bar-item'>
+            <view><van-icon class='text-max' color='{{ color.info }}' name="setting" /></view>
+            <view><text class='text-mini text-muted'>关于</text></view>
+          </view>
+      </van-col>
+    </van-row>
+  </view>
+</view>
