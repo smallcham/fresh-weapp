@@ -80,7 +80,7 @@
   </view>
 
   <view class='card-fulid text-center order-bar'>
-  <van-nav-bar border="false">
+  <van-nav-bar border="false" data-url="/pages/order/index" bind:click-right="showOrder">
     <view slot="left">
       <text class='text-small text-primary'>我的订单</text>
     </view>
@@ -90,25 +90,25 @@
     </view>
   </van-nav-bar>
     <van-row>
-      <van-col span="6">
+      <van-col span="6" data-url="/pages/order/index?active=0" bindtap='showOrder'>
         <view class='card bar-item'>
-            <view><van-icon class='text-super' color='{{ color.warning }}' name="pending-payment" /></view>
+            <view><van-icon class='text-super' color='{{ color.warning }}' name="pending-payment"/></view>
             <view><text class='text-mini text-muted'>待付款</text></view>
           </view>
       </van-col>
-      <van-col span="6">
+      <van-col span="6" data-url="/pages/order/index?active=1" bindtap='showOrder'>
         <view class='card bar-item'>
             <view><van-icon class='text-super' color='{{ color.info }}' name="send-gift" /></view>
             <view><text class='text-mini text-muted'>待发货</text></view>
           </view>
       </van-col>
-      <van-col span="6">
+      <van-col span="6" data-url="/pages/order/index?active=2" bindtap='showOrder'>
         <view class='card bar-item'>
             <view><van-icon class='text-super' color='{{ color.success }}' name="logistics" /></view>
             <view><text class='text-mini text-muted'>配送中</text></view>
           </view>
       </van-col>
-      <van-col span="6">
+      <van-col span="6" data-url="/pages/order/index?active=3" bindtap='showOrder'>
         <view class='card bar-item'>
             <view><van-icon class='text-super' color='{{ color.muted }}' name="comment" /></view>
             <view><text class='text-mini text-muted'>已完成</text></view>

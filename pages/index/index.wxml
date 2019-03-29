@@ -1,7 +1,7 @@
 <van-nav-bar fixed border="false">
     <view slot="title" style="background: {{ color.success }};padding-left:0.80rem" class='text-default text-small'><van-icon name="location" /> <text> 紫宸苑4号楼1502 </text> <van-icon name="arrow-down"/></view>
   </van-nav-bar>
-<van-search background="{{ color.success }}" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
+<van-search shape="round" background="{{ color.success }}" bind:tap="openSearch" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
 <van-tabs sticky color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
   <van-tab wx:for="{{ goodsCata }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>

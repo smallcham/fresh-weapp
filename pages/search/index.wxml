@@ -1,0 +1,1 @@
+<van-search shape="round" background="{{ color.success }}" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />

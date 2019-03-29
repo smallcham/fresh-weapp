@@ -7,6 +7,7 @@ Page({
    * Page initial data
    */
   data: {
+    title: "分类",
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -47,6 +48,9 @@ Page({
     this.getTabBar().setData({
       active: 1
     })
+    wx.setNavigationBarTitle({
+      title: this.data.title,
+    }) 
   },
 
   /**

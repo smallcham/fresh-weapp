@@ -88,5 +88,10 @@ Page({
       selector: '#custom-notify',
       backgroundColor: this.data.color.success
     });
+  },
+  openSearch: function() {
+    wx.navigateTo({
+      url: '/pages/search/index',
+    })
   }
 })

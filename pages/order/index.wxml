@@ -1,0 +1,3 @@
+<van-tabs sticky color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
+  <van-tab wx:for="{{ orderType }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
+</van-tabs>

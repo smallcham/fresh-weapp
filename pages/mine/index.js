@@ -68,5 +68,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  }, showOrder: function(e) {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
   }
 })

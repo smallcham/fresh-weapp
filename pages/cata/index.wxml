@@ -1,32 +1,7 @@
-<van-search background="{{ color.success }}" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
-<!-- <van-row>
-  <van-col span="4">
-    <scroll-view scroll-y="true" style="height: 1000rpx" class="text-small">
-      <view style="background: white; width: 180rpx; height: 50rpx;padding-top:15rpx;padding-left:40rpx;" ><text>热卖</text></view>
-      <view style="background: white; width: 180rpx; height: 70rpx;padding-top:15rpx;padding-left:40rpx;"><text>热卖</text></view>
-      <view style="background: white; width: 180rpx; height: 70rpx;padding-top:15rpx;padding-left:40rpx;" ><text>热卖</text></view>
-  </scroll-view>
-  </van-col>
-  <van-col span="20">
-    <van-tabs color="{{ color.success }}" active="{{ active }}" bind:change="onChange">
-      <van-tab title="热卖"></van-tab>
-      <van-tab title="上新"></van-tab>
-      <van-tab title="水果"></van-tab>
-      <van-tab title="蔬菜"></van-tab>
-      <van-tab title="轻食"></van-tab>
-      <van-tab title="粮油"></van-tab>
-    </van-tabs>
-  </van-col>
-</van-row> -->
-<!-- 
-<view class='cu-custom'>
-  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-      <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
-      <text class='icon-back'></text> 返回
-    </navigator>
-    <view class='content' style='top:{{StatusBar}}px;'>Tab索引</view>
-  </view>
-</view> -->
+<van-nav-bar fixed border="false">
+    <view slot="title" style="background: {{ color.success }};padding-left:0.80rem" class='text-default text-small'><van-icon name="location" /> <text> 紫宸苑4号楼1502 </text> <van-icon name="arrow-down"/></view>
+  </van-nav-bar>
+<van-search background="{{ color.success }}" input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="草莓、香蕉、龙眼" />
 <view class="VerticalBox">
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:1000rpx">
     <view class="cu-item {{item.id==TabCur?'text-success cur':''}}" wx:for="{{ goodsCata }}" wx:key bindtap='tabSelect' data-id="{{ item.id }}">

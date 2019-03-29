@@ -50,6 +50,9 @@ App({
       cartCount: tabbar.data.cartCount + 1
     })
   },
+  is_null: function(target) {
+    return null === target || undefined === target || '' === target;
+  },
   globalData: {
     userInfo: null,
     goodsCata: [
