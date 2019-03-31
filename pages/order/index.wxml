@@ -1,3 +1,32 @@
-<van-tabs sticky color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
+<van-tabs swipeable color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
   <van-tab wx:for="{{ orderType }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
+
+<view class='icon-center text-muted-a'>
+  <van-icon name="todo-list"/>
+  <text class='icon-text-center text-muted'>您还没有相关订单哦 ~</text>
+</view>
+
+<!-- <van-nav-bar data-url="/pages/order/index" bind:click-right="showOrder" border="{{ false }}">
+    <view slot="left">
+      <text class='text-small text-success'>次日到达</text>
+    </view>
+    <view slot="right">
+      <text class='text-mini text-muted' style='padding-right: 15rpx;'>2019-03-27 11:35:02</text>
+      <text class='text-mini text-success'>已签收</text>
+    </view>
+  </van-nav-bar>
+  <van-panel use-footer-slot>
+    <view class='container' style='padding: 20rpx'>
+      <view class='card'><image style='width:100rpx;height:100rpx;' src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png'/></view>
+      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img13.yiguoimg.com/d/items/2019/190116/9288736791701040_300.jpg'/></view>
+      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img12.yiguoimg.com/d/items/2018/181207/9288735167292807_300.jpg'/></view>
+      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg'/></view>
+      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img10.yiguoimg.com/d/items/2018/181108/9288733757351272_300.jpg'/></view>
+      <view style='text-align: right;'><text class='text-md text-primary' style='padding-right: 20rpx'>实付: ¥ 70.2</text></view>
+    </view>
+    <view slot="footer" style='text-align: right;'>
+      <van-button plain size="mini" type='primary' style='padding-right: 20rpx'>售后详情</van-button>
+      <van-button plain size="mini" type="success">再来一单</van-button>
+    </view>
+  </van-panel> -->

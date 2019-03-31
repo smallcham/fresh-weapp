@@ -80,7 +80,7 @@
   </view>
 
   <view class='card-fulid text-center order-bar'>
-  <van-nav-bar border="false" data-url="/pages/order/index" bind:click-right="showOrder">
+  <van-nav-bar data-url="/pages/order/index" bind:click-right="showOrder">
     <view slot="left">
       <text class='text-small text-primary'>我的订单</text>
     </view>

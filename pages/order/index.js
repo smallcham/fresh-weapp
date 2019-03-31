@@ -13,7 +13,8 @@ Page({
       { text: '待发货', id: 1 },
       { text: '配送中', id: 2 },
       { text: '已完成', id: 3 }
-    ]
+    ],
+    content: {}
   },
 
   /**

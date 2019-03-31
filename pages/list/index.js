@@ -1,14 +1,14 @@
-import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
+// pages/list/index.js
 const app = getApp()
-// pages/info/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    cartCount: 0,
-    showFoot: true
+    id: 0,
+    title: '',
+    border: false
   },
 
   /**
@@ -16,7 +16,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      color: app.globalData.color
+      color: app.globalData.color,
+      title: options.title,
+      id: options.id
     })
   },
 
@@ -31,7 +33,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -67,19 +69,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  onAddCart: function(e) {
-    Notify({
-      text: '¥ 29.2 元，还差49.2免配送费',
-      duration: 3000,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.warning
-    });
-  },
-  onToCart: function(e) {
-    wx.switchTab({
-      url: '/pages/cart/index',
-    })
   }
 })

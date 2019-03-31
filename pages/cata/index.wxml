@@ -1,7 +1,9 @@
 <van-nav-bar fixed border="false">
-    <view slot="title" style="background: {{ color.success }};padding-left:0.80rem" class='text-default text-small'><van-icon name="location" /> <text> 紫宸苑4号楼1502 </text> <van-icon name="arrow-down"/></view>
+    <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
+     <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
+    </view>
   </van-nav-bar>
-<van-search background="{{ color.success }}" input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="草莓、香蕉、龙眼" />
+<van-search input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="草莓、香蕉、龙眼" />
 <view class="VerticalBox">
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:1000rpx">
     <view class="cu-item {{item.id==TabCur?'text-success cur':''}}" wx:for="{{ goodsCata }}" wx:key bindtap='tabSelect' data-id="{{ item.id }}">
@@ -23,7 +25,7 @@
           </view>
         </view>
 
-        <view class="cu-item grayscale">
+        <view class="cu-item">
           <view class="cu-avatar radius lg" style="background-image:url(https://img14.yiguoimg.com/d/items/2017/170904/9288712321082148_500.jpg);"></view>
           <view class='content'>
             <view class='text-small'>中洋河豚河豚鱼</view>
@@ -35,7 +37,7 @@
           </view>
         </view>
 
-        <view class="cu-item grayscale">
+        <view class="cu-item">
           <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
           <view class='content'>
             <view class='text-small'>海天下法国银鳕鱼</view>

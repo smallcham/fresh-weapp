@@ -8,10 +8,11 @@ Page({
    */
   data: {
     title: "分类",
+    loading: app.globalData.loading,
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    TabCur: 0,
+    TabCur: app.globalData.TabCur,
     VerticalNavTop: 0,
     goodsCata: app.globalData.goodsCata
   },
@@ -45,6 +46,10 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    this.setData({
+      location: app.globalData.location,
+      TabCur: app.globalData.TabCur
+    })
     this.getTabBar().setData({
       active: 1
     })
@@ -86,5 +91,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  openSearch: function () {
+    wx.navigateTo({
+      url: '/pages/search/index',
+    })
+  },
+  openLocation: function () {
+    wx.navigateTo({
+      url: '/pages/location/index',
+    })
   }
 })

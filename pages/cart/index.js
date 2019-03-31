@@ -8,8 +8,8 @@ Page({
    * Page initial data
    */
   data: {
-
-    },
+    location: app.globalData.location
+  },
 
   /**
    * Lifecycle function--Called when page load
@@ -34,6 +34,9 @@ Page({
   onShow: function () {
     this.getTabBar().setData({
       active: 3
+    })
+    this.setData({
+      location: app.globalData.location
     })
   },
 
@@ -82,5 +85,10 @@ Page({
 
       });
     }
+  },
+  openLocation: function () {
+    wx.navigateTo({
+      url: '/pages/location/index',
+    })
   }
 })

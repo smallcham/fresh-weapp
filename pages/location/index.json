@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-search": "/miniprogram_npm/vant-weapp/search/index",
+    "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
+    "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "van-nav-bar": "/miniprogram_npm/vant-weapp/nav-bar/index",
+    "van-area": "/miniprogram_npm/vant-weapp/area/index",
+    "van-popup": "/miniprogram_npm/vant-weapp/popup/index",
+    "van-tag": "/miniprogram_npm/vant-weapp/tag/index"
+  }
+}

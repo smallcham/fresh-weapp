@@ -1,1 +1,80 @@
-<van-search shape="round" background="{{ color.success }}" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
+<van-search use-action-slot input-align="center" value="{{ value }}"  focus="{{ focus }}"placeholder="草莓、香蕉、龙眼">
+  <view slot="action" bind:tap="onSearch" class='text-small text-muted'>搜索</view>
+</van-search>
+
+<van-nav-bar border="{{ border }}">
+    <view slot="left">
+      <text class='text-small text-primary'>热门搜索</text>
+    </view>
+</van-nav-bar>
+<view style="padding-left: 0.2rem; margin-left: 0.2rem; position: relative;">
+  <van-tag plain size="medium" wx:for="{{ hotWord }}" wx:key="{{ item.text }}">{{ item.text }}</van-tag>
+</view>
+
+<view class='line'></view>
+
+<van-nav-bar border="{{ border }}" bind:click-right="emptyHistory">
+  <view slot="left">
+    <text class='text-small text-primary'>历史搜索</text>
+  </view>
+  <view slot="right">
+    <van-icon name="delete" class='text-mini' color='{{ color.muted }}'/>
+    <text class='text-mini text-muted'>清空历史记录</text>
+  </view>
+</van-nav-bar>
+<view style="padding-left: 0.2rem; margin-left: 0.2rem; position: relative;">
+  <van-tag plain size="medium" wx:for="{{ history }}" wx:key="{{ item.text }}">{{ item.text }}</van-tag>
+</view>
+
+<van-row>
+  <van-col span="24">
+    <view class='line'></view>
+    <van-nav-bar border="{{ border }}">
+      <view slot="left">
+        <text class='text-small text-primary'>推荐商品</text>
+      </view>
+    </van-nav-bar>
+  </van-col>
+</van-row>
+
+
+<view class="padding-xs">
+      <view class="cu-list menu menu-avatar">
+        <view class="cu-item cu-item-noborder">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img09.yiguoimg.com/d/items/2019/190124/9288737015506488_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>加拿大速冻北极甜虾</view>
+            <view class='text-muted text-mini'>24:1 黄金甜酸比</view>
+            <view><text class='text-del'>¥ 10.9</text><text class='price' style='padding-left: 10rpx'>¥ 5.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img14.yiguoimg.com/d/items/2017/170904/9288712321082148_500.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>中洋河豚河豚鱼</view>
+            <view class='text-muted text-mini'>琥珀色的酸甜果肉 软滑细糯</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 7.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+      </view>
+    </view>

@@ -1,8 +1,12 @@
 <van-nav-bar fixed border="false">
-    <view slot="title" style="background: {{ color.success }};padding-left:0.80rem" class='text-default text-small'><van-icon name="location" /> <text> 紫宸苑4号楼1502 </text> <van-icon name="arrow-down"/></view>
+    <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
+     <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
+    </view>
   </van-nav-bar>
-<van-search shape="round" background="{{ color.success }}" bind:tap="openSearch" input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼" />
-<van-tabs sticky color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
+<van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼">
+  <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/>
+</van-search>
+<van-tabs color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
   <van-tab wx:for="{{ goodsCata }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
 
@@ -14,64 +18,22 @@
   </swiper>
 
 <view class='body'>
-  <view class='card' style='border: 0rpx'>
-    <van-row gutter="20">
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img10.yiguoimg.com/d/items/2019/190220/9570212329662036_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>乳品酒饮</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img11.yiguoimg.com/d/items/2019/190220/9570212329694804_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>乳品酒饮</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img14.yiguoimg.com/d/items/2019/190220/9570212329727572_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>速食粮油</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img09.yiguoimg.com/d/items/2019/190220/9570212329760340_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>会员专区</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img14.yiguoimg.com/d/items/2019/190220/9570212329793108_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>好物拼团</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img11.yiguoimg.com/d/items/2019/190220/9570212329825876_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>邀请有理</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img12.yiguoimg.com/d/items/2019/190220/9570212329858644_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>订单提现</text></view>
-        </block>
-    </van-col>
-    <van-col span="6">
-        <block>
-          <view class='text-center'><image src='https://img12.yiguoimg.com/d/items/2019/190220/9570212329891412_144.png?w=144&h=144' style='width:2.0rem;height:2.0rem'></image></view>
-          <view class='text-center'><text class='text-small text-title'>每日签到</text></view>
-        </block>
+  <view class='card' style='border: 0rpx;'>
+    <van-row>
+    <van-col span="6" wx:for="{{ indexCata }}" wx:key="{{ item.id }}">
+        <view data-url="{{ item.url }}" data-id="{{ item.id }}" bindtap="openCata">
+          <view class='text-center'><image src='{{ item.img }}' style='width:2.0rem;height:2.0rem'></image></view>
+          <view class='text-center'><text class='text-small text-title'>{{ item.title }}</text></view>
+        </view>
     </van-col>
   </van-row>
   </view>
 <view class='line'></view>
-  <van-cell title="热销爆款" value="查看更多" is-link>
+  <van-cell title="热销爆款" border="{{ border }}" value="查看更多" is-link>
     <van-icon slot="icon" name="fire" class="text-danger" style='font-size: 30rpx;'/>
   </van-cell>
   <scroll-view scroll-x style='white-space: nowrap; display: flex;'>
-        <view class='card'>
+        <view class='card ell'>
           <block>
             <view class='text-center' bindtap='showInfo'><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
             <view bindtap='showInfo'><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -79,7 +41,7 @@
             <view bindtap='showInfo'><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class="card">
+        <view class="card ell">
           <block>
             <view class='text-center'>
               <image src='http://p02.sfimg.cn/2018/4000315385/middle_4000315385_1_1/160x160.jpg' style='width:200rpx;height:200rpx;'></image>
@@ -90,7 +52,7 @@
             <view><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class='card'>
+        <view class='card ell'>
           <block>
             <view class='text-center'><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
             <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -98,7 +60,7 @@
             <view><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class='card'>
+        <view class='card ell'>
           <block>
           <view class='text-center'> <image src='http://p02.sfimg.cn/2018/4600298705/middle_4600298705_9_00/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
             <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -108,30 +70,55 @@
         </view>
   </scroll-view>
 
-  <van-cell title="特色专区" value="查看更多" is-link fontSize="25rpx;">
+  <van-cell title="特色专区" border="{{ border }}" value="查看更多" is-link fontSize="25rpx;">
     <van-icon slot="icon" name="medel" class="text-warning" style='font-size: 30rpx;'/>
   </van-cell>
   <van-row>
     <van-col span="12">
-    <view class='card'>
+    <view class='card cell-lg'>
         <block>
           <view><text class='gs-name'>【满99减20专场】</text></view>
           <view class='text-center'><text class='text-small text-muted'>面膜39元抢</text></view>
-          <view class='text-center'><image src='http://p02.sfimg.cn/2017/5600279917/middle_5600279917_0_1/160x160.jpg' style='width:345rpx;height:320rpx;'></image></view>
+          <view class='text-center'>
+            <image src='https://img10.yiguoimg.com/e/items/2017/170619/9288709300626131_220.jpg' style='width:170rpx;height:160rpx;'></image>
+            <image src='https://img13.yiguoimg.com/e/items/2017/170616/9288709169816272_220.jpg' style='width:170rpx;height:160rpx;'></image>
+          </view>
         </block>    
     </view>
     </van-col>
     <van-col span="12">
-    <view class='card'>
+    <view class='card cell-lg'>
         <block>
           <view><text class='gs-name'>会员特价</text></view>
           <view class='text-center'><text class='text-small text-muted'>精选好货1.9元起</text></view>
-          <view class='text-center'><image src='http://004.sfimg.cn/web/b41742e7/b41742e771f53b9f81ebee581062eabc.jpg' style='width:345rpx;height:320rpx;'></image></view>
+          <view class='text-center'>
+            <image src='https://img12.yiguoimg.com/e/items/2017/170619/9288709300593363_220.jpg' style='width:170rpx;height:160rpx;'></image>
+            <image src='https://img11.yiguoimg.com/e/items/2017/170616/9288709169619664_220.jpg' style='width:170rpx;height:160rpx;'></image>
+          </view>
         </block>    
     </view>
     </van-col>
   </van-row>
-  <van-cell title="为你推荐"/>
+
+<view wx:for="{{ homeCata }}" wx:key="{{  item.id }}">
+  <van-cell title="{{ item.title }}" border="{{ border }}" value="{{ item.goodsList.length > 5 ? '查看更多' : '' }}" url="{{ item.goodsList.length > 5 ? '/pages/list/index?id=' + item.id + '&title=' + item.title : '' }}" is-link="{{ item.goodsList.length > 5 ? true : false }}">
+  <view wx:if="{{ item.icon }}" slot="icon" >
+      <van-icon name="{{ item.icon.name }}" class="{{ item.icon.color }}" style='font-size: 30rpx;'/>
+  </view>
+  </van-cell>
+  <scroll-view scroll-x style='white-space: nowrap; display: flex;'>
+        <view class='card ell' wx:for="{{ item.goodsList }}" wx:for-item="goods" wx:key="{{ goods.goodsCode }}">
+          <block>
+            <view class='text-center' bindtap='showInfo'><image src='{{ goods.img }}' style='width:220rpx;height:220rpx;'></image></view>
+            <view bindtap='showInfo'><text class='gs-name'>{{ goods.goodsName }}</text></view>
+            <view><text class='price' bindtap='showInfo'>¥ {{ goods.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view bindtap='showInfo'><text class='text-del'>¥ {{ goods.originalPrice }}</text></view>
+            </block>
+        </view>
+  </scroll-view>
+</view>
+
+    <van-cell border="{{ border }}" title="为你推荐"/>
       <van-row>
       <van-col span="12">
       <view class='card'>

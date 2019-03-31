@@ -1,14 +1,16 @@
-import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
+// pages/location/index.js
 const app = getApp()
-// pages/info/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    cartCount: 0,
-    showFoot: true
+    title: "选择地址",
+    location: {
+      address: "位置获取中"
+    },
+    border: false
   },
 
   /**
@@ -31,7 +33,10 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    
+    wx.setNavigationBarTitle({
+      title: this.data.title,
+    }) 
+    app.getLocation(this, 1);
   },
 
   /**
@@ -68,18 +73,12 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  onAddCart: function(e) {
-    Notify({
-      text: '¥ 29.2 元，还差49.2免配送费',
-      duration: 3000,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.warning
-    });
+  refresh: function() {
+    app.getLocation(this, 1);
   },
-  onToCart: function(e) {
-    wx.switchTab({
-      url: '/pages/cart/index',
-    })
+  onChoose: function(e) {
+    this.data.location = this.data.location.pois[e.currentTarget.dataset.index]
+    app.globalData.location = this.data.location
+    wx.navigateBack({})
   }
 })

@@ -1,11 +1,12 @@
 <van-dialog id="van-dialog" />
-
-<van-nav-bar fixed border="false">
-  <view slot="title" class='text-muted text-small'><van-icon name="location" /> <text> 亦庄 </text> <van-icon name="arrow-down"/></view>
+<van-nav-bar fixed border="false" z-index="3">
+  <view slot="title" class='text-muted text-small ell-super' bind:tap="openLocation">
+    <van-icon name="location" /> <text> {{ location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon name="arrow-down"/>
+  </view>
 </van-nav-bar>
 
 <view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
-    <view class='card-fluid' style='border-bottom: 0rpx'>
+    <view class='card-fluid' style='border-bottom: 0rpx; border-left: 0; border-right: 0;'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -25,7 +26,7 @@
     </view>
     
 
-    <view class='card-fluid' style='border-bottom: 0rpx'>
+    <view class='card-fluid' style='border-bottom: 0rpx; border-left: 0; border-right: 0;'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -44,7 +45,7 @@
       </van-row>
     </view>
 
-     <view class='card-fluid' style='border-bottom: 0rpx'>
+     <view class='card-fluid' style='border-bottom: 0rpx; border-left: 0; border-right: 0;'>
       <van-row>
         <van-col span="2">
           <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
@@ -80,7 +81,7 @@
     <van-submit-bar price="{{ 3050 }}" button-text="提交订单" button-type="success"  bind:submit="onClickButton" tip="{{ true }}" >
       <van-radio style='padding-left: 20rpx;' checked-color="{{ color.success }}">全选</van-radio>
         <view slot="tip">
-          您的收货地址不支持同城送, <text bindtap="onClickLink" class='text-info'>修改地址</text>
+          您的收货地址不支持同城送, <text bindtap="openLocation" class='text-info'>修改地址</text>
         </view>
     </van-submit-bar>
 </view>

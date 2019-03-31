@@ -6,6 +6,12 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     wx.hideTabBar();
+    //获取机型
+    wx.getSystemInfo({
+      success: function(e) {
+        console.log(e)
+      }
+    })
     // 登录
     wx.login({
       success: res => {
@@ -38,7 +44,11 @@ App({
       duration: 60,
       timingFunction: 'linear',
     })
-    this.animation = animation
+    this.animation = animation;
+    var QQMapWX = require('/libs/qqmap-wx-jssdk.min.js');
+    this.qqmapsdk = new QQMapWX({
+      key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP'
+    });
   },
   cartAnimation: function(target, isSetData=true) {
     this.animation.rotate(15).step()
@@ -53,8 +63,49 @@ App({
   is_null: function(target) {
     return null === target || undefined === target || '' === target;
   },
+  getLocation: function (target, poi = 0, options = null) {
+    var that = this;
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userLocation']) {
+          wx.getLocation({
+            success: function (e) {
+              that.qqmapsdk.reverseGeocoder({
+                location: {
+                  latitude: e.latitude,
+                  longitude: e.longitude
+                },
+                get_poi: poi,
+                poi_options: options,
+                success: function (res) {
+                  console.log(res)
+                  if (res.status == 0) {
+                    that.globalData.location = res.result;
+                    target.setData({
+                      location: res.result
+                    })
+                  }
+                },
+                fail: function (res) {
+                  console.log(res)
+                  that.setData({
+                    location: 位置获取失败
+                  })
+                },
+                complete: function() {
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
   globalData: {
     userInfo: null,
+    loading: false,
+    location: {"title": "地理位置获取中"},
+    TabCur: 0,
     goodsCata: [
       { text: "热卖", id: 0 },
       { text: "上新", id: 1 },

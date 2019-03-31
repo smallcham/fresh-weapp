@@ -6,7 +6,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    focus: true,
+    border: false,
+    hotWord: [
+      { text: "菠菜" },
+      { text: "韭菜" },
+      { text: "鲜奶" },
+      { text: "草莓" },
+      { text: "鲜肉" },
+      { text: "五花" },
+      { text: "坚果" },
+      { text: "抽纸" },
+      { text: "饼干" },
+      { text: "饮料" }
+    ],
+    history: [
+      { text: "设计师。" },
+      { text: "uahahabbaa" },
+      { text: "嗷嗷叫啊哈哈" },
+      { text: "猕猴桃" },
+      { text: "面包" },
+      { text: "龙眼" },
+      { text: "纸包鸡" }
+    ]
   },
 
   /**
