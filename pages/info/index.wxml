@@ -1,5 +1,5 @@
 <view class='body' style='margin-bottom: 150rpx'>
-  <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)">
+  <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 531rpx'>
     <swiper-item class="text-center"><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/e/items/2017/170620/9288709342667476_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     <swiper-item class="text-center"><image src='https://img13.yiguoimg.com/e/items/2017/170620/9288709342733012_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
