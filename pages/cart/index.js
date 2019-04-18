@@ -1,6 +1,6 @@
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
+import api from '../../api/api';
 const app = getApp()
-
 // pages/cart/index.js
 Page({
 
@@ -37,6 +37,15 @@ Page({
     })
     this.setData({
       location: app.globalData.location
+    })
+    api.post(app.globalApi.test, { params: {} }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
     })
   },
 

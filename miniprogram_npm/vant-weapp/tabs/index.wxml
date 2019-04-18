@@ -6,7 +6,7 @@
 
     <scroll-view
       scroll-x="{{ scrollable }}"
-      scroll-with-animation 
+      scroll-with-animation
       scroll-left="{{ scrollLeft }}"
       class="van-tabs__scroll--{{ type }}"
       style="{{ color ? 'border-color: ' + color : '' }}"

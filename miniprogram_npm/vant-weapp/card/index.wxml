@@ -37,6 +37,7 @@
       </view>
     </view>
   </view>
+
   <view class="van-card__footer">
     <slot name="footer" />
   </view>

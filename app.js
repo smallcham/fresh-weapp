@@ -16,6 +16,26 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        // let that = this
+        // wx.request({
+        //   url: this.globalApi.host + this.globalApi.token,
+        //   method: 'POST',
+        //   data: {
+        //     code: res.code
+        //   },
+        //   success: function (data) {
+        //     data = data.data
+        //     if (data.state) {
+        //       try {
+        //         wx.setStorageSync('token', data.data)
+        //       } catch (e) {
+        //         console.log('存储token失败', data)  
+        //       }
+        //     } else {
+        //       console.log('登录失败', data)
+        //     }
+        //   }
+        // })
       }
     })
     // 获取用户信息
@@ -27,7 +47,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              console.log(res.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -51,9 +71,8 @@ App({
     });
   },
   cartAnimation: function(target, isSetData=true) {
-    this.animation.rotate(15).step()
-    this.animation.rotate(-15).step()
-    this.animation.rotate(0).step()
+    this.animation.scale(1.2).step()
+    this.animation.scale(1).step()
     const tabbar = target.getTabBar();
     tabbar.setData({
       animationData: this.animation.export(),
@@ -100,6 +119,11 @@ App({
         }
       }
     })
+  },
+  globalApi: {
+    host: 'https://www.llfresh.cn/api/mini/',
+    token: 'token',
+    test: 'test'
   },
   globalData: {
     userInfo: null,
