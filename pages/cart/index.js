@@ -19,6 +19,9 @@ Page({
       userInfo: app.globalData.userInfo,
       color: app.globalData.color
     })
+    this.getTabBar().setData({
+      selected: 3
+    })
   },
 
   /**
@@ -32,11 +35,11 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    this.getTabBar().setData({
-      active: 3
-    })
     this.setData({
       location: app.globalData.location
+    })
+    this.getTabBar().setData({
+      selected: 3
     })
     api.post(app.globalApi.test, { params: {} }).then(res => {
       console.log(res)

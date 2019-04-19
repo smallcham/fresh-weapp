@@ -13,7 +13,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    
+    this.getTabBar().setData({
+      selected: 2
+    })
   },
 
   /**
@@ -28,7 +30,7 @@ Page({
    */
   onShow: function () {
     this.getTabBar().setData({
-      active: 2
+      selected: 2
     })
   },
 

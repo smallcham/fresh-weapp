@@ -33,6 +33,9 @@ Page({
     this.setData({
       color: app.globalData.color
     })
+    this.getTabBar().setData({
+      selected: 1
+    })
   },
 
   /**
@@ -51,7 +54,7 @@ Page({
       TabCur: app.globalData.TabCur
     })
     this.getTabBar().setData({
-      active: 1
+      selected: 1
     })
     wx.setNavigationBarTitle({
       title: this.data.title,

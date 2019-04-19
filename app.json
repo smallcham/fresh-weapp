@@ -26,25 +26,38 @@
   },
   "tabBar": {
     "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页"
+      "pagePath": "pages/index/index",
+      "iconPath": "/image/home.png",
+      "selectedIconPath": "/image/home_fill.png",
+      "text": "首页"
       },
       {
         "pagePath": "pages/cata/index",
+        "iconPath": "/image/cata.png",
+        "selectedIconPath": "/image/cata_fill.png",
         "text": "分类"
       },
       {
         "pagePath": "pages/vip/index",
-        "text": "会员+"
+        "iconPath": "/image/money.png",
+        "selectedIconPath": "/image/money_fill.png",
+        "text": "赚钱+"
       },
       {
         "pagePath": "pages/cart/index",
+        "iconPath": "/image/cart.png",
+        "selectedIconPath": "/image/cart_fill.png",
         "text": "购物车"
       },
       {
         "pagePath": "pages/mine/index",
+        "iconPath": "/image/mine.png",
+        "selectedIconPath": "/image/mine_fill.png",
         "text": "我的"
       }
     ]

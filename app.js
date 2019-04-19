@@ -64,16 +64,25 @@ App({
       duration: 60,
       timingFunction: 'linear',
     })
+    
     this.animation = animation;
+
     var QQMapWX = require('/libs/qqmap-wx-jssdk.min.js');
     this.qqmapsdk = new QQMapWX({
       key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP'
     });
   },
   cartAnimation: function(target, isSetData=true) {
-    this.animation.scale(1.2).step()
-    this.animation.scale(1).step()
+    const that = this
     const tabbar = target.getTabBar();
+    this.animation.rotate(15).step()
+    this.animation.rotate(-15).step()
+    this.animation.rotate(0).step()
+    wx.nextTick(() => {
+      tabbar.setData({
+        animationData: {},
+      })
+    })
     tabbar.setData({
       animationData: this.animation.export(),
       cartCount: tabbar.data.cartCount + 1

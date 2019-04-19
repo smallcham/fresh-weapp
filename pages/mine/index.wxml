@@ -1,11 +1,16 @@
 <view class='body'>
   <view style="background-color: {{ color.success }};border-radius: 100% 100% 100% 100% / 0% 0% 10% 10%;">
     <van-row>
-        <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image></van-col>
+        <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{ userInfo ?  userInfo.avatarUrl : '/image/avatar.png' }}" mode="cover"></image></van-col>
         <van-col span="19">
           <view style="padding-top: 4%;">
-            <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
-            <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
+            <view style="{{ userInfo ? 'display: block;' : 'display: none' }}">
+              <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
+              <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
+            </view>
+            <view style="{{ userInfo ? 'display: none;' : 'display: block' }}">
+              <van-tag  color="{{ color.warning }}">点击登录</van-tag>
+            </view>
           </view>
         </van-col>
       </van-row>

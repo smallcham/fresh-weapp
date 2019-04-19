@@ -17,6 +17,9 @@ Page({
       userInfo: app.globalData.userInfo,
       color: app.globalData.color
     })
+    this.getTabBar().setData({
+      selected: 4
+    })
   },
 
   /**
@@ -31,7 +34,7 @@ Page({
    */
   onShow: function () {
     this.getTabBar().setData({
-      active: 4
+      selected: 4
     })
   },
 

@@ -170,6 +170,9 @@ Page({
     this.setData({
       color: app.globalData.color
     })
+    this.getTabBar().setData({
+      selected: 0
+    })
     app.getLocation(this);
     if (app.globalData.userInfo) {
       this.setData({
@@ -225,7 +228,7 @@ Page({
   },
   onShow: function(e) {
     this.getTabBar().setData({
-      active: 0
+      selected: 0
     })
     this.setData({
       location: app.globalData.location
