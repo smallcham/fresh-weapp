@@ -12,7 +12,7 @@ const request = (url, options) => {
     wx.request({
       url: `${app.globalApi.host}${url}/` + token,
       method: options.method,
-      data: options.params,
+      data: options.data.data,
       header: {
         'Content-Type': 'application/json; charset=UTF-8',
       },

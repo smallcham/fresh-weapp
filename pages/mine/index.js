@@ -1,4 +1,5 @@
 // pages/mine/index.js
+import api from '../../api/api'
 const app = getApp()
 Page({
 
@@ -75,5 +76,21 @@ Page({
       wx.navigateTo({
         url: e.currentTarget.dataset.url
       })
+  },
+  getUserInfo: function (e) {
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+    api.post(app.globalApi.reg, { data: e.detail.userInfo }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
+    })
   }
 })

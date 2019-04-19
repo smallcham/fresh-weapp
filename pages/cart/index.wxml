@@ -78,7 +78,7 @@
       <van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
       <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
 
-    <van-submit-bar price="{{ 3050 }}" button-text="提交订单" button-type="success"  bind:submit="onClickButton" tip="{{ true }}" >
+    <van-submit-bar  price="{{ 3050 }}" button-text="提交订单" button-type="success"  bind:submit="onClickButton" tip="{{ true }}" >
       <van-radio style='padding-left: 20rpx;' checked-color="{{ color.success }}">全选</van-radio>
         <view slot="tip">
           您的收货地址不支持同城送, <text bindtap="openLocation" class='text-info'>修改地址</text>

@@ -41,15 +41,6 @@ Page({
     this.getTabBar().setData({
       selected: 3
     })
-    api.post(app.globalApi.test, { params: {} }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-      wx.showToast({
-        title: err,
-        icon: 'none'
-      })
-    })
   },
 
   /**

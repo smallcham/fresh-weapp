@@ -16,26 +16,26 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // let that = this
-        // wx.request({
-        //   url: this.globalApi.host + this.globalApi.token,
-        //   method: 'POST',
-        //   data: {
-        //     code: res.code
-        //   },
-        //   success: function (data) {
-        //     data = data.data
-        //     if (data.state) {
-        //       try {
-        //         wx.setStorageSync('token', data.data)
-        //       } catch (e) {
-        //         console.log('存储token失败', data)  
-        //       }
-        //     } else {
-        //       console.log('登录失败', data)
-        //     }
-        //   }
-        // })
+        let that = this
+        wx.request({
+          url: this.globalApi.host + this.globalApi.token,
+          method: 'POST',
+          data: {
+            code: res.code
+          },
+          success: function (data) {
+            data = data.data
+            if (data.state) {
+              try {
+                wx.setStorageSync('token', data.data)
+              } catch (e) {
+                console.log('存储token失败', data)  
+              }
+            } else {
+              console.log('登录失败', data)
+            }
+          }
+        })
       }
     })
     // 获取用户信息
@@ -132,6 +132,7 @@ App({
   globalApi: {
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
+    reg: 'reg',
     test: 'test'
   },
   globalData: {

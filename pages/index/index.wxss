@@ -19,3 +19,7 @@
 .usermotto {
   margin-top: 200px;
 }
+
+page {
+  background: #f1f1f1;
+}

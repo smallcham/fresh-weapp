@@ -24,7 +24,7 @@
 >
   <view class="van-goods-action-icon__content van-hairline--right">
     <van-icon
-      size="20px"
+      size="42rpx"
       name="{{ icon }}"
       info="{{ info }}"
       class="van-goods-action-icon__icon"

@@ -12,3 +12,14 @@
 .bar-item {
   width:100%;border-top:0;border-left:0;border-right:0;
 }
+
+.get-user-btn {
+  margin-top: 10rpx;
+  float: left;
+  width:250rpx;
+  font-size:25rpx;
+  background-color: #18BC9C;
+  border:1rpx white solid;
+  border-radius:2rem;
+  color:#fff;
+}

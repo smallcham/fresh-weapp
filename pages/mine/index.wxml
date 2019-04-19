@@ -5,11 +5,11 @@
         <van-col span="19">
           <view style="padding-top: 4%;">
             <view style="{{ userInfo ? 'display: block;' : 'display: none' }}">
-              <text class="text-default text-md text-bold">{{userInfo.nickName}}</text>
+              <text class="text-default text-md text-bold" style='padding-right: 15rpx'>{{userInfo.nickName}}</text>
               <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
             </view>
             <view style="{{ userInfo ? 'display: none;' : 'display: block' }}">
-              <van-tag  color="{{ color.warning }}">点击登录</van-tag>
+              <button class="get-user-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录 / 注册</button>
             </view>
           </view>
         </van-col>

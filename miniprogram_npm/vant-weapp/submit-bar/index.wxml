@@ -7,7 +7,7 @@
     {{ tipStr }}<slot name="tip" />
   </view>
 
-  <view class="bar-class {{ utils.bem('submit-bar__bar', { safe: safeAreaInsetBottom && isIPhoneX }) }}">
+  <view class="bar-class {{ utils.bem('submit-bar__bar', { safe: safeAreaInsetBottom && isIPhoneX }) }}" style='margin-bottom:110rpx' >
     <slot />
     <view class="van-submit-bar__text">
       <block wx:if="{{ hasPrice }}">

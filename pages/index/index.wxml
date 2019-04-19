@@ -6,19 +6,19 @@
 <van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼">
   <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/>
 </van-search>
-<van-tabs color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
+<van-tabs border="{{ false }}" color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
   <van-tab wx:for="{{ goodsCata }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
 
 <van-notify id="custom-notify" />
-<swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height:200rpx'>
+<swiper autoplay style='height:200rpx'>
     <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737612998261_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
   </swiper>
 
 <view class='body'>
-  <view class='card' style='border: 0rpx;'>
+  <view class='card' style='border: 0rpx;padding:0;margin:0;padding-bottom: 40rpx'>
     <van-row>
     <van-col span="6" wx:for="{{ indexCata }}" wx:key="{{ item.id }}">
         <view data-url="{{ item.url }}" data-id="{{ item.id }}" bindtap="openCata">
@@ -28,12 +28,11 @@
     </van-col>
   </van-row>
   </view>
-<view class='line'></view>
   <van-cell title="热销爆款" border="{{ border }}" value="查看更多" is-link>
     <van-icon slot="icon" name="fire" class="text-danger" style='font-size: 30rpx;'/>
   </van-cell>
-  <scroll-view scroll-x style='white-space: nowrap; display: flex;'>
-        <view class='card ell'>
+  <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
+        <view class='card ell' style='border: 0;'>
           <block>
             <view class='text-center' bindtap='showInfo'><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
             <view bindtap='showInfo'><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -41,7 +40,7 @@
             <view bindtap='showInfo'><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class="card ell">
+        <view class="card ell" style='border: 0;'>
           <block>
             <view class='text-center'>
               <image src='http://p02.sfimg.cn/2018/4000315385/middle_4000315385_1_1/160x160.jpg' style='width:200rpx;height:200rpx;'></image>
@@ -52,7 +51,7 @@
             <view><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class='card ell'>
+        <view class='card ell' style='border: 0;'>
           <block>
             <view class='text-center'><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
             <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -60,7 +59,7 @@
             <view><text class='text-del'>¥ 11.9</text></view>
             </block>
         </view>
-        <view class='card ell'>
+        <view class='card ell' style='border: 0;'>
           <block>
           <view class='text-center'> <image src='http://p02.sfimg.cn/2018/4600298705/middle_4600298705_9_00/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
             <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
@@ -73,6 +72,7 @@
   <van-cell title="特色专区" border="{{ border }}" value="查看更多" is-link fontSize="25rpx;">
     <van-icon slot="icon" name="medel" class="text-warning" style='font-size: 30rpx;'/>
   </van-cell>
+  <view style='background-color: #fff'>
   <van-row>
     <van-col span="12">
     <view class='card cell-lg'>
@@ -99,6 +99,7 @@
     </view>
     </van-col>
   </van-row>
+  </view>
 
 <view wx:for="{{ homeCata }}" wx:key="{{  item.id }}">
   <van-cell title="{{ item.title }}" border="{{ border }}" value="{{ item.goodsList.length > 5 ? '查看更多' : '' }}" url="{{ item.goodsList.length > 5 ? '/pages/list/index?id=' + item.id + '&title=' + item.title : '' }}" is-link="{{ item.goodsList.length > 5 ? true : false }}">
@@ -106,8 +107,8 @@
       <van-icon name="{{ item.icon.name }}" class="{{ item.icon.color }}" style='font-size: 30rpx;'/>
   </view>
   </van-cell>
-  <scroll-view scroll-x style='white-space: nowrap; display: flex;'>
-        <view class='card ell' wx:for="{{ item.goodsList }}" wx:for-item="goods" wx:key="{{ goods.goodsCode }}">
+  <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
+        <view class='card ell' wx:for="{{ item.goodsList }}" wx:for-item="goods" wx:key="{{ goods.goodsCode }}" style='border: 0;'>
           <block>
             <view class='text-center' bindtap='showInfo'><image src='{{ goods.img }}' style='width:220rpx;height:220rpx;'></image></view>
             <view bindtap='showInfo'><text class='gs-name'>{{ goods.goodsName }}</text></view>
@@ -118,7 +119,7 @@
   </scroll-view>
 </view>
 
-    <van-cell border="{{ border }}" title="为你推荐"/>
+    <view class='text-primary' style='font-size:30rpx;padding-left: 30rpx;margin-top:15rpx;margin-bottom:15rpx'>为你推荐</view>
       <van-row>
       <van-col span="12">
       <view class='card'>
