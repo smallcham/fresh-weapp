@@ -10,7 +10,7 @@
 <cover-view class="tab-bar">
   <cover-view class="tab-bar-border"></cover-view>
   <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
-    <cover-image animation="{{  animationData }}" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+    <cover-image animation="{{  item.animation ? animationData : '' }}" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
     <cover-view style="color: {{selected === index ? selectedColor : color}}; padding-top: 5rpx">{{item.text}}</cover-view>
   </cover-view>
 </cover-view>

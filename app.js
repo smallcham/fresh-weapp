@@ -75,9 +75,8 @@ App({
   cartAnimation: function(target, isSetData=true) {
     const that = this
     const tabbar = target.getTabBar();
-    this.animation.rotate(15).step()
-    this.animation.rotate(-15).step()
-    this.animation.rotate(0).step()
+    this.animation.scale(1.2).step()
+    this.animation.scale(1).step()
     wx.nextTick(() => {
       tabbar.setData({
         animationData: {},
