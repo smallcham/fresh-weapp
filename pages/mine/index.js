@@ -78,15 +78,13 @@ Page({
       })
   },
   getUserInfo: function (e) {
+    if (e.detail.userInfo === undefined) return false
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    api.post(app.globalApi.reg, { data: e.detail.userInfo }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
+    api.post(app.globalApi.reg, { data: e.detail.userInfo }).then(res => {}).catch(err => {
       wx.showToast({
         title: err,
         icon: 'none'

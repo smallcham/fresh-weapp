@@ -7,6 +7,7 @@ const app = getApp()
 
 Page({
   data: {
+    access: app.globalData.access_location,
     border: false,
     location: app.globalData.location,
     userInfo: {},
@@ -119,7 +120,6 @@ Page({
         id: 1,
         title: "周末特价海鲜水产",
         right: "",
-        islink: false,
         goodsList: [
           {
             goodsCode: "A001",
@@ -173,7 +173,29 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
-    app.getLocation(this);
+    const that = this
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userLocation']) {
+          app.globalData.access_location = 'true'
+          that.setData({ access: 'true' })
+          app.getLocation(that);
+        } else {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              app.globalData.access_location = 'true'
+              that.setData({ access: 'true' })
+              app.getLocation(that);
+            },
+            fail() {
+              app.globalData.access_location = 'false'
+              that.setData({ access: 'false' })
+            }
+          })
+        }
+      }
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -230,9 +252,6 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
-    this.setData({
-      location: app.globalData.location
-    })
   },
   addCart: function(e) {
     app.cartAnimation(this)
@@ -267,5 +286,20 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
+  },
+  accessLocation () {
+    const that = this
+    wx.openSetting({
+      success(res) {
+        if (res.authSetting['scope.userLocation']) {
+          app.globalData.access_location = 'true'
+          that.setData({ access: 'true' })
+          app.getLocation(that)
+        }
+      }
+    })
+  },
+  checkLocation () {
+    
   }
 })

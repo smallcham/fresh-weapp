@@ -20,7 +20,7 @@ Component({
         selectedIconPath: "/image/cata_fill.png",
         text: "分类"
       }, {
-        pagePath: "/pages/vip/index",
+        pagePath: "/pages/spread/index",
         iconPath: "/image/money.png",
         selectedIconPath: "/image/money_fill.png",
         text: "赚钱+"
@@ -59,7 +59,7 @@ Component({
       }
       else if (event.detail === 2) {
         wx.switchTab({
-          url: '/pages/vip/index',
+          url: '/pages/spread/index',
         })
       }
       else if (event.detail === 3) {

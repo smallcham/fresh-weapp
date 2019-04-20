@@ -1,4 +1,5 @@
-<van-cell border="{{ border }}" title="{{ title }}"/>
+<view style='width: 98%'>
+  <van-cell border="{{ border }}" title="{{ title }}"/>
   <van-row>
   <van-col span="12">
   <view class='card'>
@@ -85,3 +86,4 @@
   </view>
   </van-col>
 </van-row>
+</view>

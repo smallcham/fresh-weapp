@@ -90,40 +90,45 @@ App({
   is_null: function(target) {
     return null === target || undefined === target || '' === target;
   },
+  _getLocation: function (target, poi = 0, options = null) {
+    const that = this
+    wx.getLocation({
+      success: function (e) {
+        that.qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: e.latitude,
+            longitude: e.longitude
+          },
+          get_poi: poi,
+          poi_options: options,
+          success: function (res) {
+            console.log(res)
+            if (res.status == 0) {
+              that.globalData.location = res.result;
+              target.setData({
+                location: res.result
+              })
+            }
+          },
+          fail: function (res) {
+            console.log(res)
+            that.setData({
+              location: 位置获取失败
+            })
+          },
+          complete: function () {
+          }
+        })
+      }
+    })
+  },
   getLocation: function (target, poi = 0, options = null) {
     var that = this;
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userLocation']) {
-          wx.getLocation({
-            success: function (e) {
-              that.qqmapsdk.reverseGeocoder({
-                location: {
-                  latitude: e.latitude,
-                  longitude: e.longitude
-                },
-                get_poi: poi,
-                poi_options: options,
-                success: function (res) {
-                  console.log(res)
-                  if (res.status == 0) {
-                    that.globalData.location = res.result;
-                    target.setData({
-                      location: res.result
-                    })
-                  }
-                },
-                fail: function (res) {
-                  console.log(res)
-                  that.setData({
-                    location: 位置获取失败
-                  })
-                },
-                complete: function() {
-                }
-              })
-            }
-          })
+          that.globalData.access_location = 'true'
+          that._getLocation(target, poi, options)
         }
       }
     })
@@ -137,6 +142,7 @@ App({
   globalData: {
     userInfo: null,
     loading: false,
+    access_location: 'req',
     location: {"title": "地理位置获取中"},
     TabCur: 0,
     goodsCata: [

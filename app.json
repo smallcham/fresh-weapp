@@ -4,7 +4,7 @@
     "pages/logs/logs",
     "pages/cart/index",
     "pages/cata/index",
-    "pages/vip/index",
+    "pages/spread/index",
     "pages/mine/index",
     "pages/info/index",
     "custom-tab-bar/index",
@@ -16,7 +16,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#18BC9C",
-    "navigationBarTitleText": "缤果鲜生",
+    "navigationBarTitleText": "轻果鲜生",
     "navigationBarTextStyle": "white"
   },
   "permission": {
@@ -43,7 +43,7 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/vip/index",
+        "pagePath": "pages/spread/index",
         "iconPath": "/image/money.png",
         "selectedIconPath": "/image/money_fill.png",
         "text": "赚钱+"
