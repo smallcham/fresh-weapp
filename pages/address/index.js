@@ -1,25 +1,34 @@
-// pages/location/index.js
-const app = getApp()
+// pages/address/index.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    title: "选择地址",
-    location: {
-      address: "位置获取中"
-    },
-    border: false
+    title: '添加收货地址',
+    showAreaSheet: false,
+    showTypeSheet: false,
+    typeList: [
+      {
+        name: '住宅'
+      },
+      {
+        name: '公司'
+      },
+      {
+        name: '学校'
+      },
+      {
+        name: '其他'
+      }
+    ]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.setData({
-      color: app.globalData.color
-    })
+
   },
 
   /**
@@ -36,7 +45,6 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
-    app.getLocation(this, 1);
   },
 
   /**
@@ -73,17 +81,40 @@ Page({
   onShareAppMessage: function () {
 
   },
-  toAddress: function () {
-    wx.redirectTo({
-      url: '/pages/address/index',
+  showLocation: function() {
+    wx.navigateTo({
+      url: '/pages/location/index?from=address',
     })
   },
-  refresh: function() {
-    app.getLocation(this, 1);
+  showArea: function () {
+    this.setData({
+      showAreaSheet: true
+    })
   },
-  onChoose: function(e) {
-    this.data.location = this.data.location.pois[e.currentTarget.dataset.index]
-    app.globalData.location = this.data.location
-    wx.navigateBack({})
+  hideArea: function () {
+    this.setData({
+      showAreaSheet: false
+    })
+  },
+  selectedArea: function () {
+    this.setData({
+      showAreaSheet: false
+    })
+  },
+  showType: function () {
+    this.setData({
+      showTypeSheet: true
+    })
+  },
+  hideType: function () {
+    this.setData({
+      showTypeSheet: false
+    })
+  },
+  selectedType: function (e) {
+    console.log(e)
+    this.setData({
+      showTypeSheet: false
+    })
   }
 })

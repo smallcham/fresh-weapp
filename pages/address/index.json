@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "van-field": "/miniprogram_npm/vant-weapp/field/index",
+    "van-button": "/miniprogram_npm/vant-weapp/button/index",
+    "van-area": "/miniprogram_npm/vant-weapp/area/index",
+    "van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index"
+  }
+}

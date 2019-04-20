@@ -11,7 +11,8 @@
     "pages/order/index",
     "pages/search/index",
     "pages/location/index",
-    "pages/list/index"
+    "pages/list/index",
+    "pages/address/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,10 +32,10 @@
     "backgroundColor": "#000000",
     "list": [
       {
-      "pagePath": "pages/index/index",
-      "iconPath": "/image/home.png",
-      "selectedIconPath": "/image/home_fill.png",
-      "text": "首页"
+        "pagePath": "pages/index/index",
+        "iconPath": "/image/home.png",
+        "selectedIconPath": "/image/home_fill.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/cata/index",

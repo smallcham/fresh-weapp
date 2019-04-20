@@ -1,7 +1,7 @@
 <van-search value="{{ value }}" use-action-slot placeholder="请输入您的地址" bind:search="onSearch">
   <view slot="action" bindtap='onChoose' class='text-small text-muted' style='padding-top: 15rpx;'><text>{{ location.address_component.city }} </text><van-icon name="arrow-down" /></view>
 </van-search>
-<van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">
+<van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="toAddress">
     <view slot="left">
       <text class='text-mini text-muted'>当前定位</text>
     </view>

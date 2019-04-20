@@ -1,0 +1,76 @@
+<van-cell-group>
+  <van-field
+    value="{{ real_name }}"
+    left-icon="user-o"
+    clearable
+    label="收货人"
+    placeholder="姓名"
+    bind:click-icon="onClickIcon"
+  />
+
+<van-field
+    value="{{ phone }}"
+    left-icon="phone-o"
+    clearable
+    type="digit"
+    label="联系电话"
+    placeholder="手机或固话"
+    bind:click-icon="onClickIcon"
+  />
+
+<view bindtap="showArea">
+  <van-field
+      value="{{ city }}"
+      clearable
+      left-icon="hotel-o"
+      label="选择城市"
+      icon="arrow"
+      disabled
+      placeholder="请选择您的收货城市区划"
+    />
+  </view>
+
+<view bindtap='showLocation'>
+  <van-field
+      value="{{ location }}"
+      clearable
+      left-icon="wap-home"
+      label="收货地址"
+      disabled
+      icon="arrow"
+      placeholder="请输入您的收货地址"
+    />
+</view>
+
+  <van-field
+    value="{{ address }}"
+    left-icon="orders-o"
+    clearable
+    label="楼号门牌"
+    placeholder="楼号/单元/门牌号"
+    bind:click-icon="onClickIcon"
+  />
+
+<view bindtap='showType'>
+  <van-field
+    value="{{ address_type }}"
+    clearable
+    left-icon="apps-o"
+    label="地址类型"
+    icon="arrow"
+    disabled
+    placeholder="请选择地址类型"
+  />
+</view>
+</van-cell-group>
+<view style='margin: 0.5rem; padding: 0.5rem'>
+  <van-button type='success' size="large">保存地址</van-button>
+  </view>
+
+<van-action-sheet show="{{ showAreaSheet }}">
+  <view>
+    <van-area bind:cancel="hideArea" bind:confirm="selectedArea" area-list="{{ areaList }}" value="{{ selected_area }}" />
+  </view>
+</van-action-sheet>
+
+<van-action-sheet show="{{ showTypeSheet }}" actions="{{ typeList }}" bind:select="selectedType" bind:close="hideType"/>
