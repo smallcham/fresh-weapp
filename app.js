@@ -137,6 +137,7 @@ App({
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
     reg: 'reg',
+    get_phone: 'phone',
     test: 'test'
   },
   globalData: {

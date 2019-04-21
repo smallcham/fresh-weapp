@@ -1,5 +1,6 @@
 // pages/address/index.js
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
+import api from '../../api/api';
 const app = getApp()
 // import AreaList from '../../libs/area.js'
 
@@ -216,8 +217,11 @@ Page({
     })
   },
   getPhoneNumber(e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
+    api.post(app.globalApi.get_phone, { data: { iv: e.detail.iv, data: e.detail.encryptedData } }).then(res => { this.setData({ phone: res }) }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
+    })
   }
 })
