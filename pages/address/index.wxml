@@ -1,11 +1,13 @@
+<van-dialog id="van-dialog" />
 <van-cell-group>
   <van-field
     value="{{ real_name }}"
+    name="real_name"
     left-icon="user-o"
+    bind:input="setRealName"
     clearable
     label="收货人"
     placeholder="姓名"
-    bind:click-icon="onClickIcon"
   />
 
 <van-field
@@ -13,12 +15,15 @@
     left-icon="phone-o"
     clearable
     type="digit"
+    bind:input="setPhone"
     label="联系电话"
-    placeholder="手机或固话"
-    bind:click-icon="onClickIcon"
-  />
+    placeholder="手机号码"
+    use-button-slot
+  >
+  <van-button slot="button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="small" type="success">获取当前号码</van-button>
+  </van-field>
 
-<view bindtap="showArea">
+<!-- <view bindtap="showArea">
   <van-field
       value="{{ city }}"
       clearable
@@ -28,13 +33,14 @@
       disabled
       placeholder="请选择您的收货城市区划"
     />
-  </view>
+  </view> -->
 
 <view bindtap='showLocation'>
   <van-field
       value="{{ location }}"
       clearable
       left-icon="wap-home"
+      bind:input="setLocation"
       label="收货地址"
       disabled
       icon="arrow"
@@ -45,16 +51,17 @@
   <van-field
     value="{{ address }}"
     left-icon="orders-o"
+    bind:input="setAddress"
     clearable
     label="楼号门牌"
     placeholder="楼号/单元/门牌号"
-    bind:click-icon="onClickIcon"
   />
 
 <view bindtap='showType'>
   <van-field
     value="{{ address_type }}"
     clearable
+    bind:input="setAddressType"
     left-icon="apps-o"
     label="地址类型"
     icon="arrow"
@@ -64,13 +71,12 @@
 </view>
 </van-cell-group>
 <view style='margin: 0.5rem; padding: 0.5rem'>
-  <van-button type='success' size="large">保存地址</van-button>
+  <van-button type='success' size="large" bindtap='saveAddr'>保存地址</van-button>
   </view>
 
 <van-action-sheet show="{{ showAreaSheet }}">
-  <view>
     <van-area bind:cancel="hideArea" bind:confirm="selectedArea" area-list="{{ areaList }}" value="{{ selected_area }}" />
-  </view>
 </van-action-sheet>
-
-<van-action-sheet show="{{ showTypeSheet }}" actions="{{ typeList }}" bind:select="selectedType" bind:close="hideType"/>
+<van-action-sheet show="{{ showTypeSheet }}">
+  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" columns="{{ columns }}" bind:change="onChange" bind:confirm="selectedType" bind:cancel="hideType" />
+</van-action-sheet>

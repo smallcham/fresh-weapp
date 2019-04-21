@@ -1,7 +1,7 @@
 <van-dialog id="van-dialog" />
 <van-nav-bar fixed border="false" z-index="3">
   <view slot="title" class='text-muted text-small ell-super' bind:tap="openLocation">
-    <van-icon name="location" /> <text> {{ location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon name="arrow-down"/>
+    <van-icon name="location" /> <text> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon name="arrow-down"/>
   </view>
 </van-nav-bar>
 

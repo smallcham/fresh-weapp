@@ -51,6 +51,7 @@ Page({
   onShow: function () {
     this.setData({
       location: app.globalData.location,
+      selected_location: app.globalData.selected_location,
       TabCur: app.globalData.TabCur
     })
     this.getTabBar().setData({

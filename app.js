@@ -69,7 +69,7 @@ App({
 
     var QQMapWX = require('/libs/qqmap-wx-jssdk.min.js');
     this.qqmapsdk = new QQMapWX({
-      key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP'
+      key: this.globalData.map_key
     });
   },
   cartAnimation: function(target, isSetData=true) {
@@ -140,7 +140,9 @@ App({
     test: 'test'
   },
   globalData: {
+    map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',
     userInfo: null,
+    selected_location: false,
     loading: false,
     access_location: 'req',
     location: {"title": "地理位置获取中"},

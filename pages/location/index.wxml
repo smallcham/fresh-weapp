@@ -1,35 +1,48 @@
-<van-search value="{{ value }}" use-action-slot placeholder="请输入您的地址" bind:search="onSearch">
-  <view slot="action" bindtap='onChoose' class='text-small text-muted' style='padding-top: 15rpx;'><text>{{ location.address_component.city }} </text><van-icon name="arrow-down" /></view>
-</van-search>
-<van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="toAddress">
+<van-search value="{{ backfill }}" use-action-slot placeholder="请输入您的地址" bind:change="getsuggest" bind:search="onSearch"/>
+<!--关键词输入提示列表渲染-->
+<view wx:for="{{suggestion}}" wx:key="index">
+    <!--绑定回填事件-->
+    <view style='padding-bottom: 25rpx'>
+    <!--根据需求渲染相应数据-->
+    <!--渲染地址title-->
+    <view style="text-align:center;" bindtap="backfill" id="{{index}}">{{item.title}}</view>
+    <!--渲染详细地址-->
+    <view style="font-size:12px;color:#666;text-align:center;">{{item.addr}}</view>
+    </view>
+</view>
+
+<view style='display: {{ suggestion.length > 0 ? "none" : "block" }}'>
+  <van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="toAddress">
     <view slot="left">
       <text class='text-mini text-muted'>当前定位</text>
     </view>
     <view slot="right">
-      <text class='text-mini text-success'>+ 新增地址</text>
+      <text class='text-mini text-success' style='display: {{ showAdd ? "block" : "none" }}'>+ 新增地址</text>
     </view>
   </van-nav-bar>
-<van-cell-group>
-  <van-cell icon="aim" title-width="90%" title="{{ location.formatted_addresses.recommend }}">
-    <van-icon slot="right-icon" name="replay" bindtap='refresh'/>
-  </van-cell>
-</van-cell-group>
+  <van-cell-group>
+    <van-cell icon="aim" title-width="90%" title="{{ selected_location ? selected_location.title : location.formatted_addresses.recommend }}">
+      <van-icon slot="right-icon" name="replay" bindtap='refresh'/>
+    </van-cell>
+  </van-cell-group>
 
-<van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">
-    <view slot="left">
-      <text class='text-mini text-muted'>我的收货地址</text>
-    </view>
-  </van-nav-bar>
-<van-cell-group border="{{ border }}">
-  <van-cell title-width="90%" title="北京市 大兴区 数码庄园一号楼北门" value="公司"  label="王湛智 18610245757"/>
-  <van-cell title-width="90%" title="北京市 大兴区 紫宸苑4号楼1502" value="住宅" label="张雨卿 18897929159"/>
-</van-cell-group>
-
-<van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">
-    <view slot="left">
-      <text class='text-mini text-muted'>附近地址</text>
-    </view>
-  </van-nav-bar>
-<van-cell-group border="{{ border }}">
-  <van-cell title-width="90%" bindtap="onChoose" wx:for="{{ location.pois }}" title="{{ item.title }}" label="{{ item.address }}" wx:key="{{ item.id }}" data-index="{{ index }}"/>
-</van-cell-group>
+  <view  style='display: {{ showAdd ? "block" : "none" }}'>
+    <van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">
+        <view slot="left">
+          <text class='text-mini text-muted'>我的收货地址</text>
+        </view>
+      </van-nav-bar>
+    <van-cell-group border="{{ border }}">
+      <van-cell title-width="90%" title="北京市 大兴区 数码庄园一号楼北门" value="公司"  label="王湛智 18610245757"/>
+      <van-cell title-width="90%" title="北京市 大兴区 紫宸苑4号楼1502" value="住宅" label="张雨卿 18897929159"/>
+    </van-cell-group>
+  </view>
+  <van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">
+      <view slot="left">
+        <text class='text-mini text-muted'>附近地址</text>
+      </view>
+    </van-nav-bar>
+  <van-cell-group border="{{ border }}">
+    <van-cell title-width="90%" bindtap="onChoose" wx:for="{{ location.pois }}" title="{{ item.title }}" label="{{ item.address }}" wx:key="{{ item.id }}" data-index="{{ index }}"/>
+  </van-cell-group>
+</view>

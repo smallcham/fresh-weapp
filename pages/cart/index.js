@@ -8,6 +8,7 @@ Page({
    * Page initial data
    */
   data: {
+    selected_location: false,
     location: app.globalData.location
   },
 
@@ -36,7 +37,8 @@ Page({
    */
   onShow: function () {
     this.setData({
-      location: app.globalData.location
+      location: app.globalData.location,
+      selected_location: app.globalData.selected_location
     })
     this.getTabBar().setData({
       selected: 3

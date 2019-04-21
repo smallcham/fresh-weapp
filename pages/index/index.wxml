@@ -8,13 +8,13 @@
 <view style='display: {{ access == "true" ? "block" : "none" }}'>
   <van-nav-bar fixed border="false">
     <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
-     <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
+     <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
     </view>
   </van-nav-bar>
 <van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼">
-  <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/>
+  <!-- <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/> -->
 </van-search>
-<van-tabs border="{{ false }}" color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
+<van-tabs border="{{ false }}" color="{{ color.success }}" active="{{ active }}"  bind:change="onChangeHomeTab">
   <van-tab wx:for="{{ goodsCata }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
 

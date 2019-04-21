@@ -23,7 +23,7 @@ Component({
         pagePath: "/pages/spread/index",
         iconPath: "/image/money.png",
         selectedIconPath: "/image/money_fill.png",
-        text: "赚钱+"
+        text: "积分+"
       }, {
         pagePath: "/pages/cart/index",
         iconPath: "/image/cart.png",

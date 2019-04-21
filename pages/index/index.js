@@ -7,6 +7,7 @@ const app = getApp()
 
 Page({
   data: {
+    active: 0,
     access: app.globalData.access_location,
     border: false,
     location: app.globalData.location,
@@ -223,6 +224,9 @@ Page({
       })
     }
   },
+  onChangeHomeTab: function(e) {
+    console.log(e.detail)
+  },
   onChange: function (event) {
     if (event.detail === 0) {
       wx.navigateTo({
@@ -251,6 +255,10 @@ Page({
   onShow: function(e) {
     this.getTabBar().setData({
       selected: 0
+    })
+    this.setData({
+      location: app.globalData.location,
+      selected_location: app.globalData.selected_location,
     })
   },
   addCart: function(e) {
