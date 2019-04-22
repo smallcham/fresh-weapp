@@ -309,5 +309,14 @@ Page({
   },
   checkLocation () {
     
+  },
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading()
+    wx.showToast({
+      title: 'loading....',
+      icon: 'loading'
+    })
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
   }
 })

@@ -29,6 +29,7 @@ Component({
         iconPath: "/image/cart.png",
         selectedIconPath: "/image/cart_fill.png",
         animation: true,
+        info: true,
         text: "购物车"
       }, {
         pagePath: "/pages/mine/index",

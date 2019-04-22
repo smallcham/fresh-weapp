@@ -14,6 +14,8 @@ Page({
     Custom: app.globalData.Custom,
     TabCur: app.globalData.TabCur,
     VerticalNavTop: 0,
+    last_top: 0,
+    now_page: 1,
     goodsCata: app.globalData.goodsCata
   },
   tabSelect(e) {
@@ -23,9 +25,13 @@ Page({
     })
   },
   VerticalMain(e) {
-    console.log(e.detail);
+    console.log(this.data.now_page);
+    if ((e.detail.scrollTop >= e.detail.scrollHeight / (this.data.now_page * 2)) && e.detail.scrollTop > this.data.last_top) {
+      this.data.last_top = e.detail.scrollTop
+      this.data.now_page = this.data.now_page + 1
+      console.log('load more...')
+    }
   },
-
   /**
    * Lifecycle function--Called when page load
    */
@@ -87,7 +93,6 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
   },
 
   /**

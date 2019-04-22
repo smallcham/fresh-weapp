@@ -17,5 +17,6 @@
     "van-cell": "/miniprogram_npm/vant-weapp/cell/index",
     "van-cell-group": "/miniprogram_npm/vant-weapp/cell-group/index",
     "van-tree-select": "/miniprogram_npm/vant-weapp/tree-select/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

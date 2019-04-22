@@ -17,6 +17,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#18BC9C",
+    "backgroundColor": "#18BC9C",
     "navigationBarTitleText": "轻果鲜生",
     "navigationBarTextStyle": "white"
   },

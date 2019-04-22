@@ -36,3 +36,6 @@
 .tab-bar-item cover-view {
   font-size: 24rpx;
 }
+.tab-bar-item .info {
+  position:absolute;top:0rpx;min-width:16px;padding:0 3px;font-family:PingFang SC,Helvetica Neue,Arial,sans-serif;font-size:25rpx;font-weight:500;line-height:25rpx;color:#fff;text-align:center;white-space:nowrap;background-color:#f44;border:1px solid #fff;border-radius:30rpx;-webkit-transform:translateX(140%);transform:translateX(140%);box-sizing:border-box;-webkit-transform-origin:100%;transform-origin:100%
+}

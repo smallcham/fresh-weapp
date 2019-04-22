@@ -4,13 +4,13 @@
     </view>
   </van-nav-bar>
 <van-search input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="草莓、香蕉、龙眼" />
-<view class="VerticalBox">
-  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:910rpx">
+<view class="VerticalBox" style='background-color: #FFF'>
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:900rpx">
     <view class="cu-item {{item.id==TabCur?'text-success cur':''}}" wx:for="{{ goodsCata }}" wx:key bindtap='tabSelect' data-id="{{ item.id }}">
       {{ item.text }}
     </view>
   </scroll-view>
-  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain">
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 270rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain">
     <view class="padding-xs">
       <view class="cu-list menu menu-avatar">
         <view class="cu-item">
@@ -31,6 +31,90 @@
             <view class='text-small'>中洋河豚河豚鱼</view>
             <view class='text-muted text-mini'>琥珀色的酸甜果肉 软滑细糯</view>
             <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 7.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
+          </view>
+          <view class='action'>
+            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="cu-avatar radius lg" style="background-image:url(https://img12.yiguoimg.com/d/items/2018/181024/9288733014697304_300.jpg);"></view>
+          <view class='content'>
+            <view class='text-small'>海天下法国银鳕鱼</view>
+            <view class='text-muted text-mini'>切切切切开就能吃 不费劲儿</view>
+            <view><text class='text-del'>¥ 12.9</text><text class='price' style='padding-left: 10rpx'>¥ 8.9</text></view>
           </view>
           <view class='action'>
             <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
