@@ -1,4 +1,5 @@
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
+import api from '../../api/api'
 const app = getApp()
 // pages/info/index.js
 Page({
@@ -8,6 +9,8 @@ Page({
    */
   data: {
     cartCount: 0,
+    id: null,
+    goodsInfo: {},
     showFoot: true
   },
 
@@ -15,6 +18,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.data.id = options.id
     this.setData({
       color: app.globalData.color
     })
@@ -31,7 +35,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    
+    this.getGoods()
   },
 
   /**
@@ -80,6 +84,17 @@ Page({
   onToCart: function(e) {
     wx.switchTab({
       url: '/pages/cart/index',
+    })
+  },
+  getGoods: function() {
+    api.get(app.globalApi.get_goods, { rest: this.data.id }).then(res => {
+      res.banner = JSON.parse(res.banner)
+      res.info_img = JSON.parse(res.info_img)
+      res.info_text = res.info_text.split('\n')
+      this.setData({ goodsInfo: res })
+    }).catch(err => {
+      Toast.fail(err);
+      wx.navigateBack({})
     })
   }
 })

@@ -55,6 +55,7 @@ Page({
     }) 
     app.getLocation(this, 1);
     this.setData({
+      location: app.globalData.location,
       selected_location: app.globalData.selected_location
     })
   },
@@ -110,6 +111,7 @@ Page({
     app.globalData.location = this.data.location
     let that = this
     let sel_location = {
+      adcode: this.data.location.ad_info.adcode,
       title: this.data.location.title,
       addr: this.data.location.address,
       id: this.data.location.id,
@@ -135,6 +137,7 @@ Page({
     var id = e.currentTarget.id;
     for (var i = 0; i < this.data.suggestion.length; i++) {
       if (i == id) {
+        console.log(this.data.suggestion[i])
         let choose = this.data.suggestion[i]
         app.globalData.selected_location = choose
         this.setData({
@@ -158,12 +161,14 @@ Page({
     this.qqmapsdk.getSuggestion({
       //获取输入框值并设置keyword参数
       keyword: e.detail, //用户输入的关键词，可设置固定值,如keyword:'KFC'
+      policy: 1,
       // region: _this.data.location.address_component.city, //设置城市名，限制关键词所示的地域范围，非必填参数
       success: function (res) {//搜索成功后的回调
         console.log(res);
         var sug = [];
         for (var i = 0; i < res.data.length; i++) {
           sug.push({ // 获取返回结果，放到sug数组中
+            adcode: res.data[i].adcode,
             title: res.data[i].title,
             id: res.data[i].id,
             addr: res.data[i].address,

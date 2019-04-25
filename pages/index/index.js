@@ -1,5 +1,6 @@
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast';
+import api from '../../api/api'
 
 //index.js
 //获取应用实例
@@ -11,6 +12,10 @@ Page({
     access: app.globalData.access_location,
     border: false,
     location: app.globalData.location,
+    selected_location: app.globalData.selected_location,
+    house: app.globalData.house,
+    no_house: false,
+    house_msg: '',
     userInfo: {},
     loading: app.globalData.loading,
     hasUserInfo: false,
@@ -175,19 +180,23 @@ Page({
       selected: 0
     })
     const that = this
+    Toast.loading({
+      mask: false,
+      message: '定位中'
+    });
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userLocation']) {
           app.globalData.access_location = 'true'
           that.setData({ access: 'true' })
-          app.getLocation(that);
+          app.getLocation(that, 0, true);
         } else {
           wx.authorize({
             scope: 'scope.userLocation',
             success() {
               app.globalData.access_location = 'true'
               that.setData({ access: 'true' })
-              app.getLocation(that);
+              app.getLocation(that, 0, true);
             },
             fail() {
               app.globalData.access_location = 'false'
@@ -225,7 +234,10 @@ Page({
     }
   },
   onChangeHomeTab: function(e) {
-    console.log(e.detail)
+    app.globalData.TabCur = this.data.goodsCata[e.detail.index].cata_code
+    wx.switchTab({
+      url: '/pages/cata/index',
+    })
   },
   onChange: function (event) {
     if (event.detail === 0) {
@@ -256,7 +268,16 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
+    //地址切换后需要更新仓库信息
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
+      if (!app.globalData.selected_location) {
+        app.getLocation(this, 0, true)
+      } else {
+        this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
+      }
+    }
     this.setData({
+      active: 0,
       location: app.globalData.location,
       selected_location: app.globalData.selected_location,
     })
@@ -312,11 +333,58 @@ Page({
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
-    wx.showToast({
-      title: 'loading....',
-      icon: 'loading'
-    })
+    this.getCata()
     wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
+  },
+  getHouse: function(city, lat, lng) {
+    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
+      Toast.clear();
+      console.log(res)
+      app.globalData.house = res
+      this.setData({
+        house: res,
+        no_house: false,
+        house_msg: ''
+      })
+      this.house = res
+      this.getCata()
+    }).catch(err => {
+      this.setData({
+        no_house: true,
+        house_msg: err
+      })
+    })
+  },
+  getMarketing() {
+    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
+      Toast.clear();
+      console.log(res)
+      app.globalData.house = res
+      this.setData({
+        house: res,
+        no_house: false,
+        house_msg: ''
+      })
+      this.house = res
+    }).catch(err => {
+      this.setData({
+        no_house: true,
+        house_msg: err
+      })
+    })
+  },
+  getCata: function() {
+    api.get(app.globalApi.cata_list, { rest: this.data.house.id }).then(res => {
+      Toast.clear();
+      app.globalData.goodsCata = res
+      this.setData({ goodsCata: res })
+      if (res.length > 0) app.globalData.TabCur = res[0].cata_code
+      else {
+        this.setData({ no_house: true, house_msg: '该区域配送服务搭建中，敬请期待。您可以' })
+      }
+    }).catch(err => {
+      Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
+    })
   }
 })

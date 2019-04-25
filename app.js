@@ -47,7 +47,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-              console.log(res.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -90,7 +89,7 @@ App({
   is_null: function(target) {
     return null === target || undefined === target || '' === target;
   },
-  _getLocation: function (target, poi = 0, options = null) {
+  _getLocation: function (target, poi = 0, get_house = false, options = null) {
     const that = this
     wx.getLocation({
       success: function (e) {
@@ -102,16 +101,15 @@ App({
           get_poi: poi,
           poi_options: options,
           success: function (res) {
-            console.log(res)
             if (res.status == 0) {
               that.globalData.location = res.result;
+              if (get_house) target.getHouse(res.result.ad_info.adcode, res.result.location.lat, res.result.location.lng)
               target.setData({
                 location: res.result
               })
             }
           },
           fail: function (res) {
-            console.log(res)
             that.setData({
               location: 位置获取失败
             })
@@ -122,13 +120,13 @@ App({
       }
     })
   },
-  getLocation: function (target, poi = 0, options = null) {
+  getLocation: function (target, poi = 0, get_house = false, options = null) {
     var that = this;
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userLocation']) {
           that.globalData.access_location = 'true'
-          that._getLocation(target, poi, options)
+          that._getLocation(target, poi, get_house, options)
         }
       }
     })
@@ -138,33 +136,21 @@ App({
     token: 'token',
     reg: 'reg',
     get_phone: 'phone',
-    test: 'test'
+    get_house: 'distance',
+    cata_list: 'cata/list',
+    query_goods: 'house/goods/query',
+    get_goods: 'house/goods/get'
   },
   globalData: {
     map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',
     userInfo: null,
+    house: false,
     selected_location: false,
     loading: false,
     access_location: 'req',
     location: {"title": "地理位置获取中"},
     TabCur: 0,
-    goodsCata: [
-      { text: "热卖", id: 0 },
-      { text: "上新", id: 1 },
-      { text: "水果", id: 2 },
-      { text: "蔬菜", id: 3 },
-      { text: "轻食", id: 4 },
-      { text: "肉蛋", id: 5 },
-      { text: "海鲜", id: 6 },
-      { text: "河鲜", id: 7 },
-      { text: "粮油", id: 8 },
-      { text: "特产", id: 9 },
-      { text: "酒饮", id: 10 },
-      { text: "测试1", id: 11 },
-      { text: "测试2", id: 12 },
-      { text: "测试3", id: 13 },
-      { text: "测试4", id: 14 }
-    ],
+    goodsCata: [],
     color: {
       primary: "#2C3E50",
       lightprimary: "#5cadff",

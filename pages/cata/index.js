@@ -1,5 +1,6 @@
 // pages/list/index.js
 const app = getApp()
+import api from '../../api/api'
 
 Page({
 
@@ -16,9 +17,14 @@ Page({
     VerticalNavTop: 0,
     last_top: 0,
     now_page: 1,
+    goodsList: [],
     goodsCata: app.globalData.goodsCata
   },
   tabSelect(e) {
+    console.log(e)
+    app.globalData.TabCur = e.currentTarget.dataset.id
+    this.data.TabCur = e.currentTarget.dataset.id,
+    this.getGoodsList()
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
@@ -37,11 +43,14 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      TabCur: app.globalData.TabCur,
+      goodsCata: app.globalData.goodsCata,
       color: app.globalData.color
     })
     this.getTabBar().setData({
       selected: 1
     })
+    this.getGoodsList()
   },
 
   /**
@@ -55,9 +64,11 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    this.data.TabCur = app.globalData.TabCur
     this.setData({
       location: app.globalData.location,
       selected_location: app.globalData.selected_location,
+      goodsCata: app.globalData.goodsCata,
       TabCur: app.globalData.TabCur
     })
     this.getTabBar().setData({
@@ -109,6 +120,19 @@ Page({
   openLocation: function () {
     wx.navigateTo({
       url: '/pages/location/index',
+    })
+  },
+  getGoodsList: function() {
+    api.get(app.globalApi.query_goods, { rest: app.globalData.house.id, data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
+      console.log(res)
+      this.setData({
+        goodsList: res
+      })
+    }).catch(err => {})
+  },
+  showInfo: function(e) {
+    wx.navigateTo({
+      url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
     })
   }
 })

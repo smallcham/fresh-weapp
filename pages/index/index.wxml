@@ -1,11 +1,20 @@
+<van-toast id="van-toast" />
+<view style='display: {{ no_house ? "block" : "none" }}'>
+  <view class='icon-center text-muted-a'>
+    <van-icon name="location"/>
+    <text class='icon-text-center text-muted'> 当前位置：{{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text>
+    <van-button type="success" size='small' bindtap='openLocation'>{{ house_msg }} 切换地址 </van-button>
+    <van-button type="warning" size='small' bindtap='accessLocation'>申请开通该区域配送服务 </van-button>
+  </view>
+</view>
 <view style='display: {{ access == "false" ? "block" : "none" }}'>
   <view class='icon-center text-muted-a'>
     <van-icon name="location"/>
-    <text class='icon-text-center text-muted'>您未开通相关权限，部分功能无法使用哦 ,请先开通权限~</text>
+    <text class='icon-text-center text-muted'>您未开通相关权限，无法确定您的配送位置 ,请先开通权限~</text>
     <van-button type="success" size='small' bindtap='accessLocation'>开通权限 </van-button>
   </view>
 </view>
-<view style='display: {{ access == "true" ? "block" : "none" }}'>
+<view style='display: {{ access == "true" && !no_house ? "block" : "none" }}'>
   <van-nav-bar fixed border="false">
     <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
      <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
@@ -15,7 +24,7 @@
   <!-- <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/> -->
 </van-search>
 <van-tabs border="{{ false }}" color="{{ color.success }}" active="{{ active }}"  bind:change="onChangeHomeTab">
-  <van-tab wx:for="{{ goodsCata }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
+  <van-tab wx:for="{{ goodsCata }}" title="{{ item.cata_name }}" data-id="{{ item.cata_code }}" wx:key="{{ item.cata_code }}"></van-tab>
 </van-tabs>
 
   <van-notify id="custom-notify" />

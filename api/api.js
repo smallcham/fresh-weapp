@@ -10,7 +10,7 @@ const request = (url, options) => {
       return false;
     }
     wx.request({
-      url: `${app.globalApi.host}${url}/` + token,
+      url: `${app.globalApi.host}${url}/` + token + (undefined !== options.data.rest && null !== options.data.rest ? ('/' + options.data.rest) : ''),
       method: options.method,
       data: options.data.data,
       header: {

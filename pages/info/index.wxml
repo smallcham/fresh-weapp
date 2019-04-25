@@ -1,17 +1,17 @@
 <view class='body' style='margin-bottom: 150rpx'>
   <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 500rpx'>
-    <swiper-item class="text-center"><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
-    <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/e/items/2017/170620/9288709342667476_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
-    <swiper-item class="text-center"><image src='https://img13.yiguoimg.com/e/items/2017/170620/9288709342733012_500.jpg' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+    <swiper-item class="text-center" wx:for="{{ goodsInfo.banner }}" wx:key>
+      <image src='http://ppqwtqkfk.bkt.clouddn.com/{{ item }}' mode='widthFix' style='width:100%;overflow:show;'></image>
+    </swiper-item>
   </swiper>
 
 
-  <van-panel title="泰国龙眼500g * 1盒" desc="珍珠级龙眼 吃出3D肉感" status="缺货">
+  <van-panel title="{{ goodsInfo.goods_name }}" desc="{{ goodsInfo.subtitle }}" status="缺货">
     <view style='padding: 25rpx'>
-      <view><text class='price'>¥ 9.9</text></view>
-      <view><text class='text-del'>¥ 11.9</text><text class='text-small text-muted' style='float:right'>好评率93.9% | 已售 205538 份</text></view>
+      <view><text class='price'>¥ {{ goodsInfo.price }}</text></view>
+      <view><text class='text-del'>¥ {{ goodsInfo.original }}</text><text class='text-small text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text></view>
       <view class='line'></view>
-      <view><text class='text-muted text-small'>‧ 泰国</text><text class='text-small text-muted'>‧ 次日达</text><text class='text-small text-muted'>‧ 实付满69包邮</text></view>
+      <view><text class='text-muted text-small'>‧ {{ goodsInfo.place_name }}</text><text class='text-small text-muted'>‧ 次日达</text><text class='text-small text-muted'>‧ 实付满69包邮</text></view>
     </view>
   </van-panel>
 
@@ -38,15 +38,10 @@
 
   <van-panel title="商品详情">
     <view class='card-fluid-warp text-muted text-small' style='border: 0rpx;'>
-      <view><text>重量：500g * 盒</text></view>
-      <view><text>包装：盒装</text></view>
-      <view><text>保质期：到货可立即使用</text></view>
-      <view><text>储藏方法：冷藏</text></view>
+      <view wx:for="{{ goodsInfo.info_text }}" wx:key><text>{{ item }}</text></view>
       <view class='line'></view>
       <view class="text-center">
-        <image lazy-load="true" src='https://img10.yiguoimg.com/d/images/2018/180906/513691889004061990_880x651.jpg'></image>
-        <image lazy-load="true" src='https://img10.yiguoimg.com/d/images/2018/180906/513691889004127526_880x651.jpg'></image>
-        <image lazy-load="true" src='https://img13.yiguoimg.com/d/images/2018/180906/513691889004193062_880x652.jpg'></image>
+        <image lazy-load="true" wx:for="{{ goodsInfo.info_img }}" wx:key src='http://ppqwtqkfk.bkt.clouddn.com/{{ item }}'></image>
       </view>
     </view>
   </van-panel>
