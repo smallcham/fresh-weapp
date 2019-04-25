@@ -5,6 +5,7 @@
     "van-goods-action-button": "/miniprogram_npm/vant-weapp/goods-action-button/index",
     "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
     "van-panel": "/miniprogram_npm/vant-weapp/panel/index",
-    "van-icon": "/miniprogram_npm/vant-weapp/icon/index"
+    "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
   }
 }

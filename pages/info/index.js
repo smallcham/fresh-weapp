@@ -1,4 +1,5 @@
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
+import Toast from '../../miniprogram_npm/vant-weapp/toast/toast';
 import api from '../../api/api'
 const app = getApp()
 // pages/info/index.js
@@ -87,11 +88,16 @@ Page({
     })
   },
   getGoods: function() {
+    Toast.loading({
+      mask: true,
+      message: '加载中...'
+    });
     api.get(app.globalApi.get_goods, { rest: this.data.id }).then(res => {
       res.banner = JSON.parse(res.banner)
       res.info_img = JSON.parse(res.info_img)
       res.info_text = res.info_text.split('\n')
       this.setData({ goodsInfo: res })
+      Toast.clear();
     }).catch(err => {
       Toast.fail(err);
       wx.navigateBack({})

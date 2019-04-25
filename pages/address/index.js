@@ -217,6 +217,13 @@ Page({
     })
   },
   getPhoneNumber(e) {
+    if (e.detail.encryptedData === undefined) {
+      wx.showToast({
+        title: '未授权无法自动获取，请手动输入',
+        icon: 'none'
+      })
+      return false
+    }
     api.post(app.globalApi.get_phone, { data: { iv: e.detail.iv, data: e.detail.encryptedData } }).then(res => { this.setData({ phone: res }) }).catch(err => {
       wx.showToast({
         title: err,
