@@ -10,6 +10,7 @@ Page({
   data: {
     title: "分类",
     loading: app.globalData.loading,
+    loading_list: true,
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -126,7 +127,8 @@ Page({
     api.get(app.globalApi.query_goods, { rest: app.globalData.house.id, data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
       console.log(res)
       this.setData({
-        goodsList: res
+        goodsList: res,
+        loading_list: false
       })
     }).catch(err => {})
   },

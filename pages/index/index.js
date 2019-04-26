@@ -11,11 +11,13 @@ Page({
     active: 0,
     access: app.globalData.access_location,
     border: false,
+    loading_mkt: true,
     location: app.globalData.location,
     selected_location: app.globalData.selected_location,
     house: app.globalData.house,
     no_house: false,
     house_msg: '',
+    mkt_list: [],
     userInfo: {},
     loading: app.globalData.loading,
     hasUserInfo: false,
@@ -25,144 +27,51 @@ Page({
     indexCata: [
       {
         title: "乳品酒饮",
-        img: "https://img10.yiguoimg.com/d/items/2019/190220/9570212329662036_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234116965.png",
         url: "/pages/cata/index",
         id: 0
       },
       {
         title: "新鲜水果",
-        img: "https://img11.yiguoimg.com/d/items/2019/190220/9570212329694804_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
         url: "/pages/cata/index",
         id: 1
       },
       {
         title: "美护日百",
-        img: "https://img14.yiguoimg.com/d/items/2019/190220/9570212329727572_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234537451.png",
         url: "/pages/cata/index",
         id: 2
       },
       {
         title: "休闲零食",
-        img: "https://img09.yiguoimg.com/d/items/2019/190220/9570212329760340_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234837331.png",
         url: "/pages/cata/index",
         id: 3
       },
       {
         title: "速食粮油",
-        img: "https://img14.yiguoimg.com/d/items/2019/190220/9570212329793108_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
         url: "/pages/cata/index",
         id: 4
       },
       {
         title: "会员专区",
-        img: "https://img11.yiguoimg.com/d/items/2019/190220/9570212329825876_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234340173.png",
         url: "/pages/cata/index",
         id: 5
       },
       {
         title: "好物拼团",
-        img: "https://img12.yiguoimg.com/d/items/2019/190220/9570212329858644_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234537451.png",
         url: "/pages/cata/index",
         id: 6
       },
       {
         title: "邀请有礼",
-        img: "https://img12.yiguoimg.com/d/items/2019/190220/9570212329891412_144.png?w=144&h=144",
+        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
         url: "/pages/cata/index",
         id: 7
-      }
-    ],
-    homeCata: [
-      {
-        id: 0,
-        title: "周末特价肉蛋熟食",
-        icon: { name: "hot", color: "text-danger"},
-        goodsList: [
-          {
-            goodsCode: "A001",
-            img: "https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 5.15,
-            originalPrice: 11.15
-          },
-          {
-            goodsCode: "A002",
-            img: "https://img11.yiguoimg.com/d/items/2018/180130/9288718841259070_300.jpg",
-            goodsName: "新西兰半壳青口贝",
-            price: 15.15,
-            originalPrice: 31.3
-          },
-          {
-            goodsCode: "A003",
-            img: "https://img11.yiguoimg.com/e/items/2017/170616/9288709172830928_220.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 39,
-            originalPrice: 41.15
-          },
-          {
-            goodsCode: "A004",
-            img: "https://img10.yiguoimg.com/d/items/2018/181127/9288734594147707_300.jpg",
-            goodsName: "冰烤地瓜",
-            price: 5.15,
-            originalPrice: 11.15
-          },
-          {
-            goodsCode: "A005",
-            img: "https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 100,
-            originalPrice: 168
-          },
-          {
-            goodsCode: "A001",
-            img: "https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 5.15,
-            originalPrice: 11.15
-          }
-        ]
-      },
-      {
-        id: 1,
-        title: "周末特价海鲜水产",
-        right: "",
-        goodsList: [
-          {
-            goodsCode: "A001",
-            img: "https://img11.yiguoimg.com/e/items/2017/170616/9288709172929232_220.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 5.15,
-            originalPrice: 11.15
-          },
-          {
-            goodsCode: "A002",
-            img: "https://img09.yiguoimg.com/e/items/2017/170616/9288709172863696_220.jpg",
-            goodsName: "新西兰半壳青口贝",
-            price: 15.15,
-            originalPrice: 31.3
-          },
-          {
-            goodsCode: "A003",
-            img: "https://img12.yiguoimg.com/e/items/2017/170619/9288709271954131_220.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 39,
-            originalPrice: 41.15
-          },
-          {
-            goodsCode: "A004",
-            img: "https://img10.yiguoimg.com/d/items/2018/181127/9288734594147707_300.jpg",
-            goodsName: "冰烤地瓜",
-            price: 5.15,
-            originalPrice: 11.15
-          },
-          {
-            goodsCode: "A005",
-            img: "https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg",
-            goodsName: "波诺卡加拿大雪花牛肉",
-            price: 100,
-            originalPrice: 168
-          }
-        ]
       }
     ]
   },
@@ -253,7 +162,7 @@ Page({
   },
   showInfo: function(e) {
     wx.navigateTo({
-      url: '/pages/info/index',
+      url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
     })
   },
   getUserInfo: function(e) {
@@ -333,6 +242,7 @@ Page({
   },
   onPullDownRefresh() {
     wx.showNavigationBarLoading()
+    this.setData({ loading_mkt: true })
     this.getCata()
     wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
@@ -356,33 +266,23 @@ Page({
       })
     })
   },
-  getMarketing() {
-    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
-      Toast.clear();
-      console.log(res)
-      app.globalData.house = res
-      this.setData({
-        house: res,
-        no_house: false,
-        house_msg: ''
-      })
-      this.house = res
-    }).catch(err => {
-      this.setData({
-        no_house: true,
-        house_msg: err
-      })
-    })
-  },
   getCata: function() {
     api.get(app.globalApi.cata_list, { rest: this.data.house.id }).then(res => {
       Toast.clear();
       app.globalData.goodsCata = res
       this.setData({ goodsCata: res })
+      this.getMkt()
       if (res.length > 0) app.globalData.TabCur = res[0].cata_code
       else {
         this.setData({ no_house: true, house_msg: '该区域配送服务搭建中，敬请期待。您可以' })
       }
+    }).catch(err => {
+      Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
+    })
+  },
+  getMkt: function() {
+    api.get(app.globalApi.get_mkt, { rest: this.data.house.id }).then(res => {
+      this.setData({ mkt_list: res, loading_mkt: false })
     }).catch(err => {
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
     })

@@ -139,7 +139,8 @@ App({
     get_house: 'distance',
     cata_list: 'cata/list',
     query_goods: 'house/goods/query',
-    get_goods: 'house/goods/get'
+    get_goods: 'house/goods/get',
+    get_mkt: 'mkt/get'
   },
   globalData: {
     map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',

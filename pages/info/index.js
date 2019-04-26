@@ -11,6 +11,7 @@ Page({
   data: {
     cartCount: 0,
     id: null,
+    loading: true,
     goodsInfo: {},
     showFoot: true
   },
@@ -88,16 +89,11 @@ Page({
     })
   },
   getGoods: function() {
-    Toast.loading({
-      mask: true,
-      message: '加载中...'
-    });
     api.get(app.globalApi.get_goods, { rest: this.data.id }).then(res => {
       res.banner = JSON.parse(res.banner)
       res.info_img = JSON.parse(res.info_img)
       res.info_text = res.info_text.split('\n')
-      this.setData({ goodsInfo: res })
-      Toast.clear();
+      this.setData({ goodsInfo: res, loading: false })
     }).catch(err => {
       Toast.fail(err);
       wx.navigateBack({})
