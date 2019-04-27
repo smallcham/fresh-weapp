@@ -246,6 +246,10 @@ mt-5 {
   color: #95a5a6;
 }
 
+.text-muted-la {
+  color: rgba(149, 165, 166, 0.747)
+}
+
 .text-muted-a {
   color: rgba(149, 165, 166, 0.247)
 }

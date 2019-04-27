@@ -20,7 +20,7 @@
 }
 .VerticalNav.nav .cu-item.cur::after {
   content: "";
-  width: 6rpx;
+  width: 8rpx;
   height: 30rpx;
   /* border-radius: 10rpx 0 0 10rpx; */
   position: absolute;

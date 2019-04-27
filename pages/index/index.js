@@ -244,8 +244,6 @@ Page({
     wx.showNavigationBarLoading()
     this.setData({ loading_mkt: true })
     this.getCata()
-    wx.hideNavigationBarLoading()
-    wx.stopPullDownRefresh()
   },
   getHouse: function(city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
@@ -282,6 +280,8 @@ Page({
   },
   getMkt: function() {
     api.get(app.globalApi.get_mkt, { rest: this.data.house.id }).then(res => {
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
       this.setData({ mkt_list: res, loading_mkt: false })
     }).catch(err => {
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');

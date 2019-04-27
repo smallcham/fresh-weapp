@@ -28,24 +28,28 @@
 </van-tabs>
 
   <van-notify id="custom-notify" />
-  <swiper autoplay style='height:200rpx'>
+  <swiper autoplay circular style='height:200rpx'>
       <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
       <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737612998261_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
       <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     </swiper>
 
-<view class='text-center text-muted text-super' style='margin-top: 35rpx;display: {{ loading_mkt ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
+<view class='text-center text-muted-la text-max' style='margin-top: 35rpx;display: {{ loading_mkt ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
 
   <view class='body' style='display: {{ loading_mkt ? "none" : "block" }}'>
-    <view class='card' style='border: 0rpx;padding:0;margin:0;padding-bottom: 40rpx;padding-top:25rpx'>
+    <view class='card' style='width:100%;border: 0rpx;padding:0;margin:0;padding-bottom: 25rpx;padding-top:25rpx'>
       <van-row>
       <van-col span="6" wx:for="{{ indexCata }}" wx:key="{{ item.id }}">
-          <view data-url="{{ item.url }}" data-id="{{ item.id }}" bindtap="openCata">
-            <view class='text-center'><image src='{{ item.img }}' style='width:2.0rem;height:2.0rem'></image></view>
-            <view class='text-center'><text class='text-small text-title'>{{ item.title }}</text></view>
+          <view data-url="{{ item.url }}" data-id="{{ item.id }}" bindtap="openCata" style='padding-top: 15rpx'>
+            <view class='text-center'><image src='{{ item.img }}' style='width:70rpx;height:70rpx'></image></view>
+            <view class='text-center'><text class='text-mini text-title' style='color:#333'>{{ item.title }}</text></view>
           </view>
       </van-col>
     </van-row>
+    </view>
+
+    <view class='text-center text-muted-la text-max' style='margin-top: 35rpx;display: {{ !loading_mkt && mkt_list.length === 0 ? "block" : "none" }}'><van-icon name="info-o" />
+      <text class='icon-text-center text-muted-la'>当前区域暂未上架任何商品</text>
     </view>
 
     <view wx:for="{{ mkt_list }}" wx:key="{{ item.marketing_code }}"  wx:if='{{ item.marketing_type === "HOT" }}'>
@@ -64,7 +68,7 @@
     </scroll-view>
     </view>
 
-    <van-cell title="特色专区" border="{{ border }}" fontSize="25rpx;">
+    <van-cell title="特色专区" border="{{ border }}" fontSize="25rpx;" wx:if="{{ mkt_list.length > 0 }}">
       <van-icon slot="icon" name="medel" class="text-warning" style='font-size: 30rpx;'/>
     </van-cell>
     <view style='background-color: #fff'>

@@ -5,7 +5,7 @@
 </view>
 <view style='display: {{ loading ? "none" : "block" }}'>
   <view class='body' style='margin-bottom: 150rpx'>
-  <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 500rpx'>
+  <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 500rpx;background-color:#fff'>
     <swiper-item class="text-center" wx:for="{{ goodsInfo.banner }}" wx:key>
       <image src='http://ppqwtqkfk.bkt.clouddn.com/{{ item }}' mode='aspectFit' style='width:100%;overflow:show;'></image>
     </swiper-item>
