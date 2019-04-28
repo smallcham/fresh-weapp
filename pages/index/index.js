@@ -8,6 +8,7 @@ const app = getApp()
 
 Page({
   data: {
+    fs: app.globalData.fs,
     active: 0,
     access: app.globalData.access_location,
     border: false,
@@ -24,56 +25,8 @@ Page({
     animationData: {},
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     goodsCata: app.globalData.goodsCata,
-    indexCata: [
-      {
-        title: "乳品酒饮",
-        img: "https://j-image.missfresh.cn/img_20181118234116965.png",
-        url: "/pages/cata/index",
-        id: 0
-      },
-      {
-        title: "新鲜水果",
-        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
-        url: "/pages/cata/index",
-        id: 1
-      },
-      {
-        title: "美护日百",
-        img: "https://j-image.missfresh.cn/img_20181118234537451.png",
-        url: "/pages/cata/index",
-        id: 2
-      },
-      {
-        title: "休闲零食",
-        img: "https://j-image.missfresh.cn/img_20181118234837331.png",
-        url: "/pages/cata/index",
-        id: 3
-      },
-      {
-        title: "速食粮油",
-        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
-        url: "/pages/cata/index",
-        id: 4
-      },
-      {
-        title: "会员专区",
-        img: "https://j-image.missfresh.cn/img_20181118234340173.png",
-        url: "/pages/cata/index",
-        id: 5
-      },
-      {
-        title: "好物拼团",
-        img: "https://j-image.missfresh.cn/img_20181118234537451.png",
-        url: "/pages/cata/index",
-        id: 6
-      },
-      {
-        title: "邀请有礼",
-        img: "https://j-image.missfresh.cn/img_20181118234315430.png",
-        url: "/pages/cata/index",
-        id: 7
-      }
-    ]
+    banner: [],
+    indexCata: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -265,25 +218,44 @@ Page({
     })
   },
   getCata: function() {
-    api.get(app.globalApi.cata_list, { rest: this.data.house.id }).then(res => {
+    api.get(app.globalApi.cata_list).then(res => {
       Toast.clear();
       app.globalData.goodsCata = res
       this.setData({ goodsCata: res })
+      this.getLink()
       this.getMkt()
       if (res.length > 0) app.globalData.TabCur = res[0].cata_code
       else {
         this.setData({ no_house: true, house_msg: '该区域配送服务搭建中，敬请期待。您可以' })
       }
     }).catch(err => {
+      console.log('getCata', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
     })
   },
   getMkt: function() {
-    api.get(app.globalApi.get_mkt, { rest: this.data.house.id }).then(res => {
+    api.get(app.globalApi.get_mkt).then(res => {
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
       this.setData({ mkt_list: res, loading_mkt: false })
     }).catch(err => {
+      console.log('getMkt', err)
+      Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
+    })
+  },
+  getLink: function() {
+    api.get(app.globalApi.get_link).then(res => {
+      if (res === undefined) return
+      this.data.banner = []
+      this.data.indexCata = []
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].link_type === 1) this.data.banner.push(res[i])
+        else if (res[i].link_type === 0) this.data.indexCata.push(res[i])
+        else {}
+      }
+       this.setData({ banner: this.data.banner, indexCata: this.data.indexCata })
+    }).catch(err => {
+      console.log('getLink', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
     })
   }

@@ -28,10 +28,8 @@
 </van-tabs>
 
   <van-notify id="custom-notify" />
-  <swiper autoplay circular style='height:200rpx'>
-      <swiper-item class="text-center"><image src='https://img10.yiguoimg.com/d/items/2019/190321/9288737606248053_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
-      <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737612998261_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
-      <swiper-item class="text-center"><image src='https://img09.yiguoimg.com/d/items/2019/190321/9288737614669429_1125x652.jpg?w=1125&h=652' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+  <swiper autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
+      <swiper-item class="text-center" wx:for="{{ banner }}" wx:key="{{ item.link_code }}"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     </swiper>
 
 <view class='text-center text-muted-la text-max' style='margin-top: 35rpx;display: {{ loading_mkt ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
@@ -39,10 +37,10 @@
   <view class='body' style='display: {{ loading_mkt ? "none" : "block" }}'>
     <view class='card' style='width:100%;border: 0rpx;padding:0;margin:0;padding-bottom: 25rpx;padding-top:25rpx'>
       <van-row>
-      <van-col span="6" wx:for="{{ indexCata }}" wx:key="{{ item.id }}">
-          <view data-url="{{ item.url }}" data-id="{{ item.id }}" bindtap="openCata" style='padding-top: 15rpx'>
-            <view class='text-center'><image src='{{ item.img }}' style='width:70rpx;height:70rpx'></image></view>
-            <view class='text-center'><text class='text-mini text-title' style='color:#333'>{{ item.title }}</text></view>
+      <van-col span="6" wx:for="{{ indexCata }}" wx:key="{{ item.link_code }}">
+          <view data-url="{{ item.url }}" data-id="{{ item.link_code }}" bindtap="openCata" style='padding-top: 15rpx'>
+            <view class='text-center'><image src='{{ fs + item.img }}' style='width:70rpx;height:70rpx'></image></view>
+            <view class='text-center'><text class='text-mini text-title' style='color:#333'>{{ item.link_name }}</text></view>
           </view>
       </van-col>
     </van-row>
@@ -59,7 +57,7 @@
       <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
         <view class='card ell' style='border: 0;' wx:for="{{ item.goods_list }}" wx:key="column.goods_code" wx:if="{{ index < 6 }}" wx:for-item="column">
           <block>
-            <view class='text-center' data-id="{{ column.house_goods_id }}" bindtap='showInfo'><image src='http://ppqwtqkfk.bkt.clouddn.com/{{ column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
+            <view class='text-center' data-id="{{ column.house_goods_id }}" bindtap='showInfo'><image src='{{ fs + column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
             <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='gs-name'>{{ column.goods_name }}</text></view>
             <view><text class='price' data-id="{{ column.house_goods_id }}" bindtap='showInfo'>¥ {{ column.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
             <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='text-del'>¥ {{ column.original }}</text></view>
@@ -79,7 +77,7 @@
             <view><text class='gs-name'>{{ item.marketing_name }}</text></view>
             <view class='text-center'><text class='text-small text-muted'>{{ item.marketing_name.split(":").length > 1 ? item.marketing_name.split(":")[1] : "" }}</text></view>
             <view class='text-center'>
-              <image wx:for="{{ item.goods_list }}" wx:key="{{ column.goods_code }}"  wx:for-item="column" wx:if="{{ index < 2 }}" src='http://ppqwtqkfk.bkt.clouddn.com/{{ column.goods_img }}' style='width:170rpx;height:160rpx;'></image>
+              <image wx:for="{{ item.goods_list }}" wx:key="{{ column.goods_code }}"  wx:for-item="column" wx:if="{{ index < 2 }}" src='{{ fs + column.goods_img }}' style='width:170rpx;height:160rpx;'></image>
             </view>
           </block>    
       </view>
@@ -96,7 +94,7 @@
     <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
           <view class='card ell' wx:for="{{ item.goods_list }}" wx:for-item="goods" wx:key="{{ goods.goods_code }}" style='border: 0;'>
             <block>
-              <view class='text-center' bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><image src='http://ppqwtqkfk.bkt.clouddn.com/{{ goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
+              <view class='text-center' bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><image src='{{ fs + goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
               <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='gs-name'>{{ goods.goods_name }}</text></view>
               <view><text class='price' bindtap='showInfo' data-id="{{ goods.house_goods_id }}">¥ {{ goods.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
               <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='text-del'>¥ {{ goods.original }}</text></view>

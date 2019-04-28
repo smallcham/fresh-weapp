@@ -140,9 +140,11 @@ App({
     cata_list: 'cata/list',
     query_goods: 'house/goods/query',
     get_goods: 'house/goods/get',
-    get_mkt: 'mkt/get'
+    get_mkt: 'mkt/get',
+    get_link: 'house/link/list'
   },
   globalData: {
+    fs: 'http://ppqwtqkfk.bkt.clouddn.com/',
     map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',
     userInfo: null,
     house: false,

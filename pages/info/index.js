@@ -9,6 +9,7 @@ Page({
    * Page initial data
    */
   data: {
+    fs: app.globalData.fs,
     cartCount: 0,
     id: null,
     loading: true,

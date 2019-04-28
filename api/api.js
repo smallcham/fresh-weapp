@@ -10,11 +10,13 @@ const request = (url, options) => {
       return false;
     }
     wx.request({
-      url: `${app.globalApi.host}${url}/` + token + (undefined !== options.data.rest && null !== options.data.rest ? ('/' + options.data.rest) : ''),
+      url: `${app.globalApi.host}${url}` + (undefined !== options.data.rest && null !== options.data.rest ? ('/' + options.data.rest) : ''),
       method: options.method,
       data: options.data.data,
       header: {
         'Content-Type': 'application/json; charset=UTF-8',
+        'LL-Token': token,
+        'LL-House': app.globalData.house.id
       },
       success(request) {
         if (request.data.state) {

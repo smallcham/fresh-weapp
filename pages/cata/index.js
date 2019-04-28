@@ -124,7 +124,7 @@ Page({
     })
   },
   getGoodsList: function() {
-    api.get(app.globalApi.query_goods, { rest: app.globalData.house.id, data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
+    api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
       console.log(res)
       this.setData({
         goodsList: res,
