@@ -7,7 +7,7 @@
   <view class='body' style='margin-bottom: 150rpx'>
   <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 500rpx;background-color:#fff'>
     <swiper-item class="text-center" wx:for="{{ goodsInfo.banner }}" wx:key>
-      <image src='http://ppqwtqkfk.bkt.clouddn.com/{{ item }}' mode='aspectFit' style='width:100%;overflow:show;'></image>
+      <image src='{{ fs + item }}' mode='aspectFit' style='width:100%;overflow:show;'></image>
     </swiper-item>
   </swiper>
 
@@ -89,7 +89,7 @@
         <view wx:for="{{ goodsInfo.info_text }}" wx:key><text>{{ item }}</text></view>
         <view class='line'></view>
         <view>
-          <image mode='widthFix' style='width: 100%;display:block;vertical-align:top;' lazy-load="true" wx:for="{{ goodsInfo.info_img }}" wx:key src='http://ppqwtqkfk.bkt.clouddn.com/{{ item }}'></image>
+          <image mode='widthFix' style='width: 100%;display:block;vertical-align:top;' lazy-load="true" wx:for="{{ goodsInfo.info_img }}" wx:key src='{{ fs + item }}'></image>
         </view>
       </view>
     </van-panel>

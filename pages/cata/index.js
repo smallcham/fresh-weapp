@@ -9,8 +9,10 @@ Page({
    */
   data: {
     title: "分类",
+    fs: app.globalData.fs,
     loading: app.globalData.loading,
     loading_list: true,
+    empty_list: false,
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -65,7 +67,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    let needLoad = this.data.TabCur !== app.globalData.TabCur
     this.data.TabCur = app.globalData.TabCur
+    if (needLoad) this.getGoodsList()
     this.setData({
       location: app.globalData.location,
       selected_location: app.globalData.selected_location,
@@ -124,9 +128,11 @@ Page({
     })
   },
   getGoodsList: function() {
+    this.setData({ loading_list: true })
     api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
       console.log(res)
       this.setData({
+        empty_list: res.total === 0,
         goodsList: res,
         loading_list: false
       })

@@ -5,6 +5,7 @@ Component({
    */
   data: {
     selected: 0,
+    show: true,
     color: "#95a5a6",
     selectedColor: "#18BC9C",
     cartCount: 0,

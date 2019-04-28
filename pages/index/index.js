@@ -39,7 +39,8 @@ Page({
       color: app.globalData.color
     })
     this.getTabBar().setData({
-      selected: 0
+      selected: 0,
+      show: false
     })
     const that = this
     Toast.loading({
@@ -238,6 +239,7 @@ Page({
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
       this.setData({ mkt_list: res, loading_mkt: false })
+      this.getTabBar().setData({ show: true })
     }).catch(err => {
       console.log('getMkt', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
