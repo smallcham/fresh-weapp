@@ -13,11 +13,11 @@
   <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 270rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain">
     <view class="padding-xs">
       <view class="cu-list menu menu-avatar">
-        <view class="cu-item" wx:for="{{ goodsList.data }}" wx:key="{{ item.id }}">
-          <view class="cu-avatar radius lg" style="background-image:url({{ fs + item.goods_img }});" data-id="{{ item.id }}" bindtap='showInfo'></view>
-          <view class='content' data-id="{{ item.id }}" bindtap='showInfo'>
-            <view class='text-small'>{{ item.goods_name }}</view>
-            <view class='text-muted text-mini'>{{ item.subtitle }}</view>
+        <view class="cu-item" wx:for="{{ goodsList.data }}" wx:key="{{ item.goods_code }}">
+          <view class="cu-avatar radius lg" style="background-image:url({{ fs + item.goods_img }});" data-id="{{ item.goods_code }}" bindtap='showInfo'></view>
+          <view class='content' data-id="{{ item.goods_code }}" bindtap='showInfo'>
+            <view class='text-small ell-md-2'>{{ item.goods_name }}</view>
+            <view class='text-muted text-mini ell-lg'>{{ item.subtitle }}</view>
             <view><text class='text-del'>¥ {{ item.original }}</text><text class='price' style='padding-left: 10rpx'>¥ {{ item.price }}</text></view>
           </view>
           <view class='action'>

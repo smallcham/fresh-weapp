@@ -12,6 +12,7 @@ Page({
     fs: app.globalData.fs,
     cartCount: 0,
     id: null,
+    share: false,
     loading: true,
     goodsInfo: {},
     showFoot: true
@@ -22,6 +23,7 @@ Page({
    */
   onLoad: function (options) {
     this.data.id = options.id
+    this.data.share = options.share === '1'
     this.setData({
       color: app.globalData.color
     })
@@ -33,12 +35,19 @@ Page({
   onReady: function () {
 
   },
-
   /**
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    this.getGoods()
+    if (this.data.share) {
+        this.data.share = false
+        app.globalData.shareBack = '/pages/info/index?id=' + this.data.id
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+    } else {
+      this.getGoods()
+    }
   },
 
   /**
@@ -73,7 +82,13 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.goodsInfo.goods_name,
+      path: '/pages/info/index?id=' + this.data.id + '&share=1',
+      success: function (res) {
+      },
+      fail: function (res) {}
+    }
   },
 
   onAddCart: function(e) {

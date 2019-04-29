@@ -131,6 +131,7 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
+    if (this.data.house !== false) { app.shareCallBack() }
     //地址切换后需要更新仓库信息
     if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
       if (!app.globalData.selected_location) {
@@ -202,8 +203,8 @@ Page({
   getHouse: function(city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
       Toast.clear();
-      console.log(res)
       app.globalData.house = res
+      app.shareCallBack()
       this.setData({
         house: res,
         no_house: false,

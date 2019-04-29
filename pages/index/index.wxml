@@ -57,10 +57,10 @@
       <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
         <view class='card ell' style='border: 0;' wx:for="{{ item.goods_list }}" wx:key="column.goods_code" wx:if="{{ index < 6 }}" wx:for-item="column">
           <block>
-            <view class='text-center' data-id="{{ column.house_goods_id }}" bindtap='showInfo'><image src='{{ fs + column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
-            <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='gs-name'>{{ column.goods_name }}</text></view>
-            <view><text class='price' data-id="{{ column.house_goods_id }}" bindtap='showInfo'>¥ {{ column.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-            <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='text-del'>¥ {{ column.original }}</text></view>
+            <view class='text-center' data-id="{{ column.goods_code }}" bindtap='showInfo'><image src='{{ fs + column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
+            <view bindtap='showInfo' data-id="{{ column.goods_code }}"><text class='gs-name'>{{ column.goods_name }}</text></view>
+            <view><text class='price' data-id="{{ column.goods_code }}" bindtap='showInfo'>¥ {{ column.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view bindtap='showInfo' data-id="{{ column.goods_code}}"><text class='text-del'>¥ {{ column.original }}</text></view>
             </block>
         </view>
     </scroll-view>
@@ -75,7 +75,7 @@
       <view class='card cell-lg'>
           <block>
             <view><text class='gs-name'>{{ item.marketing_name }}</text></view>
-            <view class='text-center'><text class='text-small text-muted'>{{ item.marketing_name.split(":").length > 1 ? item.marketing_name.split(":")[1] : "" }}</text></view>
+            <view class='text-center'><text class='text-small text-muted'>{{ item.subtitle }}</text></view>
             <view class='text-center'>
               <image wx:for="{{ item.goods_list }}" wx:key="{{ column.goods_code }}"  wx:for-item="column" wx:if="{{ index < 2 }}" src='{{ fs + column.goods_img }}' style='width:170rpx;height:160rpx;'></image>
             </view>
@@ -94,10 +94,10 @@
     <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
           <view class='card ell' wx:for="{{ item.goods_list }}" wx:for-item="goods" wx:key="{{ goods.goods_code }}" style='border: 0;'>
             <block>
-              <view class='text-center' bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><image src='{{ fs + goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
-              <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='gs-name'>{{ goods.goods_name }}</text></view>
-              <view><text class='price' bindtap='showInfo' data-id="{{ goods.house_goods_id }}">¥ {{ goods.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view bindtap='showInfo' data-id="{{ goods.house_goods_id }}"><text class='text-del'>¥ {{ goods.original }}</text></view>
+              <view class='text-center' bindtap='showInfo' data-id="{{ goods.goods_code }}"><image src='{{ fs + goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
+              <view bindtap='showInfo' data-id="{{ goods.goods_code }}"><text class='gs-name'>{{ goods.goods_name }}</text></view>
+              <view><text class='price' bindtap='showInfo' data-id="{{ goods.goods_code }}">¥ {{ goods.price }}</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+              <view bindtap='showInfo' data-id="{{ goods.goods_code }}"><text class='text-del'>¥ {{ goods.original }}</text></view>
               </block>
           </view>
     </scroll-view>

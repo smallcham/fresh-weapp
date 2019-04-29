@@ -50,6 +50,25 @@ color: transparent;
   text-overflow:ellipsis;
 }
 
+.ell-md {
+  width:270rpx;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.ell-md-2 {
+  height:63rpx;
+  line-height:30rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
 .ell-lg {
   width:310rpx;
   display:block;

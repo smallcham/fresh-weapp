@@ -131,6 +131,15 @@ App({
       }
     })
   },
+  shareCallBack: function() {
+    if (this.globalData.shareBack) {
+      let url = this.globalData.shareBack
+      this.globalData.shareBack = false
+      wx.navigateTo({
+        url: url
+      })
+    }
+  },
   globalApi: {
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
@@ -151,6 +160,7 @@ App({
     selected_location: false,
     loading: false,
     access_location: 'req',
+    shareBack: false,
     location: {"title": "地理位置获取中"},
     TabCur: 0,
     goodsCata: [],
