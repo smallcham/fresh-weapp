@@ -1,0 +1,13 @@
+<van-panel>
+  <van-cell>
+  <view slot="title">
+    <van-tag color="#ff9900">优享会员</van-tag>
+  </view>
+  <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
+  </van-cell>
+</van-panel>
+
+<van-cell title="商品总价"  icon="gold-coin-o" value="¥ 219.5"/>
+<van-cell title="优惠券"  icon="discount" value="无可用优惠券"  is-link/>
+<van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
+<van-cell title="配送费"  icon="free-postage"  value="包邮"/>

@@ -24,11 +24,11 @@ Page({
     goodsCata: app.globalData.goodsCata
   },
   tabSelect(e) {
-    console.log(e)
     app.globalData.TabCur = e.currentTarget.dataset.id
     this.data.TabCur = e.currentTarget.dataset.id,
     this.setData({
       empty_list: false,
+      goodsList: [],
       TabCur: e.currentTarget.dataset.id,
       VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })

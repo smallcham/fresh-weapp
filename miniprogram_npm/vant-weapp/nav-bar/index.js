@@ -11,6 +11,10 @@ VantComponent({
             type: Boolean,
             value: true
         },
+        bg: {
+          type: String,
+          value: 'white'
+        },
         zIndex: {
             type: Number,
             value: 1

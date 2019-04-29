@@ -93,7 +93,12 @@ Page({
   },
   openLocation: function () {
     wx.navigateTo({
-      url: '/pages/location/index',
+      url: '/pages/location/index'
+    })
+  },
+  toCheck: function() {
+    wx.navigateTo({
+      url: '/pages/check/index'
     })
   }
 })

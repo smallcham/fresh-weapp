@@ -134,7 +134,7 @@
       <text class='text-small text-primary'>我的服务</text>
     </view>
   </van-nav-bar>
-    <van-row>
+    <van-row gutter="45">
       <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.warning }}' name="point-gift" /></view>

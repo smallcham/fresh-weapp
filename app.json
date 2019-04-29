@@ -12,7 +12,8 @@
     "pages/search/index",
     "pages/location/index",
     "pages/list/index",
-    "pages/address/index"
+    "pages/address/index",
+    "pages/check/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
