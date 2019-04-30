@@ -113,10 +113,10 @@
         </van-col>
       </van-row>
     </view> -->
-   <van-submit-bar  price="{{ 3050 }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ true }}" >
+   <van-submit-bar  price="{{ 3050 }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ true }}" mb="110rpx">
       <van-radio style='padding-left: 20rpx;' checked-color="{{ color.success }}">全选</van-radio>
         <view slot="tip">
-          实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单 ></text>
+          实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>
         </view>
     </van-submit-bar>
 </view>

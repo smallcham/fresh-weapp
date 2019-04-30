@@ -13,7 +13,8 @@
     "pages/location/index",
     "pages/list/index",
     "pages/address/index",
-    "pages/check/index"
+    "pages/check/index",
+    "pages/my-address/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

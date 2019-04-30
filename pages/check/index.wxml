@@ -1,13 +1,57 @@
-<van-panel>
-  <van-cell>
-  <view slot="title">
-    <van-tag color="#ff9900">优享会员</van-tag>
-  </view>
-  <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
-  </van-cell>
-</van-panel>
+<view style='margin: .4rem;padding.4rem'>
+  <button class="btn-card" style='display: {{ selected_address ? "none" : "block" }}' bindtap='chooseAddress'>
+    <view class='text-muted text-small' style='margin: .4rem; padding: .4rem;padding-top:35rpx'>
+      <view style='float:left'>
+        <van-icon name="location" /> 点击选择收货地址
+      </view>
+      <view style='float:right'><van-icon name="arrow" /></view>
+    </view>
+  </button>
 
-<van-cell title="商品总价"  icon="gold-coin-o" value="¥ 219.5"/>
-<van-cell title="优惠券"  icon="discount" value="无可用优惠券"  is-link/>
-<van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
-<van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+  <view style='margin-top: 15rpx' style='display: {{ selected_address ? "block" : "none" }}'>
+    <van-cell title-width="79%" is-link url="/pages/my-address/index">
+      <view slot=""><van-tag color="{{ color.success }}">{{ selected_address.address_type }}</van-tag></view>
+      <view slot="icon" class='text-muted'><van-icon name="location"/></view>
+      <view slot="title" class='text-muted text-small'>
+        <view>{{ selected_address.address_info }}</view>
+        <view style='font-weight: 700'>{{ selected_address.recive_name }} {{ selected_address.phone }}</view>
+      </view>
+    </van-cell>
+  </view>
+
+  <view style='margin-top: 15rpx'>
+    <van-cell-group>
+      <van-cell title="当日达" value="预计 2019.05.02 送达" />
+      <van-cell value="共4件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
+        <view slot="title">
+          <scroll-view scroll-x class='gs-scroll'>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+          </scroll-view>
+        </view>
+      </van-cell>
+    </van-cell-group>
+  </view>
+
+  <view style='margin-top: 15rpx;'>
+    <van-panel>
+      <van-cell>
+      <view slot="title">
+        <van-tag color="{{ color.warning }}">优享会员</van-tag>
+      </view>
+      <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
+      </van-cell>
+    </van-panel>
+    <van-cell title="商品原价"  icon="gold-coin-o" value="¥ 219.5"/>
+    <van-cell title="优惠券"  icon="discount" value="无可用优惠券"  is-link/>
+    <van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
+    <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+  </view>
+</view>
+
+<van-submit-bar label="付款："  price="{{ 3050 }}" button-text="去支付   ▸" button-type="success"  bind:submit="toCheck"/>

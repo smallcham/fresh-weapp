@@ -25,7 +25,7 @@
           </view>
         </view>
       </view>
-      <view class='text-center text-muted-la text-super' style='margin-top: 35rpx;display: {{ loading_list ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
+      <view class='text-center text-muted-la text-super anim-opacity-1' style='margin-top: 35rpx;display: {{ loading_list ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
       <view class='text-center text-muted-la text-small' style='margin-top: 35rpx;display: {{ empty_list ? "block" : "none" }}'><text>没有更多商品啦~</text></view>
     </view>
   </scroll-view>

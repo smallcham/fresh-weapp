@@ -999,3 +999,45 @@ mt-5 {
   padding-top: 50rpx;
   padding-bottom: 50rpx;
 }
+
+.anim-opacity-2 {
+    animation: 2s opacity2 0s infinite; -webkit-animation: 2s opacity2 0s infinite;-moz-animation: 2s opacity2 0s infinite;
+}
+@keyframes opacity2{
+    0%{opacity:0}
+    50%{opacity:.8;}
+    100%{opacity:0;}
+}
+@-webkit-keyframes opacity2{
+    0%{opacity:0}
+    50%{opacity:.8;}
+    100%{opacity:0;}
+}
+
+.anim-opacity-1 {
+    animation: 1s opacity1 0s infinite; -webkit-animation: 1s opacity1 0s infinite;-moz-animation: 1s opacity1 0s infinite;
+}
+@keyframes opacity1{
+    0%{opacity:0}
+    50%{opacity:.8;}
+    100%{opacity:0;}
+}
+@-webkit-keyframes opacity1{
+    0%{opacity:0}
+    50%{opacity:.8;}
+    100%{opacity:0;}
+}
+
+.anim-scale-2 {
+    animation: 2s scale2 0s infinite; -webkit-animation: 2s scale2 0s infinite;-moz-animation: 2s scale2 0s infinite;
+}
+@keyframes scale2{
+    0%{opacity:0; transform: scale(0.3);}
+    50%{opacity:.8; transform: scale(1);}
+    100%{opacity:0; transform: scale(0.3);}
+}
+@-webkit-keyframes scale2{
+    0%{opacity:0; transform: scale(0.3);}
+    50%{opacity:.8; transform: scale(1);}
+    100%{opacity:0; transform: scale(0.3);}
+}

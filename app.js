@@ -158,6 +158,7 @@ App({
     userInfo: null,
     house: false,
     selected_location: false,
+    selected_address: false,
     loading: false,
     access_location: 'req',
     shareBack: false,

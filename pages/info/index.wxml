@@ -1,6 +1,6 @@
 <van-toast id="van-toast" />
-<view class='icon-center text-muted-a' style='display: {{ loading ? "flex" : "none" }}'>
-  <van-icon name="ellipsis"/>
+<view class='icon-center text-muted-a anim-opacity-1' style='display: {{ loading ? "flex" : "none" }}'>
+  <van-icon name="weapp-nav"/>
   <text class='icon-text-center text-muted'>加载中</text>
 </view>
 <view style='display: {{ loading ? "none" : "block" }}'>
@@ -17,7 +17,7 @@
       <view><text class='price'>¥ {{ goodsInfo.price }}</text></view>
       <view><text class='text-del'>¥ {{ goodsInfo.original }}</text><text class='text-small text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text></view>
       <view class='line'></view>
-      <view><text class='text-muted text-small'>‧ {{ goodsInfo.place_name }}</text><text class='text-small text-muted'>‧ 小时达</text><text class='text-small text-muted'>‧ 实付满39包邮</text></view>
+      <view class='text-muted text-small'><text>‧ {{ goodsInfo.place_name }}</text><text>‧ 小时达</text><text>‧ 实付满39包邮</text></view>
     </view>
   </van-panel>
 

@@ -22,6 +22,10 @@ VantComponent({
         buttonType: {
             type: String,
             value: 'danger'
+        },
+        mb: {
+          type: String,
+          value: '0rpx'
         }
     },
     computed: {

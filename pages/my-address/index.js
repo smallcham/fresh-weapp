@@ -1,4 +1,4 @@
-// pages/check/index.js
+// pages/my-address/index.js
 const app = getApp()
 
 Page({
@@ -7,8 +7,7 @@ Page({
    * Page initial data
    */
   data: {
-    title: '填写订单',
-    selected_address: app.globalData.selected_address
+    title: '我的地址'
   },
 
   /**
@@ -34,9 +33,6 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
-    this.setData({
-      selected_address: app.globalData.selected_address
-    })
   },
 
   /**
@@ -73,9 +69,23 @@ Page({
   onShareAppMessage: function () {
 
   },
-  chooseAddress: function() {
+  toAddAddress: function () {
     wx.navigateTo({
-      url: '/pages/my-address/index'
+      url: '/pages/address/index?type=0&id=' + 1,
     })
+  },
+  toModifyAddress: function () {
+    wx.navigateTo({
+      url: '/pages/address/index?type=1&id=' + 1,
+    })
+  },
+  onSelectAddress: function() {
+    app.globalData.selected_address = {
+      address_type: '住宅',
+      phone: '18610245757',
+      recive_name: '张雨卿',
+      address_info: '北京 北京市 大兴区 紫宸苑 1502'
+    }
+    wx.navigateBack({})
   }
 })
