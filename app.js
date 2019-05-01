@@ -157,6 +157,7 @@ App({
     map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',
     userInfo: null,
     house: false,
+    servicePhone: '18897929159',
     selected_location: false,
     selected_address: false,
     loading: false,

@@ -9,15 +9,3 @@ page {
 .btn-card::after {
   border:none;
 }
-
-.gs-scroll {
-  white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff;width: 520rpx;
-}
-
-.gs-scroll view {
-  display: inline-block;
-}
-
-.gs-scroll view image {
-  width: 120rpx;height: 120rpx;
-}

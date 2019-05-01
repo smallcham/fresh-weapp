@@ -14,7 +14,8 @@
     "pages/list/index",
     "pages/address/index",
     "pages/check/index",
-    "pages/my-address/index"
+    "pages/my-address/index",
+    "pages/order-info/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

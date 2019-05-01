@@ -1,9 +1,9 @@
 <van-cell-group>
-  <van-cell title-width="90%" bind:click="onSelectAddress">
-    <view slot="right-icon" bindtap='toModifyAddress' class='text-muted text-super'><van-icon name="edit"/></view>
-    <view slot="icon" class='text-muted'><van-icon name="location"/></view>
-    <view slot="title" class='text-muted text-small'>
-      <view>[住宅] 北京 北京市 大兴区 紫宸苑1502</view>
+  <van-cell title-width="90%">
+    <view slot="right-icon" class='text-muted text-super' bindtap='toModifyAddress'><van-icon name="edit"/></view>
+    <view slot="icon" class='text-muted' bindtap="onSelectAddress"><van-icon name="location"/></view>
+    <view slot="title" class='text-muted text-small' bindtap="onSelectAddress">
+      <view><van-tag color="{{ color.success }}">住宅</van-tag> 北京 北京市 大兴区 紫宸苑1502</view>
       <view style='font-weight: 700'>张雨卿 18610245757</view>
     </view>
   </van-cell>

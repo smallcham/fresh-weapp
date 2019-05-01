@@ -1041,3 +1041,15 @@ mt-5 {
     50%{opacity:.8; transform: scale(1);}
     100%{opacity:0; transform: scale(0.3);}
 }
+
+.gs-scroll {
+  white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff;width: 520rpx;
+}
+
+.gs-scroll view {
+  display: inline-block;
+}
+
+.gs-scroll view image {
+  width: 120rpx;height: 120rpx;
+}

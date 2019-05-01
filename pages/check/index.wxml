@@ -54,4 +54,4 @@
   </view>
 </view>
 
-<van-submit-bar label="付款："  price="{{ 3050 }}" button-text="去支付   ▸" button-type="success"  bind:submit="toCheck"/>
+<van-submit-bar label="付款："  price="{{ 3050 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>

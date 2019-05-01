@@ -1,14 +1,12 @@
-// pages/check/index.js
+// pages/order-info/index.js
 const app = getApp()
-
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    title: '填写订单',
-    selected_address: app.globalData.selected_address
+    title: "我的订单"
   },
 
   /**
@@ -34,9 +32,6 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
-    this.setData({
-      selected_address: app.globalData.selected_address
-    })
   },
 
   /**
@@ -73,14 +68,9 @@ Page({
   onShareAppMessage: function () {
 
   },
-  toCheck: function() {
-    wx.navigateTo({
-      url: '/pages/order-info/index'
-    })
-  },
-  chooseAddress: function() {
-    wx.navigateTo({
-      url: '/pages/my-address/index'
+  callService: function() {
+    wx.makePhoneCall({
+      phoneNumber: app.globalData.servicePhone
     })
   }
 })

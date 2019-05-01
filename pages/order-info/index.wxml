@@ -1,0 +1,49 @@
+<view style='margin-bottom: 120rpx'>
+  <view>
+      <van-cell icon="todo-list" title="待付款" value="咨询客服 " is-link bind:click="callService"/>
+  </view>
+
+  <view style='margin-top: 15rpx'>
+      <van-cell title="配送信息"/>
+      <van-cell title="王湛智 18610245757" label="北京北京市大兴区紫宸苑-北门1502" />
+  </view>
+
+  <view style='margin-top: 15rpx'>
+      <van-cell title="当日达" value="预计 2019.05.02 送达" />
+      <van-cell value="共4件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
+        <view slot="title">
+          <scroll-view scroll-x class='gs-scroll'>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+          </scroll-view>
+        </view>
+      </van-cell>
+  </view>
+
+  <view style='margin-top: 15rpx'>
+      <van-cell title="订单信息"/>
+      <van-cell title="订单编号: DD19050119292849009" value="创建时间: 2019-05-01 19:29:28" />
+  </view>
+
+  <view style='margin-top: 15rpx;'>
+    <van-cell title="商品原价"  icon="gold-coin-o" value="¥ 219.5"/>
+    <van-cell title="优惠券"  icon="discount" value="无可用优惠券"/>
+    <van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
+    <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+  </view>
+
+  <view style='margin-top: 15rpx;'>
+    <van-cell title="余额支付" value="¥ 0"/>
+    <van-cell title="还需支付" value="¥ 121.2" />
+  </view>
+</view>
+
+<van-goods-action>
+  <van-goods-action-button text="取消订单" type="default" bind:click="onClickButton"/>
+  <van-goods-action-button text="去支付   ▸" type='success' bind:click="onClickButton" />
+</van-goods-action>
