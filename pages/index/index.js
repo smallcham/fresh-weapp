@@ -147,6 +147,8 @@ Page({
     })
   },
   addCart: function(e) {
+    api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
+    }).catch(err => { Toast.fail(err);  })
     app.cartAnimation(this)
     Notify({
       text: '已加入购物车',

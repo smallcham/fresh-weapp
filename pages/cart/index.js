@@ -9,7 +9,9 @@ Page({
    */
   data: {
     selected_location: false,
-    location: app.globalData.location
+    location: app.globalData.location,
+    fs: app.globalData.fs,
+    carts: []
   },
 
   /**
@@ -36,6 +38,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    this.cartList()
     this.setData({
       location: app.globalData.location,
       selected_location: app.globalData.selected_location
@@ -100,5 +103,10 @@ Page({
     wx.navigateTo({
       url: '/pages/check/index'
     })
+  },
+  cartList: function() {
+    api.get(app.globalApi.cart_list, {}).then(res => { 
+      this.setData({ carts: res })
+     }).catch(err => {})
   }
 })

@@ -150,7 +150,11 @@ App({
     query_goods: 'house/goods/query',
     get_goods: 'house/goods/get',
     get_mkt: 'mkt/get',
-    get_link: 'house/link/list'
+    get_link: 'house/link/list',
+    cart_list: 'cart/show',
+    cart_add: 'cart/add',
+    cart_count: 'cart/count',
+    cart_touch: 'cart/touch'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',

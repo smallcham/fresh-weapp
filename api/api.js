@@ -26,6 +26,7 @@ const request = (url, options) => {
         }
       },
       fail(error) {
+        console.log(error)
         reject(error.data.msg)
       }
     })
@@ -49,9 +50,14 @@ const remove = (url, options) => {
   return request(url, { method: 'DELETE', data: options })
 }
 
+const addCart = (goods_code, amount = 1) => {
+  return request(app.globalApi.cart_add + '/' + goods_code + '/' + amount, { method: 'POST', data: {} })
+}
+
 module.exports = {
   get,
   post,
   put,
-  remove
+  remove,
+  addCart
 }

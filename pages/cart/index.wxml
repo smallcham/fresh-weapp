@@ -7,93 +7,34 @@
 
 <view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
 
-  <view class='card-fluid gs-card'>
+  <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}">
       <van-row>
         <van-col span="2"><view class="gs-checkbox"><van-radio checked-color="{{ color.success }}"></van-radio></view></van-col>
-        <van-col span="7"><image src='https://img09.yiguoimg.com/d/items/2018/180810/9288728810464522_300.jpg'/></van-col>
+        <van-col span="7"><image src='{{ fs + item.goods_img }}'/></van-col>
         <van-col span="15">
           <view style='margin-top: 30rpx'>
             <van-row>
               <van-col span="24">
-                <text class='text-primary text-small'>库尔勒香梨</text>
+                <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
               </van-col>
             </van-row>
             <van-row>
               <van-col span="24">
                 <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
                 <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
-                <view style='float:right; margin-right: 20rpx'><van-stepper min="0" value="{{ 1 }}" bind:change="onChangeNum" /></view>
+                <view style='float:right; margin-right: 20rpx'><van-stepper min="0" value="{{ item.amount }}" bind:change="onChangeNum" /></view>
               </van-col>
             </van-row>
             <van-row>
               <van-col span="24">
-                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ 10.00</text>
-                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ 20.00</text>
+                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
+                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ {{ item.original }}</text>
               </van-col>
             </van-row>
           </view>
         </van-col>
       </van-row>
     </view>
-
-    <view class='card-fluid gs-card'>
-      <van-row>
-        <van-col span="2"><view class="gs-checkbox"><van-radio checked-color="{{ color.success }}"></van-radio></view></van-col>
-        <van-col span="7"><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></van-col>
-        <van-col span="15">
-          <view style='margin-top: 30rpx'>
-            <van-row>
-              <van-col span="24">
-                <text class='text-primary text-small'>进口凤梨1个1kg以上</text>
-              </van-col>
-            </van-row>
-            <van-row>
-              <van-col span="24">
-                <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
-                <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
-                <view style='float:right; margin-right: 20rpx'><van-stepper min="0" value="{{ 1 }}" bind:change="onChangeNum" /></view>
-              </van-col>
-            </van-row>
-            <van-row>
-              <van-col span="24">
-                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ 10.00</text>
-                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ 20.00</text>
-              </van-col>
-            </van-row>
-          </view>
-        </van-col>
-      </van-row>
-    </view>
-
-    <view class='card-fluid gs-card'>
-      <van-row>
-        <van-col span="2"><view class="gs-checkbox"><van-radio checked-color="{{ color.success }}"></van-radio></view></van-col>
-        <van-col span="7"><image src='https://img14.yiguoimg.com/d/items/2018/181026/9288733106578778_500.jpg'/></van-col>
-        <van-col span="15">
-          <view style='margin-top: 30rpx'>
-            <van-row>
-              <van-col span="24">
-                <text class='text-primary text-small'>加拿大冻北极甜虾1kg</text>
-              </van-col>
-            </van-row>
-            <van-row>
-              <van-col span="24">
-                <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
-                <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
-                <view style='float:right; margin-right: 20rpx'><van-stepper min="0" value="{{ 1 }}" bind:change="onChangeNum" /></view>
-              </van-col>
-            </van-row>
-            <van-row>
-              <van-col span="24">
-                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ 10.00</text>
-                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ 20.00</text>
-              </van-col>
-            </van-row>
-          </view>
-        </van-col>
-      </van-row>
-    </view>
-
 <!-- 
      <view class='card-fluid' style='border-bottom: 0rpx; border-left: 0; border-right: 0;'>
       <van-row>
