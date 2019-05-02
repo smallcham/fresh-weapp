@@ -8,7 +8,7 @@
     <view slot="right-icon" class='text-muted text-super' data-id="{{ item.address_code }}" bindtap='toModifyAddress'><van-icon name="edit"/></view>
     <view slot="icon" class='text-muted' bindtap="onSelectAddress"><van-icon name="location"/></view>
     <view slot="title" class='text-muted text-small' data-id="{{ item.address_code }}" bindtap="onSelectAddress">
-      <view><van-tag color="{{ color.success }}">{{ item.address_type }}</van-tag> {{ item.city + " " + item.district + " " + item.location }}</view>
+      <view><van-tag color="{{ color.success }}">{{ item.address_type }}</van-tag> {{ item.city + " " + item.district + " " + item.title + " " + item.location }}</view>
       <view style='font-weight: 700'>{{ item.receive_name + " " + item.phone }}</view>
     </view>
   </van-cell>
