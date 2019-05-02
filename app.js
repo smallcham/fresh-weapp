@@ -13,31 +13,7 @@ App({
       }
     })
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        let that = this
-        wx.request({
-          url: this.globalApi.host + this.globalApi.token,
-          method: 'POST',
-          data: {
-            code: res.code
-          },
-          success: function (data) {
-            data = data.data
-            if (data.state) {
-              try {
-                wx.setStorageSync('token', data.data)
-              } catch (e) {
-                console.log('存储token失败', data)  
-              }
-            } else {
-              console.log('登录失败', data)
-            }
-          }
-        })
-      }
-    })
+    this.login()
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -120,6 +96,34 @@ App({
       }
     })
   },
+  login: function() {
+    // 登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        let that = this
+        wx.request({
+          url: this.globalApi.host + this.globalApi.token,
+          method: 'POST',
+          data: {
+            code: res.code
+          },
+          success: function (data) {
+            data = data.data
+            if (data.state) {
+              try {
+                wx.setStorageSync('token', data.data)
+              } catch (e) {
+                console.log('存储token失败', data)
+              }
+            } else {
+              console.log('登录失败', data)
+            }
+          }
+        })
+      }
+    })
+  },
   getLocation: function (target, poi = 0, get_house = false, options = null) {
     var that = this;
     wx.getSetting({
@@ -154,7 +158,13 @@ App({
     cart_list: 'cart/show',
     cart_add: 'cart/add',
     cart_count: 'cart/count',
-    cart_touch: 'cart/touch'
+    cart_touch: 'cart/touch',
+    cart_checked: 'cart/checked',
+    add_addr: 'address/add',
+    modify_addr: 'address/modify',
+    query_addr: 'address/show',
+    get_addr: 'address/get',
+    del_addr: 'address/del'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',

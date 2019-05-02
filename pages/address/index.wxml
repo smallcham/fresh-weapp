@@ -70,13 +70,21 @@
   />
 </view>
 </van-cell-group>
-<view style='margin: 0.5rem; padding: 0.5rem'>
+<view style='margin: 0.5rem; padding: 0.5rem; display: {{ modify ? "none" : "block" }}'>
   <van-button type='success' size="large" bindtap='saveAddr'>保存地址</van-button>
   </view>
 
-<van-action-sheet show="{{ showAreaSheet }}">
+  <view style='margin: 0.5rem; padding: 0.5rem; display: {{ modify ? "block" : "none" }}'>
+    <van-button type='warning' size="large" bindtap='saveAddr'>保存修改</van-button>
+  </view>
+
+  <view style='margin: 0.5rem; padding: 0.5rem; display: {{ modify ? "block" : "none" }}'>
+    <van-button type='danger' size="large" bindtap='delAddr'>删除地址</van-button>
+  </view>
+
+<!-- <van-action-sheet show="{{ showAreaSheet }}">
     <van-area bind:cancel="hideArea" bind:confirm="selectedArea" area-list="{{ areaList }}" value="{{ selected_area }}" />
-</van-action-sheet>
+</van-action-sheet> -->
 <van-action-sheet show="{{ showTypeSheet }}">
-  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" columns="{{ columns }}" bind:change="onChange" bind:confirm="selectedType" bind:cancel="hideType" />
+  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" columns="{{ columns }}" bind:confirm="selectedType" bind:cancel="hideType" />
 </van-action-sheet>

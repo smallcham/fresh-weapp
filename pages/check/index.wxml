@@ -13,8 +13,8 @@
       <view slot=""><van-tag color="{{ color.success }}">{{ selected_address.address_type }}</van-tag></view>
       <view slot="icon" class='text-muted'><van-icon name="location"/></view>
       <view slot="title" class='text-muted text-small'>
-        <view>{{ selected_address.address_info }}</view>
-        <view style='font-weight: 700'>{{ selected_address.recive_name }} {{ selected_address.phone }}</view>
+        <view>{{ selected_address.city + " " + selected_address.district + " " + selected_address.location }}</view>
+        <view style='font-weight: 700'>{{ selected_address.receive_name }} {{ selected_address.phone }}</view>
       </view>
     </van-cell>
   </view>

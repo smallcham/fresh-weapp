@@ -14,12 +14,15 @@ Page({
     showAreaSheet: false,
     showTypeSheet: false,
     selected_area: 0,
+    modify: false,
+    id: '',
     areaList: {},
     columns: ['住宅', '公司', '学校', '其他'],
     real_name: "",
     phone: "",
     city: "",
     location: "",
+    location_info: {},
     address: "",
     address_type: ""
   },
@@ -31,9 +34,32 @@ Page({
     let loc = app.globalData.location
     this.setData({
       city: loc.address_component.city + " " + loc.address_component.province + " " + loc.address_component.district, 
-      selected_area: app.globalData.location.ad_info.adcode
+      selected_area: app.globalData.location.ad_info.adcode,
+      modify: options.type === '1',
+      id: undefined === options.id ? "" : options.id
       // areaList: AreaList
     })
+    if (this.data.modify) {
+      api.getAddr(this.data.id).then(res => {
+        this.setData({
+          real_name: res.receive_name,
+          phone: res.phone,
+          city: res.city,
+          location: res.title,
+          location_info: {
+            adcode: res.city_code,
+            addr: res.address,
+            city: res.city,
+            district: res.district,
+            latitude: res.lat,
+            longitude: res.lng,
+            title: res.title
+          },
+          address: res.location,
+          address_type: res.address_type
+        })
+      })
+    }
   },
 
   /**
@@ -51,6 +77,7 @@ Page({
       title: this.data.title,
     })
     if (app.globalData.selected_location !== undefined ) {
+      this.data.location_info = app.globalData.selected_location
       this.setData({
         location: app.globalData.selected_location.title === undefined ? "" : app.globalData.selected_location.title
       })
@@ -106,17 +133,17 @@ Page({
       showAreaSheet: false
     })
   },
-  selectedArea: function (e) {
-    let _city = ""
-    for (let i = 0; i < e.detail.values.length; i++) {
-      _city += e.detail.values[i].name + " "
-    }
-    this.setData({
-      city: _city,
-      selected_area: e.detail.values[e.detail.values.length - 1].code,
-      showAreaSheet: false
-    })
-  },
+  // selectedArea: function (e) {
+  //   let _city = ""
+  //   for (let i = 0; i < e.detail.values.length; i++) {
+  //     _city += e.detail.values[i].name + " "
+  //   }
+  //   this.setData({
+  //     city: _city,
+  //     selected_area: e.detail.values[e.detail.values.length - 1].code,
+  //     showAreaSheet: false
+  //   })
+  // },
   showType: function () {
     this.setData({
       showTypeSheet: true
@@ -189,7 +216,38 @@ Page({
       });
       return false
     }
-    wx.navigateBack({})
+    if (this.data.modify) {
+      api.modifyAddr(
+        this.data.id,
+        this.data.real_name,
+        this.data.phone,
+        this.data.address_type,
+        this.data.location_info.adcode,
+        this.data.location_info.city,
+        this.data.location_info.addr,
+        this.data.address,
+        this.data.location_info.district,
+        this.data.location_info.latitude,
+        this.data.location_info.longitude,
+        this.data.location_info.title).then(res => {
+          wx.navigateBack({})
+        })
+    } else {
+      api.addAddr(
+        this.data.real_name,
+        this.data.phone,
+        this.data.address_type,
+        this.data.location_info.adcode,
+        this.data.location_info.city,
+        this.data.location_info.addr,
+        this.data.address,
+        this.data.location_info.district,
+        this.data.location_info.latitude,
+        this.data.location_info.longitude,
+        this.data.location_info.title).then(res => {
+          wx.navigateBack({})
+        })
+    }
   },
   setRealName: function (e) {
     this.setData({
@@ -230,5 +288,15 @@ Page({
         icon: 'none'
       })
     })
+  },
+  delAddr: function() {
+    Dialog.confirm({
+      title: '提示',
+      message: '您确定要删除该收货地址吗'
+    }).then(() => {
+      api.delAddr(this.data.id).then(res => {
+        wx.navigateBack({})
+      })
+    }).catch(() => { });
   }
 })

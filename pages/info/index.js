@@ -92,6 +92,8 @@ Page({
   },
 
   onAddCart: function(e) {
+    api.addCart(this.data.id, 1).then(res => {
+    }).catch(err => { Toast.fail(err); })
     Notify({
       text: '¥ 29.2 元，还差49.2免配送费',
       duration: 3000,

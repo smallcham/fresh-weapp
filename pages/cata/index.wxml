@@ -1,3 +1,4 @@
+<van-notify id="custom-notify" />
 <van-nav-bar fixed border="false">
     <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
      <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
@@ -21,7 +22,7 @@
             <view><text class='text-del'>¥ {{ item.original }}</text><text class='price' style='padding-left: 10rpx'>¥ {{ item.price }}</text></view>
           </view>
           <view class='action'>
-            <view class='text-super'><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+            <view class='text-super'><van-icon bindtap='addCart'  data-id="{{ item.goods_code }}" style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
           </view>
         </view>
       </view>

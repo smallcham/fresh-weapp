@@ -1,4 +1,5 @@
 // pages/my-address/index.js
+import api from '../../api/api'
 const app = getApp()
 
 Page({
@@ -7,7 +8,8 @@ Page({
    * Page initial data
    */
   data: {
-    title: '我的地址'
+    title: '我的地址',
+    address_list: []
   },
 
   /**
@@ -32,7 +34,10 @@ Page({
   onShow: function () {
     wx.setNavigationBarTitle({
       title: this.data.title,
-    }) 
+    })
+    api.queryAddr().then(res => {
+      this.setData({ address_list: res })
+    })
   },
 
   /**
@@ -71,21 +76,18 @@ Page({
   },
   toAddAddress: function () {
     wx.navigateTo({
-      url: '/pages/address/index?type=0&id=' + 1,
+      url: '/pages/address/index?type=0',
     })
   },
-  toModifyAddress: function () {
+  toModifyAddress: function (e) {
     wx.navigateTo({
-      url: '/pages/address/index?type=1&id=' + 1,
+      url: '/pages/address/index?type=1&id=' + e.currentTarget.dataset.id,
     })
   },
-  onSelectAddress: function() {
-    app.globalData.selected_address = {
-      address_type: '住宅',
-      phone: '18610245757',
-      recive_name: '张雨卿',
-      address_info: '北京 北京市 大兴区 紫宸苑 1502'
-    }
-    wx.navigateBack({})
+  onSelectAddress: function(e) {
+    api.getAddr(e.currentTarget.dataset.id).then(res => {
+      app.globalData.selected_address = res
+      wx.navigateBack({})
+    })
   }
 })

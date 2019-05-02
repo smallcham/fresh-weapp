@@ -31,7 +31,7 @@ Page({
   onShow: function () {
     wx.setNavigationBarTitle({
       title: this.data.title,
-    }) 
+    })
   },
 
   /**

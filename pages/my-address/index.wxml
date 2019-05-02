@@ -1,10 +1,15 @@
+<view class='icon-center text-muted-a' style='display: {{ address_list.length <= 0 ? "flex" : "none" }}'>
+  <van-icon name="bulb-o"/>
+  <text class='icon-text-center text-muted'>您尚未添加任何收货地址</text>
+</view>
+
 <van-cell-group>
-  <van-cell title-width="90%">
-    <view slot="right-icon" class='text-muted text-super' bindtap='toModifyAddress'><van-icon name="edit"/></view>
+  <van-cell title-width="90%" wx:for="{{ address_list }}" wx:key="{{ item.address_code }}">
+    <view slot="right-icon" class='text-muted text-super' data-id="{{ item.address_code }}" bindtap='toModifyAddress'><van-icon name="edit"/></view>
     <view slot="icon" class='text-muted' bindtap="onSelectAddress"><van-icon name="location"/></view>
-    <view slot="title" class='text-muted text-small' bindtap="onSelectAddress">
-      <view><van-tag color="{{ color.success }}">住宅</van-tag> 北京 北京市 大兴区 紫宸苑1502</view>
-      <view style='font-weight: 700'>张雨卿 18610245757</view>
+    <view slot="title" class='text-muted text-small' data-id="{{ item.address_code }}" bindtap="onSelectAddress">
+      <view><van-tag color="{{ color.success }}">{{ item.address_type }}</van-tag> {{ item.city + " " + item.district + " " + item.location }}</view>
+      <view style='font-weight: 700'>{{ item.receive_name + " " + item.phone }}</view>
     </view>
   </van-cell>
 </van-cell-group>

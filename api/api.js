@@ -19,6 +19,14 @@ const request = (url, options) => {
         'LL-House': app.globalData.house.id
       },
       success(request) {
+        if (request.statusCode === 401) { 
+          wx.showToast({
+            title: '登录状态超时，请重新操作',
+            icon: 'none'
+          })
+          app.login()
+          return
+        }
         if (request.data.state) {
           resolve(request.data.data)
         } else {
@@ -54,10 +62,72 @@ const addCart = (goods_code, amount = 1) => {
   return request(app.globalApi.cart_add + '/' + goods_code + '/' + amount, { method: 'POST', data: {} })
 }
 
+const touchCart = (cart_code, amount = 1) => {
+  return request(app.globalApi.cart_touch + '/' + cart_code + '/' + amount, { method: 'POST', data: {} })
+}
+
+const checkedCart = (cart_codes, state = 1, all_pick=3) => {
+  return request(app.globalApi.cart_checked + '/' + state + '/' + all_pick, { method: 'POST', data: { data: { cart_codes: cart_codes} } })
+}
+
+const addAddr = (receive_name, phone, type, city_code, city, address, location, district, lat, lng, title) => {
+  return request(app.globalApi.add_addr, { method: 'POST', data: { data: {
+    title: title,
+    receive_name: receive_name,
+    phone: phone,
+    city_code: city_code,
+    city: city,
+    district: district,
+    address: address,
+    location: location,
+    address_type: type,
+    lat: lat,
+    lng: lng
+  }
+  } })
+}
+
+const modifyAddr = (address_code, receive_name, phone, type, city_code, city, address, location, district, lat, lng, title) => {
+  return request(app.globalApi.modify_addr + '/' + address_code, {
+    method: 'POST', data: { data: {
+      title: title,
+      receive_name: receive_name,
+      phone: phone,
+      city_code: city_code,
+      city: city,
+      district: district,
+      address: address,
+      location: location,
+      address_type: type,
+      lat: lat,
+      lng: lng
+    }
+  }})
+}
+
+const getAddr = (address_code) => {
+  return request(app.globalApi.get_addr + '/' + address_code, { method: 'GET', data: {} })
+}
+
+const queryAddr = () => {
+  return request(app.globalApi.query_addr, { method: 'GET', data: {} })
+}
+
+const delAddr = (address_code) => {
+  return request(app.globalApi.del_addr + '/' + address_code, { method: 'POST', data: {} })
+}
+
 module.exports = {
   get,
   post,
   put,
   remove,
-  addCart
+  addCart,
+  touchCart,
+  checkedCart,
+  addAddr,
+  modifyAddr,
+  getAddr,
+  queryAddr,
+  delAddr
 }

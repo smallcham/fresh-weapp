@@ -1,5 +1,6 @@
 // pages/list/index.js
 const app = getApp()
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 import api from '../../api/api'
 
 Page({
@@ -143,5 +144,16 @@ Page({
     wx.navigateTo({
       url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
     })
+  },
+  addCart: function(e) {
+    api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
+    }).catch(err => { Toast.fail(err);  })
+    app.cartAnimation(this)
+    Notify({
+      text: '已加入购物车',
+      duration: 1000,
+      selector: '#custom-notify',
+      backgroundColor: this.data.color.success
+    });
   }
 })

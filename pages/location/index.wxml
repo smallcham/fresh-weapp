@@ -1,11 +1,11 @@
 <van-search value="{{ backfill }}" use-action-slot placeholder="请输入您的地址" bind:change="getsuggest" bind:search="onSearch"/>
 <!--关键词输入提示列表渲染-->
-<view wx:for="{{suggestion}}" wx:key="index">
+<view wx:for="{{suggestion}}" wx:key="index" bindtap="backfill" id="{{index}}">
     <!--绑定回填事件-->
     <view style='padding-bottom: 25rpx'>
     <!--根据需求渲染相应数据-->
     <!--渲染地址title-->
-    <view style="text-align:center;" bindtap="backfill" id="{{index}}">{{item.title}}</view>
+    <view style="text-align:center;">{{item.title}}</view>
     <!--渲染详细地址-->
     <view style="font-size:12px;color:#666;text-align:center;">{{item.addr}}</view>
     </view>
