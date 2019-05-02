@@ -1,5 +1,6 @@
 // pages/location/index.js
 const app = getApp()
+import api from '../../api/api'
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
 
 Page({
@@ -36,6 +37,10 @@ Page({
 
     this.setData({
       color: app.globalData.color
+    })
+
+    api.queryAddr().then(res => {
+      this.setData({ address_list: res })
     })
   },
 

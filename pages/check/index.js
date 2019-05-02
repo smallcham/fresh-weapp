@@ -1,4 +1,5 @@
 // pages/check/index.js
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
 const app = getApp()
 
 Page({
@@ -74,6 +75,15 @@ Page({
 
   },
   toCheck: function() {
+    if (app.globalData.selected_address === undefined || app.globalData.selected_address === false || app.globalData.selected_address === null) {
+      Dialog.alert({
+        title: '轻果提醒',
+        message: '请选择收货地址'
+      }).then(() => {
+        // on close
+      });
+      return false
+    }
     wx.navigateTo({
       url: '/pages/order-info/index'
     })

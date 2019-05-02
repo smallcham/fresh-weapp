@@ -6,7 +6,8 @@ Page({
    * Page initial data
    */
   data: {
-    title: "我的订单"
+    title: "我的订单",
+    selected_address: {}
   },
 
   /**
@@ -14,7 +15,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      color: app.globalData.color
+      color: app.globalData.color,
+      selected_address: app.globalData.selected_address
     })
   },
 

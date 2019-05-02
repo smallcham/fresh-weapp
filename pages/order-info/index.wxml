@@ -5,7 +5,7 @@
 
   <view style='margin-top: 15rpx'>
       <van-cell title="配送信息"/>
-      <van-cell title="王湛智 18610245757" label="北京北京市大兴区紫宸苑-北门1502" />
+      <van-cell title="{{ selected_address.receive_name + ' ' + selected_address.phone }}" label='{{ selected_address.city + " " + selected_address.district + " " + selected_address.location }}' />
   </view>
 
   <view style='margin-top: 15rpx'>

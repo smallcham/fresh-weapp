@@ -33,8 +33,7 @@
         </view>
       </van-nav-bar>
     <van-cell-group border="{{ border }}">
-      <van-cell title-width="90%" title="北京市 大兴区 数码庄园一号楼北门" value="公司"  label="王湛智 18610245757"/>
-      <van-cell title-width="90%" title="北京市 大兴区 紫宸苑4号楼1502" value="住宅" label="张雨卿 18897929159"/>
+      <van-cell wx:for="{{ address_list }}" wx:key="{{ item.address_code }}" data-id="{{ item.address_code }}" title-width="90%" title="{{ item.city + ' ' + item.district + ' ' + item.location }}" value="{{ item.address_type }}"  label="{{ item.receive_name }} {{ item.phone }}"/>
     </van-cell-group>
   </view>
   <van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">

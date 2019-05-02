@@ -1,3 +1,4 @@
+<van-dialog id="van-dialog" />
 <view style='margin: .4rem;padding.4rem'>
   <button class="btn-card" style='display: {{ selected_address ? "none" : "block" }}' bindtap='chooseAddress'>
     <view class='text-muted text-small' style='margin: .4rem; padding: .4rem;padding-top:35rpx'>
