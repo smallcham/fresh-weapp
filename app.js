@@ -144,6 +144,17 @@ App({
       })
     }
   },
+  addressToLocation: function(addr) {
+    return {
+      adcode: addr.city_code,
+      title: addr.title,
+      addr: addr.address,
+      district: addr.district,
+      city: addr.city,
+      latitude: addr.lat,
+      longitude: addr.lng
+    }
+  },
   globalApi: {
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
@@ -157,6 +168,8 @@ App({
     get_link: 'house/link/list',
     cart_list: 'cart/show',
     cart_add: 'cart/add',
+    cart_del: 'cart/del',
+    cart_del_checked: 'cart/del/checked',
     cart_count: 'cart/count',
     cart_touch: 'cart/touch',
     cart_checked: 'cart/checked',
@@ -164,7 +177,9 @@ App({
     modify_addr: 'address/modify',
     query_addr: 'address/show',
     get_addr: 'address/get',
-    del_addr: 'address/del'
+    del_addr: 'address/del',
+    near_addr: 'address/near',
+    first_addr: 'address/first'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',
@@ -186,6 +201,8 @@ App({
       darkprimary: "#2b85e4",
       info: "#3498DB",
       success: "#18BC9C",
+      successa: "rgba(24, 188, 155, 0.116)",
+      successdisable: "rgba(24, 188, 155, 0.300)",
       warning: "#F39C12",
       danger: "#E74C3C",
       title: "#1c2438",

@@ -66,8 +66,20 @@ const touchCart = (cart_code, amount = 1) => {
   return request(app.globalApi.cart_touch + '/' + cart_code + '/' + amount, { method: 'POST', data: {} })
 }
 
-const checkedCart = (cart_codes, state = 1, all_pick=3) => {
-  return request(app.globalApi.cart_checked + '/' + state + '/' + all_pick, { method: 'POST', data: { data: { cart_codes: cart_codes} } })
+const countCart = () => {
+  return request(app.globalApi.cart_count, { method: 'GET', data: {} })
+}
+
+const checkedCart = (cart_codes, state = 1, all_pick = 3) => {
+  return request(app.globalApi.cart_checked + '/' + state + '/' + all_pick, { method: 'POST', data: { data: { cart_codes: cart_codes } } })
+}
+
+const delCart = (cart_codes) => {
+  return request(app.globalApi.cart_del, { method: 'POST', data: { data: { cart_codes: cart_codes } } })
+}
+
+const delCartChceked = () => {
+  return request(app.globalApi.cart_del_checked, { method: 'POST', data: { } })
 }
 
 const addAddr = (receive_name, phone, type, city_code, city, address, location, district, lat, lng, title) => {
@@ -109,6 +121,14 @@ const getAddr = (address_code) => {
   return request(app.globalApi.get_addr + '/' + address_code, { method: 'GET', data: {} })
 }
 
+const firstAddr = (address_code) => {
+  return request(app.globalApi.first_addr, { method: 'GET', data: {} })
+}
+
+const nearAddr = (house_id) => {
+  return request(app.globalApi.near_addr + '/' + house_id, { method: 'GET', data: {} })
+}
+
 const queryAddr = () => {
   return request(app.globalApi.query_addr, { method: 'GET', data: {} })
 }
@@ -125,9 +145,14 @@ module.exports = {
   addCart,
   touchCart,
   checkedCart,
+  countCart,
   addAddr,
+  delCart,
+  delCartChceked,
   modifyAddr,
   getAddr,
   queryAddr,
-  delAddr
+  delAddr,
+  firstAddr,
+  nearAddr
 }

@@ -33,7 +33,7 @@
         </view>
       </van-nav-bar>
     <van-cell-group border="{{ border }}">
-      <van-cell wx:for="{{ address_list }}" wx:key="{{ item.address_code }}" data-id="{{ item.address_code }}" title-width="90%" title="{{ item.city + ' ' + item.district + ' ' + item.title + ' ' + item.location }}" value="{{ item.address_type }}"  label="{{ item.receive_name }} {{ item.phone }}"/>
+      <van-cell wx:for="{{ address_list }}" wx:key="{{ item.address_code }}" data-id="{{ item.address_code }}" title-width="90%" title="{{ item.city + ' ' + item.district + ' ' + item.title + ' ' + item.location }}" value="{{ item.address_type }}"  label="{{ item.receive_name }} {{ item.phone }}" bindtap="chooseMyAddress" data-idx="{{ index }}"/>
     </van-cell-group>
   </view>
   <van-nav-bar border="{{ border }}" data-url="/pages/order/index" bind:click-right="showOrder">

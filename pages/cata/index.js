@@ -81,6 +81,9 @@ Page({
     this.getTabBar().setData({
       selected: 1
     })
+    api.countCart().then(res => {
+      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
@@ -147,11 +150,11 @@ Page({
   },
   addCart: function(e) {
     api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
+      this.getTabBar().plusCartCount()
     }).catch(err => { Toast.fail(err);  })
-    app.cartAnimation(this)
     Notify({
       text: '已加入购物车',
-      duration: 1000,
+      duration: 500,
       selector: '#custom-notify',
       backgroundColor: this.data.color.success
     });

@@ -20,7 +20,7 @@
     placeholder="手机号码"
     use-button-slot
   >
-  <van-button slot="button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="small" type="success">获取当前号码</van-button>
+  <van-button slot="button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" size="small" type="success">自动获取</van-button>
   </van-field>
 
 <!-- <view bindtap="showArea">

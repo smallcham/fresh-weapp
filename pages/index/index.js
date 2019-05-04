@@ -131,6 +131,9 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
+    api.countCart().then(res => {
+      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
     if (this.data.house !== false) { app.shareCallBack() }
     //地址切换后需要更新仓库信息
     if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
@@ -148,11 +151,11 @@ Page({
   },
   addCart: function(e) {
     api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
+      this.getTabBar().plusCartCount()
     }).catch(err => { Toast.fail(err);  })
-    app.cartAnimation(this)
     Notify({
       text: '已加入购物车',
-      duration: 1000,
+      duration: 500,
       selector: '#custom-notify',
       backgroundColor: this.data.color.success
     });
@@ -213,6 +216,13 @@ Page({
         house_msg: ''
       })
       this.house = res
+      api.nearAddr(res.id).then(res => {
+        if (null !== res && undefined !== res) {
+          app.globalData.selected_address = res
+          app.globalData.selected_location = app.addressToLocation(res)
+          this.setData({ selected_location: app.globalData.selected_location })
+        }
+      })
       this.getCata()
     }).catch(err => {
       this.setData({

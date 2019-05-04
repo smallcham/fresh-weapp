@@ -246,6 +246,13 @@ Page({
         this.data.location_info.longitude,
         this.data.location_info.title).then(res => {
           wx.navigateBack({})
+        }).catch(err => {
+          Dialog.alert({
+            title: '轻果提醒',
+            message: err
+          }).then(() => {
+            // on close
+          });
         })
     }
   },

@@ -27,6 +27,9 @@ Page({
     this.setData({
       color: app.globalData.color
     })
+    api.countCart().then(res => {
+      this.setData({ cartCount: (null === res || undefined === res) ? 0 : Number(res) })
+    })
   },
 
   /**
@@ -93,6 +96,9 @@ Page({
 
   onAddCart: function(e) {
     api.addCart(this.data.id, 1).then(res => {
+      this.setData({ 
+        cartCount: (null === this.data.cartCount || undefined === this.data.cartCount) ? 0 :  Number(this.data.cartCount) + 1
+      })
     }).catch(err => { Toast.fail(err); })
     Notify({
       text: '¥ 29.2 元，还差49.2免配送费',

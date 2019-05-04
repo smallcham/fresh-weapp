@@ -1,10 +1,11 @@
 <van-notify id="custom-notify" />
 <van-dialog id="van-dialog" />
 <van-toast id="van-toast" />
-<van-nav-bar fixed border="{{ false }}" z-index="3" bg="#18BC9C">
+<van-nav-bar fixed border="{{ false }}" z-index="3" bg="#18BC9C" bind:click-right="delCart">
   <view slot="title" class='text-default text-small ell-super' bind:tap="openLocation">
     <van-icon name="location" /> <text> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon name="arrow-down"/>
   </view>
+    <view slot="right"><text class='text-default text-small'>删除</text></view>
 </van-nav-bar>
 
 <view class='icon-center text-muted-a' style='display: {{ carts.length <= 0 ? "flex" : "none" }}'>
@@ -15,7 +16,7 @@
 <view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
   <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}">
       <van-row>
-        <van-col span="2"><view class="gs-checkbox"><van-checkbox data-idx="{{ index }}" data-id="{{ item.cart_code }}" bind:change="checkedChange" value='{{ item.cart_state == "1" }}' checked-color="{{ color.success }}"></van-checkbox></view></van-col>
+        <van-col span="2"><view class="gs-checkbox"><van-checkbox data-idx="{{ index }}" data-id="{{ item.cart_code }}" bind:change="checkedChange" value='{{ item.cart_state == "1" }}' checked-color="{{ item.inventory > 0 ? color.success : color.successdisable }}"></van-checkbox></view></van-col>
         <van-col span="7" data-id="{{ item.goods_code }}" bindtap="showInfo"><image src='{{ fs + item.goods_img }}'/></van-col>
         <van-col span="15">
           <view style='margin-top: 30rpx'>
@@ -28,7 +29,10 @@
               <van-col span="24">
                 <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
                 <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
-                <view style='float:right; margin-right: 20rpx'><van-stepper data-idx="{{ index }}" data-code="{{ item.cart_code }}" min="1" max="{{ item.inventory }}" value="{{ item.amount }}" bind:change="onChangeNum" bind:overlimit="onReduce" /></view>
+                <view style='float:right; margin-right: 20rpx'>
+                  <van-stepper style="display: {{ item.inventory > 0 ? 'block' : 'none' }}" data-idx="{{ index }}" data-code="{{ item.cart_code }}" min="1" max="{{ item.inventory }}" value="{{ item.amount }}" bind:change="onChangeNum" bind:overlimit="onReduce" />
+                  <text style="display: {{ item.inventory > 0 ? 'none' : 'block' }}" class="text-danger text-mini">库存不足</text>
+                </view>
               </van-col>
             </van-row>
             <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
@@ -60,7 +64,7 @@
         </van-col>
       </van-row>
     </view> -->
-   <van-submit-bar price="{{ total }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
+   <van-submit-bar style='display: {{ carts.length > 0 ? "block" : "none" }}' price="{{ total }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
       <van-checkbox style='padding-left: 20rpx;' checked-color="{{ color.success }}" value="{{ all_pick }}" bind:change="allPickChange">全选</van-checkbox>
         <view slot="tip">
           实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>

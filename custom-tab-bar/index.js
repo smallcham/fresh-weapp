@@ -48,6 +48,15 @@ Component({
         selected: data.index
       })
     },
+    plusCartCount: function () {
+      this.setCartCount(this.data.cartCount + 1)
+    },
+    reduceCartCount: function () {
+      this.setCartCount(this.data.cartCount - 1)
+    },
+    setCartCount: function (count) {
+      this.setData({ cartCount: count })
+    },
     onChange: function (event) {
       if (event.detail === 0) {
         wx.switchTab({

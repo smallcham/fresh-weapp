@@ -34,6 +34,9 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    api.countCart().then(res => {
+      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
     this.getTabBar().setData({
       selected: 4
     })
@@ -77,8 +80,12 @@ Page({
         url: e.currentTarget.dataset.url
       })
   },
+  openMyAddress: function(e) {
+    wx.navigateTo({
+      url: '/pages/my-address/index',
+    })
+  },
   getUserInfo: function (e) {
-    console.log(e)
     if (e.detail.userInfo === undefined) return false
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

@@ -97,7 +97,7 @@
     <van-row>
       <van-col span="6" data-url="/pages/order/index?active=0" bindtap='showOrder'>
         <view class='card bar-item'>
-            <view><van-icon class='text-super' color='{{ color.warning }}' name="pending-payment"/></view>
+            <view><van-icon class='text-super' color='{{ color.warning }}' name="pending-payment" info="{{3}}"/></view>
             <view><text class='text-mini text-muted'>待付款</text></view>
           </view>
       </van-col>
@@ -159,7 +159,7 @@
             <view><text class='text-mini text-muted'>积分商城</text></view>
           </view>
       </van-col>
-      <van-col span="8">
+      <van-col span="8" bindtap="openMyAddress">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.info }}' name="location" /></view>
             <view><text class='text-mini text-muted'>收货地址</text></view>

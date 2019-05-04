@@ -15,6 +15,7 @@ Page({
     source: null,
     suggestion: [],
     selected_location: app.globalData.selected_location,
+    address_list: [],
     location: {
       address: "位置获取中"
     },
@@ -195,4 +196,14 @@ Page({
       }
     });
   },
+  chooseMyAddress: function(e) {
+    let addr = this.data.address_list[e.currentTarget.dataset.idx]
+    app.globalData.selected_address = addr
+    let sel_location = app.addressToLocation(addr)
+    app.globalData.selected_location = sel_location
+    this.setData({
+      selected_location: sel_location
+    })
+    wx.navigateBack({})
+  }
 })

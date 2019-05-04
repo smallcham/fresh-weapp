@@ -14,7 +14,7 @@
       <view slot=""><van-tag color="{{ color.success }}">{{ selected_address.address_type }}</van-tag></view>
       <view slot="icon" class='text-muted'><van-icon name="location"/></view>
       <view slot="title" class='text-muted text-small'>
-        <view>{{ selected_address.city + " " + selected_address.district + " " + selected_address.location }}</view>
+        <view>{{ selected_address.city + " " + selected_address.district + " " + selected_address.title + " " + selected_address.location }}</view>
         <view style='font-weight: 700'>{{ selected_address.receive_name }} {{ selected_address.phone }}</view>
       </view>
     </van-cell>
@@ -22,7 +22,10 @@
 
   <view style='margin-top: 15rpx'>
     <van-cell-group>
-      <van-cell title="当日达" value="预计 2019.05.02 送达" />
+      <van-cell title="{{ house.house_type === 0 ? '小时达' : '1-3天送达' }}">
+        <view slot="" style='display: {{ house.house_type === 0 ? "block" : "none" }}' class='text-success' bindtap='openTimePicker'>今天 {{ selectedTime }} 送达[可选]</view>
+        <van-icon style='display: {{ house.house_type === 0 ? "block" : "none" }}' slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
+      </van-cell>
       <van-cell value="共4件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
         <view slot="title">
           <scroll-view scroll-x class='gs-scroll'>
@@ -54,5 +57,7 @@
     <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
   </view>
 </view>
-
+<van-action-sheet show="{{ showTimePicker }}">
+  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
+</van-action-sheet>
 <van-submit-bar label="付款："  price="{{ 3050 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>

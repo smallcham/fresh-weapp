@@ -127,7 +127,7 @@ Page({
     })
   },
   cartList: function() {
-    api.get(app.globalApi.cart_list, {}).then(res => { 
+    api.get(app.globalApi.cart_list, {}).then(res => {
       this.setData({ carts: res })
       this.flushState()
       Toast.clear()
@@ -159,16 +159,43 @@ Page({
       this.cartList()
     })
   },
+  delCart: function() {
+    Dialog.confirm({
+      title: '提示',
+      message: '您确定要删除选中的商品吗'
+    }).then(() => {
+      api.delCartChceked().then(res => {
+        this.cartList()
+      }).catch(err => { })
+    }).catch(() => { })
+  },
   flushState: function() {
     let flag = true
     let total = 0.0
+    let count = 0
+    let isModify = false
     for (let i = 0; i < this.data.carts.length; i++) {
+      if (this.data.carts[i].amount > this.data.carts[i].inventory) {
+        isModify = true
+        this.data.carts[i].amount = this.data.carts[i].inventory
+        if (this.data.carts[i].inventory !== 0) api.touchCart(this.data.carts[i].cart_code, this.data.carts[i].inventory).then(res => {})
+      }
+      count += this.data.carts[i].amount
       if (this.data.carts[i].cart_state === 0) {
         flag = false
       } else {
         total += Number(this.data.carts[i].price) * Number(this.data.carts[i].amount)
       }
     }
+    if (isModify) {
+      Notify({
+        text: '部分商品库存不足，已自动更新最大可购买数量',
+        duration: 2000,
+        selector: '#custom-notify',
+        backgroundColor: this.data.color.warning
+      });
+    }
     this.setData({ all_pick: flag, total: total * 100 })
+    this.getTabBar().setCartCount(count)
   }
 })

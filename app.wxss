@@ -293,6 +293,10 @@ mt-5 {
   color: #18BC9C;
 }
 
+.text-success-disable {
+  color: rgb(24, 188, 155, 0.300)
+}
+
 .text-success-a {
   color: rgba(24, 188, 155, 0.116)
 }
