@@ -7,8 +7,8 @@
   </view>
     <view slot="right"><text class='text-default text-small'>删除</text></view>
 </van-nav-bar>
-
-<view class='icon-center text-muted-a' style='display: {{ carts.length <= 0 ? "flex" : "none" }}'>
+<view wx:if="{{ loading }}" class='icon-center text-muted-la anim-opacity-1'><van-icon name="weapp-nav" /></view>
+<view wx:if="{{ !loading }}" class='icon-center text-muted-a' style='display: {{ carts.length <= 0 ? "flex" : "none" }}'>
   <van-icon name="shopping-cart-o"/>
   <text class='icon-text-center text-muted'>购物车居然是空的</text>
 </view>
@@ -45,26 +45,7 @@
         </van-col>
       </van-row>
     </view>
-<!-- 
-     <view class='card-fluid' style='border-bottom: 0rpx; border-left: 0; border-right: 0;'>
-      <van-row>
-        <van-col span="2">
-          <view class='text-center' style='padding-top: 100%'><van-radio checked-color="{{ color.success }}"></van-radio></view>
-        </van-col>
-        <van-col span="22">
-          <van-card tag="" centered price="10.00" origin-price="20.00" desc="低温纯净海域生长、食用简单、口感鲜嫩、营养丰富" title="加拿大冻北极甜虾1kg" thumb='https://img14.yiguoimg.com/d/items/2018/181026/9288733106578778_500.jpg'>
-              <view slot="footer">
-                <van-stepper min="0" value="{{ 1 }}" bind:change="onChange" />
-              </view>
-              <view slot="tags">
-                <van-tag plain  style='padding-right: 10rpx;'>爆款直降</van-tag>
-                <van-tag plain  style='padding-right: 10rpx;'>会员优选</van-tag>
-              </view>
-            </van-card>
-        </van-col>
-      </van-row>
-    </view> -->
-   <van-submit-bar style='display: {{ carts.length > 0 ? "block" : "none" }}' price="{{ total }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
+   <van-submit-bar style='display: {{ carts.length > 0 ? "block" : "none" }}' price="{{ total }}" llabel="(不含运费)" blabel="已优惠: ¥{{ save }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
       <van-checkbox style='padding-left: 20rpx;' checked-color="{{ color.success }}" value="{{ all_pick }}" bind:change="allPickChange">全选</van-checkbox>
         <view slot="tip">
           实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>

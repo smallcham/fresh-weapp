@@ -13,8 +13,10 @@ Page({
     selected_location: false,
     location: app.globalData.location,
     fs: app.globalData.fs,
+    loading: true,
     all_pick: true,
     total: 0,
+    save: 0,
     carts: []
   },
 
@@ -73,7 +75,11 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    Toast.loading({
+      mask: false
+    });
+    wx.showNavigationBarLoading()
+    this.cartList()
   },
 
   /**
@@ -128,10 +134,12 @@ Page({
   },
   cartList: function() {
     api.get(app.globalApi.cart_list, {}).then(res => {
-      this.setData({ carts: res })
+      this.setData({ carts: res, loading: false })
       this.flushState()
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
       Toast.clear()
-    }).catch(err => { Toast.clear() })
+    }).catch(err => { Toast.clear(); this.setData({ loading: false }) })
   },
   showInfo: function (e) {
     wx.navigateTo({
@@ -172,6 +180,8 @@ Page({
   flushState: function() {
     let flag = true
     let total = 0.0
+    let originalTotal = 0.0
+    let save = 0.0
     let count = 0
     let isModify = false
     for (let i = 0; i < this.data.carts.length; i++) {
@@ -184,7 +194,10 @@ Page({
       if (this.data.carts[i].cart_state === 0) {
         flag = false
       } else {
-        total += Number(this.data.carts[i].price) * Number(this.data.carts[i].amount)
+        if (this.data.carts[i].inventory !== 0) {
+          total += Number(this.data.carts[i].price) * Number(this.data.carts[i].amount)
+          originalTotal += Number(this.data.carts[i].original) * Number(this.data.carts[i].amount)
+        }
       }
     }
     if (isModify) {
@@ -195,7 +208,7 @@ Page({
         backgroundColor: this.data.color.warning
       });
     }
-    this.setData({ all_pick: flag, total: total * 100 })
+    this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1) })
     this.getTabBar().setCartCount(count)
   }
 })

@@ -24,10 +24,12 @@ Page({
     this.getTabBar().setData({
       selected: 4
     })
-    api.getUser().then(res => {
-      app.globalData.userInfo.mine = res
-      this.setData({ mine: res, expireDay: util.diffDay(res.vip_expire_time) })
-    })
+    if (null !== app.globalData.userInfo) {
+      api.getUser().then(res => {
+        app.globalData.userInfo.mine = res
+        this.setData({ mine: res, expireDay: util.diffDay(res.vip_expire_time) })
+      })
+    }
   },
 
   /**
@@ -41,12 +43,14 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    let _mine = undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : this.data.mine
-    this.setData({ 
-      mine: undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : {},
-      now: util.formatTime(new Date()), 
-      expireDay: undefined !== _mine.vip_expire_time ? util.diffDay(_mine.vip_expire_time) : 0 
-    })
+    if (null !== app.globalData.userInfo) {
+      let _mine = undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : this.data.mine
+      this.setData({
+        mine: undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : {},
+        now: util.formatTime(new Date()),
+        expireDay: undefined !== _mine.vip_expire_time ? util.diffDay(_mine.vip_expire_time) : 0
+      })
+    }
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
     })
@@ -104,6 +108,10 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+    api.getUser().then(res => {
+      app.globalData.userInfo.mine = res
+      this.setData({ now: util.formatTime(new Date()), mine: res, expireDay: util.diffDay(res.vip_expire_time) })
     })
     api.post(app.globalApi.reg, { data: e.detail }).then(res => {}).catch(err => {
       wx.showToast({

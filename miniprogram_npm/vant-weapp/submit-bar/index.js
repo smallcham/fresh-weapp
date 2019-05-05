@@ -12,6 +12,8 @@ VantComponent({
         type: Number,
         price: null,
         label: String,
+        blabel:String,
+        llabel:String,
         loading: Boolean,
         disabled: Boolean,
         buttonText: String,
@@ -31,6 +33,12 @@ VantComponent({
     computed: {
         hasPrice() {
             return typeof this.data.price === 'number';
+        },
+        hasBottomLabel() {
+          return typeof this.data.blabel === 'string';
+        },
+        hasLeftLabel() {
+          return typeof this.data.llabel === 'string';
         },
         priceStr() {
             return (this.data.price / 100).toFixed(1);

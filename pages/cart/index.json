@@ -19,5 +19,6 @@
     "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
     "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
     "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

@@ -1,4 +1,6 @@
-<view class='icon-center text-muted-a' style='display: {{ address_list.length <= 0 ? "flex" : "none" }}'>
+<view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
+
+<view wx:if="{{ !loading }}" class='icon-center text-muted-a' style='display: {{ address_list.length <= 0 ? "flex" : "none" }}'>
   <van-icon name="bulb-o"/>
   <text class='icon-text-center text-muted'>您尚未添加任何收货地址</text>
 </view>

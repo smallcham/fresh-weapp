@@ -1,5 +1,6 @@
 // pages/my-address/index.js
 import api from '../../api/api'
+import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 const app = getApp()
 
 Page({
@@ -9,6 +10,7 @@ Page({
    */
   data: {
     title: '我的地址',
+    loading: true,
     address_list: []
   },
 
@@ -36,7 +38,7 @@ Page({
       title: this.data.title,
     })
     api.queryAddr().then(res => {
-      this.setData({ address_list: res })
+      this.setData({ address_list: res, loading: false })
     })
   },
 

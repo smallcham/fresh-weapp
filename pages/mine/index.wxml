@@ -21,11 +21,11 @@
           </view>
         </van-col>
       </van-row>
-      <text style='position:absolute;right: 10rpx;top: 115rpx;float: right; margin-right: 2.5%; display: {{ now >= mine.vip_expire_time ? "none" : "block" }}' class="text-mini text-default">您的会员还剩{{ expireDay }}天过期</text>
+      <text wx:if="{{ userInfo }}" style='position:absolute;right: 10rpx;top: 115rpx;float: right; margin-right: 2.5%; display: {{ now >= mine.vip_expire_time ? "none" : "block" }}' class="text-mini text-default">您的会员还剩{{ expireDay }}天过期</text>
       <view class='card' style='margin-left:2.5%;margin-bottom:-1rpx;width:92%; background-color: {{ color.default }};border-radius: 100% 100% 100% 100% / 0% 0% 14% 14%;"'>
         <view style='margin-left: 5%;'>
           <block>
-            <view class='text-warning'>
+            <view wx:if="{{ userInfo }}" class='text-warning'>
                 <text class='text-small'> 已为您节省 0.00 元</text>
                 <van-tag style="float:right" round color="{{ color.warning }}" bindtap="toVipBuy">立即{{ now >= mine.vip_expire_time ? "开通" : "续费" }} <van-icon name="play" /></van-tag>
             </view>
