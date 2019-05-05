@@ -131,9 +131,6 @@ Page({
     this.getTabBar().setData({
       selected: 0
     })
-    api.countCart().then(res => {
-      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
-    })
     if (this.data.house !== false) { app.shareCallBack() }
     //地址切换后需要更新仓库信息
     if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
@@ -224,6 +221,9 @@ Page({
         }
       })
       this.getCata()
+      api.countCart().then(res => {
+        this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+      })
     }).catch(err => {
       this.setData({
         no_house: true,

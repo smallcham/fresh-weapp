@@ -137,6 +137,18 @@ const delAddr = (address_code) => {
   return request(app.globalApi.del_addr + '/' + address_code, { method: 'POST', data: {} })
 }
 
+const vipPlans = () => {
+  return request(app.globalApi.vip_plans, { method: 'GET', data: {} })
+}
+
+const vipOpen = (month) => {
+  return request(app.globalApi.vip_open + '/' + month, { method: 'POST', data: {} })
+}
+
+const getUser = () => {
+  return request(app.globalApi.get_user, { method: 'GET', data: {} })
+}
+
 module.exports = {
   get,
   post,
@@ -154,5 +166,8 @@ module.exports = {
   queryAddr,
   delAddr,
   firstAddr,
-  nearAddr
+  nearAddr,
+  vipPlans,
+  vipOpen,
+  getUser
 }

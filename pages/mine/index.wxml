@@ -6,7 +6,14 @@
           <view style="padding-top: 4%;">
             <view style="{{ userInfo ? 'display: block;' : 'display: none' }}">
               <text class="text-default text-md text-bold" style='padding-right: 15rpx'>{{userInfo.nickName}}</text>
-              <van-tag color="{{ color.warning }}">普通会员</van-tag><van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
+              <block wx:if="{{ now >= mine.vip_expire_time }}">
+                  <van-tag color="{{ color.muted }}">普通会员</van-tag>
+                  <van-tag mark color="{{ color.muted }}"><van-icon name="star" /></van-tag>
+              </block>
+              <block wx:else>
+                <van-tag color="{{ color.warning }}">优享会员</van-tag>
+                 <van-tag mark color="{{ color.success }}"><van-icon name="star" /></van-tag>
+              </block>
             </view>
             <view style="{{ userInfo ? 'display: none;' : 'display: block' }}">
               <button class="get-user-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录 / 注册</button>
@@ -14,12 +21,13 @@
           </view>
         </van-col>
       </van-row>
+      <text style='position:absolute;right: 10rpx;top: 115rpx;float: right; margin-right: 2.5%; display: {{ now >= mine.vip_expire_time ? "none" : "block" }}' class="text-mini text-default">您的会员还剩{{ expireDay }}天过期</text>
       <view class='card' style='margin-left:2.5%;margin-bottom:-1rpx;width:92%; background-color: {{ color.default }};border-radius: 100% 100% 100% 100% / 0% 0% 14% 14%;"'>
         <view style='margin-left: 5%;'>
           <block>
             <view class='text-warning'>
                 <text class='text-small'> 已为您节省 0.00 元</text>
-                <van-tag style="float:right" round color="{{ color.warning }}">立即续费 <van-icon name="play" /></van-tag>
+                <van-tag style="float:right" round color="{{ color.warning }}" bindtap="toVipBuy">立即{{ now >= mine.vip_expire_time ? "开通" : "续费" }} <van-icon name="play" /></van-tag>
             </view>
             <view class='line'></view>
             <view>

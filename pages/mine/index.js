@@ -1,5 +1,6 @@
 // pages/mine/index.js
 import api from '../../api/api'
+import util from '../../utils/util'
 const app = getApp()
 Page({
 
@@ -7,7 +8,9 @@ Page({
    * Page initial data
    */
   data: {
-      
+      now: new Date(),
+      mine: {},
+      expireDay: 0
   },
 
   /**
@@ -16,10 +19,14 @@ Page({
   onLoad: function (options) {
     this.setData({
       userInfo: app.globalData.userInfo,
-      color: app.globalData.color
+      color: app.globalData.color,
     })
     this.getTabBar().setData({
       selected: 4
+    })
+    api.getUser().then(res => {
+      app.globalData.userInfo.mine = res
+      this.setData({ mine: res, expireDay: util.diffDay(res.vip_expire_time) })
     })
   },
 
@@ -34,6 +41,12 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    let _mine = undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : this.data.mine
+    this.setData({ 
+      mine: undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : {},
+      now: util.formatTime(new Date()), 
+      expireDay: undefined !== _mine.vip_expire_time ? util.diffDay(_mine.vip_expire_time) : 0 
+    })
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
     })
@@ -97,6 +110,11 @@ Page({
         title: err,
         icon: 'none'
       })
+    })
+  },
+  toVipBuy: function() {
+    wx.navigateTo({
+      url: '/pages/buy-vip/index'
     })
   }
 })

@@ -179,7 +179,10 @@ App({
     get_addr: 'address/get',
     del_addr: 'address/del',
     near_addr: 'address/near',
-    first_addr: 'address/first'
+    first_addr: 'address/first',
+    vip_plans: 'vip/list',
+    vip_open: 'vip/open',
+    get_user: 'mine'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',

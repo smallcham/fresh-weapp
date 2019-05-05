@@ -6,7 +6,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
@@ -14,6 +14,12 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const diffDay = date => {
+  var _date = new Date(date.replace(/-/g, '/'))
+  return  parseInt((_date - new Date()) / 1000 / 60 / 60 / 24)
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  diffDay: diffDay
 }
