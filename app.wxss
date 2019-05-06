@@ -237,6 +237,10 @@ mt-5 {
   font-size: 50rpx;
 }
 
+.text-huge {
+  font-size: 100rpx;
+}
+
 .text-md {
   font-size: 30rpx;
 }

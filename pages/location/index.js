@@ -145,6 +145,7 @@ Page({
       if (i == id) {
         let choose = this.data.suggestion[i]
         app.globalData.selected_location = choose
+        app.globalData.location = choose.location
         this.setData({
           selected_location: choose,
           suggestion: []
@@ -179,7 +180,8 @@ Page({
             city: res.data[i].city,
             district: res.data[i].district,
             latitude: res.data[i].location.lat,
-            longitude: res.data[i].location.lng
+            longitude: res.data[i].location.lng,
+            location: res.data[i]
           });
         }
         _this.setData({ //设置suggestion属性，将关键词搜索结果以列表形式展示

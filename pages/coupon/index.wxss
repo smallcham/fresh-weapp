@@ -1,3 +1,11 @@
 page {
   background: #F9F9F9;
 }
+
+.coupon {
+  margin: .4rem;padding: .4rem;background-color: #fff
+}
+
+.coupon.disable {
+  opacity: 0.5
+}

@@ -8,6 +8,7 @@ Page({
    */
   data: {
     title: '优惠券',
+    activeInfo: []
   },
 
   /**
@@ -68,5 +69,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  
+  },
+  openInfo: function(e) {
+    this.setData({ activeInfo: e.detail })
   }
 })

@@ -140,9 +140,11 @@ Page({
         this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
       }
     }
-    api.countCart().then(res => {
-      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
-    })
+    if (app.globalData.selected_location) {
+      api.countCart().then(res => {
+        this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+      })
+    }
     this.setData({
       active: 0,
       location: app.globalData.location,
@@ -216,6 +218,9 @@ Page({
         house_msg: ''
       })
       this.house = res
+      api.countCart().then(res => {
+        this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+      })
       api.nearAddr(res.id).then(res => {
         if (null !== res && undefined !== res) {
           app.globalData.selected_address = res

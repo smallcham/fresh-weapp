@@ -173,13 +173,13 @@ Page({
         if (null !== res && undefined !== res) {
           app.globalData.selected_address = res
           app.globalData.selected_location = app.addressToLocation(res)
-          this.setData({ 
-            selected_location: app.globalData.selected_location,
-            location: app.globalData.location,
-            goodsCata: app.globalData.goodsCata,
-            TabCur: app.globalData.TabCur
-          })
         }
+        this.setData({
+          selected_location: app.globalData.selected_location,
+          location: app.globalData.location,
+          goodsCata: app.globalData.goodsCata,
+          TabCur: app.globalData.TabCur
+        })
       })
     }).catch(err => { })
   },

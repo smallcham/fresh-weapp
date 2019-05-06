@@ -6,12 +6,74 @@
   </van-radio-group>
 </view>
 
-<view style="margin: .2rem;padding: .2rem">
-  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+<view class='coupon'>
+  <van-row>
+    <van-col span="8">
+      <view class='text-center text-success' style='font-weight: 700;padding-top: 20rpx;'><text class='text-small'>¥ </text><text class='text-huge'>10</text></view>
+    </van-col>
+    <van-col span="12">
+      <view class='text-mini text-muted'>
+        <view>会员任务10元红包</view>
+        <view>满69元可用</view>
+        <view>全品类红包</view>
+        <view>会员、非会员通用</view>
+        <view>有效期: 2019-04-29 至 2019-05-05</view>
+      </view>
+    </van-col>
+    <van-col span="4"><van-tag color="{{ color.success }}">可用</van-tag></van-col>
+  </van-row>
+  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
+    <van-collapse-item name="1">
+      <text slot="title" class='text-mini text-muted'>查看详情</text>
+      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
+    </van-collapse-item>
+  </van-collapse>
 </view>
-<view style="margin: .2rem;padding: .2rem">
-  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+
+<view class='coupon disable'>
+  <van-row>
+    <van-col span="8">
+      <view class='text-center text-muted' style='font-weight: 700;padding-top: 20rpx;'><text class='text-small'>¥ </text><text class='text-huge'>10</text></view>
+    </van-col>
+    <van-col span="12">
+      <view class='text-mini text-primary'>
+        <view>会员任务10元红包</view>
+        <view>满69元可用</view>
+        <view>全品类红包</view>
+        <view>会员、非会员通用</view>
+        <view>有效期: 2019-04-29 至 2019-05-05</view>
+      </view>
+    </van-col>
+    <van-col span="4"><van-tag color="{{ color.muted }}">已过期</van-tag></van-col>
+  </van-row>
+  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
+    <van-collapse-item name="1">
+      <text slot="title" class='text-mini text-muted'>查看详情</text>
+      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
+    </van-collapse-item>
+  </van-collapse>
 </view>
-<view style="margin: .2rem;padding: .2rem">
-  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+
+<view class='coupon disable'>
+  <van-row>
+    <van-col span="8">
+      <view class='text-center text-success' style='font-weight: 700;padding-top: 20rpx;'><text class='text-small'>¥ </text><text class='text-huge'>25</text></view>
+    </van-col>
+    <van-col span="12">
+      <view class='text-mini text-primary'>
+        <view>会员任务10元红包</view>
+        <view>满69元可用</view>
+        <view>全品类红包</view>
+        <view>会员、非会员通用</view>
+        <view>有效期: 2019-04-29 至 2019-05-05</view>
+      </view>
+    </van-col>
+    <van-col span="4"><van-tag color="{{ color.success }}">不可用</van-tag></van-col>
+  </van-row>
+  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
+    <van-collapse-item name="1">
+      <text slot="title" class='text-mini text-muted'>查看详情</text>
+      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
+    </van-collapse-item>
+  </van-collapse>
 </view>

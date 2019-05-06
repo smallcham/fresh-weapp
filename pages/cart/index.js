@@ -198,12 +198,11 @@ Page({
     let total = 0.0
     let originalTotal = 0.0
     let save = 0.0
-    let count = 0
     let isModify = false
     let hasInvalid = false
     this.data.effective_count = 0
+    this.data.invalid = []
     for (let i = 0; i < this.data.carts.length; i++) {
-      count += this.data.carts[i].amount
       if (this.data.carts[i].inventory === -1) { 
         this.data.invalid.push(this.data.carts[i].cart_code)
         hasInvalid = true
@@ -232,7 +231,9 @@ Page({
       });
     }
     this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1), hasInvalid: hasInvalid})
-    this.getTabBar().setCartCount(count)
+    api.countCart().then(res => {
+      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
   },
   getHouse: function (city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
@@ -242,8 +243,8 @@ Page({
         if (null !== res && undefined !== res) {
           app.globalData.selected_address = res
           app.globalData.selected_location = app.addressToLocation(res)
-          this.setData({ selected_location: app.globalData.selected_location, location: app.globalData.location, })
         }
+        this.setData({ selected_location: app.globalData.selected_location, location: app.globalData.location })
       })
     }).catch(err => { })
   },
