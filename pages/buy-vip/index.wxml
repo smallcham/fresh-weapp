@@ -1,7 +1,7 @@
 <van-notify id="custom-notify" />
 <van-dialog id="van-dialog" />
 <van-toast id="van-toast" />
-<view style='background-color: {{ color.success }}'>
+<view style='background-color: {{ color.success }};padding-bottom: 8rpx'>
   <van-row>
     <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{ userInfo ?  userInfo.avatarUrl : '/image/avatar.png' }}" mode="cover"></image></van-col>
     <van-col span="19">
@@ -49,4 +49,4 @@
   </van-cell>
 </van-radio-group>
 
-<view style='border-radius: .5rem;margin: 1rem;margin-top: 250rpx'><van-button disabled="{{ loading }}" type='success' size="large" bindtap='openVip'>立即支付</van-button></view>
+<view style='border-radius: .5rem;margin: 1rem;'><van-button disabled="{{ loading }}" type='success' size="large" bindtap='openVip'>立即支付</van-button></view>

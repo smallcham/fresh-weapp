@@ -19,7 +19,8 @@ Page({
     effective_count: 0,
     total: 0,
     save: 0,
-    carts: []
+    carts: [],
+    invalid: []
   },
 
   /**
@@ -202,7 +203,9 @@ Page({
     let hasInvalid = false
     this.data.effective_count = 0
     for (let i = 0; i < this.data.carts.length; i++) {
+      count += this.data.carts[i].amount
       if (this.data.carts[i].inventory === -1) { 
+        this.data.invalid.push(this.data.carts[i].cart_code)
         hasInvalid = true
         continue 
       }
@@ -210,7 +213,6 @@ Page({
         this.data.carts[i].amount = this.data.carts[i].inventory
         if (this.data.carts[i].inventory > 0) { isModify = true; api.touchCart(this.data.carts[i].cart_code, this.data.carts[i].inventory).then(res => { }) }
       }
-      count += this.data.carts[i].amount
       if (this.data.carts[i].cart_state === 0) {
         flag = false
       } else {
@@ -244,5 +246,14 @@ Page({
         }
       })
     }).catch(err => { })
-  }
+  },
+  deleteInvalid: function() {
+    Toast.loading({
+      mask: false
+    })
+    api.delCart(this.data.invalid).then(res => {
+      Toast.clear()
+      this.cartList()
+    })
+  }  
 })

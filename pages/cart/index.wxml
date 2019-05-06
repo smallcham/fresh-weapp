@@ -78,7 +78,7 @@
       </van-row>
     </view>
     <view style='border-radius: .5rem;margin: 1rem;'>
-      <van-button size='large'><van-icon name="delete" size="35rpx"/> 清除失效商品</van-button>
+      <van-button size='large' bind:click='deleteInvalid'><van-icon name="delete" size="35rpx"/> 清除失效商品</van-button>
     </view>
    </view>
 

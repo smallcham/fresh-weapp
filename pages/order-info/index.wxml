@@ -31,9 +31,9 @@
   </view>
 
   <view style='margin-top: 15rpx;'>
-    <van-cell title="商品原价"  icon="gold-coin-o" value="¥ 219.5"/>
-    <van-cell title="优惠券"  icon="discount" value="无可用优惠券"/>
-    <van-cell title="商品实付"  icon="gold-coin-o"  value="¥ 219.5"/>
+    <van-cell title="商品总价"  icon="gold-coin-o" value="¥ 219.5"/>
+    <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券"/>
+    <van-cell title="商品实付"  icon="balance-pay"  value="¥ 219.5"/>
     <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
   </view>
 
