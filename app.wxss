@@ -297,6 +297,10 @@ mt-5 {
   color: rgb(24, 188, 155, 0.300)
 }
 
+.text-success-la {
+  color: rgba(24, 188, 155, 0.716)
+}
+
 .text-success-a {
   color: rgba(24, 188, 155, 0.116)
 }

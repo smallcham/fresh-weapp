@@ -1,0 +1,9 @@
+<view style="margin: .2rem;padding: .2rem">
+  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+</view>
+<view style="margin: .2rem;padding: .2rem">
+  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+</view>
+<view style="margin: .2rem;padding: .2rem">
+  <van-cell title="单元格" value="内容" label="描述信息" border="{{ false }}" />
+</view>

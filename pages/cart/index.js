@@ -15,6 +15,8 @@ Page({
     fs: app.globalData.fs,
     loading: true,
     all_pick: true,
+    hasInvalid: false,
+    effective_count: 0,
     total: 0,
     save: 0,
     carts: []
@@ -47,11 +49,15 @@ Page({
     Toast.loading({
       mask: false
     });
-    this.cartList()
-    this.setData({
-      location: app.globalData.location,
-      selected_location: app.globalData.selected_location
-    })
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
+      this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
+    } else {
+      this.cartList()
+      this.setData({
+        location: app.globalData.location,
+        selected_location: app.globalData.selected_location
+      })
+    }
     this.getTabBar().setData({
       selected: 3
     })
@@ -128,6 +134,15 @@ Page({
     })
   },
   toCheck: function() {
+    if (this.data.effective_count <= 0) {
+      Notify({
+        text: '选中商品库存不足',
+        duration: 1000,
+        selector: '#custom-notify',
+        backgroundColor: this.data.color.warning
+      })
+      return false
+    }
     wx.navigateTo({
       url: '/pages/check/index'
     })
@@ -184,17 +199,23 @@ Page({
     let save = 0.0
     let count = 0
     let isModify = false
+    let hasInvalid = false
+    this.data.effective_count = 0
     for (let i = 0; i < this.data.carts.length; i++) {
+      if (this.data.carts[i].inventory === -1) { 
+        hasInvalid = true
+        continue 
+      }
       if (this.data.carts[i].amount > this.data.carts[i].inventory) {
-        isModify = true
         this.data.carts[i].amount = this.data.carts[i].inventory
-        if (this.data.carts[i].inventory !== 0) api.touchCart(this.data.carts[i].cart_code, this.data.carts[i].inventory).then(res => {})
+        if (this.data.carts[i].inventory > 0) { isModify = true; api.touchCart(this.data.carts[i].cart_code, this.data.carts[i].inventory).then(res => { }) }
       }
       count += this.data.carts[i].amount
       if (this.data.carts[i].cart_state === 0) {
         flag = false
       } else {
-        if (this.data.carts[i].inventory !== 0) {
+        if (this.data.carts[i].inventory > 0) {
+          this.data.effective_count++
           total += Number(this.data.carts[i].price) * Number(this.data.carts[i].amount)
           originalTotal += Number(this.data.carts[i].original) * Number(this.data.carts[i].amount)
         }
@@ -208,7 +229,20 @@ Page({
         backgroundColor: this.data.color.warning
       });
     }
-    this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1) })
+    this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1), hasInvalid: hasInvalid})
     this.getTabBar().setCartCount(count)
+  },
+  getHouse: function (city, lat, lng) {
+    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
+      app.globalData.house = res
+      this.cartList()
+      api.nearAddr(res.id).then(res => {
+        if (null !== res && undefined !== res) {
+          app.globalData.selected_address = res
+          app.globalData.selected_location = app.addressToLocation(res)
+          this.setData({ selected_location: app.globalData.selected_location, location: app.globalData.location, })
+        }
+      })
+    }).catch(err => { })
   }
 })

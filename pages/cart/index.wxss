@@ -29,6 +29,17 @@ page {
   box-sizing: border-box;
 }
 
+.icon-center-small {
+  font-size: 80rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
 .icon-text-center {
   font-size: 28rpx;
   height: 100%;

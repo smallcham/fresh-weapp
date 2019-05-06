@@ -16,7 +16,8 @@
     "pages/check/index",
     "pages/my-address/index",
     "pages/order-info/index",
-    "pages/buy-vip/index"
+    "pages/buy-vip/index",
+    "pages/coupon/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

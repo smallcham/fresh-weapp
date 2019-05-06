@@ -7,14 +7,14 @@
   </view>
     <view slot="right"><text class='text-default text-small'>删除</text></view>
 </van-nav-bar>
-<view wx:if="{{ loading }}" class='icon-center text-muted-la anim-opacity-1'><van-icon name="weapp-nav" /></view>
+<view wx:if="{{ loading }}" class='icon-center-small text-muted-la anim-opacity-1'><van-icon name="weapp-nav" /></view>
 <view wx:if="{{ !loading }}" class='icon-center text-muted-a' style='display: {{ carts.length <= 0 ? "flex" : "none" }}'>
   <van-icon name="shopping-cart-o"/>
   <text class='icon-text-center text-muted'>购物车居然是空的</text>
 </view>
 
 <view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
-  <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}">
+  <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}" wx:if="{{ item.inventory >= 0 }}">
       <van-row>
         <van-col span="2"><view class="gs-checkbox"><van-checkbox data-idx="{{ index }}" data-id="{{ item.cart_code }}" bind:change="checkedChange" value='{{ item.cart_state == "1" }}' checked-color="{{ item.inventory > 0 ? color.success : color.successdisable }}"></van-checkbox></view></van-col>
         <van-col span="7" data-id="{{ item.goods_code }}" bindtap="showInfo"><image src='{{ fs + item.goods_img }}'/></van-col>
@@ -45,7 +45,44 @@
         </van-col>
       </van-row>
     </view>
-   <van-submit-bar style='display: {{ carts.length > 0 ? "block" : "none" }}' price="{{ total }}" llabel="(不含运费)" blabel="已优惠: ¥{{ save }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
+
+   <view style='margin-top: 15rpx; opacity: 0.5' wx:if="{{ hasInvalid }}">
+    <van-cell title="失效商品"/>
+     <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}" wx:if="{{ item.inventory === -1 }}">
+      <van-row>
+        <van-col span="3"><view class="gs-checkbox"><van-tag round>失效</van-tag></view></van-col>
+        <van-col span="7" data-id="{{ item.goods_code }}" bindtap="showInfo"><image src='{{ fs + item.goods_img }}'/></van-col>
+        <van-col span="14">
+          <view style='margin-top: 30rpx'>
+            <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
+              <van-col span="24">
+                <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
+              </van-col>
+            </van-row>
+            <van-row>
+              <van-col span="24">
+                <view style='float:right; margin-right: 20rpx'>
+                  <van-stepper style="display: {{ item.inventory > 0 ? 'block' : 'none' }}" data-idx="{{ index }}" data-code="{{ item.cart_code }}" min="1" max="{{ item.inventory }}" value="{{ item.amount }}" bind:change="onChangeNum" bind:overlimit="onReduce" />
+                  <text style="display: {{ item.inventory > 0 ? 'none' : 'block' }}" class="text-muted text-mini">该区域不配送</text>
+                </view>
+              </van-col>
+            </van-row>
+            <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
+              <van-col span="24">
+                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
+                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ {{ item.original }}</text>
+              </van-col>
+            </van-row>
+          </view>
+        </van-col>
+      </van-row>
+    </view>
+    <view style='border-radius: .5rem;margin: 1rem;'>
+      <van-button size='large'><van-icon name="delete" size="35rpx"/> 清除失效商品</van-button>
+    </view>
+   </view>
+
+   <van-submit-bar wx:if='{{ carts.length > 0 }}' price="{{ total }}" llabel="(不含运费)" blabel="已优惠: ¥{{ save }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
       <van-checkbox style='padding-left: 20rpx;' checked-color="{{ color.success }}" value="{{ all_pick }}" bind:change="allPickChange">全选</van-checkbox>
         <view slot="tip">
           实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>

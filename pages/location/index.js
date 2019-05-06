@@ -143,7 +143,6 @@ Page({
     var id = e.currentTarget.id;
     for (var i = 0; i < this.data.suggestion.length; i++) {
       if (i == id) {
-        console.log(this.data.suggestion[i])
         let choose = this.data.suggestion[i]
         app.globalData.selected_location = choose
         this.setData({
@@ -170,7 +169,6 @@ Page({
       policy: 1,
       // region: _this.data.location.address_component.city, //设置城市名，限制关键词所示的地域范围，非必填参数
       success: function (res) {//搜索成功后的回调
-        console.log(res);
         var sug = [];
         for (var i = 0; i < res.data.length; i++) {
           sug.push({ // 获取返回结果，放到sug数组中

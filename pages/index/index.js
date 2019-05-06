@@ -140,6 +140,9 @@ Page({
         this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
       }
     }
+    api.countCart().then(res => {
+      this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
     this.setData({
       active: 0,
       location: app.globalData.location,
@@ -221,9 +224,6 @@ Page({
         }
       })
       this.getCata()
-      api.countCart().then(res => {
-        this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
-      })
     }).catch(err => {
       this.setData({
         no_house: true,

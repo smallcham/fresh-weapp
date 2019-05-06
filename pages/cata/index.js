@@ -11,6 +11,8 @@ Page({
   data: {
     title: "分类",
     fs: app.globalData.fs,
+    selected_location: false,
+    location: app.globalData.location,
     loading: app.globalData.loading,
     loading_list: true,
     empty_list: false,
@@ -72,12 +74,16 @@ Page({
     let needLoad = this.data.TabCur !== app.globalData.TabCur
     this.data.TabCur = app.globalData.TabCur
     if (needLoad) this.getGoodsList()
-    this.setData({
-      location: app.globalData.location,
-      selected_location: app.globalData.selected_location,
-      goodsCata: app.globalData.goodsCata,
-      TabCur: app.globalData.TabCur
-    })
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
+      this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
+    } else {
+      this.setData({
+        location: app.globalData.location,
+        selected_location: app.globalData.selected_location,
+        goodsCata: app.globalData.goodsCata,
+        TabCur: app.globalData.TabCur
+      })
+    }
     this.getTabBar().setData({
       selected: 1
     })
@@ -158,5 +164,39 @@ Page({
       selector: '#custom-notify',
       backgroundColor: this.data.color.success
     });
-  }
+  },
+  getHouse: function (city, lat, lng) {
+    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
+      app.globalData.house = res
+      this.getCata()
+      api.nearAddr(res.id).then(res => {
+        if (null !== res && undefined !== res) {
+          app.globalData.selected_address = res
+          app.globalData.selected_location = app.addressToLocation(res)
+          this.setData({ 
+            selected_location: app.globalData.selected_location,
+            location: app.globalData.location,
+            goodsCata: app.globalData.goodsCata,
+            TabCur: app.globalData.TabCur
+          })
+        }
+      })
+    }).catch(err => { })
+  },
+  getCata: function () {
+    api.get(app.globalApi.cata_list).then(res => {
+      app.globalData.goodsCata = res
+      if (res.length > 0) { 
+        app.globalData.TabCur = res[0].cata_code
+        this.setData({ goodsCata: res, TabCur: app.globalData.TabCur, })
+        this.getGoodsList()
+      } else {
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+      }
+    }).catch(err => {
+      Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
+    })
+  },
 })
