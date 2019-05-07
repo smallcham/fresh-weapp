@@ -34,9 +34,47 @@ const request = (url, options) => {
         }
       },
       fail(error) {
-        console.log(error)
         reject(error.data.msg)
       }
+    })
+  })
+}
+
+const pay = (total, body='商品购买', detail='') => {
+  return new Promise((resolve, reject) => {
+    let userInfo = app.globalData.userInfo
+    if (null === userInfo || undefined === userInfo || null === userInfo.mine || undefined === userInfo.mine) {
+      wx.showToast({
+        title: '请先完成登录',
+        icon: 'none'
+      })
+      return false
+    }
+    createPay(total, body, detail).then(res => {
+      wx.requestPayment({
+        timeStamp: res.timeStamp,
+        nonceStr: res.nonceStr,
+        package: res.package,
+        signType: res.signType,
+        paySign: res.sign,
+        success(res) {
+          if (res.errMsg === 'requestPayment:ok') { resolve(res) }
+          else { reject(res) }
+        },
+        fail(err) { 
+          wx.showToast({
+            title: '支付失败，请重试或联系客服',
+            icon: 'none'
+          })
+          reject(res)
+        }
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '发起支付失败，请重试或联系客服',
+        icon: 'none'
+      })
+      reject(res)
     })
   })
 }
@@ -149,6 +187,10 @@ const getUser = () => {
   return request(app.globalApi.get_user, { method: 'GET', data: {} })
 }
 
+const createPay = (total, body='商品购买', detail='') => {
+  return request(app.globalApi.create_pay, { method: 'POST', data: { data: { total: total, body: '轻果鲜生-' + body, detail: detail } } })
+}
+
 module.exports = {
   get,
   post,
@@ -169,5 +211,7 @@ module.exports = {
   nearAddr,
   vipPlans,
   vipOpen,
-  getUser
+  getUser,
+  createPay,
+  pay
 }

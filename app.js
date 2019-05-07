@@ -182,7 +182,8 @@ App({
     first_addr: 'address/first',
     vip_plans: 'vip/list',
     vip_open: 'vip/open',
-    get_user: 'mine'
+    get_user: 'mine',
+    create_pay: 'pay/create'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',

@@ -93,25 +93,29 @@ Page({
   },
   openVip: function() {
     this.setData({ loading: true })
-    api.vipOpen(this.data.checked).then(res => {
-      api.getUser().then(res => {
-        app.globalData.userInfo.mine = res
+    api.pay(1, '会员购买').then(res => {
+      api.vipOpen(this.data.checked).then(res => {
+        api.getUser().then(res => {
+          app.globalData.userInfo.mine = res
+          this.setData({ loading: false })
+          Dialog.alert({
+            title: '轻果提醒',
+            message: '会员购买成功'
+          }).then(() => {
+            wx.navigateBack({})
+          })
+        })
+      }).catch(err => {
         this.setData({ loading: false })
         Dialog.alert({
           title: '轻果提醒',
-          message: '会员购买成功'
+          message: err
         }).then(() => {
-            wx.navigateBack({})
+          // on close
         })
       })
     }).catch(err => {
-      this.setData({ loading: false })
-      Dialog.alert({
-        title: '轻果提醒',
-        message: err
-      }).then(() => {
-        // on close
-      })
+      this.setData({ loading: true })
     })
   }
 })
