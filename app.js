@@ -167,6 +167,7 @@ App({
     get_mkt: 'mkt/get',
     get_link: 'house/link/list',
     cart_list: 'cart/show',
+    cart_available_list: 'cart/show/available',
     cart_add: 'cart/add',
     cart_del: 'cart/del',
     cart_del_checked: 'cart/del/checked',
@@ -183,7 +184,14 @@ App({
     vip_plans: 'vip/list',
     vip_open: 'vip/open',
     get_user: 'mine',
-    create_pay: 'pay/create'
+    create_pay: 'pay/create',
+    create_order: 'order/create',
+    query_order: 'order/query',
+    get_order: 'order/get',
+    query_coupon: 'coupon/query',
+    query_effective_coupon: 'coupon/query/effective',
+    choose_coupon: 'coupon/choose',
+    auto_choose_coupon: 'coupon/auto/choose'
   },
   globalData: {
     fs: 'http://ppqwtqkfk.bkt.clouddn.com/',

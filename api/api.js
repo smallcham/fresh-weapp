@@ -40,7 +40,7 @@ const request = (url, options) => {
   })
 }
 
-const pay = (total, body='商品购买', detail='') => {
+const pay = (order_code) => {
   return new Promise((resolve, reject) => {
     let userInfo = app.globalData.userInfo
     if (null === userInfo || undefined === userInfo || null === userInfo.mine || undefined === userInfo.mine) {
@@ -50,7 +50,7 @@ const pay = (total, body='商品购买', detail='') => {
       })
       return false
     }
-    createPay(total, body, detail).then(res => {
+    createPay(order_code).then(res => {
       wx.requestPayment({
         timeStamp: res.timeStamp,
         nonceStr: res.nonceStr,
@@ -98,6 +98,10 @@ const remove = (url, options) => {
 
 const addCart = (goods_code, amount = 1) => {
   return request(app.globalApi.cart_add + '/' + goods_code + '/' + amount, { method: 'POST', data: {} })
+}
+
+const getAvailableCart = () => {
+  return request(app.globalApi.cart_available_list, { method: 'GET', data: {} })
 }
 
 const touchCart = (cart_code, amount = 1) => {
@@ -187,8 +191,36 @@ const getUser = () => {
   return request(app.globalApi.get_user, { method: 'GET', data: {} })
 }
 
-const createPay = (total, body='商品购买', detail='') => {
-  return request(app.globalApi.create_pay, { method: 'POST', data: { data: { total: total, body: '轻果鲜生-' + body, detail: detail } } })
+const createPay = (order_code) => {
+  return request(app.globalApi.create_pay, { method: 'POST', data: { data: { order_code: order_code } } })
+}
+
+const createOrder = (coupon_ids = []) => {
+  return request(app.globalApi.create_order, { method: 'POST', data: { data: { coupon_ids: coupon_ids } } })
+}
+
+const queryOrder = (order_type) => {
+  return request(app.globalApi.query_order, { method: 'GET', data: { data: { order_type: order_type } } })
+}
+
+const getOrder = (order_code) => {
+  return request(app.globalApi.get_order + '/' + order_code, { method: 'GET', data: { } })
+}
+
+const autoChooseCoupon = () => {
+  return request(app.globalApi.auto_choose_coupon, { method: 'POST', data: {} })
+}
+
+const chooseCoupon = (coupon_code) => {
+  return request(app.globalApi.choose_coupon + '/' + coupon_code, { method: 'POST', data: {} })
+}
+
+const queryEffectiveCoupon = () => {
+  return request(app.globalApi.query_effective_coupon, { method: 'GET', data: {} })
+}
+
+const queryCoupon = () => {
+  return request(app.globalApi.query_coupon, { method: 'GET', data: {} })
 }
 
 module.exports = {
@@ -197,6 +229,7 @@ module.exports = {
   put,
   remove,
   addCart,
+  getAvailableCart,
   touchCart,
   checkedCart,
   countCart,
@@ -213,5 +246,12 @@ module.exports = {
   vipOpen,
   getUser,
   createPay,
-  pay
+  pay,
+  createOrder,
+  queryOrder,
+  getOrder,
+  autoChooseCoupon,
+  chooseCoupon,
+  queryEffectiveCoupon,
+  queryCoupon
 }

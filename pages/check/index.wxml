@@ -1,5 +1,7 @@
 <van-dialog id="van-dialog" />
-<view style='margin: .4rem;padding.4rem'>
+<view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
+<view wx:if="{{ !loading }}">
+  <view style='margin: .4rem;padding.4rem'>
   <button class="btn-card" style='display: {{ selected_address ? "none" : "block" }}' bindtap='chooseAddress'>
     <view class='text-muted text-small' style='margin: .4rem; padding: .4rem;padding-top:35rpx'>
       <view style='float:left'>
@@ -26,16 +28,10 @@
         <view slot="" style='display: {{ house.house_type === 0 ? "block" : "none" }}' class='text-success' bindtap='openTimePicker'>今天 {{ selectedTime }} 送达[可选]</view>
         <van-icon style='display: {{ house.house_type === 0 ? "block" : "none" }}' slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
       </van-cell>
-      <van-cell value="共4件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
+      <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
         <view slot="title">
           <scroll-view scroll-x class='gs-scroll'>
-            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
-            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
-            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
-            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
-            <view><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg'/></view>
-            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
-            <view><image src='https://img14.yiguoimg.com/d/items/2018/180807/9288727904101639_500.jpg'/></view>
+            <view wx:for="{{ goods_list }}" wx:key="item.goods_code" ><image src='{{ fs + item.goods_img }}'/></view>
           </scroll-view>
         </view>
       </van-cell>
@@ -43,22 +39,23 @@
   </view>
 
   <view style='margin-top: 15rpx;'>
-    <van-panel>
-      <van-cell>
-      <view slot="title">
-        <van-tag color="{{ color.warning }}">优享会员</van-tag>
-      </view>
-      <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
-      </van-cell>
-    </van-panel>
-    <van-cell title="商品原价"  icon="gold-coin-o" value="¥ 219.5"/>
-    <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ 17.5</text></van-cell>
-    <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券" url="/pages/coupon/index"  is-link/>
-    <van-cell title="商品实付"  icon="balance-pay" value="¥ 219.5"/>
-    <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+      <van-panel wx:if="{{ !is_vip }}">
+        <van-cell>
+          <view slot="title">
+            <van-tag color="{{ color.warning }}">优享会员</van-tag>
+          </view>
+          <van-checkbox value="{{ checked }}" bind:change="onChange"><text class='text-warning text-small'>¥ 8/月 勾选开通</text></van-checkbox>
+        </van-cell>
+      </van-panel>
+      <van-cell title="商品原价"  icon="gold-coin-o" value="¥ {{ original }}"/>
+      <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ {{ discount }}</text></van-cell>
+      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '无可用优惠券' : '满 ' + chooseCoupon.limit_amount + ' - '  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
+      <van-cell title="商品实付"  icon="balance-pay" value="¥ {{ total }}"/>
+      <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+    </view>
   </view>
+  <van-action-sheet show="{{ showTimePicker }}">
+    <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
+  </van-action-sheet>
+  <van-submit-bar label="付款："  price="{{ total * 100 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>
 </view>
-<van-action-sheet show="{{ showTimePicker }}">
-  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
-</van-action-sheet>
-<van-submit-bar label="付款："  price="{{ 3050 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>

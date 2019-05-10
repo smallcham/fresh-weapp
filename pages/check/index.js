@@ -1,5 +1,6 @@
 // pages/check/index.js
-import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
+import api from '../../api/api'
 const app = getApp()
 
 Page({
@@ -9,10 +10,18 @@ Page({
    */
   data: {
     title: '填写订单',
+    loading: true,
+    fs: app.globalData.fs,
     selected_address: app.globalData.selected_address,
     showTimePicker: false,
     selectedTime: '',
+    chooseCoupon: false,
     house: app.globalData.house,
+    goods_list: [], 
+    total: 0.0, 
+    original: 0.0, 
+    discount: 0.0, 
+    is_vip: false,
     timeColumns: ['9:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00']
   },
 
@@ -25,6 +34,7 @@ Page({
       house: app.globalData.house,
       selectedTime: this.data.timeColumns[0]
     })
+    this.getAvailableCart()
   },
 
   /**
@@ -108,5 +118,26 @@ Page({
   },
   onPickTimeCancel() {
     this.setData({ showTimePicker: false })
+  },
+  getAvailableCart: function() {
+    api.getAvailableCart().then(res => {
+      if (null === res || undefined === res || res.carts.length < 1) {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: '当前地址对应的购物车商品无效或为空，无法结算，请更换地址或修改购物车商品'
+        }).then(() => {
+        });
+        this.setData({ loading: false })
+        return false
+      }
+      this.setData({ goods_list: res.carts, sum: res.sum, total: res.total, original: res.original, discount: res.discount, is_vip: res.is_vip })
+      api.autoChooseCoupon().then(coupon => {
+        if (null === coupon || undefined === coupon) {
+          this.setData({ loading: false })
+          return false
+        }
+        this.setData({ chooseCoupon: res, total: this.data.total - coupon.discount_amount, loading: false })
+      })
+    })
   }
 })

@@ -9,3 +9,24 @@ page {
 .btn-card::after {
   border:none;
 }
+
+.icon-center {
+  font-size: 130rpx;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.icon-text-center {
+  font-size: 28rpx;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
