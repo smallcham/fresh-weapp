@@ -16,6 +16,7 @@
     "van-nav-bar": "/miniprogram_npm/vant-weapp/nav-bar/index",
     "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
     "van-picker": "/miniprogram_npm/vant-weapp/picker/index",
-    "van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index"
+    "van-action-sheet": "/miniprogram_npm/vant-weapp/action-sheet/index",
+    "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
   }
 }

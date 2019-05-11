@@ -1,79 +1,45 @@
-<view style="margin: .2rem;padding: .2rem">
-  <van-radio-group value="{{ false }}">
-    <van-cell border="{{ false }}" title="不使用优惠券" clickable data-name="{{ false }}">
-      <van-radio checked-color="{{ color.success }}" name="{{ false }}" />
-    </van-cell>
-  </van-radio-group>
+<view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
+<view wx:if="{{ !loading }}" class='icon-center text-muted-a' style='display: {{ coupons.length <= 0 ? "flex" : "none" }}'>
+  <van-icon name="coupon-o"/>
+  <text class='icon-text-center text-muted'>没有可以使用的优惠券</text>
 </view>
 
-<view class='coupon'>
-  <van-row>
-    <van-col span="8">
-      <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>10</text></view>
-      <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>满 ¥ 69 元可用 </text></view>
-    </van-col>
-    <van-col span="12">
-      <view class='text-mini text-muted'>
-        <view style='font-weight: 700'>会员、非会员通用</view>
-        <view>会员任务10元红包</view>
-        <view>全品类红包</view>
-        <view>有效期: 2019-04-29 至 2019-05-05</view>
-      </view>
-    </van-col>
-    <van-col span="4"><van-tag color="{{ color.success }}">可用</van-tag></van-col>
-  </van-row>
-  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
-    <van-collapse-item name="1">
-      <text slot="value" class='text-mini text-muted'>查看详情</text>
-      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
-    </van-collapse-item>
-  </van-collapse>
-</view>
+<view wx:if="{{ !loading && coupons.length > 0 }}">
+  <view style="margin: .2rem;padding: .2rem">
+    <van-radio-group value="{{ false }}">
+      <van-cell border="{{ false }}" title="不使用优惠券" clickable data-name="{{ false }}">
+        <van-radio checked-color="{{ color.success }}" name="{{ false }}" />
+      </van-cell>
+    </van-radio-group>
+  </view>
 
-<view class='coupon disable'>
-  <van-row>
-    <van-col span="8">
-      <view class='text-center text-muted' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>10</text></view>
-      <view class='text-center text-muted'><text class='text-mini' style='font-weight: 700;'>满 ¥ 69 元可用 </text></view>
-    </van-col>
-    <van-col span="12">
-      <view class='text-mini text-muted'>
-        <view style='font-weight: 700'>会员、非会员通用</view>
-        <view>会员任务10元红包</view>
-        <view>全品类红包</view>
-        <view>有效期: 2019-04-29 至 2019-05-05</view>
-      </view>
-    </van-col>
-    <van-col span="4"><van-tag color="{{ color.muted }}">已过期</van-tag></van-col>
-  </van-row>
-  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
-    <van-collapse-item name="2">
-      <text slot="value" class='text-mini text-muted'>查看详情</text>
-      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
-    </van-collapse-item>
-  </van-collapse>
-</view>
-
-<view class='coupon disable'>
-  <van-row>
-    <van-col span="8">
-      <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>10</text></view>
-      <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>满 ¥ 69 元可用 </text></view>
-    </van-col>
-    <van-col span="12">
-      <view class='text-mini text-muted'>
-        <view style='font-weight: 700'>会员、非会员通用</view>
-        <view>会员任务10元红包</view>
-        <view>全品类红包</view>
-        <view>有效期: 2019-04-29 至 2019-05-05</view>
-      </view>
-    </van-col>
-    <van-col span="4"><van-tag color="{{ color.success }}">不可用</van-tag></van-col>
-  </van-row>
-  <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
-    <van-collapse-item name="3">
-      <text slot="value" class='text-mini text-muted'>查看详情</text>
-      <text class='text-mini text-muted'>劲爆地价不可用\n限华北使用,以轻果鲜生的地区划分规则为准</text>
-    </van-collapse-item>
-  </van-collapse>
+  <view wx:for="{{ coupons }}"  wx:key="{{ item.coupon_code }}" class='coupon {{ item.can_use ? "" : " disable" }}'>
+    <van-row>
+      <van-col span="8">
+        <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>{{ item.discount_amount }}</text></view>
+        <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>实付满 ¥ {{ item.limit_amount }} 元可用 </text></view>
+      </van-col>
+      <van-col span="12">
+        <view class='text-mini text-muted'>
+          <view style='font-weight: 700'>{{ item.vip_only ? "仅限会员使用" : "会员、非会员通用" }}</view>
+          <view>
+          <text>使用范围: </text>
+          <text wx:if="{{ undefined !== item.catas && item.catas.length !== 0 }}" wx:for="{{ item.catas }}" wx:for-item="cata" wx:key="{{ cata.cata_code }}">{{ cata.cata_name }} </text>
+          <text wx:if="{{ undefined === item.catas || item.catas.length === 0 }}">适用于所有品类商品</text>
+          </view>
+          <view>优惠类型: {{ item.coupon_type === 0 ? "满减" : "红包" }}</view>
+          <view wx:if="{{  item.start_time > now }}">生效时间: {{ item.start_time }}</view>
+          <view>有效期至: {{ item.end_time }}</view>
+        </view>
+      </van-col>
+      <van-col wx:if="{{ item.can_use }}" span="4"><van-tag color="{{ color.success }}">{{ item.end_time < now ? "已过期" : item.start_time > now ? "未生效" : "可用"}}</van-tag></van-col>
+      <van-col wx:if="{{ !item.can_use }}" span="4"><van-tag color="{{ color.muted }}">已失效</van-tag></van-col>
+    </van-row>
+    <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
+      <van-collapse-item name="{{ item.coupon_code }}">
+        <text slot="value" class='text-mini text-muted'>查看详情</text>
+        <text class='text-mini text-muted'>{{ item.areas ? ("限 " + item.areas + " 地区使用") : "不限制使用地区" }}\n以轻果鲜生的地区划分规则为准</text>
+      </van-collapse-item>
+    </van-collapse>
+  </view>
 </view>

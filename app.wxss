@@ -1065,3 +1065,18 @@ mt-5 {
 .gs-scroll view image {
   width: 120rpx;height: 120rpx;
 }
+
+.gs-card {
+  border-bottom: 0rpx; border-left: 0; border-right: 0;height: 200rpx;padding:0;margin:0;width:100%;
+  margin-top: 5rpx;
+  margin-bottom: -5rpx;
+  border-radius:0;border:0;
+}
+
+.gs-card image {
+  width: 200rpx;height:200rpx;
+}
+
+.gs-checkbox {
+  margin-left: 15rpx;margin-top:80rpx;
+}

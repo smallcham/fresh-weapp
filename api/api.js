@@ -43,7 +43,7 @@ const request = (url, options) => {
 const pay = (order_code) => {
   return new Promise((resolve, reject) => {
     let userInfo = app.globalData.userInfo
-    if (null === userInfo || undefined === userInfo || null === userInfo.mine || undefined === userInfo.mine) {
+    if (null === userInfo || undefined === userInfo) {
       wx.showToast({
         title: '请先完成登录',
         icon: 'none'
@@ -62,11 +62,18 @@ const pay = (order_code) => {
           else { reject(res) }
         },
         fail(err) { 
-          wx.showToast({
-            title: '支付失败，请重试或联系客服',
-            icon: 'none'
-          })
-          reject(res)
+          if (!err.errMsg === 'requestPayment:fail cancel') {
+            wx.showToast({
+              title: '支付失败，请重试或联系客服',
+              icon: 'none'
+            })
+          } else {
+            wx.showToast({
+              title: '支付已取消',
+              icon: 'none'
+            })
+          }
+          reject(err)
         }
       })
     }).catch(err => {
@@ -74,7 +81,7 @@ const pay = (order_code) => {
         title: '发起支付失败，请重试或联系客服',
         icon: 'none'
       })
-      reject(res)
+      reject(err)
     })
   })
 }
@@ -196,7 +203,15 @@ const createPay = (order_code) => {
 }
 
 const createOrder = (coupon_ids = []) => {
-  return request(app.globalApi.create_order, { method: 'POST', data: { data: { coupon_ids: coupon_ids } } })
+  let address = app.globalData.selected_address
+  if (null === address || undefined === address) {
+    wx.showToast({
+      title: '请选择收货地址',
+      icon: 'none'
+    })
+    return false
+  }
+  return request(app.globalApi.create_order, { method: 'POST', data: { data: { address_code: address.address_code, coupon_ids: coupon_ids } } })
 }
 
 const queryOrder = (order_type) => {

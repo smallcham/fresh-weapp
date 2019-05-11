@@ -1,5 +1,6 @@
 // pages/check/index.js
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
+import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 import api from '../../api/api'
 const app = getApp()
 
@@ -100,13 +101,40 @@ Page({
       });
       return false
     }
-    wx.navigateTo({
-      url: '/pages/order-info/index'
+    Toast.loading({
+      mask: true
+    });
+    api.createOrder().then(res => {
+      if (null === res || undefined === res) {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: '创建订单失败，请稍候重试或联系客服'
+        }).then(() => {})
+        Toast.clear()
+        return false
+      }
+      wx.navigateTo({
+        url: '/pages/order-info/index?auto=1&order_code=' + res
+      })
+    }).catch(err => {
+      Dialog.alert({
+        title: '轻果提醒',
+        message: err
+      }).then(() => { })
+      Toast.clear()
+      return false
     })
   },
   chooseAddress: function() {
     wx.navigateTo({
       url: '/pages/my-address/index'
+    })
+  },
+  openGoodsList: function() {
+    if (undefined === this.data.goods_list || this.data.goods_list.length === 0) return false
+    app.tempData.goods_list = this.data.goods_list
+    wx.navigateTo({
+      url: '/pages/goods-list/index'
     })
   },
   openTimePicker: function() {
@@ -136,7 +164,7 @@ Page({
           this.setData({ loading: false })
           return false
         }
-        this.setData({ chooseCoupon: res, total: this.data.total - coupon.discount_amount, loading: false })
+        this.setData({ chooseCoupon: coupon, total: this.data.total - coupon.discount_amount, loading: false })
       })
     })
   }

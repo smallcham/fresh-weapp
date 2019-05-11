@@ -1,4 +1,5 @@
 <van-dialog id="van-dialog" />
+<van-toast id="van-toast" />
 <view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
 <view wx:if="{{ !loading }}">
   <view style='margin: .4rem;padding.4rem'>
@@ -28,7 +29,7 @@
         <view slot="" style='display: {{ house.house_type === 0 ? "block" : "none" }}' class='text-success' bindtap='openTimePicker'>今天 {{ selectedTime }} 送达[可选]</view>
         <van-icon style='display: {{ house.house_type === 0 ? "block" : "none" }}' slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
       </van-cell>
-      <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large">
+      <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
         <view slot="title">
           <scroll-view scroll-x class='gs-scroll'>
             <view wx:for="{{ goods_list }}" wx:key="item.goods_code" ><image src='{{ fs + item.goods_img }}'/></view>
@@ -49,7 +50,7 @@
       </van-panel>
       <van-cell title="商品原价"  icon="gold-coin-o" value="¥ {{ original }}"/>
       <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ {{ discount }}</text></van-cell>
-      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '无可用优惠券' : '满 ' + chooseCoupon.limit_amount + ' - '  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
+      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '无可用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
       <van-cell title="商品实付"  icon="balance-pay" value="¥ {{ total }}"/>
       <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
     </view>

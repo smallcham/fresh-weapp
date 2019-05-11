@@ -194,7 +194,7 @@ App({
     auto_choose_coupon: 'coupon/auto/choose'
   },
   globalData: {
-    fs: 'http://ppqwtqkfk.bkt.clouddn.com/',
+    fs: 'http://fs.llfresh.cn/',
     map_key: 'BACBZ-KQJ6G-NIKQW-IDZQ4-X4HHT-H5BGP',
     userInfo: null,
     house: false,
@@ -225,5 +225,6 @@ App({
       divide: "#e9eaec",
       border: "#dddee1"
     }
-  }
+  },
+  tempData: {}
 })

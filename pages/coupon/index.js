@@ -1,5 +1,7 @@
 // pages/coupon/index.js
 const app = getApp()
+import api from '../../api/api'
+import util from '../../utils/util'
 
 Page({
 
@@ -8,7 +10,10 @@ Page({
    */
   data: {
     title: '优惠券',
-    activeInfo: []
+    loading: true,
+    activeInfo: [],
+    coupons: [],
+    now: new Date()
   },
 
   /**
@@ -16,8 +21,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      color: app.globalData.color
+      color: app.globalData.color,
+      now: util.formatTime(new Date())
     })
+    this.getCanUseCoupons()
   },
 
   /**
@@ -73,5 +80,13 @@ Page({
   },
   openInfo: function(e) {
     this.setData({ activeInfo: e.detail })
+  },
+  getCanUseCoupons: function() {
+    api.queryEffectiveCoupon().then(res => {
+      if (undefined !== res) this.setData({ coupons: res, loading: false })
+      else {
+        this.setData({ loading: false })
+      }
+    })
   }
 })

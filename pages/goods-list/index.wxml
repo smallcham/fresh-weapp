@@ -1,0 +1,28 @@
+<view style="margin: .5rem">
+  <view class='card-fluid gs-card' wx:for="{{ goods_list }}" wx:key="{{ item.cart_code }}">
+    <van-row>
+      <van-col span="9" gutter="3"><image src='{{ fs + item.goods_img }}'/></van-col>
+      <van-col span="14">
+        <view style='margin-top: 30rpx'>
+          <van-row>
+            <van-col span="24">
+              <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="24">
+              <view style='float:right; margin-right: 20rpx'>
+                <text class="text-muted text-mini">x {{ item.amount }}</text>
+              </view>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="24">
+              <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
+            </van-col>
+          </van-row>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+</view>
