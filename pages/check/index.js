@@ -33,9 +33,9 @@ Page({
     this.setData({
       color: app.globalData.color,
       house: app.globalData.house,
-      selectedTime: this.data.timeColumns[0]
+      selectedTime: this.data.timeColumns[0],
+      selected_address: false
     })
-    this.getAvailableCart()
   },
 
   /**
@@ -52,6 +52,14 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
+    if (this.data.selected_address && JSON.stringify(this.data.selected_address) !== JSON.stringify(app.globalData.selected_address)) {
+      Toast.loading({
+        mask: true
+      });
+      this.getHouse(app.globalData.selected_address.city_code, app.globalData.selected_address.lat, app.globalData.selected_address.lng)
+    } else {
+      this.getAvailableCart()
+    }
     this.setData({
       selected_address: app.globalData.selected_address
     })
@@ -144,6 +152,18 @@ Page({
     const { picker, value, index } = event.detail;
     this.setData({ showTimePicker: false, selectedTime: value })
   },
+  getHouse: function (city, lat, lng) {
+    api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
+      if (res.id === app.globalData.house.id) return true
+      app.globalData.house = res
+      wx.showToast({
+        title: '由于您切换收货地址商品可能有变更,请注意检查订单商品',
+        duration: 2500,
+        icon: 'none'
+      })
+      this.getAvailableCart()
+    }).catch(err => { })
+  },
   onPickTimeCancel() {
     this.setData({ showTimePicker: false })
   },
@@ -154,11 +174,13 @@ Page({
           title: '轻果提醒',
           message: '当前地址对应的购物车商品无效或为空，无法结算，请更换地址或修改购物车商品'
         }).then(() => {
+          wx.navigateBack({})
         });
         this.setData({ loading: false })
         return false
       }
       this.setData({ goods_list: res.carts, sum: res.sum, total: res.total, original: res.original, discount: res.discount, is_vip: res.is_vip })
+      Toast.clear()
       api.autoChooseCoupon().then(coupon => {
         if (null === coupon || undefined === coupon) {
           this.setData({ loading: false })

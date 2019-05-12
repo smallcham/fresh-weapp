@@ -188,6 +188,7 @@ App({
     create_order: 'order/create',
     query_order: 'order/query',
     get_order: 'order/get',
+    get_order_count: 'order/state/count',
     query_coupon: 'coupon/query',
     query_effective_coupon: 'coupon/query/effective',
     choose_coupon: 'coupon/choose',

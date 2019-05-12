@@ -10,7 +10,8 @@ Page({
   data: {
       now: new Date(),
       mine: {},
-      expireDay: 0
+      expireDay: 0,
+      orderCount: { unpay: 0, un_deliver: 0, delivering: 0 }
   },
 
   /**
@@ -53,6 +54,9 @@ Page({
     }
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
+    api.getOrderCount().then(res => {
+      this.setData({ orderCount: res })
     })
     this.getTabBar().setData({
       selected: 4

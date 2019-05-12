@@ -1,5 +1,6 @@
 // pages/order/index.js
 const app = getApp()
+import api from '../../api/api'
 Page({
 
   /**
@@ -9,10 +10,11 @@ Page({
     title: "我的订单",
     active: "0",
     orderType: [
-      { text: '待付款', id: 0 },
-      { text: '待发货', id: 1 },
-      { text: '配送中', id: 2 },
-      { text: '已完成', id: 3 }
+      { text: '全部', id: 0 },
+      { text: '待付款', id: 1 },
+      { text: '待发货', id: 2 },
+      { text: '配送中', id: 3 },
+      { text: '已完成', id: 4 }
     ],
     content: {}
   },
@@ -25,6 +27,8 @@ Page({
       color: app.globalData.color,
       active: app.is_null(options.active) ? 0 : options.active
     })
+    this.data.state = this.options.state
+    this.orderList()
   },
 
   /**
@@ -79,5 +83,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  orderList: function() {
+    api.queryOrder(this.data.state).then(res => {
+      this.setData({ order_list: res })
+    })
   }
 })

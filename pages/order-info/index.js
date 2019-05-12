@@ -10,6 +10,7 @@ Page({
    */
   data: {
     title: "我的订单",
+    fs: app.globalData.fs,
     loading: true,
     selected_address: {}
   },
@@ -23,22 +24,22 @@ Page({
     api.getOrder(order_code).then(res => {
       if (null === res || undefined === res) wx.navigateBack({})
       res.deliver_info = JSON.parse(res.deliver_info)
+      let sum = 0
+      for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
       this.setData({
         loading: false,
         order: res,
         color: app.globalData.color,
+        sum: sum,
         selected_address: app.globalData.selected_address
       })
       if (auto && res.order_state === 0) {
-        Toast.loading({
-          mask: true
-        });
+   
         api.pay(order_code).then(res => {
           wx.showToast({
             title: '支付成功',
             icon: 'success'
           })
-          Toast.clear()
         }).catch(err => {
           if (!err.errMsg === 'requestPayment:fail cancel') {
             Dialog.alert({
@@ -46,9 +47,14 @@ Page({
               message: err
             }).then(() => {})
           }
-          Toast.clear()
         })
       }
+    }).catch(err => {
+      Dialog.alert({
+        title: '轻果提醒',
+        message: err
+      }).then(() => { })
+      Toast.clear()
     })
   },
 
@@ -107,21 +113,26 @@ Page({
       phoneNumber: app.globalData.servicePhone
     })
   },
-  toPay: function() {
-    Toast.loading({
-      mask: true
-    });
-    api.pay(order_code).then(res => {
+  openGoodsList: function () {
+    if (undefined === this.data.order || this.data.order.detail.length === 0) return false
+    app.tempData.goods_list = this.data.order.detail
+    wx.navigateTo({
+      url: '/pages/goods-list/index'
+    })
+  },
+  toPay: function(e) {
+    api.pay(e.currentTarget.dataset.id).then(res => {
       wx.showToast({
         title: '支付成功',
         icon: 'success'
       })
-      Toast.clear()
     }).catch(err => {
-      Dialog.alert({
-        title: '轻果提醒',
-        message: err
-      }).then(() => { Toast.clear() })
+      if (!err.errMsg === 'requestPayment:fail cancel') {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: err
+        }).then(() => { })
+      }
     })
   }
 })
