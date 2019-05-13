@@ -27,7 +27,7 @@
             <view wx:for="{{ item.detail }}" wx:for-item="goods"  wx:key="goods.goods_code" ><image style='width:100rpx;height:100rpx;'  src='{{ fs + goods.goods_img }}'/></view>
           </scroll-view>
         </view>
-        <view slot="" class='text-primary'><text>实付:</text><text style='font-weight: 700'>¥ {{ item.total }}</text></view>
+        <view slot="" class='text-primary'><view>实付:</view><text style='font-weight: 700'>¥ {{ item.total }}</text></view>
       </van-cell>
       <van-cell border="{{ false }}">
         <view slot="" class='text-mini'>

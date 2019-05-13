@@ -100,8 +100,8 @@ Page({
       return false
     }
     api.queryOrder(this.data.order_list.current_page + 1, this.data.state).then(res => {
-      console.log(res)
       this.data.order_list.data.concat(res.data)
+      console.log(this.data.order_list.data)
       this.setData({ order_list: this.data.order_list, last: res.current_page === res.last_page })
     })
   },

@@ -1,56 +1,59 @@
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
-<view style='margin-bottom: 120rpx'>
-  <view>
-      <van-cell wx:if="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="待配送" value="问题咨询 " is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="再来一单" is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link bind:click="callService"/>
-      <van-cell wx:if="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
+<view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
+<view wx:if="{{ !loading }}">
+  <view style='margin-bottom: 120rpx'>
+    <view>
+        <van-cell wx:if="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="待配送" value="问题咨询 " is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="再来一单" is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link bind:click="callService"/>
+        <van-cell wx:if="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
+    </view>
+
+    <view style='margin-top: 15rpx'>
+        <van-cell title="配送信息"/>
+        <van-cell title="{{ order.deliver_info.address.receive_name + ' ' + order.deliver_info.address.phone }}" label='{{ order.deliver_info.address.city + " " + order.deliver_info.address.district + " " + order.deliver_info.address.title +  " " + order.deliver_info.address.location }}' />
+    </view>
+
+    <view style='margin-top: 15rpx'>
+        <van-cell title="商品信息" value="预计 2019.05.02 送达" />
+        <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
+          <view slot="title">
+            <scroll-view scroll-x class='gs-scroll'>
+              <view wx:for="{{ order.detail }}" wx:key="{{ item.goods_code }}"><image src='{{ fs + item.goods_img }}'/></view>
+            </scroll-view>
+          </view>
+        </van-cell>
+    </view>
+
+    <view style='margin-top: 15rpx'>
+        <van-cell title="订单信息"/>
+        <van-cell>
+          <view slot="title" class='text-small text-muted'>
+            <view><text class=''>订单编号: {{ order.order_code }}</text></view>
+            <view><text class='text-small'>创建时间: {{ order.create_time }}</text></view>
+          </view>
+        </van-cell>
+    </view>
+
+    <view style='margin-top: 15rpx;'>
+      <van-cell title="商品总价"  icon="gold-coin-o" value="¥ {{ order.pre_discount_total }}"/>
+      <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券"/>
+      <van-cell title="商品实付"  icon="balance-pay"  value="¥ {{ order.total }}"/>
+      <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+    </view>
+
+    <view style='margin-top: 15rpx;'>
+      <van-cell title="余额支付" value="¥ 0"/>
+      <van-cell title="还需支付" value="¥ {{ order.total }}" />
+    </view>
   </view>
 
-  <view style='margin-top: 15rpx'>
-      <van-cell title="配送信息"/>
-      <van-cell title="{{ order.deliver_info.address.receive_name + ' ' + order.deliver_info.address.phone }}" label='{{ order.deliver_info.address.city + " " + order.deliver_info.address.district + " " + order.deliver_info.address.title +  " " + order.deliver_info.address.location }}' />
-  </view>
-
-  <view style='margin-top: 15rpx'>
-      <van-cell title="商品信息" value="预计 2019.05.02 送达" />
-      <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
-        <view slot="title">
-          <scroll-view scroll-x class='gs-scroll'>
-            <view wx:for="{{ order.detail }}" wx:key="{{ item.goods_code }}"><image src='{{ fs + item.goods_img }}'/></view>
-          </scroll-view>
-        </view>
-      </van-cell>
-  </view>
-
-  <view style='margin-top: 15rpx'>
-      <van-cell title="订单信息"/>
-      <van-cell>
-        <view slot="title" class='text-small text-muted'>
-          <view><text class=''>订单编号: {{ order.order_code }}</text></view>
-          <view><text class='text-small'>创建时间: {{ order.create_time }}</text></view>
-        </view>
-      </van-cell>
-  </view>
-
-  <view style='margin-top: 15rpx;'>
-    <van-cell title="商品总价"  icon="gold-coin-o" value="¥ {{ order.pre_discount_total }}"/>
-    <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券"/>
-    <van-cell title="商品实付"  icon="balance-pay"  value="¥ {{ order.total }}"/>
-    <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
-  </view>
-
-  <view style='margin-top: 15rpx;'>
-    <van-cell title="余额支付" value="¥ 0"/>
-    <van-cell title="还需支付" value="¥ {{ order.total }}" />
-  </view>
+  <van-goods-action>
+    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="取消订单" type="default" bind:click="cancelOrder"/>
+    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />
+  </van-goods-action>
 </view>
-
-<van-goods-action>
-  <van-goods-action-button wx:if="{{ order.order_state === 0 }}" text="取消订单" type="default" bind:click="cancelOrder"/>
-  <van-goods-action-button disabled="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />
-</van-goods-action>
