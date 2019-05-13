@@ -127,7 +127,7 @@ Page({
         Toast.clear()
         return false
       }
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/order-info/index?auto=1&order_code=' + res
       })
     }).catch(err => {

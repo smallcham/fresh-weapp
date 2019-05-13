@@ -72,7 +72,7 @@
           </view>
       </van-col>
       <van-col span="6">
-        <view class='card' style='width:100%;border-top:0;'>
+        <view class='card' style='width:100%;border-top:0;' bindtap='toCoupon'>
             <view><text class='text-primary'>2</text></view>
             <view><text class='text-mini text-muted'>红包</text></view>
           </view>

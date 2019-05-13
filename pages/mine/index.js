@@ -134,5 +134,10 @@ Page({
     wx.navigateTo({
       url: '/pages/buy-vip/index'
     })
+  },
+  toCoupon: function() {
+    wx.navigateTo({
+      url: '/pages/coupon/index'
+    })
   }
 })

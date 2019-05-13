@@ -48,7 +48,7 @@
 
     <view style='margin-top: 15rpx;'>
       <van-cell title="余额支付" value="¥ 0"/>
-      <van-cell title="还需支付" value="¥ {{ order.total }}" />
+      <van-cell title="实际支付" value="¥ {{ order.total }}" />
     </view>
   </view>
 
