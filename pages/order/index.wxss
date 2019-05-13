@@ -1,4 +1,7 @@
 /* pages/order/index.wxss */
+page {
+  background: #F9F9F9;
+}
 
 .icon-center {
   font-size: 150rpx;

@@ -8,7 +8,9 @@ Page({
    */
   data: {
     title: "我的订单",
+    fs: app.globalData.fs,
     active: "0",
+    last: false,
     orderType: [
       { text: '全部', id: 0 },
       { text: '待付款', id: 1 },
@@ -28,7 +30,6 @@ Page({
       active: app.is_null(options.active) ? 0 : options.active
     })
     this.data.state = this.options.state
-    this.orderList()
   },
 
   /**
@@ -48,6 +49,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
+    this.orderList()
   },
 
   /**
@@ -56,7 +58,10 @@ Page({
   onHide: function () {
 
   },
-
+  onChange: function (e) {
+    this.data.state = e.detail.index === 0 ? undefined : e.detail.index - 1
+    this.orderList()
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -75,7 +80,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.orderListNext()
   },
 
   /**
@@ -84,9 +89,30 @@ Page({
   onShareAppMessage: function () {
 
   },
-  orderList: function() {
-    api.queryOrder(this.data.state).then(res => {
-      this.setData({ order_list: res })
+  orderList: function () {
+    api.queryOrder(1, this.data.state).then(res => {
+      this.setData({ order_list: res, last: res.total <= res.per_page })
+    })
+  },
+  orderListNext: function () {
+    if (this.data.order_list.total === 0 || this.data.order_list.current_page === this.data.order_list.last_page) {
+      this.setData({ last: true })
+      return false
+    }
+    api.queryOrder(this.data.order_list.current_page + 1, this.data.state).then(res => {
+      console.log(res)
+      this.data.order_list.data.concat(res.data)
+      this.setData({ order_list: this.data.order_list, last: res.current_page === res.last_page })
+    })
+  },
+  toPay: function(e) {
+    wx.navigateTo({
+      url: '/pages/order-info/index?order_code=' + e.currentTarget.dataset.id + "&auto=1"
+    })
+  },
+  showOrder: function(e) {
+    wx.navigateTo({
+      url: '/pages/order-info/index?order_code=' + e.currentTarget.dataset.id
     })
   }
 })

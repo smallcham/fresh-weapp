@@ -214,14 +214,18 @@ const createOrder = (coupon_ids = []) => {
   return request(app.globalApi.create_order, { method: 'POST', data: { data: { address_code: address.address_code, coupon_ids: coupon_ids } } })
 }
 
-const queryOrder = (order_type) => {
-  let data = {}
-  if (undefined !== order_type) data = { order_type: order_type }
+const queryOrder = (page = 1, order_state) => {
+  let data = { page, page }
+  if (undefined !== order_state) data = { page: page, order_state: order_state }
   return request(app.globalApi.query_order, { method: 'GET', data: { data } })
 }
 
 const getOrder = (order_code) => {
-  return request(app.globalApi.get_order + '/' + order_code, { method: 'GET', data: { } })
+  return request(app.globalApi.get_order + '/' + order_code, { method: 'GET', data: {} })
+}
+
+const cancelOrder = (order_code) => {
+  return request(app.globalApi.cancel_order + '/' + order_code, { method: 'POST', data: {} })
 }
 
 const getOrderCount = () => {
@@ -271,6 +275,7 @@ module.exports = {
   createOrder,
   queryOrder,
   getOrder,
+  cancelOrder,
   getOrderCount,
   autoChooseCoupon,
   chooseCoupon,

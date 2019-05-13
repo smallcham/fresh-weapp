@@ -34,7 +34,6 @@ Page({
         selected_address: app.globalData.selected_address
       })
       if (auto && res.order_state === 0) {
-   
         api.pay(order_code).then(res => {
           wx.showToast({
             title: '支付成功',
@@ -99,7 +98,6 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
   },
 
   /**
@@ -133,6 +131,37 @@ Page({
           message: err
         }).then(() => { })
       }
+    })
+  },
+  cancelOrder: function() {
+    Dialog.confirm({
+      title: '提示',
+      message: '您确定要放弃该订单吗'
+    }).then(() => {
+      api.cancelOrder(this.data.order.order_code).then(res => {
+        wx.showToast({
+          title: '订单已取消',
+          icon: 'none'
+        })
+        api.getOrder(this.data.order.order_code).then(res => {
+          if (null === res || undefined === res) wx.navigateBack({})
+          res.deliver_info = JSON.parse(res.deliver_info)
+          let sum = 0
+          for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
+          this.setData({ loading: false, order: res, sum: sum })
+        }).catch(err => {
+          Dialog.alert({
+            title: '轻果提醒',
+            message: err
+          }).then(() => { })
+          Toast.clear()
+        })
+      }).catch(err => {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      })
     })
   }
 })

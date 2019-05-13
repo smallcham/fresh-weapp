@@ -2,31 +2,42 @@
   <van-tab wx:for="{{ orderType }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
 
-<view class='icon-center text-muted-a'>
+<view wx:if="{{ order_list.total === 0 }}"  class='icon-center text-muted-a'>
   <van-icon name="todo-list"/>
   <text class='icon-text-center text-muted'>您还没有相关订单哦 ~</text>
 </view>
 
-<!-- <van-nav-bar data-url="/pages/order/index" bind:click-right="showOrder" border="{{ false }}">
-    <view slot="left">
-      <text class='text-small text-success'>次日到达</text>
-    </view>
-    <view slot="right">
-      <text class='text-mini text-muted' style='padding-right: 15rpx;'>2019-03-27 11:35:02</text>
-      <text class='text-mini text-success'>已签收</text>
-    </view>
-  </van-nav-bar>
-  <van-panel use-footer-slot>
-    <view class='container' style='padding: 20rpx'>
-      <view class='card'><image style='width:100rpx;height:100rpx;' src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png'/></view>
-      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img13.yiguoimg.com/d/items/2019/190116/9288736791701040_300.jpg'/></view>
-      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img12.yiguoimg.com/d/items/2018/181207/9288735167292807_300.jpg'/></view>
-      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img11.yiguoimg.com/d/items/2018/180808/9288728030094600_300.jpg'/></view>
-      <view class='card'><image style='width:100rpx;height:100rpx;' src='https://img10.yiguoimg.com/d/items/2018/181108/9288733757351272_300.jpg'/></view>
-      <view style='text-align: right;'><text class='text-md text-primary' style='padding-right: 20rpx'>实付: ¥ 70.2</text></view>
-    </view>
-    <view slot="footer" style='text-align: right;'>
-      <van-button plain size="mini" type='primary' style='padding-right: 20rpx'>售后详情</van-button>
-      <van-button plain size="mini" type="success">再来一单</van-button>
-    </view>
-  </van-panel> -->
+<view wx:for="{{ order_list.data }}" wx:key="{{ item.order_code }}" style='margin: .5rem; opacity: {{ item.order_state === 5 ? "0.5" : "1" }}' data-id="{{ item.order_code }}" bindtap='showOrder'>
+    <van-cell-group>
+      <van-cell>
+        <view slot="title" class='text-mini'><text class='text-muted'>{{ item.create_time }}</text></view>
+        <view slot="" class='text-mini'>
+          <text wx:if="{{ item.order_state === 0 }}" class='text-success' style='font-weight: 700'>待付款</text>
+          <text wx:elif="{{ item.order_state === 1 }}" class='text-success' style='font-weight: 700'>待配送</text>
+          <text wx:elif="{{ item.order_state === 2 }}" class='text-success' style='font-weight: 700'>配送中</text>
+          <text wx:elif="{{ item.order_state === 3 }}" class='text-success' style='font-weight: 700'>待评价</text>
+          <text wx:elif="{{ item.order_state === 4 }}" class='text-success' style='font-weight: 700'>已完成</text>
+          <text wx:elif="{{ item.order_state === 5 }}" class='text-muted' style='font-weight: 700'>已取消</text>
+          <text wx:elif="{{ item.order_state === 6 }}" class='text-muted' style='font-weight: 700'>已退费</text>
+        </view>
+      </van-cell>
+      <van-cell size="large">
+        <view slot="title">
+          <scroll-view scroll-x class='gs-scroll'>
+            <view wx:for="{{ item.detail }}" wx:for-item="goods"  wx:key="goods.goods_code" ><image style='width:100rpx;height:100rpx;'  src='{{ fs + goods.goods_img }}'/></view>
+          </scroll-view>
+        </view>
+        <view slot="" class='text-primary'><text>实付:</text><text style='font-weight: 700'>¥ {{ item.total }}</text></view>
+      </van-cell>
+      <van-cell border="{{ false }}">
+        <view slot="" class='text-mini'>
+          <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="primary" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='primary' style='padding-right: 20rpx'>再来一单</van-button>
+          <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="primary">评价</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="primary">申请售后</van-button>
+        </view>
+      </van-cell>
+    </van-cell-group>
+  </view>
+
+  <view style='margin: 1rem' wx:if="{{ order_list.total !== 0 && last }}" class='text-center text-muted text-mini'>就这么多了, 再往下就到世界的尽头了 ~</view>
