@@ -86,7 +86,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
   },
   onChangePlan: function(e) {
     this.setData({ checked: e.currentTarget.dataset.id, plan: this.data.plans[e.currentTarget.dataset.id] })

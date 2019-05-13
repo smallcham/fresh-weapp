@@ -144,6 +144,32 @@ App({
       })
     }
   },
+  clickLink: function(url, type) {
+    if (type === 0) {
+      wx.switchTab({ url: url })
+    }
+    else if (type === 1) {
+      wx.reLaunch({
+        url: url
+      })
+    }
+    else if (type === 2) {
+      wx.redirectTo({
+        url: url
+      })
+    }
+    else if (type === 3) {
+      wx.navigateTo({
+        url: url
+      })
+    }
+    else if (type === 4) {
+      wx.navigateBack({})
+    }
+    else if (type === 5) {
+
+    }
+  },
   addressToLocation: function(addr) {
     return {
       adcode: addr.city_code,

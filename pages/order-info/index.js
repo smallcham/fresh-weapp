@@ -12,6 +12,7 @@ Page({
     title: "我的订单",
     fs: app.globalData.fs,
     loading: true,
+    pay_success: false,
     selected_address: {}
   },
 
@@ -36,11 +37,7 @@ Page({
       })
       if (auto && res.order_state === 0) {
         api.pay(order_code).then(res => {
-          wx.showToast({
-            title: '支付成功',
-            icon: 'success'
-          })
-          this.loadOrder()
+          this.data.pay_success = true
         }).catch(err => {
           if (!err.errMsg === 'requestPayment:fail cancel') {
             Dialog.alert({
@@ -74,6 +71,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     })
+    if (this.data.pay_success) wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + this.data.order.order_code })
   },
 
   /**
@@ -107,7 +105,13 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
   },
   callService: function() {
     wx.makePhoneCall({
@@ -168,6 +172,6 @@ Page({
           icon: 'none'
         })
       })
-    })
+    }).catch(() => {})
   }
 })

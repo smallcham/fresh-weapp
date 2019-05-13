@@ -18,7 +18,8 @@
     "pages/order-info/index",
     "pages/buy-vip/index",
     "pages/coupon/index",
-    "pages/goods-list/index"
+    "pages/goods-list/index",
+    "pages/pay-success/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

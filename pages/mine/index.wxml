@@ -114,7 +114,7 @@
         <view class='card bar-item'>
             <view wx:if="{{ orderCount.un_deliver > 0 }}"><van-icon class='text-super' color='{{ color.info }}' name="send-gift" info="{{ orderCount.un_deliver }}"/></view>
             <view wx:else><van-icon class='text-super' color='{{ color.info }}' name="send-gift"/></view>
-            <view><text class='text-mini text-muted'>待发货</text></view>
+            <view><text class='text-mini text-muted'>待配送</text></view>
           </view>
       </van-col>
       <van-col span="6" data-url="/pages/order/index?active=3&state=2" bindtap='showOrder'>

@@ -1,7 +1,6 @@
-// pages/coupon/index.js
-const app = getApp()
+// pages/pay-success/index.js
 import api from '../../api/api'
-import util from '../../utils/util'
+const app = getApp()
 
 Page({
 
@@ -9,22 +8,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '优惠券',
-    loading: true,
-    activeInfo: [],
-    coupons: [],
-    now: new Date()
+    title: "支付结果",
+    order_code: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.data.order_code = options.order_code
     this.setData({
       color: app.globalData.color,
-      now: util.formatTime(new Date())
+      order_code: options.order_code
     })
-    this.getCanUseCoupons()
+    wx.setNavigationBarTitle({
+      title: this.data.title
+    }) 
   },
 
   /**
@@ -38,9 +37,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.setNavigationBarTitle({
-      title: this.data.title,
-    }) 
+
   },
 
   /**
@@ -75,23 +72,21 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return {
-      title: '轻果鲜生',
-      path: '/pages/index/index',
-      success: function (res) {
-      },
-      fail: function (res) { }
-    }
+
   },
-  openInfo: function(e) {
-    this.setData({ activeInfo: e.detail })
+  loadOrder: function() {
+    api.getOrder(this.data.order_code).then(res => {
+      this.setData({ order: res })
+    })
   },
-  getCanUseCoupons: function() {
-    api.queryEffectiveCoupon().then(res => {
-      if (undefined !== res) this.setData({ coupons: res, loading: false })
-      else {
-        this.setData({ loading: false })
-      }
+  toOrderInfo: function(e) {
+    wx.navigateTo({
+      url: '/pages/order-info/index?order_code=' + e.currentTarget.dataset.id
+    })
+  },
+  toHome: function() {
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   }
 })

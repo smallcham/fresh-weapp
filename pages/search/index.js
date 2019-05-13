@@ -86,6 +86,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
   }
 })

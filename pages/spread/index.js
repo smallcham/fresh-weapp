@@ -66,6 +66,12 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
   }
 })

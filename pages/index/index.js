@@ -96,6 +96,15 @@ Page({
       })
     }
   },
+  onShareAppMessage: function () {
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
+  },
   onChangeHomeTab: function(e) {
     app.globalData.TabCur = this.data.goodsCata[e.detail.index].cata_code
     wx.switchTab({
@@ -278,5 +287,8 @@ Page({
       console.log('getLink', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
     })
+  },
+  clickLink: function(e) {
+    app.clickLink(e.currentTarget.dataset.url, e.currentTarget.dataset.type)
   }
 })

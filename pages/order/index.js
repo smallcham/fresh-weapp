@@ -14,7 +14,7 @@ Page({
     orderType: [
       { text: '全部', id: 0 },
       { text: '待付款', id: 1 },
-      { text: '待发货', id: 2 },
+      { text: '待配送', id: 2 },
       { text: '配送中', id: 3 },
       { text: '已完成', id: 4 }
     ],
@@ -60,6 +60,7 @@ Page({
   },
   onChange: function (e) {
     this.data.state = e.detail.index === 0 ? undefined : e.detail.index - 1
+    this.data.active = e.detail.index
     this.orderList()
   },
   /**
@@ -87,7 +88,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '轻果鲜生',
+      path: '/pages/index/index',
+      success: function (res) {
+      },
+      fail: function (res) { }
+    }
   },
   orderList: function () {
     api.queryOrder(1, this.data.state).then(res => {
@@ -100,9 +107,8 @@ Page({
       return false
     }
     api.queryOrder(this.data.order_list.current_page + 1, this.data.state).then(res => {
-      this.data.order_list.data.concat(res.data)
-      console.log(this.data.order_list.data)
-      this.setData({ order_list: this.data.order_list, last: res.current_page === res.last_page })
+      res.data = this.data.order_list.data.concat(res.data)
+      this.setData({ order_list: res, last: res.current_page === res.last_page })
     })
   },
   toPay: function(e) {

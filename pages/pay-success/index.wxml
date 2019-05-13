@@ -1,0 +1,20 @@
+<view class='icon-center text-success'>
+  <van-icon name="passed"/>
+  <text class='icon-text-center text-primary'>支付成功</text>
+  <view style='margin-top: 25rpx;margin-bottom: 25rpx;'>
+    <view class='text-primary text-small text-center'>预计 15:00 - 17:00 送达</view>
+    <view class='text-muted text-mini text-center' style='padding-top: 10rpx'>订单已支付成功，配送员配送时将与您联系请保持电话畅通</view>
+  </view>
+  <view class='text-center'>
+    <van-button size="small" style='padding: 15rpx' bind:click="toHome"> 返回首页 </van-button>
+    <van-button size="small" style='padding: 15rpx' data-id="{{ order_code }}" bind:click="toOrderInfo"> 查看订单 </van-button>
+  </view>
+</view>
+
+<view style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
+  <view class='text-priamry text-md'>
+    <text>恭喜你获得 ¥ 3.16 元提现金</text>
+    <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx'> 去领取 > </van-button></view>
+  </view>
+  <view class='text-muted text-mini'>邀请好友助力即可领取</view>
+</view>
