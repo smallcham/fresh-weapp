@@ -51,11 +51,11 @@
     </view>
 
     <view wx:for="{{ mkt_list }}" wx:key="{{ item.marketing_code }}"  wx:if='{{ item.marketing_type === "HOT" }}'>
-      <van-cell title="热销爆款" border="{{ border }}" value="{{ item.goods_list.length > 5 ? '查看更多' : '' }}" is-link="{{ item.goods_list.length > 5 ? true : false  }}">
+      <van-cell title="热销爆款" border="{{ border }}" value="{{ item.goods_list.length > 5 ? '查看更多' : '' }}" url="{{ item.goods_list.length > 5 ? ('/pages/list/index?id=' + item.marketing_code + '&title=热销爆款') : '' }}" is-link="{{ item.goods_list.length > 5 ? true : false  }}">
         <van-icon slot="icon" name="fire" class="text-danger" style='font-size: 30rpx;'/>
       </van-cell>
       <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
-        <view class='card ell' style='border: 0;' wx:for="{{ item.goods_list }}" wx:key="column.goods_code" wx:if="{{ index < 6 }}" wx:for-item="column">
+        <view class='card ell' style='border: 0;' wx:for="{{ item.goods_list }}" wx:key="column.goods_code" wx:if="{{ index < 5 }}" wx:for-item="column">
           <block>
             <view class='text-center' data-id="{{ column.goods_code }}" bindtap='showInfo'><image src='{{ fs + column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
             <view bindtap='showInfo' data-id="{{ column.goods_code }}"><text class='gs-name'>{{ column.goods_name }}</text></view>
@@ -72,7 +72,7 @@
     <view style='background-color: #fff'>
     <van-row>
       <van-col span="12" wx:for="{{ mkt_list }}" wx:if="{{ item.marketing_type === 'SPECIAL' }}" wx:key="{{ item.marketing_code }}">
-      <view class='card cell-lg'>
+      <view class='card cell-lg' data-url="{{ '/pages/list/index?id=' + item.marketing_code + '&title=' + item.marketing_name }}" bindtap="toList">
           <block>
             <view><text class='gs-name'>{{ item.marketing_name }}</text></view>
             <view class='text-center'><text class='text-small text-muted'>{{ item.subtitle }}</text></view>
@@ -86,13 +86,13 @@
     </view>
 
   <view wx:for="{{ mkt_list }}" wx:key="{{  item.marketing_code }}" wx:if="{{ item.marketing_type === 'ACTIVITY' && item.goods_list.length > 0 }}">
-    <van-cell title="{{ item.marketing_name }}" border="{{ border }}" value="{{ item.goods_list.length > 5 ? '查看更多' : '' }}" url="{{ item.goods_list.length > 5 ? '/pages/list/index?id=' + item.marketing_code + '&title=' + item.marketing_name : '' }}" is-link="{{ item.goods_list.length > 5 ? true : false }}">
+    <van-cell title="{{ item.marketing_name }}" border="{{ border }}" value="{{ item.goods_list.length > 5 ? '查看更多' : '' }}" url="{{ item.goods_list.length > 5 ? ('/pages/list/index?id=' + item.marketing_code + '&title=' + item.marketing_name) : '' }}" is-link="{{ item.goods_list.length > 5 ? true : false }}">
     <!-- <view wx:if="{{ item.icon }}" slot="icon" >
         <van-icon name="{{ item.icon.name }}" class="{{ item.icon.color }}" style='font-size: 30rpx;'/>
     </view> -->
     </van-cell>
     <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
-          <view class='card ell' wx:for="{{ item.goods_list }}" wx:for-item="goods" wx:key="{{ goods.goods_code }}" style='border: 0;'>
+          <view class='card ell' wx:for="{{ item.goods_list }}" wx:for-item="goods" wx:key="{{ goods.goods_code }}" wx:if="{{ index < 5 }}" style='border: 0;'>
             <block>
               <view class='text-center' bindtap='showInfo' data-id="{{ goods.goods_code }}"><image src='{{ fs + goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
               <view bindtap='showInfo' data-id="{{ goods.goods_code }}"><text class='gs-name'>{{ goods.goods_name }}</text></view>

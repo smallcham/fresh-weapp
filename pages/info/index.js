@@ -99,13 +99,19 @@ Page({
       this.setData({ 
         cartCount: (null === this.data.cartCount || undefined === this.data.cartCount) ? 0 :  Number(this.data.cartCount) + 1
       })
+      api.deliveryCheck().then(res => {
+        let differ = Number(res.free_delivery_limit - res.total).toFixed(1)
+        let text = differ > 0 ?
+          ' 实付满 ¥ ' + res.free_delivery_limit + ' 包邮，还差 ¥ ' + differ + ' 元，配送费 ¥ ' + res.delivery_fee :
+          ' 实付满 ¥ ' + res.free_delivery_limit + '，当前总额 ¥ ' + res.total + ' 已包邮'
+        Notify({
+          text: text,
+          duration: 3000,
+          selector: '#custom-notify',
+          backgroundColor: differ > 0 ? app.globalData.color.warning : app.globalData.color.success
+        })
+      })
     }).catch(err => { Toast.fail(err); })
-    Notify({
-      text: '¥ 29.2 元，还差49.2免配送费',
-      duration: 3000,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.warning
-    });
   },
   onToCart: function(e) {
     wx.switchTab({

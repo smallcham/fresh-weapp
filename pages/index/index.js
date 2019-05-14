@@ -262,7 +262,7 @@ Page({
     })
   },
   getMkt: function() {
-    api.get(app.globalApi.get_mkt).then(res => {
+    api.get(app.globalApi.get_mkt, { data: { limit: 6 } }).then(res => {
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh()
       this.setData({ mkt_list: res, loading_mkt: false })
@@ -290,5 +290,10 @@ Page({
   },
   clickLink: function(e) {
     app.clickLink(e.currentTarget.dataset.url, e.currentTarget.dataset.type)
+  },
+  toList: function(e) {
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url
+    })
   }
 })

@@ -123,6 +123,10 @@ const checkedCart = (cart_codes, state = 1, all_pick = 3) => {
   return request(app.globalApi.cart_checked + '/' + state + '/' + all_pick, { method: 'POST', data: { data: { cart_codes: cart_codes } } })
 }
 
+const deliveryCheck = () => {
+  return request(app.globalApi.cart_delivery_check, { method: 'GET', data: { } })
+}
+
 const delCart = (cart_codes) => {
   return request(app.globalApi.cart_del, { method: 'POST', data: { data: { cart_codes: cart_codes } } })
 }
@@ -259,6 +263,7 @@ module.exports = {
   checkedCart,
   countCart,
   addAddr,
+  deliveryCheck,
   delCart,
   delCartChceked,
   modifyAddr,

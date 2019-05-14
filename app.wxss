@@ -1080,3 +1080,7 @@ mt-5 {
 .gs-checkbox {
   margin-left: 15rpx;margin-top:80rpx;
 }
+
+.btn-cart {
+  z-index:1;position:fixed;opacity: 0.9;right: 8%;top: 75%;background-color:#18BC9C;border-radius: 100rpx;border: 1rpx #18BC9C solid;box-shadow: 5rpx 5rpx 5rpx rgba(24,188, 155, 0.300)
+}
