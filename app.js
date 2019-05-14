@@ -6,12 +6,6 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     wx.hideTabBar();
-    //获取机型
-    wx.getSystemInfo({
-      success: function(e) {
-        console.log(e)
-      }
-    })
     // 登录
     this.login()
     // 获取用户信息
@@ -119,6 +113,23 @@ App({
             } else {
               console.log('登录失败', data)
             }
+            //获取机型
+            wx.getSystemInfo({
+              success: function (e) {
+                wx.request({
+                  url: that.globalApi.host + that.globalApi.device,
+                  method: 'POST',
+                  header: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'LL-Token': data.data
+                  },
+                  data: {
+                    device: e
+                  },
+                  success: function(data) {}
+                })
+              }
+            })
           }
         })
       }
@@ -185,6 +196,7 @@ App({
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
     reg: 'reg',
+    device: 'device/put',
     get_phone: 'phone',
     get_house: 'distance',
     cata_list: 'cata/list',
@@ -202,6 +214,7 @@ App({
     cart_count: 'cart/count',
     cart_touch: 'cart/touch',
     cart_checked: 'cart/checked',
+    cart_again: 'cart/again',
     add_addr: 'address/add',
     modify_addr: 'address/modify',
     query_addr: 'address/show',

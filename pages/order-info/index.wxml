@@ -43,12 +43,12 @@
       <van-cell title="商品总价"  icon="gold-coin-o" value="¥ {{ order.pre_discount_total }}"/>
       <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券"/>
       <van-cell title="商品实付"  icon="balance-pay"  value="¥ {{ order.total }}"/>
-      <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+      <van-cell title="配送费"  icon="free-postage"  value="{{ order.deliver_fee >= 0 ? '¥ ' + order.deliver_fee : '包邮' }}"/>
     </view>
 
     <view style='margin-top: 15rpx;'>
       <van-cell title="余额支付" value="¥ 0"/>
-      <van-cell title="实际支付" value="¥ {{ order.total }}" />
+      <van-cell title="实际支付" value="¥ {{ order.real_pay }}" />
     </view>
   </view>
 

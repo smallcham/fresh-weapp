@@ -124,10 +124,10 @@
             <view><text class='text-mini text-muted'>配送中</text></view>
           </view>
       </van-col>
-      <van-col span="6" data-url="/pages/order/index?active=4&state=3" bindtap='showOrder'>
+      <van-col span="6" data-url="/pages/order/index?active=4&state=4" bindtap='showOrder'>
         <view class='card bar-item'>
             <view><van-icon class='text-super' color='{{ color.muted }}' name="comment" /></view>
-            <view><text class='text-mini text-muted'>已完成</text></view>
+            <view><text class='text-mini text-muted'>待评价</text></view>
           </view>
       </van-col>
     </van-row>

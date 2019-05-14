@@ -85,7 +85,7 @@
    <van-submit-bar wx:if='{{ carts.length > 0 }}' price="{{ total }}" llabel="(不含运费)" blabel="已优惠: ¥{{ save }}" button-text="去结算   ▸" button-type="success"  bind:submit="toCheck" tip="{{ carts.length > 0 }}" mb="110rpx">
       <van-checkbox style='padding-left: 20rpx;' checked-color="{{ color.success }}" value="{{ all_pick }}" bind:change="allPickChange">全选</van-checkbox>
         <view slot="tip">
-          实付满¥49包邮，还差¥32.2元，配送费¥9 <text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>
+          {{ tip }} <!--<text bindtap="openLocation" class='text-success' style='float: right'>去凑单</text>-->
         </view>
     </van-submit-bar>
 </view>

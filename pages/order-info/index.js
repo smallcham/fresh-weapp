@@ -36,6 +36,7 @@ Page({
         selected_address: app.globalData.selected_address
       })
       if (auto && res.order_state === 0) {
+        this.setData({ paying: false })
         api.pay(order_code).then(res => {
           this.data.pay_success = true
         }).catch(err => {
@@ -44,7 +45,6 @@ Page({
               title: '轻果提醒',
               message: err
             }).then(() => {})
-            this.setData({ paying: false })
           }
         })
       }

@@ -1,5 +1,5 @@
 <van-tabs color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
-  <van-tab wx:for="{{ orderType }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
+  <van-tab wx:for="{{ orderState }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
 
 <view wx:if="{{ order_list.total === 0 }}"  class='icon-center text-muted-a'>
@@ -7,7 +7,7 @@
   <text class='icon-text-center text-muted'>您还没有相关订单哦 ~</text>
 </view>
 
-<view wx:for="{{ order_list.data }}" wx:key="{{ item.order_code }}" style='margin: .5rem; opacity: {{ item.order_state === 5 ? "0.5" : "1" }}'>
+<view wx:for="{{ order_list.data }}" wx:key="{{ item.order_code }}" style='margin: .5rem; opacity: {{ item.order_state === 5 ? "0.7" : "1" }}'>
     <van-cell-group>
       <van-cell data-id="{{ item.order_code }}" bindtap='showOrder'>
         <view slot="title" class='text-mini'><text class='text-muted'>{{ item.create_time }}</text></view>
@@ -27,12 +27,12 @@
             <view wx:for="{{ item.detail }}" wx:for-item="goods"  wx:key="goods.goods_code" ><image style='width:100rpx;height:100rpx;'  src='{{ fs + goods.goods_img }}'/></view>
           </scroll-view>
         </view>
-        <view slot="" class='text-primary'><view>实付:</view><text style='font-weight: 700'>¥ {{ item.total }}</text></view>
+        <view slot="" class='text-primary'><view>实付:</view><text style='font-weight: 700'>¥ {{ item.real_pay }}</text></view>
       </van-cell>
       <van-cell border="{{ false }}">
         <view slot="" class='text-mini'>
           <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="primary" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
-          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='primary' style='padding-right: 20rpx'>再来一单</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='primary' data-id="{{ item.order_code }}" style='padding-right: 20rpx' bind:click="addCartAgain">再来一单</van-button>
           <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="primary">评价</van-button>
           <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="primary">申请售后</van-button>
         </view>

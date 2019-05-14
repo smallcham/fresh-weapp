@@ -115,6 +115,10 @@ const touchCart = (cart_code, amount = 1) => {
   return request(app.globalApi.cart_touch + '/' + cart_code + '/' + amount, { method: 'POST', data: {} })
 }
 
+const cartAgain = (order_code) => {
+  return request(app.globalApi.cart_again + '/' + order_code, { method: 'POST', data: {} })
+}
+
 const countCart = () => {
   return request(app.globalApi.cart_count, { method: 'GET', data: {} })
 }
@@ -266,6 +270,7 @@ module.exports = {
   deliveryCheck,
   delCart,
   delCartChceked,
+  cartAgain,
   modifyAddr,
   getAddr,
   queryAddr,

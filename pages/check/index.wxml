@@ -52,11 +52,11 @@
       <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ {{ discount }}</text></van-cell>
       <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '无可用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
       <van-cell title="商品实付"  icon="balance-pay" value="¥ {{ total }}"/>
-      <van-cell title="配送费"  icon="free-postage"  value="包邮"/>
+      <van-cell title="配送费"  icon="free-postage"  value="{{ delivery_fee === 0 ? '包邮' : ('¥ ' + delivery_fee) }}"/>
     </view>
   </view>
   <van-action-sheet show="{{ showTimePicker }}">
     <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
   </van-action-sheet>
-  <van-submit-bar label="付款："  price="{{ total * 100 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>
+  <van-submit-bar label="付款："  price="{{ real_pay * 100 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>
 </view>

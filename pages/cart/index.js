@@ -17,6 +17,7 @@ Page({
     all_pick: true,
     hasInvalid: false,
     effective_count: 0,
+    tip: '',
     total: 0,
     save: 0,
     carts: [],
@@ -239,6 +240,13 @@ Page({
     this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1), hasInvalid: hasInvalid})
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
+    })
+    api.deliveryCheck().then(res => {
+      let differ = Number(res.free_delivery_limit - res.total).toFixed(1)
+      let text = differ > 0 ?
+        ' 实付满 ¥ ' + res.free_delivery_limit + ' 包邮，还差 ¥ ' + differ + ' 元，配送费 ¥ ' + res.delivery_fee :
+        ' 实付满 ¥ ' + res.free_delivery_limit + '包邮，当前已包邮'
+      this.setData({ tip: text })
     })
   },
   getHouse: function (city, lat, lng) {

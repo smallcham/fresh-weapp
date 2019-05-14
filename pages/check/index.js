@@ -188,11 +188,16 @@ Page({
       this.setData({ goods_list: res.carts, sum: res.sum, total: res.total, original: res.original, discount: res.discount, is_vip: res.is_vip })
       Toast.clear()
       api.autoChooseCoupon().then(coupon => {
+        let discount = 0
         if (null === coupon || undefined === coupon) {
-          this.setData({ loading: false })
-          return false
+          coupon = false
+        } else {
+          discount = coupon.discount_amount
         }
-        this.setData({ chooseCoupon: coupon, total: this.data.total - coupon.discount_amount, loading: false })
+        let total = Number(this.data.total - discount).toFixed(1)
+        let delivery_fee = total  >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
+        let real_pay = (Number(total) + Number(delivery_fee)).toFixed(1)
+        this.setData({ chooseCoupon: coupon, total: total, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
       })
     })
   }

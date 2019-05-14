@@ -11,11 +11,12 @@ Page({
     fs: app.globalData.fs,
     active: "0",
     last: false,
-    orderType: [
-      { text: '全部', id: 0 },
-      { text: '待付款', id: 1 },
-      { text: '待配送', id: 2 },
-      { text: '配送中', id: 3 },
+    orderState: [
+      { text: '全部', id: -1 },
+      { text: '待付款', id: 0 },
+      { text: '待配送', id: 1 },
+      { text: '配送中', id: 2 },
+      { text: '待评价', id: 3 },
       { text: '已完成', id: 4 }
     ],
     content: {}
@@ -59,7 +60,7 @@ Page({
 
   },
   onChange: function (e) {
-    this.data.state = e.detail.index === 0 ? undefined : e.detail.index - 1
+    this.data.state = e.detail.index === 0 ? undefined : this.data.orderState[e.detail.index].id
     this.data.active = e.detail.index
     this.orderList()
   },
@@ -119,6 +120,11 @@ Page({
   showOrder: function(e) {
     wx.navigateTo({
       url: '/pages/order-info/index?order_code=' + e.currentTarget.dataset.id
+    })
+  },
+  addCartAgain: function(e) {
+    api.cartAgain(e.currentTarget.dataset.id).then(res => {
+      wx.switchTab({ url: '/pages/cart/index' })
     })
   }
 })
