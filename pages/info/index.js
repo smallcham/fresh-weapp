@@ -103,7 +103,7 @@ Page({
         let differ = Number(res.free_delivery_limit - res.total).toFixed(1)
         let text = differ > 0 ?
           ' 实付满 ¥ ' + res.free_delivery_limit + ' 包邮，还差 ¥ ' + differ + ' 元，配送费 ¥ ' + res.delivery_fee :
-          ' 实付满 ¥ ' + res.free_delivery_limit + '，当前总额 ¥ ' + res.total + ' 已包邮'
+          ' 实付满 ¥ ' + res.free_delivery_limit + '包邮，当前总额 ¥ ' + res.total + ' 已包邮'
         Notify({
           text: text,
           duration: 3000,
