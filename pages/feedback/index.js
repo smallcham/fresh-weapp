@@ -22,6 +22,9 @@ Page({
    */
   onLoad: function (options) {
     api.getOrder(options.order_code).then(res => {
+      for(let i = 0; i < res.detail.length; i ++) {
+        res.detail[i].feedback_imgs = res.detail[i].feedback_imgs === '[]' ? [] : JSON.parse(res.detail[i].feedback_imgs)
+      }
       this.setData({ color: app.globalData.color, order: res })
     })
     wx.setNavigationBarTitle({
