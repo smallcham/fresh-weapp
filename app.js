@@ -228,13 +228,16 @@ App({
     create_pay: 'pay/create',
     create_order: 'order/create',
     query_order: 'order/query',
+    feedback_order: 'order/feedback',
     get_order: 'order/get',
     get_order_count: 'order/state/count',
+    get_order_progress: 'order/progress',
     cancel_order: 'order/cancel',
     query_coupon: 'coupon/query',
     query_effective_coupon: 'coupon/query/effective',
     choose_coupon: 'coupon/choose',
-    auto_choose_coupon: 'coupon/auto/choose'
+    auto_choose_coupon: 'coupon/auto/choose',
+    upload_img: 'upload/img'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',
@@ -263,6 +266,7 @@ App({
       title: "#1c2438",
       content: "#495060",
       muted: "#95a5a6",
+      muteda: "rgba(149, 165, 166, 0.247)",
       disabled: "#bbbec4",
       background: "#f8f8f9",
       divide: "#e9eaec",

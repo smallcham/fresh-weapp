@@ -126,5 +126,10 @@ Page({
     api.cartAgain(e.currentTarget.dataset.id).then(res => {
       wx.switchTab({ url: '/pages/cart/index' })
     })
+  },
+  toFeedback: function(e) {
+    wx.navigateTo({
+      url: '/pages/feedback/index?order_code=' + e.currentTarget.dataset.id
+    })
   }
 })

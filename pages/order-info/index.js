@@ -113,9 +113,9 @@ Page({
       fail: function (res) { }
     }
   },
-  callService: function() {
+  callService: function(e) {
     wx.makePhoneCall({
-      phoneNumber: app.globalData.servicePhone
+      phoneNumber: e.currentTarget.dataset.phone
     })
   },
   openGoodsList: function () {
@@ -173,5 +173,10 @@ Page({
         })
       })
     }).catch(() => {})
+  },
+  addCartAgain: function (e) {
+    api.cartAgain(e.currentTarget.dataset.id).then(res => {
+      wx.switchTab({ url: '/pages/cart/index' })
+    })
   }
 })

@@ -1,7 +1,7 @@
 <view class='body'>
   <view style="background-color: {{ color.success }};border-radius: 100% 100% 100% 100% / 0% 0% 10% 10%;">
     <van-row>
-        <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{ userInfo ?  userInfo.avatarUrl : '/image/avatar.png' }}" mode="cover"></image></van-col>
+        <van-col span="5"><image bindtap="bindViewTap" class="userinfo-avatar" src="{{ userInfo ?  userInfo.avatarUrl : fs + '97c4a9f069d426555ca0d4cf9245c3bc' }}" mode="cover"></image></van-col>
         <van-col span="19">
           <view style="padding-top: 4%;">
             <view style="{{ userInfo ? 'display: block;' : 'display: none' }}">
@@ -124,7 +124,7 @@
             <view><text class='text-mini text-muted'>配送中</text></view>
           </view>
       </van-col>
-      <van-col span="6" data-url="/pages/order/index?active=4&state=4" bindtap='showOrder'>
+      <van-col span="6" data-url="/pages/order/index?active=4&state=3" bindtap='showOrder'>
         <view class='card bar-item'>
             <view><van-icon class='text-super' color='{{ color.muted }}' name="comment" /></view>
             <view><text class='text-mini text-muted'>待评价</text></view>

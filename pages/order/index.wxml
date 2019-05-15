@@ -31,10 +31,10 @@
       </van-cell>
       <van-cell border="{{ false }}">
         <view slot="" class='text-mini'>
-          <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="primary" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
-          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='primary' data-id="{{ item.order_code }}" style='padding-right: 20rpx' bind:click="addCartAgain">再来一单</van-button>
-          <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="primary">评价</van-button>
-          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="primary">申请售后</van-button>
+          <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='success' data-id="{{ item.order_code }}" style='padding-right: 20rpx' bind:click="addCartAgain">再来一单</van-button>
+          <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="success" style='padding-right: 20rpx' data-id="{{ item.order_code }}" bindtap='toFeedback'>评价</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="success">申请售后</van-button>
         </view>
       </van-cell>
     </van-cell-group>

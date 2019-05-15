@@ -19,7 +19,9 @@
     "pages/buy-vip/index",
     "pages/coupon/index",
     "pages/goods-list/index",
-    "pages/pay-success/index"
+    "pages/pay-success/index",
+    "pages/order-progress/index",
+    "pages/feedback/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

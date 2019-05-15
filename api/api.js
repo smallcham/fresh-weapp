@@ -86,6 +86,62 @@ const pay = (order_code) => {
   })
 }
 
+const uploadImg = (data = {}, count=1) => {
+  const token = wx.getStorageSync('token')
+  if (null === token || '' === token || undefined === token) {
+    wx.showToast({
+      title: '登录失败，请重新打开小程序',
+      icon: 'none'
+    })
+    return false;
+  }
+  return new Promise((resolve, reject) => {
+    wx.chooseImage({
+      count: count,
+      success(res) {
+        const tempFilePaths = res.tempFilePaths
+        wx.uploadFile({
+          url: `${app.globalApi.host}${app.globalApi.upload_img }`, 
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'LL-Token': token,
+            'LL-House': app.globalData.house.id
+          },
+          formData: data,
+          success(res) {
+            if (res.statusCode === 401) {
+              wx.showToast({
+                title: '登录状态超时，请重新操作',
+                icon: 'none'
+              })
+              app.login()
+              return
+            }
+            else if (res.statusCode === 413) {
+              wx.showToast({
+                title: '图片太大，请上传5M以下大小文件',
+                icon: 'none'
+              })
+              return
+            }
+            let data = JSON.parse(res.data)
+            if (data.state) {
+              resolve(data.data)
+            } else {
+              reject(data.msg)
+            }
+          },
+          fail(error) {
+            reject(JSON.parse(error.data))
+          }
+        })
+      }
+    })
+  })
+}
+
 const get = (url, options = {}) => {
   return request(url, { method: 'GET', data: options })
 }
@@ -232,6 +288,14 @@ const getOrder = (order_code) => {
   return request(app.globalApi.get_order + '/' + order_code, { method: 'GET', data: {} })
 }
 
+const feedbackOrder = (order_code, feedback) => {
+  return request(app.globalApi.feedback_order + '/' + order_code, { method: 'POST', data: { data: feedback } })
+}
+
+const getOrderProgress = (order_code) => {
+  return request(app.globalApi.get_order_progress + '/' + order_code, { method: 'GET', data: {} })
+}
+
 const cancelOrder = (order_code) => {
   return request(app.globalApi.cancel_order + '/' + order_code, { method: 'POST', data: {} })
 }
@@ -285,10 +349,13 @@ module.exports = {
   createOrder,
   queryOrder,
   getOrder,
+  feedbackOrder,
   cancelOrder,
   getOrderCount,
+  getOrderProgress,
   autoChooseCoupon,
   chooseCoupon,
   queryEffectiveCoupon,
-  queryCoupon
+  queryCoupon,
+  uploadImg
 }

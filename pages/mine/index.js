@@ -8,6 +8,7 @@ Page({
    * Page initial data
    */
   data: {
+      fs: app.globalData.fs,
       now: new Date(),
       mine: {},
       expireDay: 0,
