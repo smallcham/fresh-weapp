@@ -147,7 +147,6 @@ Page({
   getGoodsList: function() {
     this.setData({ loading_list: true })
     api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
-      console.log(res)
       this.setData({
         empty_list: res.total === 0,
         goodsList: res,
