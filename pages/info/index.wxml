@@ -41,42 +41,15 @@
       </view>
     </view>
   </view> -->
-  <view style='margin-top: 15rpx'>
+  <view wx:if="{{ undefined !== recommend_list && recommend_list.length > 0 }}" style='margin-top: 15rpx'>
   <van-panel title="推荐商品">
     <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:10rpx;background-color:#fff'>
-          <view class='card ell' style='border: 0;'>
+          <view wx:for="{{ recommend_list }}" wx:key="{{ item.goods_code }}" class='card ell' style='border: 0;'>
             <block>
-              <view class='text-center' bindtap='showInfo'><image src='http://pic.sfimg.cn/adsSaleGoodsPic/44897dd14ad08ab1b96c0f2fae116569.png' style='width:200rpx;height:200rpx;'></image></view>
-              <view bindtap='showInfo'><text class='gs-name'>泰国龙眼500g*1盒</text></view>
-              <view><text class='price' bindtap='showInfo'>¥ 9.9</text><van-icon bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view bindtap='showInfo'><text class='text-del'>¥ 11.9</text></view>
-              </block>
-          </view>
-          <view class="card ell" style='border: 0;'>
-            <block>
-              <view class='text-center'>
-                <image src='http://p02.sfimg.cn/2018/4000315385/middle_4000315385_1_1/160x160.jpg' style='width:200rpx;height:200rpx;'></image>
-                <van-icon style='float: right' class='text-warning' name="hot-sale-o" />
-              </view>
-              <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
-              <view><text class='price'>¥ 5.9</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view><text class='text-del'>¥ 11.9</text></view>
-              </block>
-          </view>
-          <view class='card ell' style='border: 0;'>
-            <block>
-              <view class='text-center'><image src='http://p02.sfimg.cn/2014/1800036771/middle_1800036771_2_11/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
-              <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
-              <view><text class='price'>¥ 9.1</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view><text class='text-del'>¥ 11.9</text></view>
-              </block>
-          </view>
-          <view class='card ell' style='border: 0;'>
-            <block>
-            <view class='text-center'> <image src='http://p02.sfimg.cn/2018/4600298705/middle_4600298705_9_00/160x160.jpg' style='width:200rpx;height:200rpx;'></image></view>
-              <view><text class='gs-name'>泰国龙眼500g*1盒</text></view>
-              <view><text class='price'>¥ 15.9</text><van-icon style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view><text class='text-del'>¥ 21.9</text></view>
+              <view class='text-center' data-id="{{ item.goods_code }}" bindtap='showInfo'><image src='{{ fs + item.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
+              <view data-id="{{ item.goods_code }}" bindtap='showInfo'><text class='gs-name'>{{ item.goods_name }}</text></view>
+              <view><text class='price' data-id="{{ item.goods_code }}" bindtap='showInfo'>¥ {{ item.price }}</text><van-icon data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
+              <view data-id="{{ item.goods_code }}" bindtap='showInfo'><text class='text-del'>¥ {{ item.original }}</text></view>
               </block>
           </view>
     </scroll-view>

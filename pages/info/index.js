@@ -50,6 +50,9 @@ Page({
         })
     } else {
       this.getGoods()
+      api.recommendGoods().then(res => {
+        this.setData({ recommend_list: res })
+      })
     }
   },
 
@@ -93,9 +96,16 @@ Page({
       fail: function (res) {}
     }
   },
-
-  onAddCart: function(e) {
-    api.addCart(this.data.id, 1).then(res => {
+  addCart: function (e) {
+    this.onAddCart(e, e.currentTarget.dataset.id)
+  },
+  showInfo: function (e) {
+    wx.navigateTo({
+      url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  onAddCart: function(e, code) {
+    api.addCart(undefined !== code ? code : this.data.id, 1).then(res => {
       this.setData({ 
         cartCount: (null === this.data.cartCount || undefined === this.data.cartCount) ? 0 :  Number(this.data.cartCount) + 1
       })
@@ -122,10 +132,9 @@ Page({
     api.get(app.globalApi.get_goods, { rest: this.data.id }).then(res => {
       res.banner = JSON.parse(res.banner)
       res.info_img = JSON.parse(res.info_img)
-      res.info_text = res.info_text.split('\n')
+      res.info_text = (null === res.info_text || undefined === res.info_text) ? '' : res.info_text.split('\n')
       this.setData({ goodsInfo: res, loading: false })
     }).catch(err => {
-      Toast.fail(err);
       wx.navigateBack({})
     })
   }

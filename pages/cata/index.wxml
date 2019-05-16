@@ -18,7 +18,7 @@
           <view class="cu-avatar radius lg" style="background-image:url({{ fs + item.goods_img }});" data-id="{{ item.goods_code }}" bindtap='showInfo'></view>
           <view class='content' data-id="{{ item.goods_code }}" bindtap='showInfo'>
             <view class='text-small ell-md-2'>{{ item.goods_name }}</view>
-            <view class='text-muted text-mini ell-lg'>{{ item.subtitle }}</view>
+            <view class='text-muted text-mini ell-lg'>{{ item.subtitle ? item.subtitle : '' }}</view>
             <view><text class='text-del'>¥ {{ item.original }}</text><text class='price' style='padding-left: 10rpx'>¥ {{ item.price }}</text></view>
           </view>
           <view class='action'>

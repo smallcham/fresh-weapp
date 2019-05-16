@@ -100,9 +100,8 @@ Page({
   setWord: function(e) {
     let word = e.currentTarget.dataset.word
     if (undefined === word || word === '' || null === word) return
-    if (undefined === e.detail || e.detail === '' || null === e.detail) return
     wx.navigateTo({
-      url: '/pages/list/index?type=search&title=搜索结果&word=' + e.detail
+      url: '/pages/list/index?type=search&title=搜索结果&word=' + word
     })
   },
   addCart: function(e) {

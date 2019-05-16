@@ -573,7 +573,7 @@ mt-5 {
 }
 
 .cu-list.menu-avatar>.cu-item {
-  padding-left: 120rpx;
+  padding-left: 145rpx;
   height: 140rpx;
 }
 
