@@ -13,8 +13,11 @@ Page({
     title: '',
     fs: app.globalData.fs,
     cartCount: 0,
+    page: false,
     loading: true,
-    border: false
+    border: false,
+    last: false,
+    word: ''
   },
 
   /**
@@ -29,9 +32,14 @@ Page({
     api.countCart().then(res => {
       this.setData({ cartCount: res })
     })
-    api.get(app.globalApi.get_mkt_goods, { data: { mkt_code: options.id } }).then(res => {
-      this.setData({ goods_list: res, loading: false })
-    }).catch(err => { })
+    if (options.type === "search") {
+      this.data.word = options.word
+      this.queryGoods(options.word, 1)
+    } else {
+      api.get(app.globalApi.get_mkt_goods, { data: { mkt_code: options.id } }).then(res => {
+        this.setData({ goods_list: res, loading: false })
+      }).catch(err => { })
+    }
   },
 
   /**
@@ -75,7 +83,13 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
+    if (!page) return
+    if (this.data.page.current_page >= this.data.page.last_page || this.data.page.next_page === undefined || this.data.page.next_page === null) {
+      this.setData({ last: true })
+      return
+    } else {
+      this.queryGoods(this.data.word, this.data.page.next_page)
+    }
   },
 
   /**
@@ -120,6 +134,12 @@ Page({
   toCart: function() {
     wx.switchTab({
       url: '/pages/cart/index'
+    })
+  },
+  queryGoods: function(word, page=1) {
+    api.queryGoods(word, undefined, page).then(res => {
+      if (this.data.page !== undefined && this.data.page.data !== undefined) res.data = this.data.page.data.concat(res.data)
+      this.setData({ page: res, loading: false, last: res.current_page === res.last_page })
     })
   }
 })

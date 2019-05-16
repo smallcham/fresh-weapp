@@ -9,12 +9,16 @@
     <text style='padding-left: 25rpx;' class='text-primary text-small'>{{ item.goods_name }}</text>
   </view>
   <view style='margin: .5rem'>
-    <van-rate value="{{ item.star }}" data-index="{{ index }}" bind:change="onChangeGoodsStar"/>
+    <van-rate readonly="{{ readonly }}" value="{{ item.star }}" data-index="{{ index }}" bind:change="onChangeGoodsStar"/>
   </view>
-  <view style='background-color:white;border-radius: .2rem;padding: .5rem;border: 1rpx solid {{ color.muteda }}'>
+  <view wx:if="{{ !readonly }}" style='background-color:white;border-radius: .2rem;padding: .5rem;border: 1rpx solid {{ color.muteda }}'>
     <van-field value="{{ item.feedback_text }}" data-index="{{ index }}" bind:change="onChangeText" label="" type="textarea" placeholder="满意就毫无保留夸一夸吧 ~ " autosize border="{{ false }}" />
     <van-icon wx:if="{{ order.detail[index].feedback_imgs !== '[]' }}" wx:for="{{ order.detail[index].feedback_imgs }}" wx:key style='padding: 15rpx;' name="{{ fs + item }}" info="x" wx:for-index="idx" data-pindex="{{ index }}" data-index="{{ idx }}" bind:click="delImg"/>
     <image bindtap='uploadImg' data-index="{{ index }}" style='width: 50rpx; height: 50rpx;padding: 15rpx; {{ undefined === order.detail[index].imgs || order.detail[index].imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
+  </view>
+  <view wx:else>
+      <view class='text-small text-muted'>{{ item.feedback_text }}</view>
+      <image wx:if="{{ order.detail[index].feedback_imgs !== '[]' }}" wx:for="{{ order.detail[index].feedback_imgs }}" wx:key style='width: 80rpx; height: 80rpx;padding: 15rpx;' src="{{ fs + item }}"/>
   </view>
 </view>
 
@@ -22,14 +26,14 @@
   <view>
     <van-row>
       <van-col span="8"><text class='text-primary text-small'>实物与描述相符</text></van-col>
-      <van-col span="16"><view style='float:right'><van-rate value="{{ feedback.quality_star }}" bind:change="onChangeQualityStar"/></view></van-col>
+      <van-col span="16"><view style='float:right'><van-rate readonly="{{ readonly }}" value="{{ order.quality_star }}" bind:change="onChangeQualityStar"/></view></van-col>
     </van-row>
   </view>
   <view style='margin-top: 25rpx'>
     <van-row>
       <van-col span="8"><text class='text-primary text-small'>平台配送服务</text></van-col>
-      <van-col span="16"><view style='float:right'><van-rate value="{{ feedback.deliver_star }}" bind:change="onChangeDeliverStar"/></view></van-col>
+      <van-col span="16"><view style='float:right'><van-rate readonly="{{ readonly }}" value="{{ order.deliver_star }}" bind:change="onChangeDeliverStar"/></view></van-col>
     </van-row>
   </view>
 </view>
-<view style='margin: .5rem;margin-top: 35rpx;border-raidus: .5rem'><van-button size="large" type="success" bind:click="submitFeedback">提交评价</van-button></view>
+<view wx:if="{{ !readonly }}" style='margin: .5rem;margin-top: 35rpx;border-raidus: .5rem'><van-button disabled='{{ order.deliver_star === 0 || order.quality_star === 0 }}' size="large" type="success" bind:click="submitFeedback">提交评价</van-button></view>

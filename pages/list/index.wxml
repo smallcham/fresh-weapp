@@ -1,7 +1,7 @@
 <van-notify id="van-notify" />
 <button bindtap='toCart' class='text-default btn-cart'><van-icon name='shopping-cart' size="1rem" info="{{ cartCount }}"/></button>
 <view wx:if="{{ loading }}" class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;'><van-icon name="weapp-nav" /></view>
-<view wx:if="{{ !loading }}" style='width: 98%'>
+<view wx:if="{{ !loading && !page }}" style='width: 98%'>
   <van-cell border="{{ border }}" title=""/>
   <van-row>
   <van-col span="12" wx:for="{{ goods_list }}" wx:key="{{ item.goods_code }}">
@@ -23,3 +23,28 @@
   </van-col>
 </van-row>
 </view>
+
+<view wx:if="{{ !loading && page }}" style='width: 98%'>
+  <van-cell border="{{ border }}" title=""/>
+  <van-row>
+  <van-col span="12" wx:for="{{ page.data }}" wx:key="{{ item.goods_code }}">
+  <view class='card'>
+      <block>
+        <view class='text-center' bindtap='showInfo' data-id="{{ item.goods_code }}">
+          <image src='{{ fs + item.goods_img }}' style='width:345rpx;height:320rpx;'></image>
+        </view>
+        <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='gs-name ell-lg'>{{ item.goods_name }}</text></view>
+        <view bindtap='showInfo' data-id="{{ item.goods_code }}" class='text-center'><text class='text-small text-muted ell-lg'>{{ item.subtitle }}</text></view>
+        <view>
+          <text  bindtap='showInfo' data-id="{{ item.goods_code }}" class='price'>¥ {{ item.price }}</text>
+          <van-icon wx:if="{{ item.inventory > 0 }}" data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" />
+          <text  bindtap='showInfo' data-id="{{ item.goods_code }}" wx:if="{{ item.inventory <= 0 }}" class='text-danger text-mini' style='float: right;'>库存不足</text>
+        </view>
+        <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='text-del'>¥ {{ item.original }}</text></view>
+      </block>    
+  </view>
+  </van-col>
+</van-row>
+</view>
+
+<view style='margin: 1rem' wx:if="{{  last }}" class='text-center text-muted text-mini'>就这么多了, 再往下就到世界的尽头了 ~</view>

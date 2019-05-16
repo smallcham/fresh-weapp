@@ -8,7 +8,7 @@
         <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="订单努力打包中" value="问题咨询 " is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="再来一单" is-link data-id="{{ order.order_code }}" bind:click="addCartAgain"/>
+        <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="查看评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
     </view>
@@ -24,7 +24,9 @@
     </view>
 
     <view style='margin-top: 15rpx'>
-        <van-cell title="商品信息" value="预计 2019.05.02 送达" />
+        <van-cell title="商品信息" wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" value="再来一单" is-link data-id="{{ order.order_code }}" bind:click="addCartAgain"/>
+        <van-cell title="商品信息" wx:elif="{{ order.order_state === 1 || order.order_state === 2 }}" value="预计 2019.05.02 送达" />
+        <van-cell title="商品信息" wx:else value=""/>
         <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
           <view slot="title">
             <scroll-view scroll-x class='gs-scroll'>

@@ -159,6 +159,14 @@ const remove = (url, options) => {
   return request(url, { method: 'DELETE', data: options })
 }
 
+const queryGoods = (goods_name, cata_code, page=1) => {
+  return request(app.globalApi.query_goods, { method: 'GET', data: { data: { goods_name: goods_name, cata: undefined === cata_code ? '' : cata_code, page: page } } })
+}
+
+const recommendGoods = () => {
+  return request(app.globalApi.recommend_goods, { method: 'GET', data: {} })
+}
+
 const addCart = (goods_code, amount = 1) => {
   return request(app.globalApi.cart_add + '/' + goods_code + '/' + amount, { method: 'POST', data: {} })
 }
@@ -320,11 +328,21 @@ const queryCoupon = () => {
   return request(app.globalApi.query_coupon, { method: 'GET', data: {} })
 }
 
+const getSearchInfo = () => {
+  return request(app.globalApi.search_info, { method: 'GET', data: {} })
+}
+
+const clearSearchHis = () => {
+  return request(app.globalApi.search_clear, { method: 'POST', data: {} })
+}
+
 module.exports = {
   get,
   post,
   put,
   remove,
+  queryGoods,
+  recommendGoods,
   addCart,
   getAvailableCart,
   touchCart,
@@ -357,5 +375,7 @@ module.exports = {
   chooseCoupon,
   queryEffectiveCoupon,
   queryCoupon,
-  uploadImg
+  uploadImg,
+  getSearchInfo,
+  clearSearchHis
 }

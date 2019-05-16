@@ -26,7 +26,8 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     goodsCata: app.globalData.goodsCata,
     banner: [],
-    indexCata: []
+    indexCata: [],
+    recommend_list: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -267,6 +268,9 @@ Page({
       wx.stopPullDownRefresh()
       this.setData({ mkt_list: res, loading_mkt: false })
       this.getTabBar().setData({ show: true })
+      api.recommendGoods().then(res => {
+        this.setData({ recommend_list: res })
+      })
     }).catch(err => {
       console.log('getMkt', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');

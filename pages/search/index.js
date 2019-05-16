@@ -1,41 +1,32 @@
 // pages/search/index.js
 const app = getApp()
+import api from '../../api/api'
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    fs: app.globalData.fs,
     focus: true,
     border: false,
-    hotWord: [
-      { text: "菠菜" },
-      { text: "韭菜" },
-      { text: "鲜奶" },
-      { text: "草莓" },
-      { text: "鲜肉" },
-      { text: "五花" },
-      { text: "坚果" },
-      { text: "抽纸" },
-      { text: "饼干" },
-      { text: "饮料" }
-    ],
-    history: [
-      { text: "设计师。" },
-      { text: "uahahabbaa" },
-      { text: "嗷嗷叫啊哈哈" },
-      { text: "猕猴桃" },
-      { text: "面包" },
-      { text: "龙眼" },
-      { text: "纸包鸡" }
-    ]
+    keys: [],
+    word: '',
+    page: {},
+    goods_list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    api.getSearchInfo().then(res => {
+      this.setData({ keys: res })
+    })
+    api.recommendGoods().then(res => {
+      this.setData({ goods_list: res })
+    })
   },
 
   /**
@@ -93,5 +84,40 @@ Page({
       },
       fail: function (res) { }
     }
+  },
+  onSearch: function(e) {
+    if (undefined === e.detail ||  e.detail === '' || null === e.detail) return
+    wx.navigateTo({
+      url: '/pages/list/index?type=search&title=搜索结果&word=' + e.detail
+    })
+  },
+  onClearSearchHis: function() {
+    api.clearSearchHis().then(res => {
+      this.data.keys.his = []
+      this.setData({ keys: this.data.keys })
+    })
+  },
+  setWord: function(e) {
+    let word = e.currentTarget.dataset.word
+    if (undefined === word || word === '' || null === word) return
+    if (undefined === e.detail || e.detail === '' || null === e.detail) return
+    wx.navigateTo({
+      url: '/pages/list/index?type=search&title=搜索结果&word=' + e.detail
+    })
+  },
+  addCart: function(e) {
+    api.addCart(e.currentTarget.dataset.id, 1).then(res => {
+      Notify({
+        text: '已加入购物车',
+        duration: 1500,
+        selector: '#van-notify',
+        backgroundColor: app.globalData.color.success
+      })
+    }).catch(err => { console.log(err) })
+  },
+  showInfo: function (e) {
+    wx.navigateTo({
+      url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
+    })
   }
 })

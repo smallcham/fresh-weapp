@@ -10,11 +10,8 @@ Page({
   data: {
     title: '评价得积分',
     fs: app.globalData.fs,
-    feedback: {
-      deliver_star: 5,
-      quality_star: 5
-    },
-    order: false
+    order: false,
+    readonly: true
   },
 
   /**
@@ -23,9 +20,10 @@ Page({
   onLoad: function (options) {
     api.getOrder(options.order_code).then(res => {
       for(let i = 0; i < res.detail.length; i ++) {
+        res.detail[i].star = res.detail[i].star === 0 ? 5 : res.detail[i].star
         res.detail[i].feedback_imgs = res.detail[i].feedback_imgs === '[]' ? [] : JSON.parse(res.detail[i].feedback_imgs)
       }
-      this.setData({ color: app.globalData.color, order: res })
+      this.setData({ color: app.globalData.color, order: res, readonly: res.deliver_star !== 0 })
     })
     wx.setNavigationBarTitle({
       title: this.data.title
@@ -109,9 +107,11 @@ Page({
   },
   onChangeDeliverStar: function (e) {
     this.data.order.deliver_star = e.detail
+    this.setData({ order: this.data.order })
   },
   onChangeQualityStar: function (e) {
     this.data.order.quality_star = e.detail
+    this.setData({ order: this.data.order })
   },
   onChangeGoodsStar: function (e) {
     this.data.order.detail[e.currentTarget.dataset.index].star = e.detail
