@@ -4,22 +4,12 @@ page {
 }
 
 .icon-center {
-  font-size: 100rpx;
+  font-size: 80rpx;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 200rpx 0;
-  box-sizing: border-box;
-}
-
-.icon-text-center {
-  font-size: 30rpx;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
 }

@@ -1,8 +1,5 @@
 <van-toast id="van-toast" />
-<view class='icon-center text-muted-a anim-opacity-1' style='display: {{ loading ? "flex" : "none" }}'>
-  <van-icon name="weapp-nav"/>
-  <text class='icon-text-center text-muted'>加载中</text>
-</view>
+<view class='icon-center text-muted-a anim-opacity-1' style='display: {{ loading ? "flex" : "none" }}'><van-icon name="weapp-nav"/></view>
 <view style='display: {{ loading ? "none" : "block" }}'>
   <view class='body' style='margin-bottom: 150rpx'>
   <swiper autoplay circular indicator-dots indicator-color="rgba(0, 0, 0, .08)" indicator-active-color="rgba(0, 0, 0, .2)" style='height: 500rpx;background-color:#fff'>
@@ -15,9 +12,9 @@
   <van-panel  title="{{ goodsInfo.goods_name }}" desc="{{ goodsInfo.subtitle }}" status="{{ goodsInfo.inventory <= 10 && goodsInfo.inventory > 0 ? '仅剩 ' + goodsInfo.inventory + ' 件' : '' }}">
     <view style='padding: 25rpx'>
       <view><text class='price'>¥ {{ goodsInfo.price }}</text></view>
-      <view><text class='text-del'>¥ {{ goodsInfo.original }}</text><text class='text-small text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text></view>
+      <view><text class='text-del'>¥ {{ goodsInfo.original }}</text><text class='text-mini text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text></view>
       <view class='line'></view>
-      <view class='text-muted text-small'><text>‧ {{ goodsInfo.place_name }}</text><text>‧ 小时达</text><text>‧ 实付满39包邮</text></view>
+      <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text><text>‧ 小时达</text><text>‧ 实付满39包邮</text></view>
     </view>
   </van-panel>
 

@@ -458,7 +458,7 @@ mt-5 {
   align-items: center;
   min-height: 200rpx;
   background: #fff;
-  padding: 0 20rpx;
+  padding: 0 3rpx;
 }
 
 .cu-list.menu>.cu-item::after {
@@ -573,7 +573,7 @@ mt-5 {
 }
 
 .cu-list.menu-avatar>.cu-item {
-  padding-left: 145rpx;
+  padding-left: 140rpx;
   height: 140rpx;
 }
 

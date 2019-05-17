@@ -113,7 +113,7 @@
                 <image src='{{ fs + item.goods_img }}' style='width:345rpx;height:320rpx;'></image>
               </view>
               <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='gs-name ell-lg'>{{ item.goods_name }}</text></view>
-              <view bindtap='showInfo' data-id="{{ item.goods_code }}" class='text-center ell-lg'><text class='text-small text-muted'>{{ item.subtitle }}</text></view>
+              <view bindtap='showInfo' data-id="{{ item.goods_code }}" class='text-center ell-lg'><text class='text-small text-muted'>{{ null === item.subtitle ? '\n' : item.subtitle }}</text></view>
               <view><text bindtap='showInfo' data-id="{{ item.goods_code }}" class='price'>¥ {{ item.price }}</text><van-icon data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
               <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='text-del'>¥ {{ item.original }}</text></view>
             </block>    
