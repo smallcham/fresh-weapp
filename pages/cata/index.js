@@ -23,27 +23,20 @@ Page({
     VerticalNavTop: 0,
     last_top: 0,
     now_page: 1,
-    goodsList: [],
+    goodsList: false,
     goodsCata: app.globalData.goodsCata
   },
   tabSelect(e) {
     app.globalData.TabCur = e.currentTarget.dataset.id
     this.data.TabCur = e.currentTarget.dataset.id,
     this.setData({
-      empty_list: false,
-      goodsList: [],
+      goodsList: false,
       TabCur: e.currentTarget.dataset.id,
       VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })
     this.getGoodsList()
   },
   VerticalMain(e) {
-    console.log(this.data.now_page);
-    if ((e.detail.scrollTop >= e.detail.scrollHeight / (this.data.now_page * 2)) && e.detail.scrollTop > this.data.last_top) {
-      this.data.last_top = e.detail.scrollTop
-      this.data.now_page = this.data.now_page + 1
-      console.log('load more...')
-    }
   },
   /**
    * Lifecycle function--Called when page load
@@ -144,15 +137,27 @@ Page({
       url: '/pages/location/index',
     })
   },
+  // getGoodsList: function() {
+  //   this.setData({ loading_list: true })
+  //   api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
+  //     this.setData({
+  //       empty_list: res.total === 0,
+  //       goodsList: res,
+  //       loading_list: false
+  //     })
+  //   }).catch(err => {})
+  // },
   getGoodsList: function() {
     this.setData({ loading_list: true })
-    api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
-      this.setData({
-        empty_list: res.total === 0,
-        goodsList: res,
-        loading_list: false
-      })
-    }).catch(err => {})
+    if (this.data.goodsList.current_page >= this.data.goodsList.last_page) {
+      this.setData({ loading_list: false })
+      return
+    }
+    let next = !this.data.goodsList ? 1 : this.data.goodsList.current_page + 1
+    api.queryGoods('', this.data.TabCur, next).then(res => {
+      res.data = (this.data.goodsList && undefined !== this.data.goodsList.data) ? this.data.goodsList.data.concat(res.data) : res.data
+      this.setData({ goodsList: res, loading_list: false })
+    })
   },
   showInfo: function(e) {
     wx.navigateTo({

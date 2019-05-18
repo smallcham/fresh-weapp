@@ -11,7 +11,7 @@
       {{ item.cata_name }}
     </view>
   </scroll-view>
-  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 270rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain">
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 270rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain" bindscrolltolower="getGoodsList">
     <view class="padding-xs">
       <view class="cu-list menu menu-avatar">
         <view class="cu-item" wx:for="{{ goodsList.data }}" wx:key="{{ item.goods_code }}">
@@ -27,7 +27,7 @@
         </view>
       </view>
       <view class='text-center text-muted-la text-super anim-opacity-1' style='margin-top: 35rpx;display: {{ loading_list ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>
-      <view class='text-center text-muted-la text-small' style='margin-top: 35rpx;display: {{ empty_list ? "block" : "none" }}'><text>没有更多商品啦~</text></view>
+      <view class='text-center text-muted-la text-small' style='margin: 35rpx;display: {{ goodsList.current_page >= goodsList.last_page ? "block" : "none" }}'><text>没啦，就这么多啦~</text></view>
     </view>
   </scroll-view>
 </view>
