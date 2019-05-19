@@ -105,7 +105,7 @@ Page({
       fail: function (res) { }
     }
   },
-  toCheck: function() {
+  toCheck: function(e) {
     if (app.globalData.selected_address === undefined || app.globalData.selected_address === false || app.globalData.selected_address === null) {
       Dialog.alert({
         title: '轻果提醒',

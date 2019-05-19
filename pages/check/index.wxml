@@ -58,5 +58,5 @@
   <van-action-sheet show="{{ showTimePicker }}">
     <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
   </van-action-sheet>
-  <van-submit-bar label="付款："  price="{{ real_pay * 100 }}" button-text="去付款   ▸" button-type="success"  bind:submit="toCheck"/>
+  <van-submit-bar label="付款："  price="{{ real_pay * 100 }}" button-text="去付款   ▸" button-type="success" bind:submit="toCheck"/>
 </view>
