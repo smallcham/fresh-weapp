@@ -30,6 +30,18 @@ Page({
     api.countCart().then(res => {
       this.setData({ cartCount: (null === res || undefined === res) ? 0 : Number(res) })
     })
+    if (this.data.share) {
+      this.data.share = false
+      app.globalData.shareBack = '/pages/info/index?id=' + this.data.id
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    } else {
+      this.getGoods()
+    }
+    api.recommendGoods().then(res => {
+      this.setData({ recommend_list: res })
+    })
   },
 
   /**
@@ -42,18 +54,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    if (this.data.share) {
-        this.data.share = false
-        app.globalData.shareBack = '/pages/info/index?id=' + this.data.id
-        wx.switchTab({
-          url: '/pages/index/index'
-        })
-    } else {
-      this.getGoods()
-      api.recommendGoods().then(res => {
-        this.setData({ recommend_list: res })
-      })
-    }
+    
   },
 
   /**

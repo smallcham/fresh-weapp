@@ -27,7 +27,7 @@ Page({
     goodsCata: app.globalData.goodsCata,
     banner: [],
     indexCata: [],
-    recommend_list: []
+    recommend_list: false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -96,6 +96,17 @@ Page({
         }
       })
     }
+  },
+  onReachBottom: function () {
+    wx.showNavigationBarLoading()
+    api.recommendGoods().then(res => {
+      if (!this.data.recommend_list) this.setData({ recommend_list: res })
+      else {
+        res = this.data.recommend_list.concat(res)
+        this.setData({ recommend_list: res })
+      }
+      wx.hideNavigationBarLoading()
+    })
   },
   onShareAppMessage: function () {
     return {

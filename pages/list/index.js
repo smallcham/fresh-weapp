@@ -83,7 +83,7 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-    if (!page) return
+    if (!this.data.page) return
     if (this.data.page.current_page >= this.data.page.last_page || this.data.page.next_page === undefined || this.data.page.next_page === null) {
       this.setData({ last: true })
       return
@@ -117,7 +117,7 @@ Page({
       let differ = Number(res.free_delivery_limit - res.total).toFixed(1)
       let text = differ > 0 ?
         ' 实付满 ¥ ' + res.free_delivery_limit + ' 包邮，还差 ¥ ' + differ + ' 元，配送费 ¥ ' + res.delivery_fee :
-        ' 实付满 ¥ ' + res.free_delivery_limit + '包邮，当前总额 ¥ ' + res.total + ' 已包邮'
+        '当前总额 ¥ ' + res.total + '， 符合包邮条件，已免配送费'
       Notify({
         text: text,
         duration: 0,

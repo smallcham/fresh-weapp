@@ -10,7 +10,7 @@
   <van-tag data-word="{{ item.word }}" bindtap="setWord" plain size="medium" wx:for="{{ keys.hot }}" wx:key="{{ item.id }}">{{ item.word }}</van-tag>
 </view>
 
-<view class='line'></view>
+<view wx:if="{{ undefined !== keys.his && keys.his.length > 0 }}" class='line'></view>
 
 <block wx:if="{{ undefined !== keys.his && keys.his.length > 0 }}">
   <van-nav-bar border="{{ border }}" bind:click-right="onClearSearchHis">

@@ -35,6 +35,9 @@ Page({
     this.getTabBar().setData({
       selected: 3
     })
+    api.recommendGoods().then(res => {
+      this.setData({ recommend_list: res })
+    })
   },
 
   /**
@@ -245,7 +248,7 @@ Page({
       let differ = Number(res.free_delivery_limit - res.total).toFixed(1)
       let text = differ > 0 ?
         ' 实付满 ¥ ' + res.free_delivery_limit + ' 包邮，还差 ¥ ' + differ + ' 元，配送费 ¥ ' + res.delivery_fee :
-        ' 实付满 ¥ ' + res.free_delivery_limit + '包邮，当前已包邮'
+        ' 符合包邮条件，已免配送费'
       this.setData({ tip: text })
     })
   },
@@ -270,5 +273,16 @@ Page({
       Toast.clear()
       this.cartList()
     })
-  }  
+  },
+  addCart: function (e) {
+    api.addCart(e.currentTarget.dataset.id, 1).then(res => {
+      this.onShow()
+    }).catch(err => { Toast.fail(err); })
+    Notify({
+      text: '已加入购物车',
+      duration: 500,
+      selector: '#custom-notify',
+      backgroundColor: this.data.color.success
+    });
+  }
 })

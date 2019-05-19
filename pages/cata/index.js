@@ -66,7 +66,10 @@ Page({
   onShow: function () {
     let needLoad = this.data.TabCur !== app.globalData.TabCur
     this.data.TabCur = app.globalData.TabCur
-    if (needLoad) this.getGoodsList()
+    if (needLoad) {
+      this.data.goodsList = false
+      this.getGoodsList()
+    }
     if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
       this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
     } else {
@@ -137,22 +140,11 @@ Page({
       url: '/pages/location/index',
     })
   },
-  // getGoodsList: function() {
-  //   this.setData({ loading_list: true })
-  //   api.get(app.globalApi.query_goods, { data: { cata: this.data.TabCur, goods_name: '' } }).then(res => {
-  //     this.setData({
-  //       empty_list: res.total === 0,
-  //       goodsList: res,
-  //       loading_list: false
-  //     })
-  //   }).catch(err => {})
-  // },
   getGoodsList: function() {
-    this.setData({ loading_list: true })
-    if (this.data.goodsList.current_page >= this.data.goodsList.last_page) {
-      this.setData({ loading_list: false })
+    if (this.data.goodsList && this.data.goodsList.current_page >= this.data.goodsList.last_page) {
       return
     }
+    this.setData({ loading_list: true })
     let next = !this.data.goodsList ? 1 : this.data.goodsList.current_page + 1
     api.queryGoods('', this.data.TabCur, next).then(res => {
       res.data = (this.data.goodsList && undefined !== this.data.goodsList.data) ? this.data.goodsList.data.concat(res.data) : res.data
