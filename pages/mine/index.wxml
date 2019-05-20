@@ -65,13 +65,13 @@
 
   <view class='card-fulid text-center' style='width:90%;margin-left:2.5%;'>
     <van-row>
-      <van-col span="8">
+      <!-- <van-col span="8">
         <view class='card' style='width:100%;border-top:0;'>
             <view><text class='text-primary'>¥ 0</text></view>
             <view><text class='text-mini text-muted'>余额</text></view>
           </view>
-      </van-col>
-      <van-col span="8">
+      </van-col> -->
+      <van-col span="12">
         <view class='card' style='width:100%;border-top:0;' bindtap='toCoupon'>
             <view><text class='text-primary'>2</text></view>
             <view><text class='text-mini text-muted'>优惠券</text></view>
@@ -83,7 +83,7 @@
             <view><text class='text-mini text-muted'>商品券</text></view>
           </view>
       </van-col> -->
-      <van-col span="8">
+      <van-col span="12">
         <view class='card' style='width:100%;border-top:0;'>
             <view><text class='text-primary'>0</text></view>
             <view><text class='text-mini text-muted'>轻果币</text></view>
