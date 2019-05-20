@@ -48,6 +48,9 @@ Page({
       mask: false,
       message: '定位中'
     });
+    api.getUser().then(res => {
+      app.globalData.mine = res
+    })
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userLocation']) {

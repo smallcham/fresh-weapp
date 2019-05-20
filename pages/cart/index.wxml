@@ -27,8 +27,8 @@
             </van-row>
             <van-row>
               <van-col span="24">
-                <van-tag plain style='padding-right: 10rpx;'>爆款直降</van-tag>
-                <van-tag plain style='padding-right: 10rpx;'>会员优选</van-tag>
+                <van-tag wx:if="{{ item.price != item.original }}" plain color="{{ color.muted }}" style='padding-right: 10rpx;'>促销优惠</van-tag>
+                <van-tag wx:if="{{ is_vip && item.vip_price != item.price }}" plain color="{{ color.warning }}" style='padding-right: 10rpx;'>会员商品</van-tag>
                 <view style='float:right; margin-right: 20rpx'>
                   <van-stepper style="display: {{ item.inventory > 0 ? 'block' : 'none' }}" data-idx="{{ index }}" data-code="{{ item.cart_code }}" min="1" max="{{ item.inventory }}" value="{{ item.amount }}" bind:change="onChangeNum" bind:overlimit="onReduce" />
                   <text style="display: {{ item.inventory > 0 ? 'none' : 'block' }}" class="text-danger text-mini">库存不足</text>
@@ -37,8 +37,8 @@
             </van-row>
             <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
               <van-col span="24">
-                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
-                <text class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ {{ item.original }}</text>
+                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ is_vip && item.vip_price != item.price ? item.vip_price : item.price }}</text>
+                <text wx:if="{{ item.original != item.price }}" class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ {{ item.original }}</text>
               </van-col>
             </van-row>
           </view>

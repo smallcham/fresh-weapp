@@ -1,7 +1,8 @@
-import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog';
-import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
-import Toast from '../../miniprogram_npm/vant-weapp/toast/toast';
-import api from '../../api/api';
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify'
+import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
+import api from '../../api/api'
+import util from '../../utils/util'
 const app = getApp()
 // pages/cart/index.js
 Page({
@@ -18,6 +19,7 @@ Page({
     hasInvalid: false,
     effective_count: 0,
     tip: '',
+    is_vip: false,
     total: 0,
     save: 0,
     carts: [],
@@ -54,6 +56,7 @@ Page({
     Toast.loading({
       mask: false
     });
+    this.setData({ is_vip: util.formatTime(new Date()) < app.globalData.mine.vip_expire_time })
     if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
       this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
     } else {
@@ -227,7 +230,7 @@ Page({
       } else {
         if (this.data.carts[i].inventory > 0) {
           this.data.effective_count++
-          total += Number(this.data.carts[i].price) * Number(this.data.carts[i].amount)
+          total += Number(this.data.is_vip ? this.data.carts[i].vip_price : this.data.carts[i].price) * Number(this.data.carts[i].amount)
           originalTotal += Number(this.data.carts[i].original) * Number(this.data.carts[i].amount)
         }
       }

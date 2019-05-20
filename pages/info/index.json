@@ -6,6 +6,7 @@
     "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
     "van-panel": "/miniprogram_npm/vant-weapp/panel/index",
     "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
+    "van-tag": "/miniprogram_npm/vant-weapp/tag/index",
     "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
   }
 }

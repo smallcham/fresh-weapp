@@ -163,6 +163,12 @@ no-border {
   font-weight: bold;
 }
 
+.vip-price {
+  color: #F39C12;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
 .line {
  background: rgba(0, 0, 0, 0.030);
  width: 96%;
@@ -217,7 +223,7 @@ mt-5 {
 
 .text-del {
   color: #bbbec4;
-  font-size: 25rpx;
+  font-size: 23rpx;
   text-decoration:line-through;
 }
 

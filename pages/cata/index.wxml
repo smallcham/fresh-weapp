@@ -19,7 +19,11 @@
           <view class='content' data-id="{{ item.goods_code }}" bindtap='showInfo'>
             <view class='text-small ell-md-2'>{{ item.goods_name }}</view>
             <view class='text-muted text-mini ell-lg'>{{ item.subtitle ? item.subtitle : '' }}</view>
-            <view><text class='text-del'>¥ {{ item.original }}</text><text class='price' style='padding-left: 10rpx'>¥ {{ item.price }}</text></view>
+            <view>
+              <text class='text-del' wx:if="{{ item.original != item.price }}">¥ {{ item.original }}</text>
+              <text class='price' style='padding-left: 10rpx;padding-right: 10rpx'>¥ {{ item.price }}</text>
+            <block wx:if="{{ item.vip_price != item.price }}"><text class='vip-price'> ¥ {{ item.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+            </view>
           </view>
           <view class='action'>
             <view class='text-super'><van-icon bindtap='addCart'  data-id="{{ item.goods_code }}" style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>

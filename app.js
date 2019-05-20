@@ -175,7 +175,7 @@ App({
   },
   get_query_var(url) {
     var query = url.split('?');
-      if(query.length < 2) [];
+      if(query.length < 2) return [];
       var vars = query[1].split("&");
       let result = []
       for(var i = 0; i<vars.length;i++) {
@@ -185,12 +185,12 @@ App({
     return result;
   },
   clickLink: function(url, type) {
+    if (null === url || undefined === url) return false
     if (type === 0) {
       let params = this.get_query_var(url)
       for(let i = 0; i < params.length; i ++) {
         this.globalData[params[i][0]] = params[i][1]
       }
-      console.log(this.globalData.TabCur)
       wx.switchTab({ url: url.split('?')[0] })
     }
     else if (type === 1) {

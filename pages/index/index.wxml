@@ -61,7 +61,10 @@
             <view class='text-center' data-id="{{ column.goods_code }}" bindtap='showInfo'><image src='{{ fs + column.goods_img }}' style='width:200rpx;height:200rpx;'></image></view>
             <view bindtap='showInfo' data-id="{{ column.goods_code }}"><text class='gs-name'>{{ column.goods_name }}</text></view>
             <view><text class='price' data-id="{{ column.goods_code }}" bindtap='showInfo'>¥ {{ column.price }}</text><van-icon data-id="{{ column.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-            <view bindtap='showInfo' data-id="{{ column.goods_code}}"><text class='text-del'>¥ {{ column.original }}</text></view>
+            <view bindtap='showInfo' data-id="{{ column.goods_code}}">
+              <text wx:if="{{ column.original != column.price }}" class='text-del'>¥ {{ column.original }}</text>
+              <block wx:if="{{ column.vip_price != column.price }}"><text class='vip-price'> ¥ {{ column.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+            </view>
             </block>
         </view>
     </scroll-view>
@@ -99,7 +102,10 @@
               <view class='text-center' bindtap='showInfo' data-id="{{ goods.goods_code }}"><image src='{{ fs + goods.goods_img }}' style='width:220rpx;height:220rpx;'></image></view>
               <view bindtap='showInfo' data-id="{{ goods.goods_code }}"><text class='gs-name'>{{ goods.goods_name }}</text></view>
               <view><text class='price' bindtap='showInfo' data-id="{{ goods.goods_code }}">¥ {{ goods.price }}</text><van-icon data-id="{{ goods.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view bindtap='showInfo' data-id="{{ goods.goods_code }}"><text class='text-del'>¥ {{ goods.original }}</text></view>
+              <view bindtap='showInfo' data-id="{{ goods.goods_code }}">
+                <text class='text-del'  wx:if="{{ goods.original != goods.price }}">¥ {{ goods.original }}</text>
+                <block wx:if="{{ goods.vip_price != goods.price }}"><text class='vip-price'> ¥ {{ goods.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+              </view>
               </block>
           </view>
     </scroll-view>
@@ -117,7 +123,10 @@
               <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='gs-name ell-lg'>{{ item.goods_name }}</text></view>
               <view bindtap='showInfo' data-id="{{ item.goods_code }}" class='text-center ell-lg'><text class='text-small text-muted'>{{ null === item.subtitle ? '\n' : item.subtitle }}</text></view>
               <view><text bindtap='showInfo' data-id="{{ item.goods_code }}" class='price'>¥ {{ item.price }}</text><van-icon data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-              <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='text-del'>¥ {{ item.original }}</text></view>
+              <view bindtap='showInfo' data-id="{{ item.goods_code }}">
+                <text class='text-del' wx:if="{{ item.original != item.price }}">¥ {{ item.original }}</text>
+                <block wx:if="{{ item.vip_price != item.price }}"><text class='vip-price'> ¥ {{ item.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+              </view>
             </block>    
         </view>
         </van-col>
