@@ -5,41 +5,42 @@
 </view>
 
 <view wx:if="{{ !loading && coupons.length > 0 }}">
-  <view style="margin: .2rem;padding: .2rem">
-    <van-radio-group value="{{ false }}">
-      <van-cell border="{{ false }}" title="不使用优惠券" clickable data-name="{{ false }}">
-        <van-radio checked-color="{{ color.success }}" name="{{ false }}" />
+  <view wx:if="{{ !read_only }}" style="margin: .2rem;padding: .2rem">
+      <van-cell border="{{ false }}" title="不使用优惠券" clickable data-name="{{ false }}" bind:click="onChangeUseCoupon">
+        <van-checkbox disabled='{{ disable }}' checked-color="{{ color.success }}" value="{{ not_use_coupon }}" />
       </van-cell>
-    </van-radio-group>
   </view>
 
-  <view wx:for="{{ coupons }}"  wx:key="{{ item.coupon_code }}" class='coupon {{ item.can_use ? "" : " disable" }}'>
-    <van-row>
-      <van-col span="8">
-        <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>{{ item.discount_amount }}</text></view>
-        <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>实付满 ¥ {{ item.limit_amount }} 元可用 </text></view>
-      </van-col>
-      <van-col span="12">
-        <view class='text-mini text-muted'>
-          <view style='font-weight: 700'>{{ item.vip_only ? "仅限会员使用" : "会员、非会员通用" }}</view>
-          <view>
-          <text>使用范围: </text>
-          <text wx:if="{{ undefined !== item.catas && item.catas.length !== 0 }}" wx:for="{{ item.catas }}" wx:for-item="cata" wx:key="{{ cata.cata_code }}">{{ cata.cata_name }} </text>
-          <text wx:if="{{ undefined === item.catas || item.catas.length === 0 }}">适用于所有品类商品</text>
+  <view style='opacity: {{ not_use_coupon && !read_only ? "0.5" : "1" }}'>
+    <view wx:for="{{ coupons }}"  wx:key="{{ item.coupon_code }}" class='coupon {{ item.can_use || read_only ? "" : " disable" }}'>
+      <van-row data-idx="{{ index }}" bindtap="{{ item.can_use && !read_only ? 'chooseCoupon' : '' }}">
+        <van-col span="8">
+          <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>{{ item.discount_amount }}</text></view>
+          <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>实付满 ¥ {{ item.limit_amount }} 元可用 </text></view>
+        </van-col>
+        <van-col span="12">
+          <view class='text-mini text-muted'>
+            <view style='font-weight: 700'>{{ item.vip_only ? "仅限会员使用" : "会员、非会员通用" }}</view>
+            <view>
+            <text>使用范围: </text>
+            <text wx:if="{{ undefined !== item.catas && item.catas.length !== 0 }}" wx:for="{{ item.catas }}" wx:for-item="cata" wx:key="{{ cata.cata_code }}">{{ cata.cata_name }} </text>
+            <text wx:if="{{ undefined === item.catas || item.catas.length === 0 }}">适用于所有品类商品</text>
+            </view>
+            <view>优惠类型: {{ item.coupon_type === 0 ? "满减" : "红包" }}</view>
+            <view wx:if="{{  item.start_time > now }}">生效时间: {{ item.start_time }}</view>
+            <view>有效期至: {{ item.end_time }}</view>
           </view>
-          <view>优惠类型: {{ item.coupon_type === 0 ? "满减" : "红包" }}</view>
-          <view wx:if="{{  item.start_time > now }}">生效时间: {{ item.start_time }}</view>
-          <view>有效期至: {{ item.end_time }}</view>
-        </view>
-      </van-col>
-      <van-col wx:if="{{ item.can_use }}" span="4"><van-tag color="{{ color.success }}">{{ item.end_time < now ? "已过期" : item.start_time > now ? "未生效" : "可用"}}</van-tag></van-col>
-      <van-col wx:if="{{ !item.can_use }}" span="4"><van-tag color="{{ color.muted }}">已失效</van-tag></van-col>
-    </van-row>
-    <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
-      <van-collapse-item name="{{ item.coupon_code }}">
-        <text slot="value" class='text-mini text-muted'>查看详情</text>
-        <text class='text-mini text-muted'>{{ item.areas ? ("限 " + item.areas + " 地区使用") : "不限制使用地区" }}\n以轻果鲜生的地区划分规则为准</text>
-      </van-collapse-item>
-    </van-collapse>
+        </van-col>
+        <van-col wx:if="{{ item.can_use && !read_only }}" span="4"><van-tag color="{{ color.success }}">{{ item.end_time < now ? "已过期" : item.start_time > now ? "未生效" : "可用"}}</van-tag></van-col>
+        <van-col wx:if="{{ !item.can_use && !read_only }}" span="4"><van-tag color="{{ color.muted }}">不可用</van-tag></van-col>
+      </van-row>
+      <van-collapse value="{{ activeInfo }}" bind:change="openInfo" border="{{ false }}">
+        <van-collapse-item name="{{ item.coupon_code }}">
+          <text slot="value" class='text-mini text-muted'>查看详情</text>
+          <text class='text-mini text-muted'>{{ item.areas ? ("限 " + item.areas + " 地区使用") : "不限制使用地区" }}\n以轻果鲜生的地区划分规则为准</text>
+        </van-collapse-item>
+      </van-collapse>
+    </view>
   </view>
+
 </view>

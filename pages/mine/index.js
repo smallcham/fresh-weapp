@@ -32,6 +32,7 @@ Page({
         this.setData({ mine: res, expireDay: util.diffDay(res.vip_expire_time) })
       })
     }
+    this.getLink()
   },
 
   /**
@@ -138,7 +139,18 @@ Page({
   },
   toCoupon: function() {
     wx.navigateTo({
-      url: '/pages/coupon/index'
+      url: '/pages/coupon/index?read_only=1'
     })
+  },
+  getLink: function () {
+    api.get(app.globalApi.get_link, { data: { link_type: 2 } }).then(res => {
+      if (res === undefined) return
+      this.setData({ banner: res })
+      console.log(res)
+    }).catch(err => {})
+  },
+  clickLink: function(e) {
+    let banner = this.data.banner[e.currentTarget.dataset.idx]
+    app.clickLink(banner.url, banner.url_type)
   }
 })

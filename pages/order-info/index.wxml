@@ -48,7 +48,8 @@
 
     <view style='margin-top: 15rpx;'>
       <van-cell title="商品总价"  icon="gold-coin-o" value="¥ {{ order.pre_discount_total }}"/>
-      <van-cell title="优惠券"  icon="coupon-o" value="无可用优惠券"/>
+      <van-cell wx:if="{{ order.coupons.length > 0 }}" title="优惠券"  icon="coupon-o" wx:for="{{ order.coupons }}" wx:key="{{ item.id }}" value="{{  '实付满 ¥' + item.limit_amount + ' 减  ¥'  + item.discount_amount }}"/>
+      <van-cell wx:if="{{ order.coupons.length <= 0 }}" title="优惠券"  icon="coupon-o" value="未使用优惠券"/>
       <van-cell title="商品实付"  icon="balance-pay"  value="¥ {{ order.total }}"/>
       <van-cell title="配送费"  icon="free-postage"  value="{{ order.deliver_fee >= 0 ? '¥ ' + order.deliver_fee : '包邮' }}"/>
     </view>

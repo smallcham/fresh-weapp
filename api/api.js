@@ -42,8 +42,8 @@ const request = (url, options) => {
 
 const pay = (order_code) => {
   return new Promise((resolve, reject) => {
-    let userInfo = app.globalData.userInfo
-    if (null === userInfo || undefined === userInfo) {
+    const token = wx.getStorageSync('token')
+    if (null === token || '' === token || undefined === token) {
       wx.showToast({
         title: '请先完成登录',
         icon: 'none'

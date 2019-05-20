@@ -37,6 +37,9 @@ App({
     this.animation = animation;
 
     var QQMapWX = require('/libs/qqmap-wx-jssdk.min.js');
+    // var Amap = require('/libs//amap-wx.js');
+    // this.amap = new Amap.AMapWX({ key: 'bc3c26bece30a5037f477aea3eef6172' });
+
     this.qqmapsdk = new QQMapWX({
       key: this.globalData.map_key
     });
@@ -60,6 +63,21 @@ App({
     return null === target || undefined === target || '' === target;
   },
   _getLocation: function (target, poi = 0, get_house = false, options = null) {
+    // const that = this
+    // this.amap.getRegeo({
+    //   success: function (data) {
+    //     if (null === data || undefined === data || data.length <= 0) {
+    //       that.setData({ location: '位置获取失败' })
+    //       return
+    //     }
+    //     console.log(data)
+    //   },
+    //   fail: function (info) {
+    //     console.log(info)
+    //     that.setData({ location: '位置获取失败' })
+    //   }
+    // })
+
     const that = this
     wx.getLocation({
       success: function (e) {
@@ -155,9 +173,25 @@ App({
       })
     }
   },
+  get_query_var(url) {
+    var query = url.split('?');
+      if(query.length < 2) [];
+      var vars = query[1].split("&");
+      let result = []
+      for(var i = 0; i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        result.push(pair)
+      }
+    return result;
+  },
   clickLink: function(url, type) {
     if (type === 0) {
-      wx.switchTab({ url: url })
+      let params = this.get_query_var(url)
+      for(let i = 0; i < params.length; i ++) {
+        this.globalData[params[i][0]] = params[i][1]
+      }
+      console.log(this.globalData.TabCur)
+      wx.switchTab({ url: url.split('?')[0] })
     }
     else if (type === 1) {
       wx.reLaunch({
@@ -255,6 +289,8 @@ App({
     shareBack: false,
     location: {"title": "地理位置获取中"},
     TabCur: 0,
+    not_use_coupon: false,
+    use_coupon: false,
     goodsCata: [],
     color: {
       primary: "#2C3E50",

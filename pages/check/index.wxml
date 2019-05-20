@@ -50,7 +50,7 @@
       </van-panel>
       <van-cell title="商品原价"  icon="gold-coin-o" value="¥ {{ original }}"/>
       <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ {{ discount }}</text></van-cell>
-      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '无可用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
+      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '不使用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
       <van-cell title="商品实付"  icon="balance-pay" value="¥ {{ total }}"/>
       <van-cell title="配送费"  icon="free-postage"  value="{{ delivery_fee === 0 ? '包邮' : ('¥ ' + delivery_fee) }}"/>
     </view>

@@ -13,6 +13,9 @@ Page({
     loading: true,
     activeInfo: [],
     coupons: [],
+    read_only: false,
+    not_use_coupon: false,
+    disable: false,
     now: new Date()
   },
 
@@ -21,6 +24,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
+      read_only: options.read_only === '1',
       color: app.globalData.color,
       now: util.formatTime(new Date())
     })
@@ -88,10 +92,23 @@ Page({
   },
   getCanUseCoupons: function() {
     api.queryEffectiveCoupon().then(res => {
-      if (undefined !== res) this.setData({ coupons: res, loading: false })
+      if (undefined !== res) {
+        app.globalData.not_use_coupon = false
+        this.setData({ coupons: res, loading: false })
+      }
       else {
-        this.setData({ loading: false })
+        app.globalData.not_use_coupon = true
+        this.setData({ loading: false, not_use_coupon: true, disable: true })
       }
     })
+  },
+  onChangeUseCoupon: function(e) {
+    app.globalData.not_use_coupon = !this.data.not_use_coupon
+    if (!this.data.not_use_coupon === false) app.globalData.use_coupon = false
+    this.setData({ not_use_coupon: !this.data.not_use_coupon })
+  },
+  chooseCoupon: function(e) {
+    app.globalData.use_coupon = this.data.coupons[e.currentTarget.dataset.idx]
+    wx.navigateBack({})
   }
 })

@@ -36,6 +36,7 @@ Page({
       selectedTime: this.data.timeColumns[0],
       selected_address: false
     })
+    app.globalData.use_coupon = app.globalData.not_use_coupon = false
   },
 
   /**
@@ -118,7 +119,7 @@ Page({
     Toast.loading({
       mask: true
     });
-    api.createOrder().then(res => {
+    api.createOrder(this.data.chooseCoupon ? [this.data.chooseCoupon.id] : []).then(res => {
       if (null === res || undefined === res) {
         Dialog.alert({
           title: '轻果提醒',
@@ -187,18 +188,35 @@ Page({
       }
       this.setData({ goods_list: res.carts, sum: res.sum, total: res.total, original: res.original, discount: res.discount, is_vip: res.is_vip })
       Toast.clear()
-      api.autoChooseCoupon().then(coupon => {
-        let discount = 0
-        if (null === coupon || undefined === coupon) {
-          coupon = false
-        } else {
-          discount = coupon.discount_amount
-        }
-        let total = Number(this.data.total - discount).toFixed(1)
-        let delivery_fee = total  >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
+      //用户选择不使用优惠券
+      if (app.globalData.not_use_coupon === true) {
+        let delivery_fee = this.data.total >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
+        let real_pay = (Number(this.data.total) + Number(delivery_fee)).toFixed(1)
+        this.setData({ chooseCoupon: false, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
+        return
+      }
+      //用户手动选择优惠券
+      if (app.globalData.use_coupon !== false) {
+        let total = Number(this.data.total - app.globalData.use_coupon.discount_amount).toFixed(1)
+        let delivery_fee = total >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
         let real_pay = (Number(total) + Number(delivery_fee)).toFixed(1)
-        this.setData({ chooseCoupon: coupon, total: total, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
-      })
+        this.setData({ chooseCoupon: app.globalData.use_coupon, total: total, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
+        app.globalData.use_coupon = false
+      } else {
+        //自动选择最优优惠方案
+        api.autoChooseCoupon().then(coupon => {
+          let discount = 0
+          if (null === coupon || undefined === coupon) {
+            coupon = false
+          } else {
+            discount = coupon.discount_amount
+          }
+          let total = Number(this.data.total - discount).toFixed(1)
+          let delivery_fee = total >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
+          let real_pay = (Number(total) + Number(delivery_fee)).toFixed(1)
+          this.setData({ chooseCoupon: coupon, total: total, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
+        })
+      }
     })
   }
 })
