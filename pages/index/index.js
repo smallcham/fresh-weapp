@@ -48,9 +48,6 @@ Page({
       mask: false,
       message: '定位中'
     });
-    api.getUser().then(res => {
-      app.globalData.mine = res
-    })
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userLocation']) {
@@ -232,6 +229,9 @@ Page({
     this.getCata()
   },
   getHouse: function(city, lat, lng) {
+    api.getUser().then(res => {
+      app.globalData.mine = res
+    })
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
       Toast.clear();
       app.globalData.house = res

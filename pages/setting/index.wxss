@@ -1,0 +1,12 @@
+page {
+  background: #F9F9F9;
+}
+
+.footer {
+  margin-top: 70%;
+}
+
+.footer .foot-icon {
+  width: 90rpx;
+  height: 90rpx;
+}

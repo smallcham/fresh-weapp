@@ -1,0 +1,11 @@
+<view style="padding-top: 35rpx">
+  <van-cell-group>
+    <van-cell title="隐私政策" is-link data-src="privacy.html" bind:click="toPage"/>
+    <van-cell title="用户协议" is-link data-src="agreement.html" bind:click="toPage"/>
+    <van-cell title="意见反馈" is-link data-src="" bind:click="toPage"/>
+  </van-cell-group>
+</view>
+<view class='footer text-center'>
+  <view><image class='foot-icon' src="{{ fs + 'ee1596ad1582dd250e12170c292968fa' }}"/></view>
+  <view><text class='text-mini text-muted'>轻果鲜生小程序</text></view>
+</view>

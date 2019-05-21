@@ -146,11 +146,15 @@ Page({
     api.get(app.globalApi.get_link, { data: { link_type: 2 } }).then(res => {
       if (res === undefined) return
       this.setData({ banner: res })
-      console.log(res)
     }).catch(err => {})
   },
   clickLink: function(e) {
     let banner = this.data.banner[e.currentTarget.dataset.idx]
     app.clickLink(banner.url, banner.url_type)
+  },
+  toSetting: function() {
+    wx.navigateTo({
+      url: '/pages/setting/index'
+    })
   }
 })

@@ -37,7 +37,8 @@
             </van-row>
             <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
               <van-col span="24">
-                <text class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ is_vip && item.vip_price != item.price ? item.vip_price : item.price }}</text>
+                <text wx:if="{{ is_vip && item.vip_price != item.price }}" class='text-small text-warning' style='float: left;font-weight:700;'>¥ {{ item.vip_price }}</text>
+                <text wx:else class='text-small text-success' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
                 <text wx:if="{{ item.original != item.price }}" class='text-mini text-muted text-del' style='float: left;padding-left: 10rpx'>¥ {{ item.original }}</text>
               </van-col>
             </van-row>

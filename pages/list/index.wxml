@@ -17,7 +17,10 @@
           <van-icon wx:if="{{ item.inventory > 0 }}" data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" />
           <text  bindtap='showInfo' data-id="{{ item.goods_code }}" wx:if="{{ item.inventory <= 0 }}" class='text-danger text-mini' style='float: right;'>库存不足</text>
         </view>
-        <view bindtap='showInfo' data-id="{{ item.goods_code }}"><text class='text-del'>¥ {{ item.original }}</text></view>
+        <view bindtap='showInfo' data-id="{{ item.goods_code }}">
+          <text wx:if="{{ item.original != item.price }}" class='text-del'>¥ {{ item.original }}</text>
+          <block wx:if="{{ item.vip_price != item.price }}"><text class='vip-price'> ¥ {{ item.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+        </view>
       </block>    
   </view>
   </van-col>
@@ -48,3 +51,4 @@
 </view>
 
 <view style='margin: 1rem' wx:if="{{  last }}" class='text-center text-muted text-mini'>就这么多了, 再往下就到世界的尽头了 ~</view>
+

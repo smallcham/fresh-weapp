@@ -35,24 +35,24 @@
                 <van-col span="6">
                   <view><van-icon name="diamond" /><text> 专享价</text></view>
                 </van-col>
-                <van-col span="6">
+                <!-- <van-col span="6">
                   <view><van-icon name="bill" /><text> 任务红包</text></view>
-                </van-col>
+                </van-col> -->
                 <van-col span="6">
-                  <view><van-icon name="logistics" /><text> 1小时达</text></view>
+                  <view><van-icon name="logistics" /><text> 小时达</text></view>
                 </van-col>
-                <van-col span="6">
+                <!-- <van-col span="6">
                   <view><van-icon name="gift" /><text> 会员日</text></view>
-                </van-col>
-                <van-col span="6">
+                </van-col> -->
+                <!-- <van-col span="6">
                   <view><van-icon name="friends" /><text> 共享会员</text></view>
-                </van-col>
+                </van-col> -->
                 <van-col span="6">
-                  <view><van-icon name="diamond" /><text> 超级积分</text></view>
+                  <view><van-icon name="diamond" /><text> 双倍积分</text></view>
                 </van-col>
-                <van-col span="6">
+                <!-- <van-col span="6">
                   <view><van-icon name="service" /><text> 专属客服</text></view>
-                </van-col>
+                </van-col> -->
                 <van-col span="6">
                   <view><van-icon name="more-o" /><text> 敬请期待</text></view>
                 </van-col>
@@ -144,30 +144,30 @@
     </view>
   </van-nav-bar>
     <van-row gutter="45">
-      <van-col span="8">
+      <!-- <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.warning }}' name="point-gift" /></view>
             <view><text class='text-mini text-muted'>储值送会员</text></view>
           </view>
-      </van-col>
+      </van-col> -->
       <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.danger }}' name="balance-list" /></view>
             <view><text class='text-mini text-muted'>邀请的红包</text></view>
           </view>
       </van-col>
-      <van-col span="8">
+      <!-- <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.danger }}' name="friends" /></view>
             <view><text class='text-mini text-muted'>我的拼团</text></view>
           </view>
-      </van-col>
-      <van-col span="8">
+      </van-col> -->
+      <!-- <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.warning }}' name="star" /></view>
             <view><text class='text-mini text-muted'>积分商城</text></view>
           </view>
-      </van-col>
+      </van-col> -->
       <van-col span="8" bindtap="openMyAddress">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.info }}' name="location" /></view>
@@ -180,7 +180,7 @@
             <view><text class='text-mini text-muted'>客服和帮助</text></view>
           </view>
       </van-col>
-      <van-col span="8">
+      <van-col span="8" bindtap="toSetting">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.info }}' name="setting" /></view>
             <view><text class='text-mini text-muted'>关于</text></view>

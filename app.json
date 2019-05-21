@@ -21,7 +21,9 @@
     "pages/goods-list/index",
     "pages/pay-success/index",
     "pages/order-progress/index",
-    "pages/feedback/index"
+    "pages/feedback/index",
+    "pages/setting/index",
+    "pages/web/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

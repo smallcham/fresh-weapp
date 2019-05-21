@@ -227,6 +227,7 @@ App({
     }
   },
   globalApi: {
+    root: 'https://www.llfresh.cn/',
     host: 'https://www.llfresh.cn/api/mini/',
     token: 'token',
     reg: 'reg',
