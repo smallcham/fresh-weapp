@@ -336,6 +336,10 @@ const clearSearchHis = () => {
   return request(app.globalApi.search_clear, { method: 'POST', data: {} })
 }
 
+const getRunData = (iv, edata) => {
+  return request(app.globalApi.get_run_data, { method: 'GET', data: { data: { iv: iv, encryptedData: edata } } })
+}
+
 module.exports = {
   get,
   post,
@@ -377,5 +381,6 @@ module.exports = {
   queryCoupon,
   uploadImg,
   getSearchInfo,
-  clearSearchHis
+  clearSearchHis,
+  getRunData
 }

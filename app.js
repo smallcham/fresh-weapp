@@ -235,6 +235,7 @@ App({
     search_info: 'search/info',
     search_clear: 'search/clear',
     get_phone: 'phone',
+    get_run_data: 'run/data',
     get_house: 'distance',
     cata_list: 'cata/list',
     recommend_goods: 'goods/recommend',

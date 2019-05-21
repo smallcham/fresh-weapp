@@ -23,7 +23,8 @@
     "pages/order-progress/index",
     "pages/feedback/index",
     "pages/setting/index",
-    "pages/web/index"
+    "pages/web/index",
+    "pages/question/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -58,8 +58,10 @@
       <van-cell title="余额支付" value="¥ 0"/>
       <van-cell title="实际支付" value="¥ {{ order.real_pay }}" />
     </view>
-  </view>
 
+    <view style='margin-top: 35rpx;' wx:if="{{  order.order_state === 3 || order.order_state === 4 }}" class='text-center text-muted text-mini'>如果收到的商品出现质量、错发、漏发等情况请提交 <text class='text-success'>问题咨询</text></view>
+  </view>
+  
   <van-goods-action>
     <van-goods-action-button disabled="{{ paying }}" wx:if="{{ order.order_state === 0 || order.order_state === 1 }}" text="取消订单" type="default" bind:click="cancelOrder"/>
     <van-goods-action-button disabled="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />

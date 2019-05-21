@@ -79,8 +79,8 @@
       </van-col>
       <!-- <van-col span="8">
         <view class='card' style='width:100%;border-top:0;'>
-            <view><text class='text-primary'>0</text></view>
-            <view><text class='text-mini text-muted'>商品券</text></view>
+            <view><text class='text-primary'>{{ step }}</text></view>
+            <view><text class='text-mini text-muted'>昨日步数</text></view>
           </view>
       </van-col> -->
       <van-col span="12">

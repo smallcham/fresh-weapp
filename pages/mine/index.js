@@ -11,6 +11,7 @@ Page({
       fs: app.globalData.fs,
       now: new Date(),
       mine: {},
+      step: 0,
       expireDay: 0,
       orderCount: { unpay: 0, un_deliver: 0, delivering: 0 }
   },
@@ -19,6 +20,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    // this.getRunData()
     this.setData({
       userInfo: app.globalData.userInfo,
       color: app.globalData.color,
@@ -155,6 +157,17 @@ Page({
   toSetting: function() {
     wx.navigateTo({
       url: '/pages/setting/index'
+    })
+  },
+  getRunData: function() {
+    let that = this
+    wx.getWeRunData({
+      success: function(e) {
+        api.getRunData(e.iv, e.encryptedData).then(res => {
+          let step = undefined === res.stepInfoList || res.stepInfoList.length <= 0 ? 0 : res.stepInfoList[res.stepInfoList.length - 1].step
+          that.setData({ step: step })
+        })
+      }
     })
   }
 })
