@@ -91,7 +91,7 @@ Page({
     this.setData({ activeInfo: e.detail })
   },
   getCanUseCoupons: function() {
-    api.queryEffectiveCoupon().then(res => {
+    api.queryEffectiveCoupon(this.data.read_only ? 0 : 1).then(res => {
       if (undefined !== res) {
         app.globalData.not_use_coupon = false
         this.setData({ coupons: res, loading: false })

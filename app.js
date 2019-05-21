@@ -274,6 +274,7 @@ App({
     cancel_order: 'order/cancel',
     query_coupon: 'coupon/query',
     query_effective_coupon: 'coupon/query/effective',
+    count_effective_coupon: 'coupon/count/effective',
     choose_coupon: 'coupon/choose',
     auto_choose_coupon: 'coupon/auto/choose',
     upload_img: 'upload/img'

@@ -13,6 +13,7 @@ Page({
       mine: {},
       step: 0,
       expireDay: 0,
+      couponCount: 0,
       orderCount: { unpay: 0, un_deliver: 0, delivering: 0 }
   },
 
@@ -28,12 +29,6 @@ Page({
     this.getTabBar().setData({
       selected: 4
     })
-    if (null !== app.globalData.userInfo) {
-      api.getUser().then(res => {
-        app.globalData.userInfo.mine = res
-        this.setData({ mine: res, expireDay: util.diffDay(res.vip_expire_time) })
-      })
-    }
     this.getLink()
   },
 
@@ -48,19 +43,18 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    if (null !== app.globalData.userInfo) {
-      let _mine = undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : this.data.mine
-      this.setData({
-        mine: undefined !== app.globalData.userInfo.mine ? app.globalData.userInfo.mine : {},
-        now: util.formatTime(new Date()),
-        expireDay: undefined !== _mine.vip_expire_time ? util.diffDay(_mine.vip_expire_time) : 0
-      })
-    }
+    api.getUser().then(res => {
+      app.globalData.userInfo.mine = res
+      this.setData({ now: util.formatTime(new Date()), mine: res, expireDay: util.diffDay(res.vip_expire_time) })
+    })
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
     })
     api.getOrderCount().then(res => {
       this.setData({ orderCount: res })
+    })
+    api.countEffectiveCoupon().then(res => {
+      this.setData({ couponCount: res })
     })
     this.getTabBar().setData({
       selected: 4

@@ -320,8 +320,12 @@ const chooseCoupon = (coupon_code) => {
   return request(app.globalApi.choose_coupon + '/' + coupon_code, { method: 'POST', data: {} })
 }
 
-const queryEffectiveCoupon = () => {
-  return request(app.globalApi.query_effective_coupon, { method: 'GET', data: {} })
+const queryEffectiveCoupon = (mode=1) => {
+  return request(app.globalApi.query_effective_coupon + '/' + mode, { method: 'GET', data: {} })
+}
+
+const countEffectiveCoupon = () => {
+  return request(app.globalApi.count_effective_coupon, { method: 'GET', data: {} })
 }
 
 const queryCoupon = () => {
@@ -378,6 +382,7 @@ module.exports = {
   autoChooseCoupon,
   chooseCoupon,
   queryEffectiveCoupon,
+  countEffectiveCoupon,
   queryCoupon,
   uploadImg,
   getSearchInfo,

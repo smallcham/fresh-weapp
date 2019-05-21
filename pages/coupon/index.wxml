@@ -28,7 +28,7 @@
             </view>
             <view>优惠类型: {{ item.coupon_type === 0 ? "满减" : "红包" }}</view>
             <view wx:if="{{  item.start_time > now }}">生效时间: {{ item.start_time }}</view>
-            <view>有效期至: {{ item.end_time }}</view>
+            <view>有效期至: {{ item.end_time < now ? "已过期失效" : item.end_time }}</view>
           </view>
         </van-col>
         <van-col wx:if="{{ item.can_use && !read_only }}" span="4"><van-tag color="{{ color.success }}">{{ item.end_time < now ? "已过期" : item.start_time > now ? "未生效" : "可用"}}</van-tag></van-col>
