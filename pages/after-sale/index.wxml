@@ -1,0 +1,40 @@
+<van-tabs color="{{ color.success }}" active="{{ active }}" bind:change="onChange">
+  <van-tab title="申请售后"></van-tab>
+  <van-tab title="售后记录"></van-tab>
+</van-tabs>
+
+<view style="margin: .5rem">
+  <view class='card-fluid gs-card' wx:for="{{ order.detail }}" wx:key="{{ item.goods_code }}">
+    <van-row>
+      <van-col span="9" gutter="3"><image src='{{ fs + item.goods_img }}'/></van-col>
+      <van-col span="14">
+        <view style='margin-top: 30rpx'>
+          <van-row>
+            <van-col span="24">
+              <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="24">
+              <view style='float:right; margin-right: 20rpx'>
+                <text class="text-muted text-mini">数量: {{ item.amount }}</text>
+              </view>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="24">
+              <text class='text-small text-primary' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
+            </van-col>
+          </van-row>
+          <van-row>
+            <van-col span="24">
+              <view style='float: right'>
+                <van-button wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" plain size="mini" data-id="{{ item.goods_code }}" bindtap='apply'>申请售后</van-button>
+              </view>
+            </van-col>
+          </van-row>
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+</view>

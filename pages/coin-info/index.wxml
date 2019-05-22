@@ -1,0 +1,6 @@
+<van-cell-group wx:if="{{ coins && coins.total > 0 }}" wx:for="{{ coins.data }}" wx:key="{{ item.id }}" border="{{ false }}">
+  <van-cell value="{{ item.create_time }}">
+    <view slot="title" class='text-small {{ item.amount > 0 ? "text-success" : "text-muted" }}' style='font-weight: 700'>{{ item.amount > 0 ? '+' : '-' }} {{ item.amount + '  ' + item.src }}</view>
+  </van-cell>
+</van-cell-group>
+<view style='margin: 1rem' class='text-center text-small text-muted' wx:if="{{ coins && conis.total <= 0 }}">暂时没有轻果币的获取记录哦 ~</view>

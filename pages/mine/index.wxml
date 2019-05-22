@@ -84,7 +84,7 @@
           </view>
       </van-col> -->
       <van-col span="12">
-        <view class='card' style='width:100%;border-top:0;'>
+        <view class='card' style='width:100%;border-top:0;' bindtap='toCoin'>
             <view><text class='text-primary'>{{ mine.coin }}</text></view>
             <view><text class='text-mini text-muted'>轻果币</text></view>
           </view>

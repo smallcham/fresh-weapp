@@ -24,10 +24,12 @@ Page({
     })
     wx.setNavigationBarTitle({
       title: this.data.title
-    }) 
+    })
+    this.loadOrder() 
+    let that = this
     let id = setInterval(function() {
-      this.loadOrder()
-      if (this.data.order && this.data.order.order_state !== 0) clearInterval(id)
+      that.loadOrder()
+      if (that.data.order && that.data.order.order_state !== 0) clearInterval(id)
     }, 2000)
   },
 

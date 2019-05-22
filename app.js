@@ -277,7 +277,8 @@ App({
     count_effective_coupon: 'coupon/count/effective',
     choose_coupon: 'coupon/choose',
     auto_choose_coupon: 'coupon/auto/choose',
-    upload_img: 'upload/img'
+    upload_img: 'upload/img',
+    query_coin: 'coin/query/log'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

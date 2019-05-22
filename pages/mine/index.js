@@ -138,6 +138,11 @@ Page({
       url: '/pages/coupon/index?read_only=1'
     })
   },
+  toCoin: function() {
+    wx.navigateTo({
+      url: '/pages/coin/index'
+    })
+  },
   getLink: function () {
     api.get(app.globalApi.get_link, { data: { link_type: 2 } }).then(res => {
       if (res === undefined) return

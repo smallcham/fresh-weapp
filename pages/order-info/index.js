@@ -39,6 +39,7 @@ Page({
         this.setData({ paying: false })
         api.pay(order_code).then(res => {
           this.data.pay_success = true
+          wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + order_code })
         }).catch(err => {
           if (!err.errMsg === 'requestPayment:fail cancel') {
             Dialog.alert({

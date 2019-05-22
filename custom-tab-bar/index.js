@@ -53,7 +53,7 @@ Component({
       pagePath: "/pages/spread/index",
         iconPath: "http://fs.llfresh.cn/afda385ac434258538f223c0f05c0568",
         selectedIconPath: "http://fs.llfresh.cn/422085822d0d320a344c14d48b4b111a",
-      text: "积分+"
+      text: "优惠+"
     }, {
       pagePath: "/pages/cart/index",
         iconPath: "http://fs.llfresh.cn/7743f96ecb8509bb34fa55152b49a29a",

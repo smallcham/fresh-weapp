@@ -24,7 +24,11 @@
     "pages/feedback/index",
     "pages/setting/index",
     "pages/web/index",
-    "pages/question/index"
+    "pages/question/index",
+    "pages/coin/index",
+    "pages/coin-info/index",
+    "pages/after-sale/index",
+    "pages/after-sale-type/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

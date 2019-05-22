@@ -1,0 +1,6 @@
+<van-notice-bar scrollable="false" text="轻果币可用于兑换优惠券，单单可得，会员双倍哦 ~"/>
+<van-cell is-link value="查看明细" url="/pages/coin-info/index">
+  <view slot="title" class='text-small text-success'>
+    <text>当前剩余: <text style='font-weight: 700'>{{ mine ? mine.coin : 0 }}</text> 个</text>
+  </view>
+</van-cell>

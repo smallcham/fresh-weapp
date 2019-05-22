@@ -344,6 +344,10 @@ const getRunData = (iv, edata) => {
   return request(app.globalApi.get_run_data, { method: 'GET', data: { data: { iv: iv, encryptedData: edata } } })
 }
 
+const queryCoin = () => {
+  return request(app.globalApi.query_coin, { method: 'GET', data: {} })
+}
+
 module.exports = {
   get,
   post,
@@ -387,5 +391,6 @@ module.exports = {
   uploadImg,
   getSearchInfo,
   clearSearchHis,
-  getRunData
+  getRunData,
+  queryCoin
 }

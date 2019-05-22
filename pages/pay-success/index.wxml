@@ -1,8 +1,10 @@
 <view class='icon-center text-success'>
   <van-icon name="passed"/>
-  <text wx:if="{{ order && order.order_state === 1 || order.order_state === 2 || order.order_state === 3 || order.order_state === 4 }}" class='icon-text-center text-primary'>支付成功</text>
+  <text wx:if="{{ !order }}" class='icon-text-center text-primary'>支付结果确认中</text>
+  <text wx:elif="{{ order && order.order_state === 1 || order.order_state === 2 || order.order_state === 3 || order.order_state === 4 }}" class='icon-text-center text-primary'>支付成功</text>
   <text wx:elif="{{ order && order.order_state === 0 }}" class='icon-text-center text-warning'>支付结果确认中</text>
   <text wx:else class='icon-text-center text-muted'>已失效</text>
+  <view wx:if="{{ order && order.coin > 0 }}" style='margin-top: 25rpx;' class='text-mini text-success'>轻果币 +{{ order.coin }}</view>
   <view style='margin-top: 25rpx;margin-bottom: 25rpx;'>
     <view class='text-primary text-small text-center'>预计 15:00 - 17:00 送达</view>
     <view class='text-muted text-mini text-center' style='padding-top: 10rpx'>订单已支付成功，配送员配送时将与您联系请保持电话畅通</view>

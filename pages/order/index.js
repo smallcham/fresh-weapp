@@ -131,5 +131,10 @@ Page({
     wx.navigateTo({
       url: '/pages/feedback/index?order_code=' + e.currentTarget.dataset.id
     })
+  },
+  toAfterSale: function(e) {
+    wx.navigateTo({
+      url: '/pages/after-sale/index?order_code=' + e.currentTarget.dataset.id
+    })
   }
 })
