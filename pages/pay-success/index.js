@@ -9,7 +9,8 @@ Page({
    */
   data: {
     title: "支付结果",
-    order_code: ''
+    order_code: '',
+    order: false
   },
 
   /**
@@ -24,6 +25,10 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title
     }) 
+    let id = setInterval(function() {
+      this.loadOrder()
+      if (this.data.order && this.data.order.order_state !== 0) clearInterval(id)
+    }, 2000)
   },
 
   /**

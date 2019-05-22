@@ -11,6 +11,7 @@ Page({
     title: '评价得积分',
     fs: app.globalData.fs,
     order: false,
+    coin: 0,
     readonly: true
   },
 
@@ -23,7 +24,7 @@ Page({
         res.detail[i].star = res.detail[i].star === 0 ? 5 : res.detail[i].star
         res.detail[i].feedback_imgs = res.detail[i].feedback_imgs === '[]' ? [] : JSON.parse(res.detail[i].feedback_imgs)
       }
-      this.setData({ color: app.globalData.color, order: res, readonly: res.deliver_star !== 0 })
+      this.setData({ color: app.globalData.color, order: res, readonly: res.deliver_star !== 0, coin: 0 === res.actual_total ? 0 : parseInt(res.actual_total / 5) })
     })
     wx.setNavigationBarTitle({
       title: this.data.title

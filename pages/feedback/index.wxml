@@ -1,6 +1,6 @@
 <van-notice-bar
   scrollable="false"
-  text="文字+照片评价任意商品即可获得30轻果币"
+  text="评价任意商品即可获得 {{ coin }} 轻果币"
 />
 
 <view wx:if="{{ order }}" wx:for="{{ order.detail }}" wx:key style="border-radius: .2rem;margin: .5rem;padding:.5rem;background-color:white">
