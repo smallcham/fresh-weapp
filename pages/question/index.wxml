@@ -1,2 +1,15 @@
-<!--pages/question/index.wxml-->
-<text>pages/question/index.wxml</text>
+<van-dialog id="van-dialog" />
+<view bindtap='showType'>
+  <van-field value="{{ question_type }}" clearable bind:input="setAddressType" left-icon="question-o" label="问题类型" icon="arrow" disabled placeholder="请选择问题分类" />
+</view>
+
+<view wx:if="{{ show }}"  style='background-color:white;border-radius: .2rem;padding: .5rem;margin: .5rem;border: 1rpx solid {{ color.muteda }}'>
+  <van-field value="{{ reason }}" bind:change="onChangeText" label="" type="textarea" placeholder="请详细描述您遇到的问题" autosize border="{{ false }}" />
+  <van-icon style='padding: 15rpx;' info="x" wx:for="{{ imgs }}" name="{{ fs + item }}" wx:key wx:for-index="idx" data-index="{{ idx }}" bind:click="delImg"/>
+  <image bindtap='uploadImg' style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
+</view>
+
+<van-action-sheet show="{{ showTypeSheet }}">
+  <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" columns="{{ columns }}" bind:confirm="selectedType" bind:cancel="hideType" />
+</van-action-sheet>
+<view style='margin: .5rem;margin-top: 50rpx;border-raidus: .5rem'><van-button size="large" type="success" bind:click="submitQuestion">提交问题</van-button></view>

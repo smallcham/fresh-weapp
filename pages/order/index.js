@@ -1,5 +1,6 @@
 // pages/order/index.js
 const app = getApp()
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
 import api from '../../api/api'
 Page({
 
@@ -133,6 +134,14 @@ Page({
     })
   },
   toAfterSale: function(e) {
+    let order = this.data.order_list.data[e.currentTarget.dataset.idx]
+    if ((new Date() - new Date(order.create_time)) / (1000 * 60 * 60 * 24) > 7) {
+      Dialog.alert({
+        title: '提示',
+        message: '该订单已超过七天，无法申请退款服务'
+      }).then(() => { })
+      return
+    }
     wx.navigateTo({
       url: '/pages/after-sale/index?order_code=' + e.currentTarget.dataset.id
     })

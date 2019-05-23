@@ -1,1 +1,3 @@
-/* pages/question/index.wxss */
+page {
+  background: #F9F9F9;
+}

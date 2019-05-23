@@ -31,10 +31,10 @@
     <view slot="" class='text-small text-success'>¥ {{ real_refund }}</view>
   </van-cell>
 
-  <view style='background-color:white;border-radius: .2rem;padding: .5rem;margin: .5rem;border: 1rpx solid {{ color.muteda }}'>
+  <view wx:if="{{ show }}"  style='background-color:white;border-radius: .2rem;padding: .5rem;margin: .5rem;border: 1rpx solid {{ color.muteda }}'>
     <van-field value="{{ reason }}" bind:change="onChangeText" label="" type="textarea" placeholder="请详细描述您的退费原因" autosize border="{{ false }}" />
     <van-icon style='padding: 15rpx;' info="x" wx:for="{{ imgs }}" name="{{ fs + item }}" wx:key wx:for-index="idx" data-index="{{ idx }}" bind:click="delImg"/>
-    <image bindtap='uploadImg' style='width: 50rpx; height: 50rpx;padding: 15rpx; {{ imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
+    <image bindtap='uploadImg' style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
   </view>
 </view>
 

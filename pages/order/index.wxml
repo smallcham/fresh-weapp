@@ -1,3 +1,4 @@
+<van-dialog id="van-dialog" />
 <van-tabs color="{{ color.success }}" active="{{ active }}"  bind:change="onChange">
   <van-tab wx:for="{{ orderState }}" title="{{ item.text }}" data-id="{{ item.id }}" wx:key="{{ item.id }}"></van-tab>
 </van-tabs>
@@ -34,7 +35,7 @@
           <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
           <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='success' data-id="{{ item.order_code }}" style='padding-right: 20rpx' bind:click="addCartAgain">再来一单</van-button>
           <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="success" style='padding-right: 20rpx' data-id="{{ item.order_code }}" bindtap='toFeedback'>评价</van-button>
-          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" bindtap='toAfterSale'>申请售后</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" data-idx="{{ index }}" bindtap='toAfterSale'>申请售后</van-button>
         </view>
       </van-cell>
     </van-cell-group>

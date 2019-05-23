@@ -280,7 +280,8 @@ App({
     choose_coupon: 'coupon/choose',
     auto_choose_coupon: 'coupon/auto/choose',
     upload_img: 'upload/img',
-    query_coin: 'coin/query/log'
+    query_coin: 'coin/query/log',
+    add_question: 'question/add'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

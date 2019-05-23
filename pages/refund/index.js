@@ -14,6 +14,7 @@ Page({
     real_refund: 0,
     refund_amount: 1,
     reason: '',
+    show: true,
     imgs: []
   },
 
@@ -129,6 +130,7 @@ Page({
       return
     }
     api.applyRefund(this.data.order.order_code, this.data.goods_code, this.data.refund_amount, this.data.reason, this.data.imgs).then(res => {
+      this.setData({ show: false })
       Dialog.alert({
         title: '提交成功',
         message: '退费申请已提交，请耐心等待审核，退费成功后将原路返回您的账户'
@@ -136,10 +138,13 @@ Page({
         wx.navigateBack({})
       })
     }).catch(err => {
+      this.setData({ show: false })
       Dialog.alert({
         title: '提交失败',
         message: err
-      }).then(() => {})
+      }).then(() => {
+        this.setData({ show: true })
+      })
     })
   }
 })

@@ -4,12 +4,12 @@
 <view wx:if="{{ !loading }}">
   <view style='margin-bottom: 120rpx'>
     <view>
-        <van-cell wx:if="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="订单努力打包中" value="问题咨询 " is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
+        <van-cell wx:if="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link url="/pages/question/index?type=支付问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="订单努力打包中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="查看评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link url="/pages/question/index?order_code={{ order.order_code }}"/>
+        <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link url="/pages/question/index?type=订单咨询&order_code={{ order.order_code }}"/>
         <van-cell wx:if="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
     </view>
 
@@ -59,7 +59,7 @@
       <van-cell title="实际支付" value="¥ {{ order.real_pay }}" />
     </view>
 
-    <view style='margin-top: 35rpx;' wx:if="{{  order.order_state === 3 || order.order_state === 4 }}" class='text-center text-muted text-mini'>如果收到的商品出现质量、错发、漏发等情况请提交 <text class='text-success'>问题咨询</text></view>
+    <view style='margin-top: 35rpx;' wx:if="{{  order.order_state === 3 || order.order_state === 4 }}" class='text-center text-muted text-mini'>如果收到的商品出现质量、错发、漏发等情况请提交 <text class='text-success' data-type="订单咨询" data-id="{{ order.order_code }}" bindtap='toQuestion'>问题咨询</text></view>
   </view>
   
   <van-goods-action>

@@ -356,6 +356,10 @@ const applyRefund = (order_code, goods_code, amount, reason='', imgs=[]) => {
   return request(app.globalApi.apply_refund + '/' + order_code + '/' + goods_code + '/' + amount, { method: 'POST', data: { data: { reason: reason, imgs: imgs } } })
 }
 
+const addQuestion = (type, reason, imgs=[]) => {
+  return request(app.globalApi.add_question, { method: 'POST', data: { data: { reason: reason, imgs: imgs, type: type } } })
+}
+
 module.exports = {
   get,
   post,
@@ -402,5 +406,6 @@ module.exports = {
   getRunData,
   queryCoin,
   queryRefund,
-  applyRefund
+  applyRefund,
+  addQuestion
 }

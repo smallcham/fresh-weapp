@@ -168,5 +168,10 @@ Page({
         })
       }
     })
+  },
+  toQuestion: function() {
+    wx.navigateTo({
+      url: '/pages/question/index'
+    })
   }
 })

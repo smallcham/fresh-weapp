@@ -174,10 +174,10 @@
             <view><text class='text-mini text-muted'>收货地址</text></view>
           </view>
       </van-col>
-      <van-col span="8">
+      <van-col span="8" bindtap="toQuestion">
         <view class='card bar-item'>
-            <view><van-icon class='text-max' color='{{ color.info }}' name="service" /></view>
-            <view><text class='text-mini text-muted'>客服和帮助</text></view>
+            <view><van-icon class='text-max' color='{{ color.warning }}' name="question-o" /></view>
+            <view><text class='text-mini text-muted'>问题和反馈</text></view>
           </view>
       </van-col>
       <van-col span="8" bindtap="toSetting">
