@@ -73,6 +73,14 @@ Page({
   onShareAppMessage: function () {
 
   },
+  onChange: function(e) {
+    this.setData({ active: e.detail.index })
+    if (e.detail.index === 1) {
+      api.queryRefund(this.data.order.order_code).then(res => {
+        this.setData({ logs: res })
+      })
+    }
+  },
   apply: function(e) {
     wx.navigateTo({
       url: '/pages/after-sale-type/index?order_code=' + this.data.order_code + '&goods_code=' + e.currentTarget.dataset.id

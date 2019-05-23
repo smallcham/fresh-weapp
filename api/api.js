@@ -348,6 +348,14 @@ const queryCoin = () => {
   return request(app.globalApi.query_coin, { method: 'GET', data: {} })
 }
 
+const queryRefund = (order_code) => {
+  return request(app.globalApi.query_refund + '/' + order_code, { method: 'GET', data: {} })
+}
+
+const applyRefund = (order_code, goods_code, amount, reason='', imgs=[]) => {
+  return request(app.globalApi.apply_refund + '/' + order_code + '/' + goods_code + '/' + amount, { method: 'POST', data: { data: { reason: reason, imgs: imgs } } })
+}
+
 module.exports = {
   get,
   post,
@@ -392,5 +400,7 @@ module.exports = {
   getSearchInfo,
   clearSearchHis,
   getRunData,
-  queryCoin
+  queryCoin,
+  queryRefund,
+  applyRefund
 }

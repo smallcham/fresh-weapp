@@ -7,6 +7,7 @@ Page({
    * Page initial data
    */
   data: {
+    fs: app.globalData.fs,
     title: '选择售后类型'
   },
 
@@ -14,7 +15,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.setData({ color: app.globalData.color })
+    api.getOrder(options.order_code).then(res => {
+      this.setData({ color: app.globalData.color, order: res, goods_code: options.goods_code })
+    })
   },
 
   /**

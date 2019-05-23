@@ -1,2 +1,26 @@
-<!--pages/after-sale-type/index.wxml-->
-<text>pages/after-sale-type/index.wxml</text>
+<view wx:for="{{ order.detail }}" wx:if="{{ item.goods_code === goods_code }}" class='card-fluid gs-card' wx:key="{{ item.goods_code }}">
+  <van-row>
+    <van-col span="9" gutter="3"><image src='{{ fs + item.goods_img }}'/></van-col>
+    <van-col span="14">
+      <view style='margin-top: 30rpx'>
+        <van-row>
+          <van-col span="24">
+            <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="12">
+            <text class='text-small text-primary' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
+          </van-col>
+          <van-col span="12">
+            <view style='float:right; margin-right: 20rpx'>
+              <text class="text-muted text-mini">可退数量: {{ item.amount - item.refund_amount }}</text>
+            </view>
+          </van-col>
+        </van-row>
+      </view>
+    </van-col>
+  </van-row>
+  <van-cell title="实际支付金额" value="¥ {{ item.price }}"/>
+  <van-cell wx:if="{{ item.amount - item.refund_amount > 0 }}" icon="refund-o" title="退款" border="{{ false }}"  is-link url="/pages/refund/index?order_code={{ order.order_code }}&goods_code={{ goods_code }}"/>
+</view>

@@ -3,7 +3,7 @@
   <van-tab title="售后记录"></van-tab>
 </van-tabs>
 
-<view style="margin: .5rem">
+<view style="margin: .5rem" wx:if="{{ active === 0 }}">
   <view class='card-fluid gs-card' wx:for="{{ order.detail }}" wx:key="{{ item.goods_code }}">
     <van-row>
       <van-col span="9" gutter="3"><image src='{{ fs + item.goods_img }}'/></van-col>
@@ -22,14 +22,12 @@
             </van-col>
           </van-row>
           <van-row>
-            <van-col span="24">
+          <van-col span="12">
               <text class='text-small text-primary' style='float: left;font-weight:700;'>¥ {{ item.price }}</text>
             </van-col>
-          </van-row>
-          <van-row>
-            <van-col span="24">
+            <van-col span="12">
               <view style='float: right'>
-                <van-button wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" plain size="mini" data-id="{{ item.goods_code }}" bindtap='apply'>申请售后</van-button>
+                <van-button wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" data-id="{{ item.goods_code }}" plain size="mini" bindtap='apply'>申请售后</van-button>
               </view>
             </van-col>
           </van-row>
@@ -38,3 +36,30 @@
     </van-row>
   </view>
 </view>
+
+<view wx:if="{{ active === 1 }}" wx:for="{{ logs }}" wx:key="{{ item.id }}" style='margin: .5rem;'>
+    <van-cell-group>
+      <van-cell icon="refund-o" title="退款">
+        <view slot="" class='text-mini'>
+          <text wx:if="{{ item.refund_state === 0 }}" class='text-warning' style='font-weight: 700'>审核中</text>
+          <text wx:elif="{{ item.refund_state === 1 }}" class='text-success' style='font-weight: 700'>退款成功</text>
+          <text wx:elif="{{ item.refund_state === 2 }}" class='text-muted' style='font-weight: 700'>取消</text>
+        </view>
+      </van-cell>
+      <van-cell size="large">
+        <view slot="title">
+            <image style='width:100rpx;height:100rpx;'  src='{{ fs + item.goods_img }}'/>
+        </view>
+        <view slot="" class='text-primary'>
+          <text style='font-weight: 700'>¥ {{ item.refund_money }}</text>
+          <view class='text-mini text-muted'>数量: {{ item.amount }}</view>
+        </view>
+      </van-cell>
+      <van-cell border="{{ false }}">
+        <view slot="" class='text-mini'>
+          <text class='text-small text-primary' style='float: left;'>{{ item.goods_name }}</text>
+          <text class='text-muted'>{{ item.create_time }}</text>
+        </view>
+      </van-cell>
+    </van-cell-group>
+  </view>

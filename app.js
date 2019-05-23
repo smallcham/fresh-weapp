@@ -271,6 +271,8 @@ App({
     get_order: 'order/get',
     get_order_count: 'order/state/count',
     get_order_progress: 'order/progress',
+    apply_refund: 'order/refund/apply',
+    query_refund: 'order/refund/apply/query',
     cancel_order: 'order/cancel',
     query_coupon: 'coupon/query',
     query_effective_coupon: 'coupon/query/effective',

@@ -28,7 +28,8 @@
     "pages/coin/index",
     "pages/coin-info/index",
     "pages/after-sale/index",
-    "pages/after-sale-type/index"
+    "pages/after-sale-type/index",
+    "pages/refund/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
