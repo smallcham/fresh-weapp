@@ -275,7 +275,7 @@ const createPay = (order_code) => {
   return request(app.globalApi.create_pay, { method: 'POST', data: { data: { order_code: order_code } } })
 }
 
-const createOrder = (coupon_ids = []) => {
+const createOrder = (day, delivery_time, coupon_ids = []) => {
   let address = app.globalData.selected_address
   if (null === address || undefined === address) {
     wx.showToast({
@@ -284,7 +284,7 @@ const createOrder = (coupon_ids = []) => {
     })
     return false
   }
-  return request(app.globalApi.create_order, { method: 'POST', data: { data: { address_code: address.address_code, coupon_ids: coupon_ids } } })
+  return request(app.globalApi.create_order, { method: 'POST', data: { data: { day: day, delivery_time: delivery_time, address_code: address.address_code, coupon_ids: coupon_ids } } })
 }
 
 const queryOrder = (page = 1, order_state) => {

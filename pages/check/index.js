@@ -120,7 +120,7 @@ Page({
     Toast.loading({
       mask: true
     });
-    api.createOrder(this.data.chooseCoupon ? [this.data.chooseCoupon.id] : []).then(res => {
+    api.createOrder(this.data.label === '今天' ? 'TODAY' : 'TOMORROW', this.data.timeColumns[this.data.selectedTimeIndex], this.data.chooseCoupon ? [this.data.chooseCoupon.id] : []).then(res => {
       if (null === res || undefined === res) {
         Dialog.alert({
           title: '轻果提醒',
