@@ -12,6 +12,7 @@ Page({
     title: "我的订单",
     fs: app.globalData.fs,
     loading: true,
+    login: true,
     pay_success: false,
     selected_address: {}
   },
@@ -21,41 +22,15 @@ Page({
    */
   onLoad: function (options) {
     let auto = options.auto === "1"
-    let order_code = options.order_code
-    api.getOrder(order_code).then(res => {
-      if (null === res || undefined === res) wx.navigateBack({})
-      res.deliver_info = JSON.parse(res.deliver_info)
-      let sum = 0
-      for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
-      this.setData({
-        loading: false,
-        paying: auto,
-        order: res,
-        color: app.globalData.color,
-        sum: sum,
-        selected_address: app.globalData.selected_address
+    if (options.quick === '1') {
+      this.setData({ login: false })
+      app.login(function() {
+        this.setData({ login: true })
+        this.loadOrder(options.order_code, auto)
       })
-      if (auto && res.order_state === 0) {
-        this.setData({ paying: false })
-        api.pay(order_code).then(res => {
-          this.data.pay_success = true
-          wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + order_code })
-        }).catch(err => {
-          if (!err.errMsg === 'requestPayment:fail cancel') {
-            Dialog.alert({
-              title: '轻果提醒',
-              message: err
-            }).then(() => {})
-          }
-        })
-      }
-    }).catch(err => {
-      Dialog.alert({
-        title: '轻果提醒',
-        message: err
-      }).then(() => { })
-      Toast.clear()
-    })
+    }
+    if (!this.data.login) return
+    this.loadOrder(options.order_code, auto)
   },
 
   /**
@@ -127,7 +102,10 @@ Page({
     })
   },
   toPay: function(e) {
+    this.setData({ paying: true })
     api.pay(e.currentTarget.dataset.id).then(res => {
+      this.data.pay_success = true
+      wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + order_code })
       wx.showToast({
         title: '支付成功',
         icon: 'success'
@@ -139,6 +117,7 @@ Page({
           message: err
         }).then(() => { })
       }
+      this.setData({ paying: false })
     })
   },
   loadOrder: function() {
@@ -166,7 +145,7 @@ Page({
           title: '订单已取消',
           icon: 'none'
         })
-        this.loadOrder()
+        wx.navigateBack({})
       }).catch(err => {
         wx.showToast({
           title: err,
@@ -183,6 +162,43 @@ Page({
   toQuestion: function(e) {
     wx.navigateTo({
       url: '/pages/question/index?type=' + e.currentTarget.dataset.type + '&order_code=' + e.currentTarget.dataset.id
+    })
+  },
+  loadOrder: function(order_code, auto) {
+    api.getOrder(order_code).then(res => {
+      if (null === res || undefined === res) wx.navigateBack({})
+      res.deliver_info = JSON.parse(res.deliver_info)
+      let sum = 0
+      for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
+      this.setData({
+        loading: false,
+        paying: auto,
+        order: res,
+        color: app.globalData.color,
+        sum: sum,
+        selected_address: app.globalData.selected_address
+      })
+      if (auto && res.order_state === 0) {
+        api.pay(order_code).then(res => {
+          this.setData({ paying: false })
+          this.data.pay_success = true
+          wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + order_code })
+        }).catch(err => {
+          if (!err.errMsg === 'requestPayment:fail cancel') {
+            Dialog.alert({
+              title: '轻果提醒',
+              message: err
+            }).then(() => { })
+          }
+          this.setData({ paying: false })
+        })
+      }
+    }).catch(err => {
+      Dialog.alert({
+        title: '轻果提醒',
+        message: err
+      }).then(() => { })
+      Toast.clear()
     })
   }
 })

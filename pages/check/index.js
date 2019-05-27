@@ -19,11 +19,13 @@ Page({
     chooseCoupon: false,
     house: app.globalData.house,
     goods_list: [], 
+    label: '今天',
     total: 0.0, 
     original: 0.0, 
     discount: 0.0, 
     is_vip: false,
-    timeColumns: ['9:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00', '16:00-17:00', '17:00-18:00']
+    selectedTimeIndex: 0,
+    timeColumns: []
   },
 
   /**
@@ -32,8 +34,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       color: app.globalData.color,
-      house: app.globalData.house,
-      selectedTime: this.data.timeColumns[0],
+      house: app.globalData.house,      
       selected_address: false
     })
     app.globalData.use_coupon = app.globalData.not_use_coupon = false
@@ -157,7 +158,7 @@ Page({
   },
   onPickTimeConfirm(event) {
     const { picker, value, index } = event.detail;
-    this.setData({ showTimePicker: false, selectedTime: value })
+    this.setData({ showTimePicker: false, selectedTimeIndex: index })
   },
   getHouse: function (city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
@@ -218,5 +219,42 @@ Page({
         })
       }
     })
+    this.deliverTime()
+  },
+  deliverTime: function() {
+    let house = app.globalData.house
+    let date = new Date()
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
+
+    let start_time = new Date(house.start_time)
+    let end_time = new Date(house.end_time)
+    let now_min = hour * 60 + minute
+    let start_min = start_time.getHours() * 60 + start_time.getMinutes()
+    let end_min = end_time.getHours() * 60 + end_time.getMinutes()
+
+    if (now_min >= start_min && now_min < end_min ) {
+      let _mod = now_min % 60
+      start_min = _mod === 0 ? now_min : now_min + (60 - _mod)
+    }
+    
+    if (now_min >= end_min || start_min >= end_min) {
+      this.data.label = '明天'
+      start_min = start_time.getHours() * 60 + start_time.getMinutes()
+    }
+
+    let times = []
+    for (let i = start_min; i < end_min; i += 60) {
+      let _hour = i / 60
+      let _min = i % 60
+      _min = _min < 10 ? '0' + _min : _min
+      let _time = _hour + ':' + _min + '-' + (_hour + 1) + ':' + _min
+      times.push(_time)
+    }
+    this.setData({ label: this.data.label, timeColumns: times })
   }
 })

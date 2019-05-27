@@ -72,6 +72,7 @@ const pay = (order_code) => {
               title: '支付已取消',
               icon: 'none'
             })
+            reject('cancel')
           }
           reject(err)
         }

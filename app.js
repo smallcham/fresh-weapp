@@ -108,7 +108,7 @@ App({
       }
     })
   },
-  login: function() {
+  login: function(call) {
     // 登录
     wx.login({
       success: res => {
@@ -125,6 +125,7 @@ App({
             if (data.state) {
               try {
                 wx.setStorageSync('token', data.data)
+                if (undefined !== call) { call() }
               } catch (e) {
                 console.log('存储token失败', data)
               }

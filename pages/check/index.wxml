@@ -26,8 +26,8 @@
   <view style='margin-top: 15rpx'>
     <van-cell-group>
       <van-cell title="{{ house.house_type === 0 ? '小时达' : '1-3天送达' }}">
-        <view slot="" style='display: {{ house.house_type === 0 ? "block" : "none" }}' class='text-success' bindtap='openTimePicker'>今天 {{ selectedTime }} 送达[可选]</view>
-        <van-icon style='display: {{ house.house_type === 0 ? "block" : "none" }}' slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
+        <view slot="" wx:if="{{ house.house_type === 0 }}" class='text-success' bindtap='openTimePicker'>{{ label }} {{ timeColumns[selectedTimeIndex] }} 送达[可选]</view>
+        <van-icon wx:if="{{ house.house_type === 0 }}" slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
       </van-cell>
       <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
         <view slot="title">
@@ -56,7 +56,7 @@
     </view>
   </view>
   <van-action-sheet show="{{ showTimePicker }}">
-    <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间" default-index="{{ 0 }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
+    <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间 ({{ label }})" default-index="{{ selectedTimeIndex }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
   </van-action-sheet>
   <van-submit-bar label="付款："  price="{{ real_pay * 100 }}" button-text="去付款   ▸" button-type="success" bind:submit="toCheck"/>
 </view>
