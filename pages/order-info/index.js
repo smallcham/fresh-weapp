@@ -120,21 +120,6 @@ Page({
       this.setData({ paying: false })
     })
   },
-  loadOrder: function() {
-    api.getOrder(this.data.order.order_code).then(res => {
-      if (null === res || undefined === res) wx.navigateBack({})
-      res.deliver_info = JSON.parse(res.deliver_info)
-      let sum = 0
-      for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
-      this.setData({ loading: false, order: res, sum: sum })
-    }).catch(err => {
-      Dialog.alert({
-        title: '轻果提醒',
-        message: err
-      }).then(() => { })
-      Toast.clear()
-    })
-  },
   cancelOrder: function() {
     Dialog.confirm({
       title: '提示',
@@ -168,6 +153,8 @@ Page({
     api.getOrder(order_code).then(res => {
       if (null === res || undefined === res) wx.navigateBack({})
       res.deliver_info = JSON.parse(res.deliver_info)
+      let _time = new Date(res.deliver_end_time)
+      res.deliver_time_label = (new Date().getFullYear() === _time.getFullYear() ? '今天' : _time.getFullYear()) + ' ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? _time.getMinutes() + '0' : _time.getMinutes()) + ' 前 '
       let sum = 0
       for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
       this.setData({

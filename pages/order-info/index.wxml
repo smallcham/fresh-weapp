@@ -16,8 +16,8 @@
 
     <view style='margin-top: 15rpx'>
         <van-cell title="配送信息"/>
-        <van-cell wx:if="{{ order.order_state === 1 || order.order_state === 2 }}" value="查看订单进度" title="{{ order.deliver_info.rider ? '配送员 ' + order.deliver_info.rider.rider_name : '商品打包中' }}" border="{{ false }}" is-link url="/pages/order-progress/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.deliver_info.rider }}" data-phone="{{ order.deliver_info.rider.phone }}" bind:click="callService">
+        <van-cell wx:if="{{ order.order_state === 1 || order.order_state === 2 }}" value="查看订单进度" title="{{ order.deliver_info.rider ? '正在配送' : '商品打包中' }}" border="{{ false }}" is-link url="/pages/order-progress/index?order_code={{ order.order_code }}"/>
+        <van-cell wx:if="{{ order.deliver_info.rider }}" title="配送员 {{ order.deliver_info.rider.rider_name }}" label="配送问题请及时联系配送员" data-phone="{{ order.deliver_info.rider.phone }}" bind:click="callService">
           <text slot="" class='text-success text-mini'>联系配送员 </text>
           <van-icon slot="right-icon" name="phone-circle-o" color="{{ color.success }}" />
         </van-cell>
@@ -26,7 +26,7 @@
 
     <view style='margin-top: 15rpx'>
         <van-cell title="商品信息" wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" value="再来一单" is-link data-id="{{ order.order_code }}" bind:click="addCartAgain"/>
-        <van-cell title="商品信息" wx:elif="{{ order.order_state === 1 || order.order_state === 2 }}" value="预计 2019.05.02 送达" />
+        <van-cell title="商品信息" wx:elif="{{ order.order_state === 1 || order.order_state === 2 }}" value="预计 {{ order.deliver_time_label }} 送达" />
         <van-cell title="商品信息" wx:else value=""/>
         <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
           <view slot="title">

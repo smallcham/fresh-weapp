@@ -11,7 +11,7 @@ Page({
     fs: app.globalData.fs,
     show: true,
     reason: '',
-    columns: ['订单咨询', '支付问题', '配送问题', '小程序问题', '其他问题'],
+    columns: ['订单咨询', '支付问题', '配送问题', '少发发错',  '小程序问题', '意见反馈', '其他问题'],
     question_type: '订单咨询',
     showTypeSheet: false,
     imgs: []

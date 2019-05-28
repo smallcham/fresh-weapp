@@ -24,7 +24,7 @@
   </van-row>
   <van-cell title="申请数量">
     <view slot="">
-      <van-stepper min="1" max="{{ item.amount }}" value="{{ refund_amount }}" bind:change="onChangeNum"/>
+      <van-stepper min="1" max="{{ item.amount - item.refund_amount }}" value="{{ refund_amount }}" bind:change="onChangeNum"/>
     </view>
   </van-cell>
   <van-cell title="实际可退金额" label="优惠及奖励部分将按比例扣除" border="{{ false }}">

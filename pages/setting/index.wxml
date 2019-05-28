@@ -2,7 +2,7 @@
   <van-cell-group>
     <van-cell title="隐私政策" is-link data-src="privacy.html" bind:click="toPage"/>
     <van-cell title="用户协议" is-link data-src="agreement.html" bind:click="toPage"/>
-    <van-cell title="意见反馈" is-link data-src="" bind:click="toPage"/>
+    <van-cell title="意见反馈" is-link url="/pages/question/index?type=意见反馈"/>
   </van-cell-group>
 </view>
 <view class='footer text-center'>
