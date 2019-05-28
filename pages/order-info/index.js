@@ -154,7 +154,10 @@ Page({
       if (null === res || undefined === res) wx.navigateBack({})
       res.deliver_info = JSON.parse(res.deliver_info)
       let _time = new Date(res.deliver_end_time)
-      res.deliver_time_label = (new Date().getFullYear() === _time.getFullYear() ? '今天' : _time.getFullYear()) + ' ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? _time.getMinutes() + '0' : _time.getMinutes()) + ' 前 '
+      let _now = new Date()
+      let _year = _now.getFullYear() + '-' + (_now.getMonth() + 1) + '-' + _now.getDate()
+      let _deliver_year = _time.getFullYear() + '-' + (_time.getMonth() + 1) + '-' + _time.getDate()
+      res.deliver_time_label = (_year === _deliver_year ? '今天' : _deliver_year) + ' ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? _time.getMinutes() + '0' : _time.getMinutes()) + ' 前 '
       let sum = 0
       for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
       this.setData({
