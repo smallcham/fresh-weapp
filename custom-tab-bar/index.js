@@ -39,6 +39,13 @@ Component({
   //       text: "我的"
   //     }]
   // },
+
+  //  {
+  //   pagePath: "/pages/spread/index",
+  //   iconPath: "http://fs.llfresh.cn/afda385ac434258538f223c0f05c0568",
+  //   selectedIconPath: "http://fs.llfresh.cn/422085822d0d320a344c14d48b4b111a",
+  //   text: "优惠+"
+  // }, 
     list: [{
       pagePath: "/pages/index/index",
       iconPath: "http://fs.llfresh.cn/cce6d3a38249b3a7adad4640d59a8199",
@@ -49,12 +56,7 @@ Component({
         iconPath: "http://fs.llfresh.cn/e86891fb29335430be90dae2f9af554e",
         selectedIconPath: "http://fs.llfresh.cn/6d368237f54e3e4d996eaa205b60ecd9",
       text: "分类"
-    }, {
-      pagePath: "/pages/spread/index",
-        iconPath: "http://fs.llfresh.cn/afda385ac434258538f223c0f05c0568",
-        selectedIconPath: "http://fs.llfresh.cn/422085822d0d320a344c14d48b4b111a",
-      text: "优惠+"
-    }, {
+    },{
       pagePath: "/pages/cart/index",
         iconPath: "http://fs.llfresh.cn/7743f96ecb8509bb34fa55152b49a29a",
         selectedIconPath: "http://fs.llfresh.cn/10baccd3e9470debcfa9c477f5775563",

@@ -4,3 +4,26 @@
     <text>当前剩余: <text style='font-weight: 700'>{{ mine ? mine.coin : 0 }}</text> 个</text>
   </view>
 </van-cell>
+
+<view>
+    <view wx:for="{{ coupons }}"  wx:key="{{ item.coupon_code }}" class='coupon {{ item.can_use || read_only ? "" : " disable" }}'>
+      <van-row data-idx="{{ index }}" bindtap="{{ item.can_use && !read_only ? 'chooseCoupon' : '' }}">
+        <van-col span="8">
+          <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>{{ item.discount_amount }}</text></view>
+          <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>实付满 ¥ {{ item.limit_amount }} 元可用 </text></view>
+        </van-col>
+        <van-col span="12">
+          <view class='text-mini text-muted'>
+            <view style='font-weight: 700'>{{ item.vip_only ? "仅限会员使用" : "会员、非会员通用" }}</view>
+            <view>
+            <text>使用范围: </text>
+            <text wx:if="{{ undefined !== item.catas && item.catas.length !== 0 }}" wx:for="{{ item.catas }}" wx:for-item="cata" wx:key="{{ cata.cata_code }}">{{ cata.cata_name }} </text>
+            <text wx:if="{{ undefined === item.catas || item.catas.length === 0 }}">适用于所有品类商品</text>
+            </view>
+            <view>优惠类型: {{ item.coupon_type === 0 ? "满减" : "红包" }}</view>
+          </view>
+        </van-col>
+        <van-col wx:if="{{ !item.can_use && !read_only }}" span="4"><van-tag color="{{ color.muted }}">不可用</van-tag></van-col>
+      </van-row>
+    </view>
+  </view>
