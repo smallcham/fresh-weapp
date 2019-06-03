@@ -282,6 +282,8 @@ App({
     auto_choose_coupon: 'coupon/auto/choose',
     upload_img: 'upload/img',
     query_coin: 'coin/query/log',
+    query_exchange_item: 'coin/exchange/list',
+    exchange_item: 'coin/exchange/item',
     add_question: 'question/add'
   },
   globalData: {

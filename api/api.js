@@ -349,6 +349,16 @@ const queryCoin = () => {
   return request(app.globalApi.query_coin, { method: 'GET', data: {} })
 }
 
+const queryExchangeItem = (type=null) => {
+  let param = {}
+  if (null !== type) param = { type: type }
+  return request(app.globalApi.query_exchange_item, { method: 'GET', data: { data: param } })
+}
+
+const exchangeItem = (item_code) => {
+  return request(app.globalApi.exchange_item + '/' + item_code, { method: 'POST', data: {} })
+}
+
 const queryRefund = (order_code) => {
   return request(app.globalApi.query_refund + '/' + order_code, { method: 'GET', data: {} })
 }
@@ -406,6 +416,8 @@ module.exports = {
   clearSearchHis,
   getRunData,
   queryCoin,
+  queryExchangeItem,
+  exchangeItem,
   queryRefund,
   applyRefund,
   addQuestion

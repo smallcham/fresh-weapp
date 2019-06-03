@@ -9,6 +9,7 @@ Page({
    */
   data: {
     title: '轻果币兑换',
+    items: {},
     mine: false
   },
 
@@ -33,10 +34,16 @@ Page({
    */
   onShow: function () {
     wx.setNavigationBarTitle({
-      title: this.data.title,
+      title: this.data.title
     })
     api.getUser().then(res => {
       this.setData({ mine: res })
+    })
+    api.queryExchangeItem().then(res => {
+      for(let i = 0; i < res.total; i ++) {
+        res.data[i].item_setting = JSON.parse(res.data[i].item_setting)
+      }
+      this.setData({ items: res })
     })
   },
 
@@ -73,5 +80,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  doExchangeItem: function (e) {
+    api.exchangeItem(e.currentTarget.dataset.id).then(res => {
+
+    }).catch(err => {
+
+    })
   }
 })
