@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '绑定手机号'
+    title: '手机验证'
   },
 
   /**
@@ -74,7 +74,22 @@ Page({
       url: '/pages/web/index?src=' + app.globalApi.root + e.currentTarget.dataset.src
     })
   },
-  bind: function() {
-    
+  getPhoneNumber(e) {
+    if (e.detail.encryptedData === undefined) {
+      wx.showToast({
+        title: '未授权无法绑定',
+        icon: 'none'
+      })
+      return false
+    }
+    api.checkPhone(e.detail.iv, e.detail.encryptedData).then(res => {
+      app.globalData.mine.phone = res
+      wx.navigateBack({})
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
+    })
   }
 })

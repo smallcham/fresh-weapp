@@ -153,8 +153,21 @@ Page({
     })
   },
   loadOrder: function(order_code, auto) {
-    api.getUser().then(res => {
-      if (null === res.phone || '' === res.phone || undefined === res.phone) {
+    if (null === app.globalData.mine) {
+      api.getUser().then(res => {
+        if (null === res) {
+          wx.showToast({
+            title: '登录失败,请重新打开小程序',
+            icon: 'none'
+          })
+          return
+        }
+        app.globalData.mine = res
+        if (this.loadOrder(order_code, auto))
+        return
+      })
+    } else {
+      if (null === app.globalData.mine.phone || '' === app.globalData.mine.phone || undefined === app.globalData.mine.phone) {
         this.toCheckPhone()
       } else {
         api.getOrder(order_code).then(res => {
@@ -198,7 +211,7 @@ Page({
           Toast.clear()
         })
       }
-    })
+    }
   },
   toCheckPhone: function() {
     wx.navigateTo({

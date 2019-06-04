@@ -375,8 +375,8 @@ const addQuestion = (type, reason, imgs=[]) => {
   return request(app.globalApi.add_question, { method: 'POST', data: { data: { reason: reason, imgs: imgs, type: type } } })
 }
 
-const checkPhone = () => {
-  return request(app.globalApi.check_phone, { method: 'POST', data: {} })
+const checkPhone = (iv, encryptedData) => {
+  return request(app.globalApi.check_phone, { method: 'POST', data: { data: { iv: iv, data: encryptedData } } })
 }
 
 module.exports = {
@@ -429,5 +429,6 @@ module.exports = {
   getLowerExchangeItem,
   queryRefund,
   applyRefund,
-  addQuestion
+  addQuestion,
+  checkPhone
 }
