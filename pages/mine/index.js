@@ -13,6 +13,7 @@ Page({
       mine: {},
       step: 0,
       expireDay: 0,
+      coin: 0,
       couponCount: 0,
       orderCount: { unpay: 0, un_deliver: 0, delivering: 0 }
   },
@@ -44,8 +45,9 @@ Page({
    */
   onShow: function () {
     api.getUser().then(res => {
+      if (null === app.globalData.userInfo) return
       app.globalData.userInfo.mine = res
-      this.setData({ now: util.formatTime(new Date()), mine: res, expireDay: util.diffDay(res.vip_expire_time) })
+      this.setData({ now: util.formatTime(new Date()), mine: res, coin: res.coin, expireDay: util.diffDay(res.vip_expire_time) })
     })
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
@@ -60,7 +62,6 @@ Page({
       selected: 4
     })
   },
-
   /**
    * Lifecycle function--Called when page hide
    */

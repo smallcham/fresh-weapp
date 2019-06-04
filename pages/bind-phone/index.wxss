@@ -1,0 +1,10 @@
+.bind-phone-btn {
+  margin-top: 10rpx;
+  float: left;
+  width:500rpx;
+  font-size:25rpx;
+  background-color: #18BC9C;
+  border:1rpx white solid;
+  border-radius:2rem;
+  color:#fff;
+}

@@ -26,9 +26,7 @@ Page({
     this.setData({
       read_only: options.read_only === '1',
       color: app.globalData.color,
-      now: util.formatTime(new Date())
     })
-    this.getCanUseCoupons()
   },
 
   /**
@@ -45,6 +43,10 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     }) 
+    this.setData({
+      now: util.formatTime(new Date())
+    })
+    this.getCanUseCoupons()
   },
 
   /**
@@ -91,7 +93,7 @@ Page({
     this.setData({ activeInfo: e.detail })
   },
   getCanUseCoupons: function() {
-    api.queryEffectiveCoupon(this.data.read_only ? 0 : 1).then(res => {
+    api.queryEffectiveCoupon(1).then(res => {
       if (undefined !== res) {
         app.globalData.not_use_coupon = false
         this.setData({ coupons: res, loading: false })

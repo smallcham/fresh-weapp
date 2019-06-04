@@ -65,6 +65,15 @@ Page({
     this.setData({
       selected_address: app.globalData.selected_address
     })
+    api.getUser().then(mine => {
+      api.getLowerExchangeItem().then(item => {
+        if (null !== item && undefined !== item && item.item_price <= mine.coin) {
+          this.setData({ mine: mine, lowerItem: item })
+        } else {
+          this.setData({ mine: mine, lowerItem: false })
+        }
+      })
+    })
   },
 
   /**
@@ -94,7 +103,11 @@ Page({
   onReachBottom: function () {
 
   },
-
+  toExchange: function() {
+    wx.navigateTo({
+      url: '/pages/coin/index'
+    })
+  },
   /**
    * Called when user click on the top right corner to share
    */

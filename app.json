@@ -29,7 +29,8 @@
     "pages/coin-info/index",
     "pages/after-sale/index",
     "pages/after-sale-type/index",
-    "pages/refund/index"
+    "pages/refund/index",
+    "pages/bind-phone/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

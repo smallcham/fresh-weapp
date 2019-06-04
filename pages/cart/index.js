@@ -243,7 +243,7 @@ Page({
         backgroundColor: this.data.color.warning
       });
     }
-    this.setData({ all_pick: flag, total: total * 100, save: (originalTotal - total).toFixed(1), hasInvalid: hasInvalid})
+    this.setData({ all_pick: flag, total: total <= 0 ? 10 : total * 100, save: (originalTotal - total).toFixed(1), hasInvalid: hasInvalid})
     api.countCart().then(res => {
       this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
     })

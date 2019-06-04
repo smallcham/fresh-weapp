@@ -55,6 +55,10 @@
       <van-cell title="配送费"  icon="free-postage"  value="{{ delivery_fee === 0 ? '包邮' : ('¥ ' + delivery_fee) }}"/>
     </view>
   </view>
+
+<view style='margin-top: 35rpx;' wx:if="{{ !chooseCoupon && lowerItem }}" class='text-center text-muted text-mini'>您有 <van-icon name="gold-coin-o"/> {{ mine.coin }} 轻果币可兑换优惠券 <text class='text-success' data-type="订单咨询" data-id="{{ order.order_code }}" bindtap='toExchange'>立即兑换</text></view>
+
+
   <van-action-sheet show="{{ showTimePicker }}">
     <van-picker show-toolbar confirm-button-text="确认" cancel-button-text="取消" title="选择配送时间 ({{ label }})" default-index="{{ selectedTimeIndex }}" columns="{{ timeColumns }}" bind:confirm="onPickTimeConfirm" bind:cancel="onPickTimeCancel" />
   </van-action-sheet>

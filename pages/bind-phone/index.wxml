@@ -1,0 +1,6 @@
+<view style="margin-top:250rpx;margin: 1rem; padding: 1rem" class='text-center'>
+  <view class='text-center text-small'>响应国家要求，实名认证</view>
+  <view class='text-center'><button class="bind-phone-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信用户快速绑定</button></view>
+</view>
+
+<view style='width:100%;postion:fixed;bottom:0;' class='text-center text-mini text-muted'>点击绑定，即表示已阅读并同意 <text class='text-success' data-src="privacy.html" bindtap="toPage">《法律条款与隐私政策》</text></view>

@@ -6,7 +6,7 @@
   <text wx:else class='icon-text-center text-muted'>已失效</text>
   <view wx:if="{{ order && order.coin > 0 }}" style='margin-top: 25rpx;' class='text-mini text-success'>轻果币 +{{ order.coin }}</view>
   <view style='margin-top: 25rpx;margin-bottom: 25rpx;'>
-    <view class='text-primary text-small text-center'>预计 15:00 - 17:00 送达</view>
+    <view class='text-primary text-small text-center'>预计 {{ order.deliver_end_time  }}前 送达</view>
     <view class='text-muted text-mini text-center' style='padding-top: 10rpx'>订单已支付成功，配送员配送时将与您联系请保持电话畅通</view>
   </view>
   <view class='text-center'>
@@ -17,8 +17,8 @@
 
 <view style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
   <view class='text-priamry text-md'>
-    <text>恭喜你获得 ¥ 3.16 元提现金</text>
-    <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx'> 去领取 > </van-button></view>
+    <text>恭喜你获得 ¥ 3.16 元优惠券</text>
+    <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx'> 分享领取 > </van-button></view>
   </view>
   <view class='text-muted text-mini'>邀请好友助力即可领取</view>
 </view>

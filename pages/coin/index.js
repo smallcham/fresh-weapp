@@ -1,6 +1,8 @@
 // pages/coin/index.js
 const app = getApp()
 import api from '../../api/api'
+import util from '../../utils/util'
+import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
 
 Page({
 
@@ -37,7 +39,7 @@ Page({
       title: this.data.title
     })
     api.getUser().then(res => {
-      this.setData({ mine: res })
+      this.setData({ mine: res, now: util.formatTime(new Date()) })
     })
     api.queryExchangeItem().then(res => {
       for(let i = 0; i < res.total; i ++) {
@@ -82,10 +84,22 @@ Page({
 
   },
   doExchangeItem: function (e) {
-    api.exchangeItem(e.currentTarget.dataset.id).then(res => {
-
-    }).catch(err => {
-
-    })
+    Dialog.confirm({
+      title: '提示',
+      message: '是否兑换该优惠券'
+    }).then(() => {
+      api.exchangeItem(e.currentTarget.dataset.id).then(res => {
+        wx.showToast({
+          title: '兑换成功',
+          icon: 'success'
+        })
+        this.onShow()
+      }).catch(err => {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      })
+    }).catch(() => { })
   }
 })

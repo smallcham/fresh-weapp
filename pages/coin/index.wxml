@@ -1,3 +1,4 @@
+<van-dialog id="van-dialog" />
 <van-notice-bar scrollable="false" text="轻果币可用于兑换优惠券，单单可得，会员双倍哦 ~"/>
 <van-cell is-link value="查看明细" url="/pages/coin-info/index">
   <view slot="title" class='text-small text-success'>
@@ -12,14 +13,19 @@
           <view class='text-center text-success' style='font-weight: 700;'><text class='text-small'>¥ </text><text class='text-huge'>{{ item.item_setting.discount_amount }}</text></view>
           <view class='text-center text-success'><text class='text-mini' style='font-weight: 700;'>实付满 ¥ {{ item.item_setting.limit_amount }} 元可用 </text></view>
         </van-col>
-        <van-col span="12">
+        <van-col span="11">
           <view class='text-mini text-muted'>
             <view wx:if="{{ item.vip_only }}" class='text-warning' style='font-weight: 700;'>仅限会员使用</view>
             <view wx:else style='font-weight: 700'>会员、非会员通用</view>
+            <view>全品类</view>
           </view>
         </van-col>
-        <van-col span="4">
-          <view style='padding-top: 30rpx;'><van-button plain size="small" type="success" data-id="{{ item.item_code }}" bindtap='doExchangeItem'>兑换</van-button></view>
+        <van-col span="5">
+          <view class='text-mini text-success' style='font-weight: 700;'> {{ item.item_price }} 轻果币</view>
+          <view wx:if="{{ mine.coin >= item.item_price && (!item.vip_only || item.vip_only && now < mine.vip_expire_time ) }}" style='padding-top: 30rpx;'><van-button plain size="small" type="success" data-id="{{ item.item_code }}" bindtap='doExchangeItem'>兑换</van-button></view>
+          <view style='padding-top: 30rpx;' wx:if="{{ mine.coin < item.item_price }}" class="text-mini text-muted">还差 {{ item.item_price - mine.coin }} 个</view>
+          <view wx:if="{{ item.vip_only && now >= mine.vip_expire_time }}" style='padding-top: 30rpx;'><van-button plain size="small" type="warning" data-id="{{ item.item_code }}" bindtap='doExchangeItem'>开通会员</van-button></view>
+          
         </van-col>
       </van-row>
     </view>

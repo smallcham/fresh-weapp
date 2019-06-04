@@ -359,6 +359,10 @@ const exchangeItem = (item_code) => {
   return request(app.globalApi.exchange_item + '/' + item_code, { method: 'POST', data: {} })
 }
 
+const getLowerExchangeItem = () => {
+  return request(app.globalApi.lower_exchange_item, { method: 'GET', data: { } })
+}
+
 const queryRefund = (order_code) => {
   return request(app.globalApi.query_refund + '/' + order_code, { method: 'GET', data: {} })
 }
@@ -369,6 +373,10 @@ const applyRefund = (order_code, goods_code, amount, reason='', imgs=[]) => {
 
 const addQuestion = (type, reason, imgs=[]) => {
   return request(app.globalApi.add_question, { method: 'POST', data: { data: { reason: reason, imgs: imgs, type: type } } })
+}
+
+const checkPhone = () => {
+  return request(app.globalApi.check_phone, { method: 'POST', data: {} })
 }
 
 module.exports = {
@@ -418,6 +426,7 @@ module.exports = {
   queryCoin,
   queryExchangeItem,
   exchangeItem,
+  getLowerExchangeItem,
   queryRefund,
   applyRefund,
   addQuestion

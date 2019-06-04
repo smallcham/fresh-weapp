@@ -38,17 +38,17 @@
                 <!-- <van-col span="6">
                   <view><van-icon name="bill" /><text> 任务红包</text></view>
                 </van-col> -->
-                <van-col span="6">
-                  <view><van-icon name="logistics" /><text> 小时达</text></view>
-                </van-col>
                 <!-- <van-col span="6">
-                  <view><van-icon name="gift" /><text> 会员日</text></view>
+                  <view><van-icon name="logistics" /><text> 小时达</text></view>
                 </van-col> -->
+                <van-col span="6">
+                  <view><van-icon name="discount" /><text> 专属优惠</text></view>
+                </van-col>
                 <!-- <van-col span="6">
                   <view><van-icon name="friends" /><text> 共享会员</text></view>
                 </van-col> -->
                 <van-col span="6">
-                  <view><van-icon name="diamond" /><text> 双倍积分</text></view>
+                  <view><van-icon name="gold-coin-o" /><text> 双倍积分</text></view>
                 </van-col>
                 <!-- <van-col span="6">
                   <view><van-icon name="service" /><text> 专属客服</text></view>
@@ -85,7 +85,7 @@
       </van-col> -->
       <van-col span="12">
         <view class='card' style='width:100%;border-top:0;' bindtap='toCoin'>
-            <view><text class='text-primary'>{{ mine.coin }}</text></view>
+            <view><text class='text-primary'>{{ coin }}</text></view>
             <view><text class='text-mini text-muted'>轻果币</text></view>
           </view>
       </van-col>

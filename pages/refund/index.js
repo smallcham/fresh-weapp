@@ -117,7 +117,7 @@ Page({
     }
     let rate = Number(goods.total) / total.toFixed(1)
     let discount = rate * Number(this.data.order.coupon_discount_total).toFixed(1)
-    let refund_total = Number(((goods.total - discount) / goods.amount) * this.data.refund_amount).toFixed(1)
+    let refund_total = (parseInt(Number(((goods.total - discount) / goods.amount) * this.data.refund_amount) * 10)  / 10).toFixed(1)
     if (refund_total > Number(this.data.order.actual_total)) refund_total = this.data.order.actual_total
     this.setData({ real_refund: refund_total <= 0 ? 0 : refund_total })
   },

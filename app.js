@@ -236,6 +236,7 @@ App({
     search_info: 'search/info',
     search_clear: 'search/clear',
     get_phone: 'phone',
+    check_phone: 'check/phone',
     get_run_data: 'run/data',
     get_house: 'distance',
     cata_list: 'cata/list',
@@ -284,6 +285,7 @@ App({
     query_coin: 'coin/query/log',
     query_exchange_item: 'coin/exchange/list',
     exchange_item: 'coin/exchange/item',
+    lower_exchange_item: 'coin/lower/exchange/item',
     add_question: 'question/add'
   },
   globalData: {
