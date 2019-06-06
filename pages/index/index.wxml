@@ -4,7 +4,7 @@
     <van-icon name="location"/>
     <text class='icon-text-center text-muted'> 当前位置：{{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text>
     <van-button type="success" size='small' bindtap='openLocation'>{{ house_msg }} 切换地址 </van-button>
-    <van-button type="warning" size='small' bindtap='accessLocation'>申请开通该区域配送服务 </van-button>
+    <!-- <van-button type="warning" size='small' bindtap='accessLocation'>申请开通该区域配送服务 </van-button> -->
   </view>
 </view>
 <view style='display: {{ access == "false" ? "block" : "none" }}'>
