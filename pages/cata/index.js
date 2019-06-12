@@ -171,18 +171,20 @@ Page({
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
       app.globalData.house = res
       this.getCata()
-      api.nearAddr(res.id).then(res => {
-        if (null !== res && undefined !== res) {
-          app.globalData.selected_address = res
-          app.globalData.selected_location = app.addressToLocation(res)
-        }
-        this.setData({
-          selected_location: app.globalData.selected_location,
-          location: app.globalData.location,
-          goodsCata: app.globalData.goodsCata,
-          TabCur: app.globalData.TabCur
+      if (res.house_type === 0) {
+        api.nearAddr(res.id).then(res => {
+          if (null !== res && undefined !== res) {
+            app.globalData.selected_address = res
+            app.globalData.selected_location = app.addressToLocation(res)
+          }
+          this.setData({
+            selected_location: app.globalData.selected_location,
+            location: app.globalData.location,
+            goodsCata: app.globalData.goodsCata,
+            TabCur: app.globalData.TabCur
+          })
         })
-      })
+      }
     }).catch(err => { })
   },
   getCata: function () {

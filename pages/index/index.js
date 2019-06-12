@@ -245,13 +245,15 @@ Page({
       api.countCart().then(res => {
         this.getTabBar().setCartCount((null === res || undefined === res) ? 0 : Number(res))
       })
-      api.nearAddr(res.id).then(res => {
-        if (null !== res && undefined !== res) {
-          app.globalData.selected_address = res
-          app.globalData.selected_location = app.addressToLocation(res)
-          this.setData({ selected_location: app.globalData.selected_location })
-        }
-      })
+      if (res.house_type === 0) {
+        api.nearAddr(res.id).then(res => {
+          if (null !== res && undefined !== res) {
+            app.globalData.selected_address = res
+            app.globalData.selected_location = app.addressToLocation(res)
+            this.setData({ selected_location: app.globalData.selected_location })
+          }
+        })
+      }
       this.getCata()
     }).catch(err => {
       this.setData({

@@ -16,11 +16,13 @@
 
     <view style='margin-top: 15rpx'>
         <van-cell title="配送信息"/>
-        <van-cell wx:if="{{ order.order_state === 1 || order.order_state === 2 }}" value="查看订单进度" title="{{ order.deliver_info.rider ? '正在配送' : '商品打包中' }}" border="{{ false }}" is-link url="/pages/order-progress/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.deliver_info.rider }}" title="配送员 {{ order.deliver_info.rider.rider_name }}" label="配送问题请及时联系配送员" data-phone="{{ order.deliver_info.rider.phone }}" bind:click="callService">
-          <text slot="" class='text-success text-mini'>联系配送员 </text>
-          <van-icon slot="right-icon" name="phone-circle-o" color="{{ color.success }}" />
-        </van-cell>
+        <block wx:if="{{ order.deliver_type === 0 }}">
+          <van-cell wx:if="{{ order.order_state === 1 || order.order_state === 2 }}" value="查看订单进度" title="{{ order.deliver_info.rider ? '正在配送' : '商品打包中' }}" border="{{ false }}" is-link url="/pages/order-progress/index?order_code={{ order.order_code }}"/>
+          <van-cell wx:if="{{ order.deliver_info.rider }}" title="配送员 {{ order.deliver_info.rider.rider_name }}" label="配送问题请及时联系配送员" data-phone="{{ order.deliver_info.rider.phone }}" bind:click="callService">
+            <text slot="" class='text-success text-mini'>联系配送员 </text>
+            <van-icon slot="right-icon" name="phone-circle-o" color="{{ color.success }}" />
+          </van-cell>
+        </block>
         <van-cell title="{{ order.deliver_info.address.receive_name + ' ' + order.deliver_info.address.phone }}" label='{{ order.deliver_info.address.city + " " + order.deliver_info.address.district + " " + order.deliver_info.address.title +  " " + order.deliver_info.address.location }}' />
     </view>
 

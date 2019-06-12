@@ -83,7 +83,11 @@ Page({
   },
   loadOrder: function() {
     api.getOrder(this.data.order_code).then(res => {
-      this.setData({ order: res })
+      let end_time = new Date(res.deliver_end_time)
+      let now = new Date()
+      let end_min = end_time.getHours() * 60 + end_time.getMinutes()
+      let now_min = now.getHours() * 60 + now.getMinutes()
+      this.setData({ order: res, deliver_time: end_min <= now_min ? ('今天' + res.deliver_end_time.split(' ')[1]) : res.deliver_end_time })
     })
   },
   toOrderInfo: function(e) {
