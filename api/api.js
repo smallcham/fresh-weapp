@@ -383,6 +383,18 @@ const checkPhone = (iv, encryptedData) => {
   return request(app.globalApi.check_phone, { method: 'POST', data: { data: { iv: iv, data: encryptedData } } })
 }
 
+const createRedPaper = (order_code) => {
+  return request(app.globalApi.create_red_paper + '/' + order_code, { method: 'POST', data: {} })
+}
+
+const getRedPaper = (paper_code) => {
+  return request(app.globalApi.get_red_paper + '/' + order_code, { method: 'GET', data: {} })
+}
+
+const takeRedPaper = (paper_code) => {
+  return request(app.globalApi.take_red_paper + '/' + order_code, { method: 'POST', data: {} })
+}
+
 module.exports = {
   get,
   post,
@@ -435,5 +447,8 @@ module.exports = {
   queryRefund,
   applyRefund,
   addQuestion,
-  checkPhone
+  checkPhone,
+  createRedPaper,
+  getRedPaper,
+  takeRedPaper
 }

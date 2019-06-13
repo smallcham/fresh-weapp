@@ -23,9 +23,9 @@
   </van-row>
 </view>
 
-<van-cell title="选择会员套餐" border="{{ false }}">
-  <view slot="" class='text-small text-muted' bindtap='toUseCode'>使用兑换码</view>
-  <van-icon slot="right-icon" name="arrow" class='text-small text-muted' bindtap='toUseCode'/>
+<van-cell title="选择会员套餐" border="{{ false }}" >
+  <!-- <view slot="" class='text-small text-muted' bindtap='toUseCode'>使用兑换码</view> -->
+  <!-- <van-icon slot="right-icon" name="arrow" class='text-small text-muted' bindtap='toUseCode'/> -->
 </van-cell>
 <scroll-view scroll-x style='white-space: nowrap; display: flex;margin-bottom:100rpx;'>
   <van-radio-group value="{{ checked }}" wx:for="{{ plans }}" wx:key>

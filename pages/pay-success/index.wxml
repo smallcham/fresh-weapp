@@ -15,10 +15,10 @@
   </view>
 </view>
 
-<view style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
+<view wx:if="{{ paper && paper.amount > 0 }}" style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
   <view class='text-priamry text-md'>
-    <text>恭喜你获得 ¥ 3.16 元优惠券</text>
-    <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx'> 分享领取 > </van-button></view>
+    <text>恭喜你获得最高 ¥{{ paper.amount }} 元随机红包</text>
+    <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx' bind:click="toShare"> 分享领取 > </van-button></view>
   </view>
-  <view class='text-muted text-mini'>邀请好友助力即可领取</view>
+  <view class='text-muted text-mini'>分享到微信群看看谁的运气好</view>
 </view>

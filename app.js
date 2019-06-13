@@ -287,7 +287,10 @@ App({
     query_exchange_item: 'coin/exchange/list',
     exchange_item: 'coin/exchange/item',
     lower_exchange_item: 'coin/lower/exchange/item',
-    add_question: 'question/add'
+    add_question: 'question/add',
+    create_red_paper: 'paper/create',
+    take_red_paper: 'paper/take',
+    get_red_paper: 'paper/info'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

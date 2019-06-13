@@ -29,7 +29,9 @@ Page({
     let that = this
     let id = setInterval(function() {
       that.loadOrder()
-      if (that.data.order && that.data.order.order_state !== 0) clearInterval(id)
+      if (that.data.order && that.data.order.order_state !== 0) { 
+        clearInterval(id)
+      }
     }, 2000)
   },
 
@@ -88,6 +90,11 @@ Page({
       let _year = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
       let _deliver_year = end_time.getFullYear() + '-' + (end_time.getMonth() + 1) + '-' + end_time.getDate()
       this.setData({ order: res, deliver_time: _deliver_year === _year ? ('今天' + res.deliver_end_time.split(' ')[1]) : res.deliver_end_time })
+      if (res.order_state !== 0) {
+        api.createRedPaper(this.data.order_code).then(res => {
+          this.setData({ paper: res })
+        })
+      }
     })
   },
   toOrderInfo: function(e) {
@@ -98,6 +105,11 @@ Page({
   toHome: function() {
     wx.switchTab({
       url: '/pages/index/index'
+    })
+  },
+  toShare: function() {
+    wx.redirectTo({
+      url: '/pages/red-paper/index?paper_code=' + this.data.paper.paper_code 
     })
   }
 })

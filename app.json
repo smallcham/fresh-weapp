@@ -30,7 +30,8 @@
     "pages/after-sale/index",
     "pages/after-sale-type/index",
     "pages/refund/index",
-    "pages/bind-phone/index"
+    "pages/bind-phone/index",
+    "pages/red-paper/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
