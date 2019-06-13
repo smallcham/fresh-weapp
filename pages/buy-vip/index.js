@@ -97,31 +97,31 @@ Page({
   onChangePlan: function(e) {
     this.setData({ checked: e.currentTarget.dataset.id, plan: this.data.plans[e.currentTarget.dataset.id] })
   },
-  openVip: function() {
+  openVip: function () {
     this.setData({ loading: true })
-    api.pay(1, '会员购买').then(res => {
-      api.vipOpen(this.data.checked).then(res => {
-        api.getUser().then(res => {
-          app.globalData.userInfo.mine = res
-          this.setData({ loading: false })
-          Dialog.alert({
-            title: '轻果提醒',
-            message: '会员购买成功'
-          }).then(() => {
-            wx.navigateBack({})
-          })
-        })
-      }).catch(err => {
-        this.setData({ loading: false })
+    api.createBuyVipOrder(this.data.checked).then(res => {
+      api.pay(res).then(pay_res => {
         Dialog.alert({
           title: '轻果提醒',
-          message: err
-        }).then(() => {
-          // on close
-        })
+          message: '会员购买成功'
+        }).then(() => { wx.navigateBack({}) })
+      }).catch(err => {
+        if (!err.errMsg === 'requestPayment:fail cancel') {
+          Dialog.alert({
+            title: '轻果提醒',
+            message: err
+          }).then(() => { })
+        }
+        this.setData({ loading: false })
       })
     }).catch(err => {
-      this.setData({ loading: true })
+      this.setData({ loading: false })
+      Dialog.alert({
+        title: '轻果提醒',
+        message: err
+      }).then(() => {
+        // on close
+      })
     })
   }
 })

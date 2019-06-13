@@ -85,9 +85,9 @@ Page({
     api.getOrder(this.data.order_code).then(res => {
       let end_time = new Date(res.deliver_end_time)
       let now = new Date()
-      let end_min = end_time.getHours() * 60 + end_time.getMinutes()
-      let now_min = now.getHours() * 60 + now.getMinutes()
-      this.setData({ order: res, deliver_time: end_min <= now_min ? ('今天' + res.deliver_end_time.split(' ')[1]) : res.deliver_end_time })
+      let _year = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+      let _deliver_year = end_time.getFullYear() + '-' + (end_time.getMonth() + 1) + '-' + end_time.getDate()
+      this.setData({ order: res, deliver_time: _deliver_year === _year ? ('今天' + res.deliver_end_time.split(' ')[1]) : res.deliver_end_time })
     })
   },
   toOrderInfo: function(e) {

@@ -268,6 +268,7 @@ App({
     get_user: 'mine',
     create_pay: 'pay/create',
     create_order: 'order/create',
+    buy_vip_create_order: 'order/buy/vip/create',
     query_order: 'order/query',
     feedback_order: 'order/feedback',
     get_order: 'order/get',

@@ -287,6 +287,10 @@ const createOrder = (day, delivery_time, coupon_ids = []) => {
   return request(app.globalApi.create_order, { method: 'POST', data: { data: { day: day, delivery_time: delivery_time, address_code: address.address_code, coupon_ids: coupon_ids } } })
 }
 
+const createBuyVipOrder = (plan) => {
+  return request(app.globalApi.buy_vip_create_order, { method: 'POST', data: { data: { plan: plan } } })
+}
+
 const queryOrder = (page = 1, order_state) => {
   let data = { page, page }
   if (undefined !== order_state) data = { page: page, order_state: order_state }
@@ -408,6 +412,7 @@ module.exports = {
   createPay,
   pay,
   createOrder,
+  createBuyVipOrder,
   queryOrder,
   getOrder,
   feedbackOrder,
