@@ -28,7 +28,7 @@ Page({
       color: app.globalData.color,
     })
     this.getTabBar().setData({
-      selected: 4
+      selected: 3
     })
     this.getLink()
   },

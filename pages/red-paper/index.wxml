@@ -1,3 +1,27 @@
-<view style="background-color: #fff;border-radius: 100% 100% 100% 100% / 0% 0% 10% 10%;">
-<van-button hairline round size="large" type="warning" open-type="share">点击领取</van-button>
+<view style='margin: .5rem'>
+  <view style='background-color: #fff;border-top-left-radius:.5rem;border-top-right-radius:.5rem;border-bottom:1rpx dashed {{ color.warning }}'>
+    <view wx:if="{{ now >= redPaper.end_time }}" style='padding: .5rem' class='text-center text-warning text-small'><van-icon name="info"/> 活动已结束</view>
+    <view wx:else style='padding: .5rem' class='text-center text-warning text-small'><van-icon name="clock"/> {{ redPaper.end_time }} 后结束</view>
+  </view>
+  <view style="background-color: #fff;border-bottom:1rpx dashed {{ color.warning }}">
+      <view style='padding: 1rem'>
+        <view wx:if="{{ !redPaper.mine && now < redPaper.end_time }}" style="padding-bottom: 25rpx" class='text-warning text-center'>快点击领取看看你的运气吧</view>
+        <view wx:if="{{ redPaper.mine }}" class='text-primary text-lg text-center'  style="padding-bottom: 25rpx">恭喜您获得 <text class='text-warning' style='font-weight: 700'>¥ {{ redPaper.mine.amount }}</text> 元 红包</view>
+        <van-button wx:if="{{ !redPaper.mine && now < redPaper.end_time }}"  style="padding-bottom: 25rpx" hairline round size="large" type="warning" bind:click="take">点击领取</van-button>
+        <view wx:if="{{ redPaper.mine }}">
+          <van-button hairline round size="large" type="warning" bind:click="toHome">去商城逛逛</van-button>
+          <view class='text-mini text-muted text-center'  style="padding-top: 25rpx">您已领取该红包, 快去使用吧</view>
+        </view>
+        <view wx:else>
+          <view class='text-mini text-muted text-center'  style="padding-top: 25rpx">恭喜你获得一个随机红包</view>
+        </view>
+      </view>
+  </view>
+  <view>
+    <van-cell wx:if="{{ redPaper && redPaper.log }}" wx:for="{{ redPaper.log }}" wx:key="{{ item.id }}">
+      <van-icon size="45rpx" slot="icon" name="{{ item.avatar }}"/>
+      <view slot="title" style='padding-left: 10rpx'> {{ item.nick_name }} </view>
+      <view slot="" class='text-warning' style='font-weight: 700'>¥ {{ item.amount }} 元</view>
+    </van-cell>
+  </view>
 </view>

@@ -81,7 +81,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '吃吃吃, 快来这里买, 最快1小时达!',
+      path: '/pages/red-paper/index?paper_code=' + this.data.paper.paper_code,
+      imageUrl: app.globalData.fs + 'red_paper.png'//自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
+    }
   },
   loadOrder: function() {
     api.getOrder(this.data.order_code).then(res => {
@@ -93,6 +97,10 @@ Page({
       if (res.order_state !== 0) {
         api.createRedPaper(this.data.order_code).then(res => {
           this.setData({ paper: res })
+          if (null === this.data.paper || null === this.data.paper.amount || this.data.paper.amount <= 0) {
+            wx.hideShareMenu({})
+            return false
+          }
         })
       }
     })

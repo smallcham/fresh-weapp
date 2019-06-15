@@ -388,11 +388,11 @@ const createRedPaper = (order_code) => {
 }
 
 const getRedPaper = (paper_code) => {
-  return request(app.globalApi.get_red_paper + '/' + order_code, { method: 'GET', data: {} })
+  return request(app.globalApi.get_red_paper + '/' + paper_code, { method: 'GET', data: {} })
 }
 
 const takeRedPaper = (paper_code) => {
-  return request(app.globalApi.take_red_paper + '/' + order_code, { method: 'POST', data: {} })
+  return request(app.globalApi.take_red_paper + '/' + paper_code, { method: 'POST', data: {} })
 }
 
 module.exports = {

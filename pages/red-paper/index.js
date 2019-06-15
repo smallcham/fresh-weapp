@@ -1,4 +1,5 @@
 import api from '../../api/api'
+import util from '../../utils/util'
 const app = getApp()
 
 Page({
@@ -8,6 +9,7 @@ Page({
    */
   data: {
     title: '红包领取',
+    userInfo: app.globalData.userInfo
   },
 
   /**
@@ -16,7 +18,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       color: app.globalData.color,
-      paper_code: options.paper_code
+      paper_code: options.paper_code,
+      userInfo: app.globalData.userInfo
     })
   },
 
@@ -34,6 +37,12 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title
     })
+    if (null === this.data.userInfo) {
+      let that = this
+      app.login(function () { that.getPaper() })
+    } else {
+      this.getPaper()
+    }
   },
 
   /**
@@ -68,10 +77,31 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
-    return {
-      title: '哈根达斯冰激凌5折特惠',
-      path: '/pages/index/index',
-      imageUrl: 'http://static.e-mallchina.com/pic/product/brand/detail/hgds.jpg'//自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
-    }
+
+  },
+  take: function() {
+    api.takeRedPaper(this.data.paper_code).then(res => {
+      this.onShow()
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })    
+    })
+  },
+  toHome: function() {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+  getPaper: function() {
+    api.getRedPaper(this.data.paper_code).then(res => {
+      this.setData({ redPaper: res, now: util.formatTime(new Date()) })
+    }).catch(err => {
+      wx.showToast({
+        title: '该红包已过期或不存在',
+        icon: 'none'
+      })
+    })
   }
 })
