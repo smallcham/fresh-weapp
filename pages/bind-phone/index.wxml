@@ -1,4 +1,5 @@
 <view style="margin: 1rem;margin-top:30%; padding: 1rem" class='text-center'>
+  <view class='text-center'><van-icon name="{{ fs }}/%E5%BE%AE%E4%BF%A1%20%281%29.png" size="100rpx"/></view>
   <view class='text-center'><button class="bind-phone-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信用户快速绑定</button></view>
 </view>
 

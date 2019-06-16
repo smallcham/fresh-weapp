@@ -154,7 +154,7 @@ Page({
     })
     if (this.data.house !== false) { app.shareCallBack() }
     //地址切换后需要更新仓库信息
-    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location) || (!this.data.selected_location && !app.globalData.selected_location)) {
       if (!app.globalData.selected_location) {
         app.getLocation(this, 0, true)
       } else {

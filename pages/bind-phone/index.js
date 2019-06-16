@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '手机验证'
+    title: '手机验证',
+    fs: app.globalData.fs
   },
 
   /**

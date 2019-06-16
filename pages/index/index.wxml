@@ -28,7 +28,7 @@
 </van-tabs>
 
   <van-notify id="custom-notify" />
-  <swiper autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
+  <swiper wx:if="{{ banner && banner.length > 0 }}" autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
       <swiper-item class="text-center" wx:for="{{ banner }}" wx:key="{{ item.link_code }}" data-url="{{ item.url }}" data-type="{{ item.url_type }}" bindtap="clickLink"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     </swiper>
 

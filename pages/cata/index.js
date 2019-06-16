@@ -70,14 +70,14 @@ Page({
       this.data.goodsList = false
       this.getGoodsList()
     }
-    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location) || (!this.data.selected_location && !app.globalData.selected_location)) {
       this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
     } else {
       this.setData({
         location: app.globalData.location,
         selected_location: app.globalData.selected_location,
         goodsCata: app.globalData.goodsCata,
-        TabCur: app.globalData.TabCur
+        TabCur: this.data.TabCur
       })
     }
     this.getTabBar().setData({
@@ -181,8 +181,13 @@ Page({
             selected_location: app.globalData.selected_location,
             location: app.globalData.location,
             goodsCata: app.globalData.goodsCata,
-            TabCur: app.globalData.TabCur
+            TabCur: this.data.TabCur
           })
+        })
+      } else {
+        this.setData({
+          goodsCata: app.globalData.goodsCata,
+          TabCur: this.data.TabCur
         })
       }
     }).catch(err => { })
@@ -192,7 +197,7 @@ Page({
       app.globalData.goodsCata = res
       if (res.length > 0) { 
         app.globalData.TabCur = res[0].cata_code
-        this.setData({ goodsCata: res, TabCur: app.globalData.TabCur, })
+        this.setData({ goodsCata: res, TabCur: this.data.TabCur, })
         this.getGoodsList()
       } else {
         wx.switchTab({
