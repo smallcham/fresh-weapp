@@ -84,7 +84,7 @@ Page({
     return {
       title: '吃吃吃, 快来这里买, 最快1小时达!',
       path: '/pages/red-paper/index?paper_code=' + this.data.paper.paper_code,
-      imageUrl: app.globalData.fs + 'red_paper.png'//自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
+      imageUrl: app.globalData.fs + 'red_paper_new.png'//自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
     }
   },
   loadOrder: function() {

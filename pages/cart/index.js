@@ -67,7 +67,7 @@ Page({
       })
     }
     this.getTabBar().setData({
-      selected: 3
+      selected: 2
     })
   },
 

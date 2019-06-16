@@ -59,7 +59,7 @@ Page({
       this.setData({ couponCount: res })
     })
     this.getTabBar().setData({
-      selected: 4
+      selected: 3
     })
   },
   /**
