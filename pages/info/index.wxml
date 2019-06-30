@@ -18,7 +18,7 @@
         <text class='text-mini text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text>
       </view>
       <view class='line'></view>
-      <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text><text>‧ 小时达</text><text>‧ 实付满39包邮</text></view>
+      <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text><text wx:if="{{ house }}">‧ {{ house.house_type === 0 ? '小时达' : '2至4日达' }}</text><text>‧ 实付满{{ house.free_delivery_limit }}包邮</text></view>
     </view>
   </van-panel>
 

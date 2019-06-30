@@ -17,7 +17,10 @@
 <view style='display: {{ access == "true" && !no_house ? "block" : "none" }}'>
   <van-nav-bar fixed border="{{ false }}">
     <view slot="left" style="background: {{ color.success }};padding-left:0.80rem;padding-bottom:0.50rem" class='text-default text-small'>
-     <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
+     <view class='ell-super'>
+      <van-icon name="location" bindtap='openLocation'/>
+      <text bindtap='openLocation'><text style='font-weight: 700;font-style: italic' wx:if="{{ house }}">{{ house.house_type === 0 ? '小时达' : '2至4日达' }}</text> . {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text>        <van-icon bindtap='openLocation' name="arrow-down"/>
+      </view>
     </view>
   </van-nav-bar>
 <van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼">
@@ -29,7 +32,7 @@
 
   <van-notify id="custom-notify" />
   <swiper wx:if="{{ banner && banner.length > 0 }}" autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
-      <swiper-item class="text-center" wx:for="{{ banner }}" wx:key="{{ item.link_code }}" data-url="{{ item.url }}" data-type="{{ item.url_type }}" bindtap="clickLink"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+      <swiper-item class="text-center" wx:for="{{ banner }}" wx:key data-url="{{ item.url }}" data-type="{{ item.url_type }}" bindtap="clickLink"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     </swiper>
 
 <view class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;display: {{ loading_mkt ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>

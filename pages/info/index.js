@@ -15,6 +15,7 @@ Page({
     share: false,
     loading: true,
     goodsInfo: {},
+    house: false,
     showFoot: true
   },
 
@@ -25,7 +26,8 @@ Page({
     this.data.id = options.id
     this.data.share = options.share === '1'
     this.setData({
-      color: app.globalData.color
+      color: app.globalData.color,
+      house: app.globalData.house
     })
     api.countCart().then(res => {
       this.setData({ cartCount: (null === res || undefined === res) ? 0 : Number(res) })

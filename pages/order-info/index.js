@@ -177,7 +177,7 @@ Page({
           let _now = new Date()
           let _year = _now.getFullYear() + '-' + (_now.getMonth() + 1) + '-' + _now.getDate()
           let _deliver_year = _time.getFullYear() + '-' + (_time.getMonth() + 1) + '-' + _time.getDate()
-          res.deliver_time_label = (_year === _deliver_year ? '今天' : _deliver_year) + ' ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? '0' + _time.getMinutes() : _time.getMinutes()) + ' 前 '
+          res.deliver_time_label = (_year === _deliver_year ? '今天' : _deliver_year) + '日 ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? '0' + _time.getMinutes() : _time.getMinutes()) + ' 前 '
           let sum = 0
           for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
           this.setData({
