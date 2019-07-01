@@ -10,6 +10,7 @@ Page({
   data: {
     fs: app.globalData.fs,
     active: 0,
+    current: 0,
     access: app.globalData.access_location,
     border: false,
     loading_mkt: true,
@@ -302,7 +303,7 @@ Page({
         else if (res[i].link_type === 0) this.data.indexCata.push(res[i])
         else {}
       }
-       this.setData({ banner: this.data.banner, indexCata: this.data.indexCata })
+       this.setData({ banner: this.data.banner, current: 0, indexCata: this.data.indexCata })
     }).catch(err => {
       console.log('getLink', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');

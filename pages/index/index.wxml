@@ -31,8 +31,8 @@
 </van-tabs>
 
   <van-notify id="custom-notify" />
-  <swiper wx:if="{{ banner && banner.length > 0 }}" autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
-      <swiper-item class="text-center" wx:for="{{ banner }}" wx:key data-url="{{ item.url }}" data-type="{{ item.url_type }}" bindtap="clickLink"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
+  <swiper wx:if="{{ banner && banner.length > 0 }}" current="{{ current }}" autoplay circular style='height:{{ banner.length > 0 ? "200rpx" : "0"}}'>
+      <swiper-item class="text-center" wx:for="{{ banner }}" wx:key="{{ item.id }}" data-url="{{ item.url }}" data-type="{{ item.url_type }}" bindtap="clickLink"><image src='{{ fs + item.img }}' mode='widthFix' style='width:100%;overflow:show;'></image></swiper-item>
     </swiper>
 
 <view class='text-center text-muted-la text-max anim-opacity-1' style='margin-top: 35rpx;display: {{ loading_mkt ? "block" : "none" }}'><van-icon name="weapp-nav" /></view>

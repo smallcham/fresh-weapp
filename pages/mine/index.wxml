@@ -150,12 +150,12 @@
             <view><text class='text-mini text-muted'>储值送会员</text></view>
           </view>
       </van-col> -->
-      <van-col span="8">
+      <!-- <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.danger }}' name="balance-list" /></view>
             <view><text class='text-mini text-muted'>邀请的红包</text></view>
           </view>
-      </van-col>
+      </van-col> -->
       <!-- <van-col span="8">
         <view class='card bar-item'>
             <view><van-icon class='text-max' color='{{ color.danger }}' name="friends" /></view>
