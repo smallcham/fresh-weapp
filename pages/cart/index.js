@@ -57,7 +57,7 @@ Page({
       mask: false
     });
     this.setData({ is_vip: util.formatTime(new Date()) < app.globalData.mine.vip_expire_time })
-    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location) || (!this.data.selected_location && !app.globalData.selected_location)) {
+    if (JSON.stringify(this.data.selected_location) !== JSON.stringify(app.globalData.selected_location)) {
       this.getHouse(app.globalData.selected_location.adcode, app.globalData.selected_location.latitude, app.globalData.selected_location.longitude)
     } else {
       this.cartList()
