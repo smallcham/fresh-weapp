@@ -23,7 +23,7 @@
       </view>
     </view>
   </van-nav-bar>
-<van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="草莓、香蕉、龙眼">
+<van-search bind:tap="openSearch" disabled use-action-slot input-align="center" value="{{ value }}" placeholder="蒸蛋糕、AD钙奶、辣条">
   <!-- <van-icon slot="action" class='text-lg text-muted' bind:tap='openScan' name="scan" style='padding-top: 15rpx;'/> -->
 </van-search>
 <van-tabs border="{{ false }}" color="{{ color.success }}" active="{{ active }}"  bind:change="onChangeHomeTab">

@@ -4,7 +4,7 @@
      <view class='ell-super'><van-icon name="location" bindtap='openLocation'/><text bindtap='openLocation'> {{ selected_location ? selected_location.title : location.title ? location.title : location.formatted_addresses.recommend }} </text> <van-icon bindtap='openLocation' name="arrow-down"/></view>
     </view>
   </van-nav-bar>
-<van-search input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="草莓、香蕉、龙眼" />
+<van-search input-align="center" value="{{ value }}" bindtap="openSearch" placeholder="蒸蛋糕、AD钙奶、辣条" />
 <view class="VerticalBox" style='background-color: #FFF'>
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:900rpx">
     <view class="cu-item {{item.cata_code==TabCur?'text-success cur':''}}" wx:for="{{ goodsCata }}" wx:key bindtap='tabSelect' data-id="{{ item.cata_code }}">
