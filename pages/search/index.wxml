@@ -1,5 +1,5 @@
 <van-notify id="van-notify" />
-<van-search input-align="center" value="{{ word }}"  focus="{{ focus }}"placeholder="草莓、香蕉、龙眼" bind:search="onSearch"/>
+<van-search input-align="center" value="{{ word }}"  focus="{{ focus }}"placeholder="蒸蛋糕、AD钙奶、辣条" bind:search="onSearch"/>
 
 <van-nav-bar border="{{ border }}">
     <view slot="left">

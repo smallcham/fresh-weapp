@@ -244,10 +244,13 @@ Page({
     const minute = date.getMinutes()
     const second = date.getSeconds()
 
-    let start_time = new Date(house.start_time)
-    let end_time = new Date(house.end_time)
+    let start_time = new Date(house.start_time.replace(/-/g, '/'))
+    let end_time = new Date(house.end_time.replace(/-/g, '/'))
+    console.log(start_time, end_time)
     let now_min = hour * 60 + minute
+    console.log(now_min)
     let start_min = start_time.getHours() * 60 + start_time.getMinutes()
+    console.log(start_time.getMinutes())
     let end_min = end_time.getHours() * 60 + end_time.getMinutes()
 
     if (now_min >= start_min && now_min < end_min ) {

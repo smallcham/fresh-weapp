@@ -52,6 +52,7 @@
               <view><text class='price' data-id="{{ item.goods_code }}" bindtap='showInfo'>¥ {{ item.price }}</text><van-icon data-id="{{ item.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
               <view data-id="{{ item.goods_code }}" bindtap='showInfo'>
                 <text class='text-del' wx:if="{{ item.original != item.price }}">¥ {{ item.original }}</text>
+                <text wx:else space="{{true}}" decode="{{true}}" class='text-mini'>&nbsp;</text>
                 <block wx:if="{{ item.vip_price != item.price }}"><text class='vip-price'> ¥ {{ item.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
               </view>
               </block>
@@ -61,7 +62,7 @@
   </view>
 
   <view style="margin-top: 15rpx">
-    <van-panel title="商品详情">
+    <van-panel title="商品详情" wx:if='{{ goodsInfo.info_text }}'>
       <view class='text-muted text-small' style='border: 0rpx;padding: 25rpx'>
         <view wx:for="{{ goodsInfo.info_text }}" wx:key><text>{{ item }}</text></view>
         <view class='line'></view>

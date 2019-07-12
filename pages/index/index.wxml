@@ -66,6 +66,7 @@
             <view><text class='price' data-id="{{ column.goods_code }}" bindtap='showInfo'>¥ {{ column.price }}</text><van-icon data-id="{{ column.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
             <view bindtap='showInfo' data-id="{{ column.goods_code}}">
               <text wx:if="{{ column.original != column.price }}" class='text-del'>¥ {{ column.original }}</text>
+              <text wx:else space="{{true}}" decode="{{true}}" class='text-mini'>&nbsp;</text>
               <block wx:if="{{ column.vip_price != column.price }}"><text class='vip-price'> ¥ {{ column.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
             </view>
             </block>
@@ -107,6 +108,7 @@
               <view><text class='price' bindtap='showInfo' data-id="{{ goods.goods_code }}">¥ {{ goods.price }}</text><van-icon data-id="{{ goods.goods_code }}" bindtap='addCart' style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
               <view bindtap='showInfo' data-id="{{ goods.goods_code }}">
                 <text class='text-del'  wx:if="{{ goods.original != goods.price }}">¥ {{ goods.original }}</text>
+                <text wx:else space="{{true}}" decode="{{true}}" class='text-mini'>&nbsp;</text>
                 <block wx:if="{{ goods.vip_price != goods.price }}"><text class='vip-price'> ¥ {{ goods.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
               </view>
               </block>

@@ -16,7 +16,7 @@
       <view class="cu-list menu menu-avatar">
         <view class="cu-item" wx:for="{{ goodsList.data }}" wx:key="{{ item.goods_code }}">
           <view class="cu-avatar radius lg" style="background-image:url({{ fs + item.goods_img }});{{ item.inventory <= 0 ? ' opacity: 0.4' : '' }}" data-id="{{ item.goods_code }}" bindtap='showInfo'>
-            <cover-view wx:if="{{ item.inventory < 1 }}" class="text-mini" style='border-radius: .3rem;padding: .1rem;background-color: {{ color.disabled }}'>已抢光</cover-view>
+            <scroll-view wx:if="{{ item.inventory < 1 }}" class="text-mini" style='border-radius: .3rem;padding: .1rem;background-color: {{ color.disabled }}'>已抢光</scroll-view>
           </view>
           <view class='content' data-id="{{ item.goods_code }}" bindtap='showInfo'>
             <view class='text-small ell-md-2'>{{ item.goods_name }}</view>
