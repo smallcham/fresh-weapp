@@ -159,13 +159,17 @@ Page({
   addCart: function(e) {
     api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
       this.getTabBar().plusCartCount()
-    }).catch(err => { Toast.fail(err);  })
-    Notify({
-      text: '已加入购物车',
-      duration: 500,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.success
-    });
+      Notify({
+        text: '已加入购物车',
+        duration: 500,
+        selector: '#custom-notify',
+        backgroundColor: this.data.color.success
+      });
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })  })
   },
   getHouse: function (city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {

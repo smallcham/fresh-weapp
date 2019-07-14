@@ -124,7 +124,11 @@ Page({
         selector: '#van-notify',
         backgroundColor: differ > 0 ? app.globalData.color.warning : app.globalData.color.success
       })
-    })
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      }) })
   },
   showInfo: function (e) {
     wx.navigateTo({

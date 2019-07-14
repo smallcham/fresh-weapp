@@ -13,6 +13,7 @@ Page({
     current: 0,
     access: app.globalData.access_location,
     border: false,
+    maskFlag: false,
     loading_mkt: true,
     location: app.globalData.location,
     selected_location: app.globalData.selected_location,
@@ -20,6 +21,7 @@ Page({
     no_house: false,
     house_msg: '',
     mkt_list: [],
+    mask: false,
     userInfo: {},
     loading: app.globalData.loading,
     hasUserInfo: false,
@@ -176,13 +178,17 @@ Page({
   addCart: function(e) {
     api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
       this.getTabBar().plusCartCount()
-    }).catch(err => { Toast.fail(err);  })
-    Notify({
-      text: '已加入购物车',
-      duration: 500,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.success
-    });
+      Notify({
+        text: '已加入购物车',
+        duration: 500,
+        selector: '#custom-notify',
+        backgroundColor: this.data.color.success
+      });
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })  })
   },
   openSearch: function () {
     wx.navigateTo({
@@ -301,9 +307,10 @@ Page({
       for (let i = 0; i < res.length; i++) {
         if (res[i].link_type === 1) this.data.banner.push(res[i])
         else if (res[i].link_type === 0) this.data.indexCata.push(res[i])
+        else if (res[i].link_type === 3) this.data.mask = res[i]
         else {}
       }
-       this.setData({ banner: this.data.banner, current: 0, indexCata: this.data.indexCata })
+      this.setData({ banner: this.data.banner, current: 0, indexCata: this.data.indexCata, mask: undefined !== this.data.mask ? this.data.mask : false  })
     }).catch(err => {
       console.log('getLink', err)
       Toast.fail('数据加载失败，请刷新重试或重新打开小程序');
@@ -316,5 +323,13 @@ Page({
     wx.navigateTo({
       url: e.currentTarget.dataset.url
     })
-  }
+  },
+   // 遮罩层显示
+  showMask: function () {
+    this.setData({ maskFlag: false })
+  },
+  // 遮罩层隐藏
+  conceal: function () {
+    this.setData({ maskFlag: true })
+  },
 })

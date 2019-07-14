@@ -52,8 +52,25 @@
     <view class='text-center text-muted-la text-max' style='margin-top: 35rpx;display: {{ !loading_mkt && mkt_list.length === 0 ? "block" : "none" }}'><van-icon name="info-o" />
       <text class='icon-text-center text-muted-la'>当前区域暂未上架任何商品</text>
     </view>
-
     <view wx:for="{{ mkt_list }}" wx:key="{{ item.marketing_code }}"  wx:if='{{ item.marketing_type === "HOT" }}'>
+
+    <view wx:if="{{ mask }}">
+      <view class="zhezao" hidden="{{maskFlag}}">
+       <view class="t_w">
+        <!--右上角图标开始-->
+        <view class="t_image"  bindtap="conceal">
+          <image class="t_image1" src="{{ fs }}error%20%281%29.png" ></image>
+        </view>
+        <!--右上角图标结束-->
+        <!--弹出框开始-->
+        <view class="tanchu_view" data-url="{{ mask.url }}" data-type="{{ mask.url_type }}" bindtap="clickLink">
+            <image style='width: 600rpx; height: 700rpx'src='{{ fs + mask.img }}'/>
+        </view>
+        <!--弹出框结束-->
+      </view>
+    </view>
+  </view>
+
       <van-cell border="{{ border }}" value="{{ item.goods_list.length > 5 ? '查看更多' : '' }}" url="{{ item.goods_list.length > 5 ? ('/pages/list/index?id=' + item.marketing_code + '&title=热销爆款') : '' }}" is-link="{{ item.goods_list.length > 5 ? true : false  }}">
         <view slot="title" class='text-md text-primary' style='font-weight: 600'>热销爆款</view>
         <van-icon slot="icon" name="fire" class="text-danger" style='font-size: 30rpx;'/>

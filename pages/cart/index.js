@@ -125,7 +125,9 @@ Page({
           this.data.carts.splice(e.currentTarget.dataset.idx, 1)
           this.setData({ carts: this.data.carts })
           this.flushState()
-        }).catch(err => { })
+        }).catch(err => { 
+          Toast.fail(err);
+        })
       }).catch(() => {});
     } else {
       Notify({
@@ -140,7 +142,13 @@ Page({
     api.touchCart(e.currentTarget.dataset.code, e.detail).then(res => {
       this.data.carts[e.currentTarget.dataset.idx].amount = e.detail
       this.flushState()
-    }).catch(err => {})
+    }).catch(err => {
+      this.setData({ carts: this.data.carts })
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      })
+    })
   },
   openLocation: function () {
     wx.navigateTo({
@@ -282,12 +290,12 @@ Page({
   addCart: function (e) {
     api.addCart(e.currentTarget.dataset.id, 1).then(res => {
       this.onShow()
+      Notify({
+        text: '已加入购物车',
+        duration: 500,
+        selector: '#custom-notify',
+        backgroundColor: this.data.color.success
+      });
     }).catch(err => { Toast.fail(err); })
-    Notify({
-      text: '已加入购物车',
-      duration: 500,
-      selector: '#custom-notify',
-      backgroundColor: this.data.color.success
-    });
   }
 })

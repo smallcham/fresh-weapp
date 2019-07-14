@@ -124,7 +124,11 @@ Page({
           backgroundColor: differ > 0 ? app.globalData.color.warning : app.globalData.color.success
         })
       })
-    }).catch(err => { Toast.fail(err); })
+    }).catch(err => {
+      wx.showToast({
+        title: err,
+        icon: 'none'
+      }) })
   },
   onToCart: function(e) {
     wx.switchTab({
