@@ -66,7 +66,7 @@
   </view>
   
   <van-goods-action>
-    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ !paying && (order.order_state === 0 || order.order_state === 1) }}" text="取消订单" type="default" bind:click="cancelOrder"/>
+    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ !paying && !blockCancel && (order.order_state === 0 || order.order_state === 1) }}" text="取消订单" type="default" bind:click="cancelOrder"/>
     <van-goods-action-button disabled="{{ paying }}" loading="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />
   </van-goods-action>
 </view>

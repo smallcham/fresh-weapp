@@ -13,6 +13,7 @@ Page({
     fs: app.globalData.fs,
     loading: true,
     login: true,
+    blockCancel: false,
     pay_success: false,
     selected_address: {}
   },
@@ -105,7 +106,7 @@ Page({
     })
   },
   toPay: function(e) {
-    this.setData({ paying: true })
+    this.setData({ paying: true, blockCancel: true })
     api.pay(e.currentTarget.dataset.id).then(res => {
       this.data.pay_success = true
       wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + order_code })
@@ -189,6 +190,7 @@ Page({
             selected_address: app.globalData.selected_address
           })
           if (auto && res.order_state === 0) {
+            this.setData({ auto: false, blockCancel: true })
             api.pay(order_code).then(res => {
               this.setData({ paying: false })
               this.data.pay_success = true
