@@ -62,7 +62,7 @@
   </view>
 
   <view style="margin-top: 15rpx">
-    <van-panel title="商品详情" wx:if='{{ goodsInfo.info_text }}'>
+    <van-panel title="商品详情" wx:if='{{ goodsInfo.info_text !== "" || goodsInfo.info_img !== [] }}'>
       <view class='text-muted text-small' style='border: 0rpx;padding: 25rpx'>
         <view wx:for="{{ goodsInfo.info_text }}" wx:key><text>{{ item }}</text></view>
         <view class='line'></view>
