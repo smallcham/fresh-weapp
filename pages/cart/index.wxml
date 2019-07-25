@@ -46,6 +46,29 @@
           </view>
         </van-col>
       </van-row>
+
+      <view class='card-fluid gs-card-sm' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}" wx:if="{{ item.inventory >= 0 }}">
+        <van-row>
+          <van-col span="9" data-id="{{ item.goods_code }}" bindtap="showInfo"><image src='{{ fs + item.goods_img }}'/></van-col>
+          <van-col span="15">
+            <view style='margin-top: 30rpx'>
+              <van-row data-id="{{ item.goods_code }}" bindtap="showInfo">
+                <van-col span="24">
+                  <text class='text-primary text-small ell-super'>{{ item.goods_name }}</text>
+                </van-col>
+              </van-row>
+              <van-row>
+                <van-col span="24">
+                  <van-tag plain color="{{ color.danger }}" style='padding-right: 10rpx;'>赠品</van-tag>
+                  <view style='float:right; margin-right: 20rpx'>
+                    <text class="text-muted text-mini">x 1</text>
+                  </view>
+                </van-col>
+              </van-row>
+            </view>
+          </van-col>
+        </van-row>
+      </view>
     </view>
 
    <view style='margin-top: 15rpx; opacity: 0.5' wx:if="{{ hasInvalid }}">
