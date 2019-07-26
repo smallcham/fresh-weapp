@@ -1,0 +1,8 @@
+var filters = {
+  intval: function (value) {
+    return parseInt(value)
+  }
+}
+module.exports = {
+  intval: filters.intval
+}

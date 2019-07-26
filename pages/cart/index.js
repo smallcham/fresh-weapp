@@ -141,6 +141,7 @@ Page({
   onChangeNum: function(e) {
     api.touchCart(e.currentTarget.dataset.code, e.detail).then(res => {
       this.data.carts[e.currentTarget.dataset.idx].amount = e.detail
+      this.setData({ carts: this.data.carts })
       this.flushState()
     }).catch(err => {
       this.setData({ carts: this.data.carts })

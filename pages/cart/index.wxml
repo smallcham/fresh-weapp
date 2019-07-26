@@ -13,6 +13,7 @@
   <text class='icon-text-center text-muted'>购物车居然是空的</text>
 </view>
 
+<wxs module="filters" src="../../utils/format.wxs"></wxs>
 <view class="body" style='margin-top:90rpx;margin-bottom:350rpx;'>
   <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}" wx:if="{{ item.inventory >= 0 }}">
       <van-row>
@@ -54,18 +55,18 @@
             <view style='margin-top: 30rpx'>
               <van-row data-id="{{ gift.gift_goods_code }}" bindtap="showInfo">
                 <van-col span="24">
-                  <text class='text-primary text-small ell-super'><text style='color: {{ color.danger }}'>【赠品】</text>{{ gift.goods_name }}</text>
+                  <text class='text-primary text-mini ell-super'><text style='color: {{ color.danger }}'>【赠品】</text>{{ gift.goods_name }}</text>
                 </van-col>
               </van-row>
               <van-row>
                 <van-col span="24">
                   <view>
-                    <text wx:if="{{ !(item.amount >= gift.start_limit && (gift.vip_only === 0 || is_vip)) }}" class='text-mini text-primary'>满足条件赠送{{ gift.step }}份: </text>
+                    <text wx:if="{{ !(item.amount >= gift.start_limit && (gift.vip_only === 0 || is_vip)) }}" class='text-mini text-primary'>满足以下条件赠送{{ gift.step }}份: </text>
                     <van-tag wx:if="{{ item.amount < gift.start_limit }}" plain color="{{ color.danger }}" style='padding-right: 10rpx;'>再买{{ gift.start_limit - item.amount }}份</van-tag>
                     <van-tag wx:if="{{ gift.vip_only === 1 && !is_vip }}" plain color="{{ color.warning }}" style='padding-right: 10rpx;'>仅限会员</van-tag>
                   </view>
                   <view style='float:right; margin-right: 20rpx'>
-                    <text wx:if="{{ item.amount >= gift.start_limit }}" class="text-muted text-mini">x {{ parseInt(item.amount / gift.start_limit * gift.step)  }}</text>
+                    <text wx:if="{{ item.amount >= gift.start_limit }}" class="text-muted text-mini">x {{ filters.intval(item.amount / gift.start_limit) * gift.step  }}</text>
                   </view>
                 </van-col>
               </van-row>

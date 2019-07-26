@@ -1080,7 +1080,7 @@ mt-5 {
 }
 
 .gs-card-sm {
-  border-bottom: 0rpx; border-left: 0; border-right: 0;height: 150rpx;padding:0;margin:0;width:100%;
+  border-bottom: 0rpx; border-left: 0; border-right: 0;height: 140rpx;padding:0;margin:0;width:100%;
   margin-top: -10rpx;
   margin-bottom: -5rpx;
   border-radius:0;border:0;
