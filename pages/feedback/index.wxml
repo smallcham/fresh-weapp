@@ -3,7 +3,7 @@
   text="评价任意商品即可获得 {{ coin }} 轻果币"
 />
 
-<view wx:if="{{ order }}" wx:for="{{ order.detail }}" wx:key style="border-radius: .2rem;margin: .5rem;padding:.5rem;background-color:white">
+<view wx:if="{{ order }}" wx:for="{{ order.detail }}" wx:if="{{ item.buy_type === 0 }}" wx:key style="border-radius: .2rem;margin: .5rem;padding:.5rem;background-color:white">
   <view style='margin: .5rem'>
     <image style='width: 50rpx;height:50rpx;float:left' src="{{ fs + item.goods_img }}" />
     <text style='padding-left: 25rpx;' class='text-primary text-small'>{{ item.goods_name }}</text>

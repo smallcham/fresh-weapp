@@ -4,7 +4,7 @@
 </van-tabs>
 
 <view style="margin: .5rem" wx:if="{{ active === 0 }}">
-  <view class='card-fluid gs-card' wx:for="{{ order.detail }}" wx:key="{{ item.goods_code }}">
+  <view class='card-fluid gs-card' wx:for="{{ order.detail }}" wx:if="{{ item.buy_type === 0 }}" wx:key="{{ item.goods_code }}">
     <van-row>
       <van-col span="9" gutter="3"><image src='{{ fs + item.goods_img }}'/></van-col>
       <van-col span="14">

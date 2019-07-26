@@ -12,6 +12,7 @@
           <van-row>
             <van-col span="24">
               <view style='float:right; margin-right: 20rpx'>
+                <van-tag wx:if="{{ item.buy_type === 1 }}" plain color="{{ color.danger }}" style='padding-right: 10rpx;'>赠品</van-tag>
                 <text class="text-muted text-mini">x {{ item.amount }}</text>
               </view>
             </van-col>
