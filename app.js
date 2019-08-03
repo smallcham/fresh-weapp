@@ -87,7 +87,7 @@ App({
             longitude: e.longitude
           },
           get_poi: poi,
-          poi_options: options,
+          poi_options: poi !== 0 ? 'policy=2;radius=3000;page_size=15;page_index=1' : null,
           success: function (res) {
             if (res.status == 0) {
               that.globalData.location = res.result;
@@ -262,6 +262,7 @@ App({
     get_addr: 'address/get',
     del_addr: 'address/del',
     near_addr: 'address/near',
+    global_near_addr: 'address/global/near',
     first_addr: 'address/first',
     vip_plans: 'vip/list',
     vip_open: 'vip/open',
@@ -277,6 +278,7 @@ App({
     apply_refund: 'order/refund/apply',
     query_refund: 'order/refund/apply/query',
     cancel_order: 'order/cancel',
+    confirm_deliver: 'order/confirm/deliver',
     query_coupon: 'coupon/query',
     query_effective_coupon: 'coupon/query/effective',
     count_effective_coupon: 'coupon/count/effective',
@@ -290,7 +292,8 @@ App({
     add_question: 'question/add',
     create_red_paper: 'paper/create',
     take_red_paper: 'paper/take',
-    get_red_paper: 'paper/info'
+    get_red_paper: 'paper/info',
+    get_locus: 'express/order/locus'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

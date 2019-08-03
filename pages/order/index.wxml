@@ -11,7 +11,11 @@
 <view wx:for="{{ order_list.data }}" wx:key="{{ item.order_code }}" style='margin: .5rem; opacity: {{ item.order_state === 5 ? "0.7" : "1" }}'>
     <van-cell-group>
       <van-cell data-id="{{ item.order_code }}" bindtap='showOrder'>
-        <view slot="title" class='text-mini'><text class='text-muted'>{{ item.create_time }}</text></view>
+        <view slot="title" class='text-mini'>
+          <text wx:if="{{ item.deliver_type === 0 }}" class="text-muted" style='font-weight: 700;font-style: italic'>小时达 . </text>
+          <text wx:elif="{{ item.deliver_type === 1 }}" class="text-muted" style='font-weight: 700;font-style: italic'>全国送 . </text>
+          <text class='text-muted'>{{ item.create_time }}</text>
+        </view>
         <view slot="" class='text-mini'>
           <text wx:if="{{ item.order_state === 0 }}" class='text-success' style='font-weight: 700'>待付款</text>
           <text wx:elif="{{ item.order_state === 1 }}" class='text-success' style='font-weight: 700'>待配送</text>
@@ -35,7 +39,8 @@
           <van-button wx:if="{{ item.order_state === 0 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" bind:click="toPay">去支付</van-button>
           <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type='success' data-id="{{ item.order_code }}" style='padding-right: 20rpx' bind:click="addCartAgain">再来一单</van-button>
           <van-button wx:if="{{ item.order_state === 3 }}" plain size="mini" type="success" style='padding-right: 20rpx' data-id="{{ item.order_code }}" bindtap='toFeedback'>评价</van-button>
-          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" data-idx="{{ index }}" bindtap='toAfterSale'>申请售后</van-button>
+          <van-button wx:if="{{ item.order_state === 3 || item.order_state === 4 }}" plain size="mini"  style='padding-right: 20rpx'  type="success" data-id="{{ item.order_code }}" data-idx="{{ index }}" bindtap='toAfterSale'>申请售后</van-button>
+          <van-button wx:if="{{ item.order_state === 2 && item.deliver_type === 1 }}" plain size="mini" type="success" data-id="{{ item.order_code }}" data-idx="{{ index }}" bindtap='confirmDeliver'>确认收货</van-button>
         </view>
       </van-cell>
     </van-cell-group>

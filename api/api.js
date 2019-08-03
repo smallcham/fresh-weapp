@@ -251,6 +251,10 @@ const nearAddr = (house_id) => {
   return request(app.globalApi.near_addr + '/' + house_id, { method: 'GET', data: {} })
 }
 
+const globalNearAddr = (xy) => {
+  return request(app.globalApi.global_near_addr + '/' + xy, { method: 'GET', data: {} })
+}
+
 const queryAddr = () => {
   return request(app.globalApi.query_addr, { method: 'GET', data: {} })
 }
@@ -395,6 +399,14 @@ const takeRedPaper = (paper_code) => {
   return request(app.globalApi.take_red_paper + '/' + paper_code, { method: 'POST', data: {} })
 }
 
+const getLocus = (sub_order_code) => {
+  return request(app.globalApi.get_locus + '/' + sub_order_code, { method: 'GET', data: {} })
+}
+
+const confirmDeliver = (order_code) => {
+  return request(app.globalApi.confirm_deliver + '/' + order_code, { method: 'POST', data: {} })
+}
+
 module.exports = {
   get,
   post,
@@ -418,6 +430,7 @@ module.exports = {
   delAddr,
   firstAddr,
   nearAddr,
+  globalNearAddr,
   vipPlans,
   vipOpen,
   getUser,
@@ -431,6 +444,7 @@ module.exports = {
   cancelOrder,
   getOrderCount,
   getOrderProgress,
+  confirmDeliver,
   autoChooseCoupon,
   chooseCoupon,
   queryEffectiveCoupon,
@@ -450,5 +464,6 @@ module.exports = {
   checkPhone,
   createRedPaper,
   getRedPaper,
-  takeRedPaper
+  takeRedPaper,
+  getLocus
 }

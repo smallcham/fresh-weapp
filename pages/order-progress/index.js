@@ -15,13 +15,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    api.getOrderProgress(options.order_code).then(res => {
-      let steps = []
-      for(let i = 0; i < res.length; i++) {
-        steps.push({text: res[i].content, desc: res[i].create_time})
-      }
-      this.setData({ color: app.globalData.color, steps: steps })
-    })
+    if (undefined !== options.sub_order_code && null !== options.sub_order_code) {
+      api.getLocus(options.sub_order_code).then(res => {
+        let steps = []
+        res = res.Traces
+        for (let i = res.length - 1; i >= 0; i--) {
+          steps.push({ text: res[i].AcceptStation, desc: res[i].AcceptTime })
+        }
+        this.setData({ color: app.globalData.color, steps: steps })
+      }).catch(err => {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      })
+    } else {
+      api.getOrderProgress(options.order_code).then(res => {
+        let steps = []
+        for (let i = 0; i < res.length; i++) {
+          steps.push({ text: res[i].content, desc: res[i].create_time })
+        }
+        this.setData({ color: app.globalData.color, steps: steps })
+      })
+    }
   },
 
   /**

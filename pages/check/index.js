@@ -55,9 +55,6 @@ Page({
       title: this.data.title,
     }) 
     if (this.data.selected_address && JSON.stringify(this.data.selected_address) !== JSON.stringify(app.globalData.selected_address)) {
-      Toast.loading({
-        mask: true
-      });
       this.getHouse(app.globalData.selected_address.city_code, app.globalData.selected_address.lat, app.globalData.selected_address.lng)
     } else {
       this.getAvailableCart()
@@ -176,6 +173,7 @@ Page({
   getHouse: function (city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
       if (res.id === app.globalData.house.id) return true
+      this.setData({ house: res })
       app.globalData.house = res
       wx.showToast({
         title: '由于您切换收货地址商品可能有变更,请注意检查订单商品',

@@ -23,12 +23,17 @@
             <van-icon slot="right-icon" name="phone-circle-o" color="{{ color.success }}" />
           </van-cell>
         </block>
+        <block wx:if="{{ order.deliver_type === 1 && order.order_state === 2 }}" wx:for="{{ order.expresss }}" wx:for-item="express" wx:key="{{ express.sub_order_code }}">
+          <van-cell value="查看物流信息" title="{{ express.express_name }}" border="{{ false }}" is-link url="/pages/order-progress/index?sub_order_code={{ express.sub_order_code }}"/>
+          <van-cell title="物流单号" value="{{ express.express_order_code }}"/>
+        </block>
         <van-cell title="{{ order.deliver_info.address.receive_name + ' ' + order.deliver_info.address.phone }}" label='{{ order.deliver_info.address.city + " " + order.deliver_info.address.district + " " + order.deliver_info.address.title +  " " + order.deliver_info.address.location }}' />
     </view>
 
     <view style='margin-top: 15rpx'>
         <van-cell title="商品信息" wx:if="{{ order.order_state === 3 || order.order_state === 4 }}" value="再来一单" is-link data-id="{{ order.order_code }}" bind:click="addCartAgain"/>
-        <van-cell title="商品信息" wx:elif="{{ order.order_state === 1 || order.order_state === 2 }}" value="预计 {{ order.deliver_time_label }} 送达" />
+        <van-cell title="商品信息" wx:elif="{{ order.deliver_type === 0 && (order.order_state === 1 || order.order_state === 2) }}" value="预计 {{ order.deliver_time_label }} 送达" />
+        <van-cell title="商品信息" wx:elif="{{ order.deliver_type === 1 && (order.order_state === 1 || order.order_state === 2) }}" value="全国送" />
         <van-cell title="商品信息" wx:else value=""/>
         <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
           <view slot="title">
@@ -68,5 +73,6 @@
   <van-goods-action>
     <van-goods-action-button disabled="{{ paying }}" wx:if="{{ !paying && !blockCancel && (order.order_state === 0 || order.order_state === 1) }}" text="取消订单" type="default" bind:click="cancelOrder"/>
     <van-goods-action-button disabled="{{ paying }}" loading="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />
+    <van-goods-action-button wx:if="{{  order.deliver_type === 1 && order.order_state === 2 }}" text="确认收货" type="warning" bind:click="confirmDeliver"/>
   </van-goods-action>
 </view>

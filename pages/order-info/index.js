@@ -124,6 +124,26 @@ Page({
       this.setData({ paying: false })
     })
   },
+  confirmDeliver: function () {
+    let that = this
+    Dialog.confirm({
+      title: '提示',
+      message: '请确认您已收到货'
+    }).then(() => {
+      api.confirmDeliver(this.data.order_code).then(res => {
+        wx.showToast({
+          title: '确认收货成功',
+          icon: 'success'
+        })
+        wx.navigateBack({})
+      }).catch(err => {
+        Dialog.alert({
+          title: '提示',
+          message: err
+        }).then(() => { })
+      })
+    }).catch(() => { })
+  },
   cancelOrder: function() {
     Dialog.confirm({
       title: '提示',

@@ -267,6 +267,7 @@ Page({
   getHouse: function (city, lat, lng) {
     api.get(app.globalApi.get_house, { data: { city: city, to: (lat + ',' + lng) } }).then(res => {
       app.globalData.house = res
+      this.setData({ house: res })
       this.cartList()
       if (res.house_type === 0) {
         api.nearAddr(res.id).then(res => {
@@ -275,6 +276,14 @@ Page({
             app.globalData.selected_location = app.addressToLocation(res)
           }
           this.setData({ selected_location: app.globalData.selected_location, location: app.globalData.location })
+        })
+      } else {
+        api.globalNearAddr(lat + ',' + lng).then(res => {
+          if (null !== res && undefined !== res) {
+            app.globalData.selected_address = res
+            app.globalData.selected_location = app.addressToLocation(res)
+            this.setData({ selected_location: app.globalData.selected_location })
+          }
         })
       }
     }).catch(err => { })

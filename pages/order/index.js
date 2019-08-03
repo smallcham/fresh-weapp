@@ -103,6 +103,26 @@ Page({
       this.setData({ order_list: res, last: res.total <= res.per_page })
     })
   },
+  confirmDeliver: function (e) {
+    let that = this
+    Dialog.confirm({
+      title: '提示',
+      message: '请确认您已收到货'
+    }).then(() => {
+      api.confirmDeliver(e.currentTarget.dataset.id).then(res => {
+        wx.showToast({
+          title: '确认收货成功',
+          icon: 'success'
+        })
+        that.orderList()
+      }).catch(err => {
+        Dialog.alert({
+          title: '提示',
+          message: err
+        }).then(() => { })
+      })
+    }).catch(() => { })
+  },
   orderListNext: function () {
     if (this.data.order_list.total === 0 || this.data.order_list.current_page === this.data.order_list.last_page) {
       this.setData({ last: true })
