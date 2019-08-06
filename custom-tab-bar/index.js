@@ -52,22 +52,27 @@ Component({
       selectedIconPath: "http://fs.llfresh.cn/1f0ded876cd976acd7ba292f17ad5335",
       text: "首页"
     }, {
-      pagePath: "/pages/cata/index",
-        iconPath: "http://fs.llfresh.cn/e86891fb29335430be90dae2f9af554e",
-        selectedIconPath: "http://fs.llfresh.cn/6d368237f54e3e4d996eaa205b60ecd9",
-      text: "分类"
-    },{
+        pagePath: "/pages/cata/index",
+        iconPath: "http://fs.llfresh.cn/f37aba961ee75aa6af5273cd1b19aee9",
+        selectedIconPath: "http://fs.llfresh.cn/4db3aae695001be1e249149e0a6dd59b",
+        text: "分类"
+      }, {
+        pagePath: "/pages/team/index",
+        iconPath: "http://fs.llfresh.cn/d1540b0cf952616345c4634ab457e557",
+        selectedIconPath: "http://fs.llfresh.cn/581bb8b0a9922e057215b184275779aa",
+        text: "拼团"
+      },{
       pagePath: "/pages/cart/index",
-        iconPath: "http://fs.llfresh.cn/7743f96ecb8509bb34fa55152b49a29a",
-        selectedIconPath: "http://fs.llfresh.cn/10baccd3e9470debcfa9c477f5775563",
-      animation: true,
-      info: true,
-      text: "购物车"
+        iconPath: "http://fs.llfresh.cn/6adfa75af880821b5f5b2ae63bdc623f",
+        selectedIconPath: "http://fs.llfresh.cn/5bff891ff1316469232f5532adc608c4",
+        animation: true,
+        info: true,
+        text: "购物车"
     }, {
       pagePath: "/pages/mine/index",
-        iconPath: "http://fs.llfresh.cn/c92e26d06830ac01336d2ec02a88ba79",
-        selectedIconPath: "http://fs.llfresh.cn/568d4af729f1214756a0a8087e2121b8",
-      text: "我的"
+        iconPath: "http://fs.llfresh.cn/f30d5da840d4d2376a0b5912da2e3c8f",
+        selectedIconPath: "http://fs.llfresh.cn/de33df28639108e2e424eabc808a9788",
+        text: "我的"
     }]
   },
   methods: {
@@ -101,7 +106,7 @@ Component({
       }
       else if (event.detail === 2) {
         wx.switchTab({
-          url: '/pages/spread/index',
+          url: '/pages/team/index',
         })
       }
       else if (event.detail === 3) {

@@ -76,7 +76,8 @@
       </view>
     </view>
 
-   <view style='margin-top: 15rpx; opacity: 0.5' wx:if="{{ hasInvalid }}">
+   <view style='margin-top: 15rpx;' wx:if="{{ hasInvalid }}">
+   <view style="opacity: 0.5">
     <van-cell title="失效商品"/>
      <view class='card-fluid gs-card' wx:for="{{ carts }}" wx:key="{{ item.cart_code }}" wx:if="{{ item.inventory === -1 }}">
       <van-row>
@@ -106,9 +107,10 @@
           </view>
         </van-col>
       </van-row>
+      </view>
     </view>
-    <view style='border-radius: .5rem;margin: 1rem;'>
-      <van-button size='large' bind:click='deleteInvalid'><van-icon name="delete" size="35rpx"/> 清除失效商品</van-button>
+    <view style='border-radius: .5rem;margin: 1rem;' bindtap='deleteInvalid'>
+      <van-button size='large'><van-icon name="delete" size="35rpx"/> 清除失效商品</van-button>
     </view>
    </view>
 

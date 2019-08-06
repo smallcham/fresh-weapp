@@ -31,7 +31,8 @@
     "pages/after-sale-type/index",
     "pages/refund/index",
     "pages/bind-phone/index",
-    "pages/red-paper/index"
+    "pages/red-paper/index",
+    "pages/team/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -64,10 +65,10 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/spread/index",
-        "iconPath": "/image/money.png",
-        "selectedIconPath": "/image/money_fill.png",
-        "text": "积分+"
+        "pagePath": "pages/team/index",
+        "iconPath": "/image/cata.png",
+        "selectedIconPath": "/image/cata.png",
+        "text": "拼团"
       },
       {
         "pagePath": "pages/cart/index",

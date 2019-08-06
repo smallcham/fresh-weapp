@@ -28,7 +28,7 @@ Page({
       color: app.globalData.color,
     })
     this.getTabBar().setData({
-      selected: 3
+      selected: 4
     })
     this.getLink()
   },
@@ -59,7 +59,7 @@ Page({
       this.setData({ couponCount: res })
     })
     this.getTabBar().setData({
-      selected: 3
+      selected: 4
     })
   },
   /**

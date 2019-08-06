@@ -35,7 +35,7 @@ Page({
       color: app.globalData.color
     })
     this.getTabBar().setData({
-      selected: 2
+      selected: 3
     })
     api.recommendGoods().then(res => {
       this.setData({ recommend_list: res })
@@ -67,7 +67,7 @@ Page({
       })
     }
     this.getTabBar().setData({
-      selected: 2
+      selected: 3
     })
   },
 
