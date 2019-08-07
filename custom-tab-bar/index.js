@@ -48,8 +48,8 @@ Component({
   // }, 
     list: [{
       pagePath: "/pages/index/index",
-      iconPath: "http://fs.llfresh.cn/cce6d3a38249b3a7adad4640d59a8199",
-      selectedIconPath: "http://fs.llfresh.cn/1f0ded876cd976acd7ba292f17ad5335",
+      iconPath: "http://fs.llfresh.cn/f30d5da840d4d2376a0b5912da2e3c8f",
+      selectedIconPath: "http://fs.llfresh.cn/de33df28639108e2e424eabc808a9788",
       text: "首页"
     }, {
         pagePath: "/pages/cata/index",
@@ -70,8 +70,8 @@ Component({
         text: "购物车"
     }, {
       pagePath: "/pages/mine/index",
-        iconPath: "http://fs.llfresh.cn/f30d5da840d4d2376a0b5912da2e3c8f",
-        selectedIconPath: "http://fs.llfresh.cn/de33df28639108e2e424eabc808a9788",
+        iconPath: "http://fs.llfresh.cn/54cb5a06df7c64dbb34f5f8a0ac63789",
+        selectedIconPath: "http://fs.llfresh.cn/2a6083da9ff62658abb9a856fdb27a65",
         text: "我的"
     }]
   },

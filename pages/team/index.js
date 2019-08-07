@@ -9,8 +9,9 @@ Page({
    * Page initial data
    */
   data: {
+    title: '超值拼团',
     fs: app.globalData.fs,
-    is_vip: false
+    is_vip: false,
   },
 
   /**
@@ -39,6 +40,9 @@ Page({
   onShow: function () {
     this.getTabBar().setData({
       selected: 2
+    })
+    wx.setNavigationBarTitle({
+      title: this.data.title
     })
   },
 

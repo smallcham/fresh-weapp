@@ -8,6 +8,8 @@
     "van-icon": "/miniprogram_npm/vant-weapp/icon/index",
     "van-row": "/miniprogram_npm/vant-weapp/row/index",
     "van-col": "/miniprogram_npm/vant-weapp/col/index",
-    "van-notify": "/miniprogram_npm/vant-weapp/notify/index"
+    "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
+    "van-progress": "/miniprogram_npm/vant-weapp/progress/index",
+    "van-steps": "/miniprogram_npm/vant-weapp/steps/index"
   }
 }

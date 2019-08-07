@@ -4,34 +4,30 @@
     <view class="cu-item cu-item-noborder">
       <view bindtap='showInfo' data-id="12313" class="cu-avatar radius lg" style="background-image:url({{ fs + '01db51aa091abfd5dd4cfc6a784a8ff8' }});"></view>
       <view class='content' bindtap='showInfo' data-id="123123">
-        <view class='text-small'>整箱陕西大荔新鲜冬枣脆枣一盒2.5斤
-</view>
-        <view class='text-muted text-mini'>圆润饱满 色美味香</view>
-        <view>
-          <text class='text-del' >¥ 78.0</text><text class='price' style='padding-left: 10rpx;padding-right: 10rpx'>¥ 62</text>
-          <block ><text class='vip-price'> ¥ 58.0 </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
+        <view class='text-small text-primary' style='padding-bottom: 15rpx'>整箱陕西大荔新鲜冬枣脆枣一盒2.5斤</view>
+        <view style='margin-bottom: 20rpx;'>
+          <van-row>
+            <van-col span='16'>
+              <van-progress pivot-text="26%" color="{{ color.danger }}" percentage="26"/>
+            </van-col>
+            <van-col span='8'>
+              <view style='margin-top: -20rpx;padding-left: 15rpx;'><text class='text-danger text-mini'> 已抢 930 件</text></view>
+            </van-col>
+          </van-row>
         </view>
-      </view>
-      <view class='action'>
-        <view class='text-super'><van-button type="warning" size='small'>马上抢 ></van-button></view>
+        <view>
+          <block >
+            <van-row>
+              <van-col span="17">
+                <text class='text-danger text-lg' style='font-weight: 700'>¥ 78.0</text><text class='text-del text-small' style='padding-left: 10rpx;padding-right: 10rpx'>¥ 62</text>
+                <text class='vip-price'> ¥ 58.0 </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag>
+              </van-col>
+              <van-col span="7"><view class='text-super'><van-button type='danger' size='small'> 马上抢 <van-icon name="fire" /></van-button></view></van-col>
+            </van-row>
+          </block>
+        </view>
       </view>
     </view>
     
-    <view class="cu-item cu-item-noborder">
-      <view bindtap='showInfo' data-id="12313" class="cu-avatar radius lg" style="background-image:url({{ fs + '01db51aa091abfd5dd4cfc6a784a8ff8' }});"></view>
-      <view class='content' bindtap='showInfo' data-id="123123">
-        <view class='text-small'>整箱陕西大荔新鲜冬枣脆枣一盒2.5斤
-</view>
-        <view class='text-muted text-mini'>圆润饱满 色美味香</view>
-        <view>
-          <text class='text-del' >¥ 78.0</text><text class='price' style='padding-left: 10rpx;padding-right: 10rpx'>¥ 62</text>
-          <block ><text class='vip-price'> ¥ 58.0 </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
-        </view>
-      </view>
-      <view class='action'>
-        <view class='text-super'><van-icon bindtap='addCart' data-id="" style='color:{{ color.success }} ;float: right;' name="shopping-cart" /></view>
-      </view>
-    </view>
-
   </view>
 </view>
