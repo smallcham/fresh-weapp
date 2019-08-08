@@ -407,6 +407,14 @@ const confirmDeliver = (order_code) => {
   return request(app.globalApi.confirm_deliver + '/' + order_code, { method: 'POST', data: {} })
 }
 
+const groupBuyQuery = (goods_name = '') => {
+  return request(app.globalApi.group_buy_query + '/' + goods_name, { method: 'GET', data: {} })
+}
+
+const groupBuyInfo = (goods_code) => {
+  return request(app.globalApi.group_buy_info + '/' + goods_code, { method: 'GET', data: {} })
+}
+
 module.exports = {
   get,
   post,
@@ -465,5 +473,7 @@ module.exports = {
   createRedPaper,
   getRedPaper,
   takeRedPaper,
-  getLocus
+  getLocus,
+  groupBuyQuery,
+  groupBuyInfo
 }

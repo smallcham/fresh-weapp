@@ -12,6 +12,8 @@ Page({
     title: '超值拼团',
     fs: app.globalData.fs,
     is_vip: false,
+    goods_list: [],
+    goods_name: ''
   },
 
   /**
@@ -44,6 +46,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title
     })
+    this.onQuery()
   },
 
   /**
@@ -79,5 +82,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  showInfo: function(e) {
+    wx.navigateTo({
+      url: '/pages/info/index?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  onQuery: function() {
+    api.groupBuyQuery(this.data.goods_name).then(res => {
+      this.setData({ goods_list: res })
+    })
   }
 })

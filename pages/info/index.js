@@ -1,6 +1,7 @@
 import Notify from '../../miniprogram_npm/vant-weapp/notify/notify';
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast';
 import api from '../../api/api'
+import util from '../../utils/util'
 const app = getApp()
 // pages/info/index.js
 Page({
@@ -16,7 +17,8 @@ Page({
     loading: true,
     goodsInfo: {},
     house: false,
-    showFoot: true
+    showFoot: true,
+    group_buy: false
   },
 
   /**
@@ -140,7 +142,15 @@ Page({
       res.banner = JSON.parse(res.banner)
       res.info_img = JSON.parse(res.info_img)
       res.info_text = (null === res.info_text || undefined === res.info_text) ? '' : res.info_text.split('\n')
-      this.setData({ goodsInfo: res, loading: false })
+      api.groupBuyInfo(this.data.id).then(gb => {
+        if (null != gb && undefined != gb) {
+          gb.end = gb.end_time <= util.formatTime(new Date())
+          gb.unstart = gb.start_time > util.formatTime(new Date())
+          this.setData({ goodsInfo: res, loading: false, group_buy: gb })
+        }else {
+          this.setData({ goodsInfo: res, loading: false, group_buy: false })
+        }
+      })
     }).catch(err => {
       wx.navigateBack({})
     })

@@ -267,6 +267,10 @@ mt-5 {
   color: #fff;
 }
 
+.text-lw {
+  color: #fafafa;
+}
+
 .text-title {
   color: #1c2438;
 }
@@ -301,6 +305,10 @@ mt-5 {
 
 .text-success {
   color: #18BC9C;
+}
+
+.text-white {
+  color: #FFF;
 }
 
 .text-success-disable {

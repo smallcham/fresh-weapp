@@ -293,7 +293,9 @@ App({
     create_red_paper: 'paper/create',
     take_red_paper: 'paper/take',
     get_red_paper: 'paper/info',
-    get_locus: 'express/order/locus'
+    get_locus: 'express/order/locus',
+    group_buy_query: 'group/buy/query',
+    group_buy_info: 'group/buy/info'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

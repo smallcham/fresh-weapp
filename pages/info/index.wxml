@@ -8,17 +8,47 @@
     </swiper-item>
   </swiper>
 
-
+  <wxs module="filters" src="../../utils/format.wxs"></wxs>
+  <view wx:if="{{ group_buy }}">
+    <van-row>
+      <van-col span="16">
+        <view style="padding: 25rpx;height:90rpx;background-color:#f44">
+          <text  class='text-white text-lg' style='font-weight: 700'>¥ {{ group_buy.group_price }}</text>
+          <text class='text-del text-small' style='color:#fafafa; padding-left: 10rpx;padding-right: 10rpx'>¥ {{ goodsInfo.original }}</text>
+          <text style='margin-top: -20rpx;padding-left: 15rpx;' class='text-white text-mini'> 仅剩 {{ group_buy.buy_count }} 件</text>
+          <view class='text-mini text-white' style='padding-top: 10rpx'>
+            <van-tag plain color="#fff">{{ group_buy.group_size }}人团</van-tag>
+            <text style='padding-left: 15rpx'> 累计已拼{{ group_buy.buy_sum >= 10000 ? (filters.intval(group_buy.buy_sum / 10000) + '万') : group_buy.buy_sum }}件</text>
+          </view>
+        </view>
+      </van-col>
+      <van-col span="8">
+        <view class="text-mini text-default" style="height:90rpx;padding: 25rpx;background-color:{{ color.warning }}">
+          <block wx:if="{{ !group_buy.unstart && !group_buy.end }}">
+            <van-icon name="clock-o" /> 剩余 <van-tag plain color="#fff"> 41</van-tag> 天 <van-tag plain color="#fff">02</van-tag> 时 <van-tag plain color="#fff">21</van-tag> 分 <van-tag plain color="#fff">21</van-tag> 秒
+          </block>
+          <block wx:elif="{{ group_buy.unstart }}">
+            <van-icon name="clock-o" />  <van-tag plain color="#fff"> 41</van-tag> 天 <van-tag plain color="#fff">02</van-tag> 时 <van-tag plain color="#fff">21</van-tag> 分 <van-tag plain color="#fff">21</van-tag> 秒 后开始
+          </block>
+          <block wx:elif="{{ group_buy.end }}">
+            <van-icon name="clock-o" /> 已结束
+          </block>
+        </view> 
+      </van-col>
+    </van-row>
+  </view>
   <van-panel  title="{{ goodsInfo.goods_name }}" desc="{{ goodsInfo.subtitle }}" status="{{ goodsInfo.inventory <= 10 && goodsInfo.inventory > 0 ? '仅剩 ' + goodsInfo.inventory + ' 件' : '' }}">
     <view style='padding: 25rpx'>
-      <view><text class='price'>¥ {{ goodsInfo.price }}</text></view>
-      <view>
+      <view wx:if="{{ !group_buy }}"><text class='price'>¥ {{ goodsInfo.price }}</text></view>
+      <view wx:if="{{ !group_buy }}">
         <text class='text-del' wx:if="{{ goodsInfo.original != goodsInfo.price }}">¥ {{ goodsInfo.original }}</text>
         <block wx:if="{{ goodsInfo.vip_price != goodsInfo.price }}"><text class='vip-price'> ¥ {{ goodsInfo.vip_price }} </text><van-tag size="mini" color="{{ color.warning }}">会员</van-tag></block>
         <text class='text-mini text-muted' style='float:right'>已售 {{ goodsInfo.sales_count }} 份</text>
       </view>
-      <view class='line'></view>
-      <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text><text wx:if="{{ house }}">‧ {{ house.house_type === 0 ? '小时达' : '2至4日达' }}</text><text>‧ 实付满{{ house.free_delivery_limit }}包邮</text></view>
+      <view class='line' wx:if="{{ !group_buy }}"></view>
+      <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text>
+      <text wx:if="{{ house && !group_buy }}">‧ {{ house.house_type === 0 ? '小时达' : '2至4日达' }}</text>
+      <text wx:if="{{ house && !group_buy }}">‧ 实付满{{ house.free_delivery_limit }}包邮</text></view>
     </view>
   </van-panel>
 
@@ -93,15 +123,24 @@
     info="{{ cartCount }}"
   />
   <van-goods-action-button
+    disabled='{{ group_buy && group_buy.single_buy === 0 }}'
     style='display: {{ goodsInfo.inventory > 0 ? "block" : "none" }}'
     text="加入购物车"
     type="success"
     bind:click="onAddCart"
   />
+  <van-goods-action-button
+    wx:if="{{ group_buy }}"
+    disabled='{{ group_buy.buy_limit <= group_buy.buy_count || group_buy.group_buy_state === 1 || group_buy.unstart || group_buy.end }}'
+    text="¥ {{ group_buy.group_price }} 发起拼单"
+    type="danger"
+    bind:click="onAddCart"
+  />
    <van-goods-action-button
+    wx:if="{{ !group_buy }}"
     style='display: {{  0 >= goodsInfo.inventory ? "block" : "none" }}'
     text="到货通知"
-    type="warning"
+    type="default"
     bind:click="subscribe"
   />
 </van-goods-action>
