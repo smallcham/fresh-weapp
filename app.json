@@ -32,7 +32,8 @@
     "pages/refund/index",
     "pages/bind-phone/index",
     "pages/red-paper/index",
-    "pages/team/index"
+    "pages/team/index",
+    "pages/my-team/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

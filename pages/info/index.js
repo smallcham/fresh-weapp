@@ -184,5 +184,10 @@ Page({
     }).catch(err => {
       wx.navigateBack({})
     })
+  },
+  onGroupBuy: function() {
+    wx.navigateTo({
+      url: '/pages/check/index?check_type=group&goods_code=' + this.data.id
+    })
   }
 })

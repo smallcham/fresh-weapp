@@ -10,6 +10,8 @@
     "van-col": "/miniprogram_npm/vant-weapp/col/index",
     "van-notify": "/miniprogram_npm/vant-weapp/notify/index",
     "van-progress": "/miniprogram_npm/vant-weapp/progress/index",
-    "van-steps": "/miniprogram_npm/vant-weapp/steps/index"
+    "van-tab": "/miniprogram_npm/vant-weapp/tab/index",
+    "van-tabs": "/miniprogram_npm/vant-weapp/tabs/index",
+    "van-notice-bar": "/miniprogram_npm/vant-weapp/notice-bar/index"
   }
 }

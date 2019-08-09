@@ -140,7 +140,7 @@
     disabled='{{ group_buy.buy_limit <= group_buy.buy_count || group_buy.group_buy_state === 1 || group_buy.unstart || group_buy.end }}'
     text="¥ {{ group_buy.group_price }} 发起拼单"
     type="danger"
-    bind:click="onAddCart"
+    bind:click="onGroupBuy"
   />
    <van-goods-action-button
     wx:if="{{ !group_buy }}"

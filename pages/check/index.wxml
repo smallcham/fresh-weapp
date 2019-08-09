@@ -25,7 +25,7 @@
 
   <view style='margin-top: 15rpx'>
     <van-cell-group>
-      <van-cell title="{{ house.house_type === 0 ? '小时达' : '全国送商品2~4日送达' }}">
+      <van-cell title="{{ house.house_type === 0 ? '小时达' : '全国送商品2~4日送达' }}" value="{{ check_type === 'group' ? '预售商品' : '' }}">
         <view slot="" wx:if="{{ house.house_type === 0 }}" class='text-success' bindtap='openTimePicker'>{{ label }} {{ timeColumns[selectedTimeIndex] }} 送达[可选]</view>
         <van-icon wx:if="{{ house.house_type === 0 }}" slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
       </van-cell>

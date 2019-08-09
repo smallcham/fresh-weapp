@@ -25,7 +25,9 @@ Page({
     discount: 0.0, 
     is_vip: false,
     selectedTimeIndex: 0,
-    timeColumns: []
+    timeColumns: [],
+    goods_code: '',
+    check_type: 'along'
   },
 
   /**
@@ -35,7 +37,9 @@ Page({
     this.setData({
       color: app.globalData.color,
       house: app.globalData.house,      
-      selected_address: false
+      selected_address: false,
+      check_type: undefined === options.check_type ? 'along' : options.check_type,
+      goods_code: undefined === options.goods_code ? '' : options.goods_code
     })
     app.globalData.use_coupon = app.globalData.not_use_coupon = false
   },
@@ -53,7 +57,10 @@ Page({
   onShow: function () {
     wx.setNavigationBarTitle({
       title: this.data.title,
-    }) 
+    })
+    if (this.check_type === 'group') {
+      console.log('group')
+    }
     if (this.data.selected_address && JSON.stringify(this.data.selected_address) !== JSON.stringify(app.globalData.selected_address)) {
       this.getHouse(app.globalData.selected_address.city_code, app.globalData.selected_address.lat, app.globalData.selected_address.lng)
     } else {

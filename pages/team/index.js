@@ -12,8 +12,27 @@ Page({
     title: '超值拼团',
     fs: app.globalData.fs,
     is_vip: false,
+    active: 0,
     goods_list: [],
-    goods_name: ''
+    goods_name: '',
+    steps: [
+      {
+        text: '① 开团',
+        desc: ''
+      },
+      {
+        text: '②. 邀好友',
+        desc: ''
+      },
+      {
+        text: '③ 成团',
+        desc: ''
+      },
+      {
+        text: '④ 发货',
+        desc: ''
+      }
+    ]
   },
 
   /**
@@ -46,6 +65,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title
     })
+    this.setData({ active: 0 })
     this.onQuery()
   },
 
@@ -82,6 +102,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChange: function(e) {
+    if (e.detail.index === 1) {
+      wx.navigateTo({
+        url: '/pages/my-team/index'
+      })
+    }
   },
   showInfo: function(e) {
     wx.navigateTo({

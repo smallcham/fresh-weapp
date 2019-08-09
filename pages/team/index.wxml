@@ -1,3 +1,9 @@
+<van-notice-bar left-icon="{{ fs + '4cadb127005d8b95d0b0960ad21b27b6' }}" text="🎉 超值拼团购买步骤 🎉   ① 开团 → ② 邀好友 → ③ 成团 → ④ 发货  (🎉每天超值拼团多重优惠，多拼多省钱！🎉)"/>
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="拼团首页"></van-tab>
+  <van-tab title="我的拼团"></van-tab>
+</van-tabs>
+
 <view class="padding-xs">
   <view class="cu-list menu menu-avatar">
     <wxs module="filters" src="../../utils/format.wxs"></wxs>
