@@ -16,6 +16,7 @@ Page({
     share: false,
     loading: true,
     goodsInfo: {},
+    count_down: false,
     house: false,
     showFoot: true,
     group_buy: false
@@ -137,6 +138,20 @@ Page({
       url: '/pages/cart/index',
     })
   },
+  countDown: function(date, now) {
+    let less = date - now
+    if (less <= 0) {
+      this.setData({ count_down: { day: 0, hour: 0, min: 0, m: 0 } })
+      return
+    } else {
+      let _m = less / 1000
+      let day = parseInt(_m / 60 / 60 / 24)
+      let hour = parseInt(_m / 60 / 60)
+      let min = parseInt(_m / 60)
+      let m = parseInt(_m)
+      this.setData({ count_down: { day: day, hour: hour, min: min, m: m } })
+    }
+  },
   getGoods: function() {
     api.get(app.globalApi.get_goods, { rest: this.data.id }).then(res => {
       res.banner = JSON.parse(res.banner)
@@ -147,6 +162,21 @@ Page({
           gb.end = gb.end_time <= util.formatTime(new Date())
           gb.unstart = gb.start_time > util.formatTime(new Date())
           this.setData({ goodsInfo: res, loading: false, group_buy: gb })
+          if (gb.unstart) {
+            let that = this
+            that.countDown(new Date(gb.start_time.replace(/-/g, '/')).getTime(), new Date().getTime())
+            let id = setInterval(function () {
+              if (new Date(gb.start_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0) clearInterval(id)
+              that.countDown(new Date(gb.start_time.replace(/-/g, '/')).getTime(), new Date().getTime())
+            }, 1000)
+          } else {
+            let that = this
+            that.countDown(new Date(gb.end_time.replace(/-/g, '/')).getTime(), new Date().getTime())
+            let id = setInterval(function () {
+              if (new Date(gb.end_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0) clearInterval(id)
+              that.countDown(new Date(gb.end_time.replace(/-/g, '/')).getTime(), new Date().getTime())
+            }, 1000)
+          }
         }else {
           this.setData({ goodsInfo: res, loading: false, group_buy: false })
         }

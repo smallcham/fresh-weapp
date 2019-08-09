@@ -28,14 +28,6 @@ App({
       }
     })
 
-  //初始化购物车动画
-    const animation = wx.createAnimation({
-      duration: 60,
-      timingFunction: 'linear',
-    })
-    
-    this.animation = animation;
-
     var QQMapWX = require('/libs/qqmap-wx-jssdk.min.js');
     // var Amap = require('/libs//amap-wx.js');
     // this.amap = new Amap.AMapWX({ key: 'bc3c26bece30a5037f477aea3eef6172' });
@@ -45,18 +37,25 @@ App({
     });
   },
   cartAnimation: function(target, isSetData=true) {
+    //购物车动画
     const that = this
     const tabbar = target.getTabBar();
-    this.animation.scale(1.2).step()
-    this.animation.scale(1).step()
+    let animation = wx.createAnimation({
+      duration: 60,
+      timingFunction: 'linear',
+    })
+    animation.rotate(15).scale(1.1).step()
+    animation.rotate(0).step()
+    animation.rotate(-15).step()
+    animation.rotate(0).scale(1).step()
+    tabbar.setData({
+      animationData: animation.export(),
+      cartCount: tabbar.data.cartCount + 1
+    })
     wx.nextTick(() => {
-      tabbar.setData({
+      target.getTabBar().setData({
         animationData: {},
       })
-    })
-    tabbar.setData({
-      animationData: this.animation.export(),
-      cartCount: tabbar.data.cartCount + 1
     })
   },
   is_null: function(target) {

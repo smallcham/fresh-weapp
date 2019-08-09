@@ -176,6 +176,7 @@ Page({
     })
   },
   addCart: function(e) {
+    app.cartAnimation(this)
     api.addCart(e.currentTarget.dataset.id, 1).then(res => { 
       this.getTabBar().plusCartCount()
       Notify({
