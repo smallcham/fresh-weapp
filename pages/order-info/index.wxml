@@ -5,13 +5,42 @@
 <view wx:if="{{ !loading }}">
   <view style='margin-bottom: 120rpx'>
     <view>
-        <van-cell wx:if="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link url="/pages/question/index?type=支付问题&order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 1 }}" icon="send-gift" title="订单努力打包中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="查看评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link url="/pages/question/index?type=订单咨询&order_code={{ order.order_code }}"/>
-        <van-cell wx:if="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
+        <van-cell wx:if="{{ order.is_group === 1 && order.order_state === 1 }}" icon="friends" title="拼团中" value="问题咨询 " is-link url="/pages/question/index?type=拼团问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 0 }}" icon="wechat" title="待付款" value="问题咨询 " is-link url="/pages/question/index?type=支付问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 1 }}" icon="send-gift" title="订单努力打包中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 2 }}" icon="logistics" title="配送中" value="问题咨询 " is-link url="/pages/question/index?type=配送问题&order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 3 }}" icon="comment-o" title="已完成, 待评价" value="去评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 4 }}" icon="comment" title="已评价" value="查看评价" is-link url="/pages/feedback/index?order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 5 }}" icon="clear" title="已取消" value="问题咨询" is-link url="/pages/question/index?type=订单咨询&order_code={{ order.order_code }}"/>
+        <van-cell wx:elif="{{ order.order_state === 6 }}" icon="cash-back-record" title="已退费"/>
+    </view>
+    
+    <view style='background-color: #fff;margin-top: 15rpx' wx:if="{{ order.order_state !== 0 && order.order_state !== 5 && order.order_state !== 6 && order.is_group === 1 }}">
+        <view style='padding: 1rem'>
+        <view wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-danger text-center'><van-icon name='checked'/> 开团成功</view>
+        <view wx:if="{{ order.group_info.team.team_size === order.group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-primary text-center'> 已成团 </view>
+        <view wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}" class='text-primary text-md text-center'  style="padding-bottom: 25rpx">还差 <text class='text-danger' style='font-weight: 700'>{{ order.group_info.team.team_size - order.group_info.info.length  }}</text>人，赶快邀请好友来拼团吧</view>
+        <view class='text-primary text-md text-center'  style="padding-bottom: 25rpx">剩余 
+          <van-tag color="{{ color.primary }}"> 12</van-tag> :
+          <van-tag color="{{ color.primary }}"> 22</van-tag> :
+          <van-tag color="{{ color.primary }}"> 54</van-tag> :
+          <van-tag color="{{ color.primary }}"> 1</van-tag>
+        </view>
+        <view class='text-center'>
+          <image wx:if="{{ null !== order.group_info.info && undefined !== order.group_info.info && index < 6 }}" wx:key wx:for="{{ order.group_info.info }}" wx:for-item="info" class="userinfo-avatar" src="{{ null === info.avatar ? (fs + '97c4a9f069d426555ca0d4cf9245c3bc') : info.avatar }}" mode="cover">
+          </image>
+          <image class="userinfo-avatar" wx:if="{{  null !== order.group_info.team &&  undefined !== order.group_info.team && order.group_info.team.team_size > order.group_info.info.length }}" src="{{ fs + 'c51bb9c64f54c8d9f8e3b1c0e54265a5' }}" mode="cover"></image>
+        </view>
+        <van-button wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" open-type="share">邀请好友参团</van-button>
+        <van-button wx:if="{{ order.group_info.team.team_size <= order.group_info.info.length }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" bind:click="take">去商城查看更多福利</van-button>
+        <view>
+          <view class='text-mini text-muted text-center'  style="padding-top: 25rpx;font-weight: 700">{{  order.group_info.team.team_size > order.group_info.info.length ? '分享好友和群越多，成团越快' : '拼团成功' }}</view>
+        </view>
+      </view>
+    </view>
+
+    <view style='background-color: #fff;margin-top: 15rpx' wx:if="{{ order.order_state !== 0 && order.order_state !== 5 && order.order_state !== 6 && order.is_group === 1 }}">
+      <van-steps steps="{{ steps }}" active="{{ order.group_info.team.team_size === order.group_info.info.length ? 3 : 2 }}" active-color="{{ color.danger }}" />
     </view>
 
     <view style='margin-top: 15rpx'>
@@ -71,7 +100,7 @@
   </view>
   
   <van-goods-action>
-    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ !paying && !blockCancel && (order.order_state === 0 || order.order_state === 1) }}" text="取消订单" type="default" bind:click="cancelOrder"/>
+    <van-goods-action-button disabled="{{ paying }}" wx:if="{{ !paying && !blockCancel && (order.order_state === 0) }}" text="取消订单" type="default" bind:click="cancelOrder"/>
     <van-goods-action-button disabled="{{ paying }}" loading="{{ paying }}" wx:if="{{ order.order_state === 0 }}" text="去支付   ▸" type='success' data-id="{{ order.order_code }}"  bind:click="toPay" />
     <van-goods-action-button wx:if="{{  order.deliver_type === 1 && order.order_state === 2 }}" text="确认收货" type="warning" bind:click="confirmDeliver"/>
   </van-goods-action>

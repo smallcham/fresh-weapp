@@ -53,10 +53,25 @@
       <view class='line' wx:if="{{ !group_buy }}"></view>
       <view class='text-muted text-mini'><text>‧ {{ goodsInfo.place_name }}</text>
       <text wx:if="{{ house && !group_buy }}">‧ {{ house.house_type === 0 ? '小时达' : '2至4日达' }}</text>
-      <text wx:if="{{ house && group_buy }}">‧ {{ house.house_type === 0 ? '最快今天送达' : '最快2至4日送达' }}</text>
+      <text wx:if="{{ house && group_buy }}">‧ {{ house.house_type === 0 ? '最快次日送达' : '最快2至4日送达' }}</text>
       <text wx:if="{{ house && !group_buy }}">‧ 实付满{{ house.free_delivery_limit }}包邮</text></view>
     </view>
   </van-panel>
+
+<view style='margin-top: 15rpx' wx:if="{{ group_buy }}">
+  <van-panel title="有用户在拼单，可直接参与">
+    <van-transition name="fade-up">
+      <view>
+        <van-row>
+          <van-col span="4"></van-col>
+          <van-col span="8"></van-col>
+          <van-col span="6"></van-col>
+          <van-col span="6"></van-col>
+        </van-row>
+      </view>
+    </van-transition>
+  </van-panel>
+</view>
 
   <!-- <view>
     <view class='card' style='border: 0rpx'>

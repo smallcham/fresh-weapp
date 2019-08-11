@@ -12,7 +12,8 @@
     <van-cell-group>
       <van-cell data-id="{{ item.order_code }}" bindtap='showOrder'>
         <view slot="title" class='text-mini'>
-          <text wx:if="{{ item.deliver_type === 0 }}" class="text-muted" style='font-weight: 700;font-style: italic'>小时达 . </text>
+          <text wx:if="{{ item.is_group === 1 }}" class="text-muted" style='font-weight: 700;font-style: italic'>拼团 . </text>
+          <text wx:elif="{{ item.deliver_type === 0 }}" class="text-muted" style='font-weight: 700;font-style: italic'>小时达 . </text>
           <text wx:elif="{{ item.deliver_type === 1 }}" class="text-muted" style='font-weight: 700;font-style: italic'>全国送 . </text>
           <text class='text-muted'>{{ item.create_time }}</text>
         </view>

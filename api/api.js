@@ -291,6 +291,18 @@ const createOrder = (day, delivery_time, coupon_ids = []) => {
   return request(app.globalApi.create_order, { method: 'POST', data: { data: { day: day, delivery_time: delivery_time, address_code: address.address_code, coupon_ids: coupon_ids } } })
 }
 
+const createGroupOrder = (goods_code, group_id = '') => {
+  let address = app.globalData.selected_address
+  if (null === address || undefined === address) {
+    wx.showToast({
+      title: '请选择收货地址',
+      icon: 'none'
+    })
+    return false
+  }
+  return request(app.globalApi.create_group_order + '/' + goods_code + '/' + address.address_code + '/' + group_id, { method: 'POST', data: {} })
+}
+
 const createBuyVipOrder = (plan) => {
   return request(app.globalApi.buy_vip_create_order, { method: 'POST', data: { data: { plan: plan } } })
 }
@@ -407,8 +419,8 @@ const confirmDeliver = (order_code) => {
   return request(app.globalApi.confirm_deliver + '/' + order_code, { method: 'POST', data: {} })
 }
 
-const groupBuyQuery = (goods_name = '') => {
-  return request(app.globalApi.group_buy_query + '/' + goods_name, { method: 'GET', data: {} })
+const groupBuyQuery = (goods_name = '', next = 1) => {
+  return request(app.globalApi.group_buy_query + '/' + goods_name, { method: 'GET', data: { page: next } })
 }
 
 const groupBuyInfo = (goods_code) => {
@@ -446,6 +458,7 @@ module.exports = {
   pay,
   createOrder,
   createBuyVipOrder,
+  createGroupOrder,
   queryOrder,
   getOrder,
   feedbackOrder,

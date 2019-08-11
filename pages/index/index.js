@@ -186,10 +186,17 @@ Page({
         backgroundColor: this.data.color.success
       });
     }).catch(err => {
-      wx.showToast({
-        title: err,
-        icon: 'none'
-      })  })
+      if (err === 'redirect.group.buy') {
+        wx.navigateTo({
+          url: '/pages/info/index?id=' + e.currentTarget.dataset.id
+        })
+      } else {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })    
+      }
+    })
   },
   openSearch: function () {
     wx.navigateTo({

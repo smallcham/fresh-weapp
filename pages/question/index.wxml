@@ -6,7 +6,7 @@
 <view wx:if="{{ show }}"  style='background-color:white;border-radius: .2rem;padding: .5rem;margin: .5rem;border: 1rpx solid {{ color.muteda }}'>
   <van-field value="{{ reason }}" bind:change="onChangeText" label="" type="textarea" placeholder="请详细描述您遇到的问题" autosize border="{{ false }}" />
   <van-icon style='padding: 15rpx;' info="x" wx:for="{{ imgs }}" name="{{ fs + item }}" wx:key wx:for-index="idx" data-index="{{ idx }}" bind:click="delImg"/>
-  <image bindtap='uploadImg' style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
+  <image bindtap='uploadImg' style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + '2bab9a63e2faed7d87b947232b460668' }}"/>
 </view>
 
 <van-action-sheet show="{{ showTypeSheet }}">

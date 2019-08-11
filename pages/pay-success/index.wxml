@@ -6,7 +6,7 @@
   <text wx:else class='icon-text-center text-muted'>已失效</text>
   <view wx:if="{{ order && order.coin > 0 }}" style='margin-top: 25rpx;' class='text-mini text-success'>轻果币 +{{ order.coin }}</view>
   <view style='margin-top: 25rpx;margin-bottom: 25rpx;'>
-    <view class='text-primary text-small text-center'>预计 {{ deliver_time  }} 前送达</view>
+    <view wx:if="{{ order.is_group !== 1 }}" class='text-primary text-small text-center'>预计 {{ deliver_time  }} 前送达</view>
     <view class='text-muted text-mini text-center' style='padding-top: 10rpx'>订单已支付成功，配送员配送时将与您联系请保持电话畅通</view>
   </view>
   <view class='text-center'>
@@ -15,7 +15,7 @@
   </view>
 </view>
 
-<view wx:if="{{ paper && paper.amount > 0 }}" style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
+<view wx:if="{{ order.is_group !== 1 && paper && paper.amount > 0 }}" style='border-radius: .3rem;background-color:{{ color.successa }};margin: 1rem;padding: 1rem; box-shadow: 5rpx 5rpx 5rpx {{ color.successdisable }};'>
   <view class='text-priamry text-md'>
     <text>恭喜你获得 <text class='text-warning' style='font-weight: 700'>¥ {{ paper.amount }}</text> 元随机红包</text>
     <view style='float: right'><van-button size="small" type='success' style='padding: 15rpx' open-type="share"> 分享领取 > </van-button></view>

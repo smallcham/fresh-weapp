@@ -110,7 +110,18 @@ Page({
         this.setData({ cartCount: res })
       })
       this.deliveryCheck()
-    }).catch(err => { console.log(err) })
+    }).catch(err => {
+      if (err === 'redirect.group.buy') {
+        wx.navigateTo({
+          url: '/pages/info/index?id=' + e.currentTarget.dataset.id
+        })
+      } else {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      }
+     })
   },
   deliveryCheck:function() {
     api.deliveryCheck().then(res => {

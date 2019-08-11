@@ -26,7 +26,7 @@
   <view style='margin-top: 15rpx'>
     <van-cell-group>
       <van-cell title="{{ house.house_type === 0 ? '小时达' : '全国送商品2~4日送达' }}" value="{{ check_type === 'group' ? '预售商品' : '' }}">
-        <view slot="" wx:if="{{ house.house_type === 0 }}" class='text-success' bindtap='openTimePicker'>{{ label }} {{ timeColumns[selectedTimeIndex] }} 送达[可选]</view>
+        <view slot="" wx:if="{{ house.house_type === 0 && check_type !== 'group' }}" class='text-success' bindtap='openTimePicker'>{{ label }} {{ timeColumns[selectedTimeIndex] }} 送达[可选]</view>
         <van-icon wx:if="{{ house.house_type === 0 }}" slot="right-icon" name="arrow" class='text-success' bindtap='openTimePicker'/>
       </van-cell>
       <van-cell value="共{{ sum }}件" is-link use-label-slot="{{ true }}" border="{{ false }}" size="large" bind:click="openGoodsList">
@@ -50,7 +50,7 @@
       </van-panel> -->
       <van-cell title="商品原价"  icon="gold-coin-o" value="¥ {{ original }}"/>
       <van-cell title="商品优惠"  icon="discount"><text slot="" style='color: {{ color.success }}; font-weight: 700'>- ¥ {{ discount }}</text></van-cell>
-      <van-cell title="优惠券"  icon="coupon-o" value="{{ !chooseCoupon ? '不使用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount }}" url="/pages/coupon/index"  is-link/>
+      <van-cell title="优惠券"  icon="coupon-o" value="{{ check_type === 'group' ? '该商品不可使用优惠券' : (!chooseCoupon ? '不使用优惠券' : '实付满 ¥' + chooseCoupon.limit_amount + ' 减  ¥'  + chooseCoupon.discount_amount) }}" url="{{ check_type === 'group' ? '' : '/pages/coupon/index' }}"  is-link="{{ check_type !== 'group' }}"/>
       <van-cell title="商品实付"  icon="balance-pay" value="¥ {{ total }}"/>
       <van-cell title="配送费"  icon="free-postage"  value="{{ delivery_fee === 0 ? '包邮' : ('¥ ' + delivery_fee) }}"/>
     </view>

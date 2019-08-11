@@ -2,6 +2,13 @@ page {
   background: #F9F9F9;
 }
 
+.userinfo-avatar {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 15rpx;
+  border-radius: 50%;
+}
+
 .icon-center {
   font-size: 130rpx;
   height: 100%;

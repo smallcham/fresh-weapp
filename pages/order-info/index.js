@@ -15,7 +15,21 @@ Page({
     login: true,
     blockCancel: false,
     pay_success: false,
-    selected_address: {}
+    selected_address: {},
+    steps: [
+      {
+        text: '开团',
+      },
+      {
+        text: '邀请好友',
+      },
+      {
+        text: '限定时间内成团',
+      },
+      {
+        text: '发货',
+      }
+    ]
   },
 
   /**
@@ -85,12 +99,20 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function () {
+    if (this.data.order.is_group !== 1) {
+      return {
+        title: '轻果鲜生',
+        path: '/pages/index/index',
+        success: function (res) {
+        },
+        fail: function (res) { }
+      }
+    }
     return {
-      title: '轻果鲜生',
-      path: '/pages/index/index',
-      success: function (res) {
-      },
-      fail: function (res) { }
+      title: '【仅剩1个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
+      path: '/pages/my-team/index?team_id=' + this.data.order.group_info.team.id,
+      imageUrl: app.globalData.fs + this.data.order.detail[0].goods_img
+      //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
     }
   },
   callService: function(e) {

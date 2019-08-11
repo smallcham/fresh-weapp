@@ -112,7 +112,18 @@ Page({
         selector: '#van-notify',
         backgroundColor: app.globalData.color.success
       })
-    }).catch(err => { console.log(err) })
+    }).catch(err => { 
+      if (err === 'redirect.group.buy') {
+        wx.navigateTo({
+          url: '/pages/info/index?id=' + e.currentTarget.dataset.id
+        })
+      } else {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      }
+    })
   },
   showInfo: function (e) {
     wx.navigateTo({

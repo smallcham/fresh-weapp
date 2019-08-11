@@ -307,6 +307,17 @@ Page({
         selector: '#custom-notify',
         backgroundColor: this.data.color.success
       });
-    }).catch(err => { Toast.fail(err); })
+    }).catch(err => { 
+      if (err === 'redirect.group.buy') {
+        wx.navigateTo({
+          url: '/pages/info/index?id=' + e.currentTarget.dataset.id
+        })
+      } else {
+        wx.showToast({
+          title: err,
+          icon: 'none'
+        })
+      }
+     })
   }
 })

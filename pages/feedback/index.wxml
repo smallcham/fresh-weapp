@@ -14,7 +14,7 @@
   <view wx:if="{{ !readonly }}" style='background-color:white;border-radius: .2rem;padding: .5rem;border: 1rpx solid {{ color.muteda }}'>
     <van-field value="{{ item.feedback_text }}" data-index="{{ index }}" bind:change="onChangeText" label="" type="textarea" placeholder="满意就毫无保留夸一夸吧 ~ " autosize border="{{ false }}" />
     <van-icon wx:if="{{ order.detail[index].feedback_imgs !== '[]' }}" wx:for="{{ order.detail[index].feedback_imgs }}" wx:key style='padding: 15rpx;' name="{{ fs + item }}" info="x" wx:for-index="idx" data-pindex="{{ index }}" data-index="{{ idx }}" bind:click="delImg"/>
-    <image bindtap='uploadImg' data-index="{{ index }}" style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ undefined === order.detail[index].imgs || order.detail[index].imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + 'aeb66da5c216ce0577424febbb3f8815' }}"/>
+    <image bindtap='uploadImg' data-index="{{ index }}" style='width: 55rpx; height: 55rpx;padding: 15rpx; {{ undefined === order.detail[index].imgs || order.detail[index].imgs.length < 6  ? "" : "display:none" }}' src="{{ fs + '2bab9a63e2faed7d87b947232b460668' }}"/>
   </view>
   <view wx:else>
       <view class='text-small text-muted'>{{ item.feedback_text }}</view>

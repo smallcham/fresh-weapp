@@ -14,6 +14,7 @@ Page({
     is_vip: false,
     active: 0,
     goods_list: [],
+    last: false,
     goods_name: '',
     steps: [
       {
@@ -54,7 +55,6 @@ Page({
   onReady: function () {
 
   },
-
   /**
    * Lifecycle function--Called when page show
    */
@@ -94,7 +94,7 @@ Page({
    * Called when page reach bottom
    */
   onReachBottom: function () {
-
+    this.onQuery()
   },
 
   /**
@@ -116,8 +116,14 @@ Page({
     })
   },
   onQuery: function() {
-    api.groupBuyQuery(this.data.goods_name).then(res => {
-      this.setData({ goods_list: res })
+    if (this.data.goods_list && this.data.goods_list.current_page >= this.data.goods_list.last_page) {
+      this.setData({ last: true })
+      return
+    }
+    let next = !this.data.goods_list ? 1 : this.data.goods_list.current_page + 1
+    api.groupBuyQuery(this.data.goods_name, next).then(res => {
+      if (this.data.goods_list.length !== 0) res.data = this.data.goods_list.data.concat(res.data)
+      this.setData({ goods_list: res, last: res.current_page === res.last_page})
     })
   }
 })

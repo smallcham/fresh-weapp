@@ -158,7 +158,8 @@ Page({
       res.info_img = JSON.parse(res.info_img)
       res.info_text = (null === res.info_text || undefined === res.info_text) ? '' : res.info_text.split('\n')
       api.groupBuyInfo(this.data.id).then(gb => {
-        if (null != gb && undefined != gb) {
+        if (null != gb && undefined != gb && null !== gb.info && undefined !== gb.info) {
+          gb = gb.info
           gb.end = gb.end_time <= util.formatTime(new Date())
           gb.unstart = gb.start_time > util.formatTime(new Date())
           this.setData({ goodsInfo: res, loading: false, group_buy: gb })

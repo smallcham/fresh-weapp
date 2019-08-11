@@ -27,6 +27,7 @@ Page({
     selectedTimeIndex: 0,
     timeColumns: [],
     goods_code: '',
+    group_id: '',
     check_type: 'along'
   },
 
@@ -39,7 +40,8 @@ Page({
       house: app.globalData.house,      
       selected_address: false,
       check_type: undefined === options.check_type ? 'along' : options.check_type,
-      goods_code: undefined === options.goods_code ? '' : options.goods_code
+      goods_code: undefined === options.goods_code ? '' : options.goods_code,
+      group_id: undefined === options.group_id ? '' : options.group_id
     })
     app.globalData.use_coupon = app.globalData.not_use_coupon = false
   },
@@ -58,13 +60,14 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title,
     })
-    if (this.check_type === 'group') {
-      console.log('group')
-    }
     if (this.data.selected_address && JSON.stringify(this.data.selected_address) !== JSON.stringify(app.globalData.selected_address)) {
       this.getHouse(app.globalData.selected_address.city_code, app.globalData.selected_address.lat, app.globalData.selected_address.lng)
     } else {
-      this.getAvailableCart()
+      if (this.data.check_type === 'group') {
+        this.loadGroupGoods()
+      } else {
+        this.getAvailableCart()
+      }
     }
     this.setData({
       selected_address: app.globalData.selected_address
@@ -137,26 +140,52 @@ Page({
     Toast.loading({
       mask: true
     });
-    api.createOrder(this.data.label === '今天' ? 'TODAY' : 'TOMORROW', this.data.timeColumns[this.data.selectedTimeIndex], this.data.chooseCoupon ? [this.data.chooseCoupon.id] : []).then(res => {
-      if (null === res || undefined === res) {
+
+    if (this.data.check_type === 'group') {
+      //拼团订单
+      api.createGroupOrder(this.data.goods_code, this.data.group_id).then(res => {
+        if (null === res || undefined === res) {
+          Dialog.alert({
+            title: '轻果提醒',
+            message: '创建订单失败，请稍候重试或联系客服'
+          }).then(() => { })
+          Toast.clear()
+          return false
+        }
+        wx.redirectTo({
+          url: '/pages/order-info/index?auto=1&order_code=' + res
+        })
+      }).catch(err => {
         Dialog.alert({
           title: '轻果提醒',
-          message: '创建订单失败，请稍候重试或联系客服'
-        }).then(() => {})
+          message: err
+        }).then(() => { })
         Toast.clear()
         return false
-      }
-      wx.redirectTo({
-        url: '/pages/order-info/index?auto=1&order_code=' + res
       })
-    }).catch(err => {
-      Dialog.alert({
-        title: '轻果提醒',
-        message: err
-      }).then(() => { })
-      Toast.clear()
-      return false
-    })
+    } else {
+      //普通购买订单
+      api.createOrder(this.data.label === '今天' ? 'TODAY' : 'TOMORROW', this.data.timeColumns[this.data.selectedTimeIndex], this.data.chooseCoupon ? [this.data.chooseCoupon.id] : []).then(res => {
+        if (null === res || undefined === res) {
+          Dialog.alert({
+            title: '轻果提醒',
+            message: '创建订单失败，请稍候重试或联系客服'
+          }).then(() => { })
+          Toast.clear()
+          return false
+        }
+        wx.redirectTo({
+          url: '/pages/order-info/index?auto=1&order_code=' + res
+        })
+      }).catch(err => {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: err
+        }).then(() => { })
+        Toast.clear()
+        return false
+      })
+    }
   },
   chooseAddress: function() {
     wx.navigateTo({
@@ -187,7 +216,11 @@ Page({
         duration: 2500,
         icon: 'none'
       })
-      this.getAvailableCart()
+      if (this.data.check_type === 'group') {
+        this.loadGroupGoods()
+      } else {
+        this.getAvailableCart()
+      }
     }).catch(err => { })
   },
   onPickTimeCancel() {
@@ -231,7 +264,7 @@ Page({
             discount = coupon.discount_amount
           }
           let total = Number(this.data.total - discount).toFixed(1)
-          let delivery_fee = total >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee)
+          let delivery_fee = total >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee).toFixed(1)
           let real_pay = (Number(total) + Number(delivery_fee)).toFixed(1)
           this.setData({ chooseCoupon: coupon, total: total, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
         })
@@ -274,5 +307,44 @@ Page({
       times.push(_time)
     }
     this.setData({ label: this.data.label, timeColumns: times })
+  },
+  loadGroupGoods: function() {
+    api.groupBuyInfo(this.data.goods_code).then(res => {
+      if (null === res || undefined === res || null === res.info || undefined === res.info) {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: '该收货地址不参与当前商品的拼团活动,请选择其它商品'
+        }).then(() => {
+          app.globalData.selected_address = false
+          this.setData({ selected_address: false })
+          wx.navigateBack({})
+        })
+        return false
+      }
+      if (res.info.group_buy_state === 1) {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: '该拼团商品活动已暂停'
+        }).then(() => {
+          wx.navigateBack({})
+        })
+        return false
+      }
+      if (res.info.buy_count >= res.info.buy_limit) {
+        Dialog.alert({
+          title: '轻果提醒',
+          message: '该拼团商品已被抢光，快去抢购其他商品吧!'
+        }).then(() => {
+          wx.navigateBack({})
+        })
+        return false
+      }
+      let delivery_fee = res.info.group_price >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee).toFixed(1)
+      let total = Number(res.info.group_price).toFixed(1)
+      let discount = (Number(res.info.original) + Number(res.info.group_price)).toFixed(1)
+      let real_pay = (Number(total) + Number(delivery_fee)).toFixed(1)
+      res.info.amount = 1
+      this.setData({ goods_list: [res.info], sum: 1, total: total, original: res.info.original, discount: discount, real_pay: real_pay, delivery_fee: delivery_fee, loading: false })
+    })
   }
 })
