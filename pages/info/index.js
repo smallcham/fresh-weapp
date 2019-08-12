@@ -17,7 +17,9 @@ Page({
     loading: true,
     goodsInfo: {},
     count_down: false,
+    shutdown: false,
     house: false,
+    team_list: false,
     showFoot: true,
     group_buy: false
   },
@@ -73,7 +75,7 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
+    this.data.shutdown = true
   },
 
   /**
@@ -139,6 +141,7 @@ Page({
     })
   },
   countDown: function(date, now) {
+    console.log(123)
     let less = date - now
     if (less <= 0) {
       this.setData({ count_down: { day: 0, hour: 0, min: 0, m: 0 } })
@@ -167,14 +170,17 @@ Page({
             let that = this
             that.countDown(new Date(gb.start_time.replace(/-/g, '/')).getTime(), new Date().getTime())
             let id = setInterval(function () {
-              if (new Date(gb.start_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0) clearInterval(id)
+              if ((new Date(gb.start_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0) || that.data.shutdown) clearInterval(id)
               that.countDown(new Date(gb.start_time.replace(/-/g, '/')).getTime(), new Date().getTime())
             }, 1000)
           } else {
             let that = this
+            api.groupQueryTeam(that.data.id).then(res => {
+              if (null !== res && undefined !== res) this.setData({ team_list: res })
+            })
             that.countDown(new Date(gb.end_time.replace(/-/g, '/')).getTime(), new Date().getTime())
             let id = setInterval(function () {
-              if (new Date(gb.end_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0) clearInterval(id)
+              if (new Date(gb.end_time.replace(/-/g, '/')).getTime() - new Date().getTime() <= 0 || that.data.shutdown) clearInterval(id)
               that.countDown(new Date(gb.end_time.replace(/-/g, '/')).getTime(), new Date().getTime())
             }, 1000)
           }
@@ -186,9 +192,14 @@ Page({
       wx.navigateBack({})
     })
   },
-  onGroupBuy: function() {
+  onGroupBuy: function () {
     wx.navigateTo({
       url: '/pages/check/index?check_type=group&goods_code=' + this.data.id
+    })
+  },
+  onAddGroupBuy: function (e) {
+    wx.navigateTo({
+      url: '/pages/check/index?check_type=group&goods_code=' + this.data.id + '&group_id=' + e.currentTarget.dataset.id
     })
   }
 })

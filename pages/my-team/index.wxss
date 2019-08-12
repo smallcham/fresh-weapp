@@ -1,1 +1,10 @@
-/* pages/my-team/index.wxss */
+.userinfo-avatar {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 15rpx;
+  border-radius: 50%;
+}
+
+page {
+  background: #F9F9F9;
+}

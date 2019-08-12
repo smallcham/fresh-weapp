@@ -427,6 +427,14 @@ const groupBuyInfo = (goods_code) => {
   return request(app.globalApi.group_buy_info + '/' + goods_code, { method: 'GET', data: {} })
 }
 
+const groupQueryTeam = (goods_code) => {
+  return request(app.globalApi.group_query_team + '/' + goods_code, { method: 'GET', data: {} })
+}
+
+const groupTeamInfo = (order_code, get_goods=false) => {
+  return request(app.globalApi.group_team_info + '/' + order_code, { method: 'GET', data: { data: {get_goods: get_goods} } })
+}
+
 module.exports = {
   get,
   post,
@@ -488,5 +496,7 @@ module.exports = {
   takeRedPaper,
   getLocus,
   groupBuyQuery,
-  groupBuyInfo
+  groupBuyInfo,
+  groupQueryTeam,
+  groupTeamInfo
 }

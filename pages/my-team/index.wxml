@@ -1,2 +1,43 @@
-<!--pages/my-team/index.wxml-->
-<text>pages/my-team/index.wxml</text>
+<wxs module="filters" src="../../utils/format.wxs"></wxs>
+<view style='background-color: #fff;padding: 15rpx;' wx:if="{{ group_info && null !== group_info.info && undefined !== group_info.info }}" bindtap='toGoods'>
+  <van-row>
+    <van-col span="10"><view class='text-center'><image src='{{ fs + group_info.goods.goods_img }}' style='width: 200rpx;height: 200rpx'></image></view></van-col>
+    <van-col span="14">
+      <view class='ell-lg text-primary text-small' style='font-weight: 700'>{{ group_info.goods.goods_name }}</view>
+      <view class='ell-lg text-muted text-small'>{{ group_info.goods.subtitle }}</view>
+      <view style='padding-bottom: 15rpx;'><van-tag color='{{ color.warning }}' plain> {{ group_info.team.team_size }}人拼团 </van-tag></view>
+      <view wx:if="{{ null !== group_info.group && undefined !== group_info.group }}" class='text-danger text-super' style='font-weight: 700'>{{ group_info.group.group_price }} <van-tag type='danger'> <van-icon name="fire"/> 拼团省 {{ group_info.goods.original - group_info.group.group_price }} </van-tag></view>
+    </van-col>
+  </van-row>
+</view>
+<view style='background-color: #fff;margin-top: 15rpx' wx:if="{{ group_info && null !== group_info.info && undefined !== group_info.info }}">
+    <view style='padding: 1rem'>
+    <view wx:if="{{ group_info.team.team_size > group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-danger text-center'><van-icon name='checked'/> 拼团中</view>
+    <view wx:elif="{{ group_info.team.team_size === group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-primary text-center'> 已成团 </view>
+    <view wx:elif="{{ now >= group_info.team.end_time }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-muted text-center'><van-icon name='clock'/> 已超时 </view>
+    <view wx:if="{{ group_info.team.team_size > group_info.info.length }}" class='text-primary text-md text-center'  style="padding-bottom: 25rpx">还差 <text class='text-danger' style='font-weight: 700'>{{ group_info.team.team_size - group_info.info.length  }}</text>人，赶快{{ group_info.in_group ?  '邀请好友来' : '加入' }}拼团吧</view>
+    <van-transition name="fade-up">
+      <view class='text-primary text-md text-center'  style="padding-bottom: 25rpx" wx:if="{{ ms && now < group_info.team.end_time && group_info.team.team_size > group_info.info.length  }}">剩余 
+        <van-tag color="{{ color.primary }}"> {{ filters.intval(ms / 1000 / (24 * 60 * 60)) }}</van-tag> :
+        <van-tag color="{{ color.primary }}"> {{ filters.intval(ms / 1000 % (24 * 60 * 60) / (60 * 60)) }}</van-tag> :
+        <van-tag color="{{ color.primary }}"> {{ filters.intval((ms / 1000 % (24 * 60 * 60) % (60 * 60)) /  60) }}</van-tag> :
+        <van-tag color="{{ color.primary }}"> {{ filters.intval((ms / 1000 % (24 * 60 * 60) % (60 * 60)) %  60) }}</van-tag>
+      </view>
+    </van-transition>
+    <view class='text-center'>
+      <image wx:if="{{ null !== group_info.info && undefined !== group_info.info && index < 6 }}" wx:key wx:for="{{ group_info.info }}" wx:for-item="info" class="userinfo-avatar" src="{{ null === info.avatar ? (fs + 'a56d49fc524f3de9c4bd3643f9fe2bf6') : info.avatar }}" mode="cover">
+      </image>
+      <image class="userinfo-avatar" wx:if="{{  null !== group_info.team &&  undefined !== group_info.team && group_info.team.team_size > group_info.info.length }}" src="{{ fs + 'c51bb9c64f54c8d9f8e3b1c0e54265a5' }}" mode="cover"></image>
+    </view>
+    <van-button wx:if="{{ group_info.team.team_size > group_info.info.length && group_info.in_group }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" open-type="share">邀请好友参团</van-button>
+    <van-button wx:if="{{ group_info.team.team_size <= group_info.info.length || now >= group_info.team.end_time }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" bind:click="toHome">去商城查看更多福利</van-button>
+    <van-button wx:if="{{ group_info.team.team_size > group_info.info.length && !group_info.in_group }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" data-id="{{ group_info.item.id }}" bind:click="onAddGroupBuy">立即加入拼团</van-button>
+    <view>
+      <view class='text-mini text-muted text-center'  style="padding-top: 25rpx;font-weight: 700">{{  group_info.team.team_size > group_info.info.length ? '分享好友和群越多，成团越快' : '拼团成功' }}</view>
+    </view>
+  </view>
+</view>
+
+<view style='background-color: #fff;margin-top: 15rpx' wx:if="{{ group_info.team.team_size > group_info.info.length }}">
+  <van-steps steps="{{ steps }}" active="{{ group_info.team.team_size === group_info.info.length ? 3 : 2 }}" active-color="{{ color.danger }}" />
+</view>

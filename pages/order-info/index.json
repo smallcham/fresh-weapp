@@ -14,6 +14,7 @@
     "van-goods-action-button": "/miniprogram_npm/vant-weapp/goods-action-button/index",
     "van-dialog": "/miniprogram_npm/vant-weapp/dialog/index",
     "van-steps": "/miniprogram_npm/vant-weapp/steps/index",
-    "van-toast": "/miniprogram_npm/vant-weapp/toast/index"
+    "van-toast": "/miniprogram_npm/vant-weapp/toast/index",
+    "van-transition": "/miniprogram_npm/vant-weapp/transition/index"
   }
 }

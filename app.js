@@ -126,7 +126,7 @@ App({
                 wx.setStorageSync('token', data.data)
                 if (undefined !== call) { call() }
               } catch (e) {
-                console.log('存储token失败', data)
+                console.log('存储token失败', data, e)
               }
             } else {
               console.log('登录失败', data)
@@ -295,7 +295,9 @@ App({
     get_red_paper: 'paper/info',
     get_locus: 'express/order/locus',
     group_buy_query: 'group/buy/query',
-    group_buy_info: 'group/buy/info'
+    group_buy_info: 'group/buy/info',
+    group_query_team: 'group/buy/team/random',
+    group_team_info: 'group/buy/team/info'
   },
   globalData: {
     fs: 'http://fs.llfresh.cn/',

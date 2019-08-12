@@ -2,6 +2,7 @@
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
 import Toast from '../../miniprogram_npm/vant-weapp/toast/toast'
 import api from '../../api/api'
+import util from '../../utils/util'
 const app = getApp()
 Page({
 
@@ -15,6 +16,8 @@ Page({
     login: true,
     blockCancel: false,
     pay_success: false,
+    shutdown: false,
+    ms: false,
     selected_address: {},
     steps: [
       {
@@ -57,6 +60,7 @@ Page({
       title: this.data.title,
     })
     if (this.data.pay_success) wx.reLaunch({ url: '/pages/pay-success/index?order_code=' + this.data.order.order_code })
+    this.setData({ now: util.formatTime(new Date()) })
     if (this.data.quick === '1') {
       this.setData({ login: false })
       app.login(function () {
@@ -79,7 +83,7 @@ Page({
    * Lifecycle function--Called when page unload
    */
   onUnload: function () {
-
+    this.data.shutdown = true
   },
 
   /**
@@ -109,8 +113,8 @@ Page({
       }
     }
     return {
-      title: '【仅剩1个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
-      path: '/pages/my-team/index?team_id=' + this.data.order.group_info.team.id,
+      title: '【仅剩' + (this.data.order.group_info.team.team_size - this.data.order.group_info.info.length) + '个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
+      path: '/pages/my-team/index?share=1&order_code=' + this.data.order.order_code,
       imageUrl: app.globalData.fs + this.data.order.detail[0].goods_img
       //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
     }
@@ -231,6 +235,13 @@ Page({
             sum: sum,
             selected_address: app.globalData.selected_address
           })
+          if (res.is_group === 1) {
+            let that = this
+            that.countDown()
+            let id = setInterval(function () {
+              that.countDown(id)
+            }, 1000)
+          }
           if (auto && res.order_state === 0) {
             this.setData({ auto: false, blockCancel: true })
             api.pay(order_code).then(res => {
@@ -261,5 +272,15 @@ Page({
     wx.navigateTo({
       url: '/pages/bind-phone/index'
     })
+  },
+  countDown: function (id) {
+    let time = new Date(this.data.order.group_info.team.end_time.replace(/-/g, '/')).getTime()
+    let now = new Date().getTime()
+    let diff = time - now
+    if (diff <= 0 || this.data.shutdown) {
+      if (null !== id && undefined !== id) clearInterval(id)
+      return false
+    }
+    this.setData({ ms: diff })
   }
 })

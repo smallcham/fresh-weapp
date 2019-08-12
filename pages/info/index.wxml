@@ -58,15 +58,15 @@
     </view>
   </van-panel>
 
-<view style='margin-top: 15rpx' wx:if="{{ group_buy }}">
+<view style='margin-top: 15rpx' wx:if="{{ group_buy && team_list }}">
   <van-panel title="有用户在拼单，可直接参与">
     <van-transition name="fade-up">
-      <view>
+      <view wx:for="{{ team_list }}" wx:key style='margin:15rpx'>
         <van-row>
-          <van-col span="4"></van-col>
-          <van-col span="8"></van-col>
-          <van-col span="6"></van-col>
-          <van-col span="6"></van-col>
+          <van-col span="4"><view class='text-center'><image class='userinfo-avatar' src="{{ null === item.avatar ? (fs + 'a56d49fc524f3de9c4bd3643f9fe2bf6') : item.avatar }}"></image></view></van-col>
+          <van-col span="8"><text class="text-muted text-small">{{ null === item.nick_name || '' === item.nick_name ? '****' : item.nick_name }}</text></van-col>
+          <van-col span="6"><text style='float: right' class='text-small text-muted'>还差 <text class='text-danger'>{{ item.team_size - item.num }}</text> 人拼成</text></van-col>
+          <van-col span="6"><van-button style='float: right' type='danger' size='mini' data-id="{{ item.id }}" bind:click="onAddGroupBuy"> 去拼单 </van-button></van-col>
         </van-row>
       </view>
     </van-transition>

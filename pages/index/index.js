@@ -200,7 +200,8 @@ Page({
   },
   openSearch: function () {
     wx.navigateTo({
-      url: '/pages/search/index',
+      // url: '/pages/search/index',
+      url: '/pages/my-team/index?order_code=' + '8FEA19F1C4D78D99272826F2B50AF499',
     })
   },
   openLocation: function () {
