@@ -200,8 +200,9 @@ Page({
   },
   openSearch: function () {
     wx.navigateTo({
-      // url: '/pages/search/index',
-      url: '/pages/my-team/index?order_code=' + '8FEA19F1C4D78D99272826F2B50AF499',
+      url: '/pages/search/index',
+      // url: '/pages/my-team/index?order_code=' + '8FEA19F1C4D78D99272826F2B50AF499',
+      // url: '/pages/pay-success/index?order_code=' + 'CFA6D124770E38ACE967E37C07AF4233',
     })
   },
   openLocation: function () {

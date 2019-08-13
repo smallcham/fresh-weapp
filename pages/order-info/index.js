@@ -43,6 +43,13 @@ Page({
     this.data.auto = options.auto === "1"
     this.data.quick = options.quick
     this.data.order_code = options.order_code
+    if (!app.globalData.house) {
+      app.globalData.shareBack = '/pages/order-info/index?order_code=' + this.data.order_code
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
+
   },
 
   /**
@@ -112,11 +119,15 @@ Page({
         fail: function (res) { }
       }
     }
-    return {
-      title: '【仅剩' + (this.data.order.group_info.team.team_size - this.data.order.group_info.info.length) + '个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
-      path: '/pages/my-team/index?share=1&order_code=' + this.data.order.order_code,
-      imageUrl: app.globalData.fs + this.data.order.detail[0].goods_img
-      //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
+    else {
+      if (null !== this.data.order.group_info && undefined !== this.data.order.group_info) {
+        return {
+          title: '【仅剩' + (this.data.order.group_info.team.team_size - this.data.order.group_info.info.length) + '个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
+          path: '/pages/my-team/index?share=1&order_code=' + this.data.order.order_code,
+          imageUrl: app.globalData.fs + this.data.order.detail[0].goods_img
+          //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。
+        }
+      }
     }
   },
   callService: function(e) {
@@ -235,7 +246,7 @@ Page({
             sum: sum,
             selected_address: app.globalData.selected_address
           })
-          if (res.is_group === 1) {
+          if (res.is_group === 1 && null !== res.group_info && undefined !== res.group_info) {
             let that = this
             that.countDown()
             let id = setInterval(function () {
@@ -282,5 +293,10 @@ Page({
       return false
     }
     this.setData({ ms: diff })
+  },
+  toHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
   }
 })

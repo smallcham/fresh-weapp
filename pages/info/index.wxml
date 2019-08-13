@@ -15,7 +15,7 @@
         <view style="padding: 25rpx;height:90rpx;background-color:#f44">
           <text  class='text-white text-lg' style='font-weight: 700'>¥ {{ group_buy.group_price }}</text>
           <text class='text-del text-small' style='color:#fafafa; padding-left: 10rpx;padding-right: 10rpx'>¥ {{ goodsInfo.original }}</text>
-          <text style='margin-top: -20rpx;padding-left: 15rpx;' class='text-white text-mini'> 仅剩 {{ group_buy.buy_count }} 件</text>
+          <text style='margin-top: -20rpx;padding-left: 15rpx;' class='text-white text-mini'> 仅剩 {{ group_buy.buy_limit - group_buy.buy_count }} 件</text>
           <view class='text-mini text-white' style='padding-top: 10rpx'>
             <van-tag plain color="#fff">{{ group_buy.group_size }}人团</van-tag>
             <text style='padding-left: 15rpx'> 累计已拼{{ group_buy.buy_sum >= 10000 ? (filters.intval(group_buy.buy_sum / 10000) + '万') : group_buy.buy_sum }}件</text>

@@ -79,7 +79,7 @@ const pay = (order_code) => {
       })
     }).catch(err => {
       wx.showToast({
-        title: '发起支付失败，请重试或联系客服',
+        title: err,
         icon: 'none'
       })
       reject(err)

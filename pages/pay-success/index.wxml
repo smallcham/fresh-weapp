@@ -1,5 +1,6 @@
 <view class='icon-center text-success'>
-  <van-icon name="passed"/>
+  <van-icon wx:if="{{ !order || order.order_state === 0 }}" color="{{ color.warning }}" name="more"/>
+  <van-icon wx:if="{{ order && order.order_state === 1 || order.order_state === 2 || order.order_state === 3 || order.order_state === 4 }}" name="passed"/>
   <text wx:if="{{ !order }}" class='icon-text-center text-primary'>支付结果确认中</text>
   <text wx:elif="{{ order && order.order_state === 1 || order.order_state === 2 || order.order_state === 3 || order.order_state === 4 }}" class='icon-text-center text-primary'>支付成功</text>
   <text wx:elif="{{ order && order.order_state === 0 }}" class='icon-text-center text-warning'>支付结果确认中</text>

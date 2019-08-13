@@ -18,10 +18,10 @@
     
     <view style='background-color: #fff;margin-top: 15rpx' wx:if="{{ order.order_state !== 0 && order.order_state !== 5 && order.order_state !== 6 && order.is_group === 1 }}">
         <view style='padding: 1rem'>
-        <view wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-danger text-center'><van-icon name='checked'/> 开团成功</view>
+        <view wx:if="{{ order.group_info.team.team_size !== order.group_info.info.length && now >= order.group_info.team.end_time }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-muted text-center'><van-icon name='clock'/> 您未在限定时间内成团，无法享受团购优惠，金额将会在2个工作日内退回 </view>
+        <view wx:elif="{{ order.group_info.team.team_size > order.group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-danger text-center'><van-icon name='checked'/> 开团成功</view>
         <view wx:elif="{{ order.group_info.team.team_size === order.group_info.info.length }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-primary text-center'> 已成团 </view>
-        <view wx:elif="{{ now >= order.group_info.team.end_time }}"  style="padding-bottom: 25rpx;font-weight: 700" class='text-super text-muted text-center'><van-icon name='clock'/> 已超时 </view>
-        <view wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}" class='text-primary text-md text-center'  style="padding-bottom: 25rpx">还差 <text class='text-danger' style='font-weight: 700'>{{ order.group_info.team.team_size - order.group_info.info.length  }}</text>人，赶快邀请好友来拼团吧</view>
+        <view wx:if="{{ order.group_info.team.team_size > order.group_info.info.length && now < order.group_info.team.end_time }}" class='text-primary text-md text-center'  style="padding-bottom: 25rpx">还差 <text class='text-danger' style='font-weight: 700'>{{ order.group_info.team.team_size - order.group_info.info.length  }}</text>人，赶快邀请好友来拼团吧</view>
         <van-transition name="fade-up">
           <view class='text-primary text-md text-center'  style="padding-bottom: 25rpx"  wx:if="{{ ms && now < order.group_info.team.end_time && order.group_info.team.team_size > order.group_info.info.length  }}">剩余 
             <van-tag color="{{ color.primary }}"> {{ filters.intval(ms / 1000 / (24 * 60 * 60)) }}</van-tag> :
@@ -35,8 +35,8 @@
           </image>
           <image class="userinfo-avatar" wx:if="{{  null !== order.group_info.team &&  undefined !== order.group_info.team && order.group_info.team.team_size > order.group_info.info.length }}" src="{{ fs + 'c51bb9c64f54c8d9f8e3b1c0e54265a5' }}" mode="cover"></image>
         </view>
-        <van-button wx:if="{{ order.group_info.team.team_size > order.group_info.info.length }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" open-type="share">邀请好友参团</van-button>
-        <van-button wx:if="{{ order.group_info.team.team_size <= order.group_info.info.length || now >= order.group_info.team.end_time }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" bind:click="take">去商城查看更多福利</van-button>
+        <van-button wx:if="{{ order.group_info.team.team_size > order.group_info.info.length && now < order.group_info.team.end_time }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" open-type="share">邀请好友参团</van-button>
+        <van-button wx:if="{{ order.group_info.team.team_size <= order.group_info.info.length || now >= order.group_info.team.end_time }}"  style="padding-bottom: 25rpx" hairline round size="large" type="danger" bind:click="toHome">去商城查看更多福利</van-button>
         <view>
           <view class='text-mini text-muted text-center'  style="padding-top: 25rpx;font-weight: 700">{{  order.group_info.team.team_size > order.group_info.info.length ? '分享好友和群越多，成团越快' : '拼团成功' }}</view>
         </view>

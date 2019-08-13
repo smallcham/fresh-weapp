@@ -31,9 +31,11 @@ Page({
       that.loadOrder()
       if (that.data.order && that.data.order.order_state !== 0) { 
         clearInterval(id)
-        wx.navigateTo({
-          url: '/pages/order-info/index?order_code=' + this.data.order_code
-        })
+        if (that.data.order.is_group === 1) {
+          wx.navigateTo({
+            url: '/pages/order-info/index?order_code=' + that.data.order_code
+          })
+        }
       }
     }, 2000)
   },
