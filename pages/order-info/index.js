@@ -231,11 +231,15 @@ Page({
         api.getOrder(order_code).then(res => {
           if (null === res || undefined === res) wx.navigateBack({})
           res.deliver_info = JSON.parse(res.deliver_info)
-          let _time = new Date(res.deliver_end_time)
-          let _now = new Date()
-          let _year = _now.getFullYear() + '-' + (_now.getMonth() + 1) + '-' + _now.getDate()
-          let _deliver_year = _time.getFullYear() + '-' + (_time.getMonth() + 1) + '-' + _time.getDate()
-          res.deliver_time_label = (_year === _deliver_year ? '今' : _deliver_year) + '日 ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? '0' + _time.getMinutes() : _time.getMinutes()) + ' 前 '
+          if (null === res.deliver_end_time || undefined === res.deliver_end_time) {
+            res.deliver_time_label = ''
+          } else {
+            let _time = new Date(res.deliver_end_time.replace(/-/g, '/'))
+            let _now = new Date()
+            let _year = _now.getFullYear() + '-' + (_now.getMonth() + 1) + '-' + _now.getDate()
+            let _deliver_year = _time.getFullYear() + '-' + (_time.getMonth() + 1) + '-' + _time.getDate()
+            res.deliver_time_label = (_year === _deliver_year ? '今' : _deliver_year) + '日 ' + _time.getHours() + ':' + (_time.getMinutes() < 10 ? '0' + _time.getMinutes() : _time.getMinutes()) + ' 前 '
+          }
           let sum = 0
           for (let i = 0; i < res.detail.length; i++) sum += res.detail[i].amount
           this.setData({
