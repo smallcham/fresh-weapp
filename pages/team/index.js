@@ -65,7 +65,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.title
     })
-    this.setData({ active: 0 })
+    this.setData({ active: 0, goods_list: [] })
     this.onQuery()
   },
 
@@ -116,10 +116,6 @@ Page({
     })
   },
   onQuery: function() {
-    if (this.data.goods_list && this.data.goods_list.current_page >= this.data.goods_list.last_page) {
-      this.setData({ last: true })
-      return
-    }
     let next = !this.data.goods_list ? 1 : this.data.goods_list.current_page + 1
     api.groupBuyQuery(this.data.goods_name, next).then(res => {
       if (this.data.goods_list.length !== 0) res.data = this.data.goods_list.data.concat(res.data)
