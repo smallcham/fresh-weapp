@@ -122,7 +122,7 @@ Page({
     else {
       if (null !== this.data.order.group_info && undefined !== this.data.order.group_info) {
         return {
-          title: '【仅剩' + (this.data.order.group_info.team.team_size - this.data.order.group_info.info.length) + '个名额】我用' + this.data.order.real_pay + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
+          title: '【仅剩' + (this.data.order.group_info.team.team_size - this.data.order.group_info.info.length) + '个名额】我用' + this.data.order.group_info.group.group_price + '元就拼到了【' + this.data.order.detail[0].goods_name + '】',
           path: '/pages/my-team/index?share=1&order_code=' + this.data.order.order_code,
           imageUrl: app.globalData.fs + this.data.order.detail[0].goods_img
           //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径。支持PNG及JPG。显示图片长宽比是 5:4。

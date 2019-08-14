@@ -167,10 +167,40 @@ App({
   shareCallBack: function() {
     if (this.globalData.shareBack) {
       let url = this.globalData.shareBack
+      let urls = url.split(':')
       this.globalData.shareBack = false
-      wx.navigateTo({
-        url: url
-      })
+      if (urls.length > 1) {
+        if (urls[0] === '0') {
+          wx.reLaunch({
+            url: urls[1]
+          })
+        }
+        else if (urls[0] === '1') {
+          wx.reLaunch({
+            url: urls[1]
+          })
+        }
+        else if (urls[0] === '2') {
+          wx.redirectTo({
+            url: urls[1]
+          })
+        }
+        else if (urls[0] === '3') {
+          wx.navigateTo({
+            url: urls[1]
+          })
+        }
+        else if (urls[0] === '4') {
+          wx.navigateBack({})
+        }
+        else if (urls[0] === '5') {
+
+        }
+      } else {
+        wx.navigateTo({
+          url: url
+        })
+      }
     }
   },
   get_query_var(url) {

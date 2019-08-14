@@ -1,3 +1,4 @@
+<view wx:if="{{ null === steps || undefined === steps || steps.length === 0 }}" style='margin: 2rem' class='text-center text-muted text-small'>暂无物流信息</view>
 <van-steps
   steps="{{ steps }}"
   active="{{ 0 }}"

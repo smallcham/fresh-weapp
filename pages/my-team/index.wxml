@@ -11,7 +11,7 @@
         <view class='ell-lg text-primary text-small' style='font-weight: 700'>{{ group_info.goods.goods_name }}</view>
         <view class='ell-lg text-muted text-small'>{{ group_info.goods.subtitle }}</view>
         <view style='padding-bottom: 15rpx;'><van-tag color='{{ color.warning }}' plain> {{ group_info.team.team_size }}人拼团 </van-tag></view>
-        <view wx:if="{{ null !== group_info.group && undefined !== group_info.group }}" class='text-danger text-super' style='font-weight: 700'>{{ group_info.group.group_price }} <van-tag type='danger'> <van-icon name="fire"/> 拼团省 {{ group_info.goods.original - group_info.group.group_price }} </van-tag></view>
+        <view wx:if="{{ null !== group_info.group && undefined !== group_info.group }}" class='text-danger text-super' style='font-weight: 700'>{{ group_info.group.group_price }} <van-tag type='danger'> <van-icon name="fire"/> 拼团省 {{ filters.intval(group_info.goods.original - group_info.group.group_price) }} </van-tag></view>
       </van-col>
     </van-row>
   </view>

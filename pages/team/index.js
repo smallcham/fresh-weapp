@@ -47,6 +47,12 @@ Page({
     this.getTabBar().setData({
       selected: 2
     })
+    if (!app.globalData.house) {
+      app.globalData.shareBack = '0:/pages/team/index'
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    }
   },
 
   /**
