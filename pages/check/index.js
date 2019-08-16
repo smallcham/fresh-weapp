@@ -330,15 +330,15 @@ Page({
         })
         return false
       }
-      if (res.info.buy_count >= res.info.buy_limit) {
-        Dialog.alert({
-          title: '轻果提醒',
-          message: '该拼团商品已被抢光，快去抢购其他商品吧!'
-        }).then(() => {
-          wx.navigateBack({})
-        })
-        return false
-      }
+      // if (res.info.buy_count >= res.info.buy_limit) {
+      //   Dialog.alert({
+      //     title: '轻果提醒',
+      //     message: '该拼团商品已被抢光，快去抢购其他商品吧!'
+      //   }).then(() => {
+      //     wx.navigateBack({})
+      //   })
+      //   return false
+      // }
       let delivery_fee = res.info.group_price >= Number(res.free_delivery_limit) ? 0 : Number(res.delivery_fee).toFixed(1)
       let total = Number(res.info.group_price).toFixed(1)
       let discount = (Number(res.info.original) + Number(res.info.group_price)).toFixed(1)

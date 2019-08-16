@@ -30,7 +30,7 @@
         </view>
       </van-transition>
       <view class='text-center'>
-        <image wx:if="{{ null !== group_info.info && undefined !== group_info.info && index < 6 }}" wx:key wx:for="{{ group_info.info }}" wx:for-item="info" class="userinfo-avatar" src="{{ null === info.avatar ? (fs + 'a56d49fc524f3de9c4bd3643f9fe2bf6') : info.avatar }}" mode="cover">
+        <image wx:if="{{ null !== group_info.info && undefined !== group_info.info && index < 6 }}" wx:key wx:for="{{ group_info.info }}" wx:for-item="info" class="userinfo-avatar" src="{{ (null === info.avatar || '' === info.avatar) ? (fs + 'a56d49fc524f3de9c4bd3643f9fe2bf6') : info.avatar }}" mode="cover">
         </image>
         <image class="userinfo-avatar" wx:if="{{  null !== group_info.team &&  undefined !== group_info.team && group_info.team.team_size > group_info.info.length }}" src="{{ fs + 'c51bb9c64f54c8d9f8e3b1c0e54265a5' }}" mode="cover"></image>
       </view>

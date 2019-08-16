@@ -141,7 +141,6 @@ Page({
     })
   },
   countDown: function(date, now) {
-    console.log(123)
     let less = date - now
     if (less <= 0) {
       this.setData({ count_down: { day: 0, hour: 0, min: 0, m: 0 } })
